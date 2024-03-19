@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>welcome?</title>
+</head>
+<body>
+  <h1>Test</h1>
+  <script>
+    var urlParams = new URLSearchParams(window.location.search)
+    var res = ''
+    for (var param of urlParams.entries()) {
+      res += `<meta name="og:${param[0]}" content="${param[1]}">`
+    }
+    document.head.innerHTML += res
+  </script>
+</body>
+</html>
