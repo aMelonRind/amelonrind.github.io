@@ -123,7 +123,8 @@ function updateClassGroups() {
 async function searchF(query, force = false) {
     const syncId = ++searchSyncId;
     const style = document.getElementById("search").attributeStyleMap;
-    style.set("background-color", localStorage.getItem('colorMode') === "light" ? "cyan" : "darkcyan");
+    if (query) style.set("background-color", localStorage.getItem('colorMode') === "light" ? "cyan" : "darkcyan");
+    else style.delete("background-color");
     await new Promise(res => setTimeout(res, 80));
     if (syncId !== searchSyncId) return;
 
