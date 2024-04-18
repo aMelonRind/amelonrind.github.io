@@ -225,4 +225,4 @@ function appendSearchResult(name, url, type) {
     document.getElementById(`${type}Results`).appendChild(div);
 }
 
-const loadingSearchMap = reloadSearchMap();
+let loadingSearchMap = reloadSearchMap();
