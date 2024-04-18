@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="../../../../../../../../classContent.css"></link>
+    </head>
+    <body>
+        <header>
+            <a href="../../../../../../../../">
+                <----- Return to main JsMacros docs page.
+            </a>
+        </header>
+    </body>
+    <main class="classDoc">
+        <div id="subClasses"></div>
+        <h2 class="classTitle">xyz.wagyourtail.jsmacros.core.library.impl.classes.HTTPRequest</h2>
+        <div class="flags"></div>
+        <h4 class="classExtends"></h4>
+        <p class="classSince since">1.1.8</p>
+        <p class="description"></p>
+        <h3>Constructors</h3>
+        <div class="constructorDoc">
+            <div id="constructor-String-" class="constructor classItem">
+                <h4 class="constructorTitle classItemTitle">
+                    new 
+                    HTTPRequest
+                    (<div class="constructorParams">url</div>)
+                </h4>
+                <div class="flags"></div>
+                <p class="constructorSince since"></p>
+                <div class="constructorDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>url</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="shortFieldMethods">
+            <div class="fieldShorts">
+                <h4>
+                    Fields
+                </h4>
+                <div class="shortField shortClassItem">
+                    <a href="#headers">headers</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortField shortClassItem">
+                    <a href="#conn">conn</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortField shortClassItem">
+                    <a href="">connectTimeout</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortField shortClassItem">
+                    <a href="">readTimeout</a>
+                    <div class="shortFlags"></div>
+                </div>
+            </div>
+            <div class="methodShorts">
+                <h4>
+                    Methods
+                </h4>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addHeader-String-String-">addHeader(key, value)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#setConnectTimeout-int-">setConnectTimeout(timeout)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#setReadTimeout-int-">setReadTimeout(timeout)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#get-">get()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#post-String-">post(data)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#post-byte[]-">post(data)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#put-String-">put(data)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#put-byte[]-">put(data)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#send-String-">send(method)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#send-String-String-">send(method, data)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#send-String-byte[]-">send(method, data)</a>
+                    <div class="shortFlags"></div>
+                </div>
+            </div>
+        </div>
+        <h3>Fields</h3>
+        <div class="fieldDoc">
+            <div id="headers" class="field classItem"><h4 class="classItemTitle">.headers</h4>
+                <div class="flags"></div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/Map.html" class="type" target="_blank">Map</a><<div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div>, <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div>></div></h5>
+                </div>
+            </div>
+            <div id="conn" class="field classItem"><h4 class="classItemTitle">.conn</h4>
+                <div class="flags"></div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/net/URL.html" class="type" target="_blank">URL</a></div></h5>
+                </div>
+            </div>
+            <div id="connectTimeout" class="field classItem"><h4 class="classItemTitle">.connectTimeout</h4>
+                <div class="flags"></div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><p class="type primitiveType">int</p></div></h5>
+                </div>
+            </div>
+            <div id="readTimeout" class="field classItem"><h4 class="classItemTitle">.readTimeout</h4>
+                <div class="flags"></div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><p class="type primitiveType">int</p></div></h5>
+                </div>
+            </div>
+        </div>
+        <h3>Methods</h3>
+        <div class="methodDoc">
+            <div id="addHeader-String-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.addHeader(<div class="methodParams">key, value</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.1.8</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>key</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>value</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="#" class="type">HTTPRequest</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="setConnectTimeout-int-" class="method classItem"><h4 class="methodTitle classItemTitle">.setConnectTimeout(<div class="methodParams">timeout</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.6</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>timeout</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="#" class="type">HTTPRequest</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="setReadTimeout-int-" class="method classItem"><h4 class="methodTitle classItemTitle">.setReadTimeout(<div class="methodParams">timeout</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.6</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>timeout</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="#" class="type">HTTPRequest</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="get-" class="method classItem"><h4 class="methodTitle classItemTitle">.get(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.1.8</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/core/library/impl/classes/HTTPRequest.Response.html" class="type">HTTPRequest$Response</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="post-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.post(<div class="methodParams">data</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.1.8</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>data</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/core/library/impl/classes/HTTPRequest.Response.html" class="type">HTTPRequest$Response</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="post-byte[]-" class="method classItem"><h4 class="methodTitle classItemTitle">.post(<div class="methodParams">data</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>data</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">byte</p>[]</div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/core/library/impl/classes/HTTPRequest.Response.html" class="type">HTTPRequest$Response</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="put-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.put(<div class="methodParams">data</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>data</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/core/library/impl/classes/HTTPRequest.Response.html" class="type">HTTPRequest$Response</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="put-byte[]-" class="method classItem"><h4 class="methodTitle classItemTitle">.put(<div class="methodParams">data</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>data</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">byte</p>[]</div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/core/library/impl/classes/HTTPRequest.Response.html" class="type">HTTPRequest$Response</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="send-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.send(<div class="methodParams">method</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.6</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>method</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/core/library/impl/classes/HTTPRequest.Response.html" class="type">HTTPRequest$Response</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="send-String-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.send(<div class="methodParams">method, data</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>method</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>data</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/core/library/impl/classes/HTTPRequest.Response.html" class="type">HTTPRequest$Response</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="send-String-byte[]-" class="method classItem"><h4 class="methodTitle classItemTitle">.send(<div class="methodParams">method, data</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>method</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>data</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">byte</p>[]</div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/core/library/impl/classes/HTTPRequest.Response.html" class="type">HTTPRequest$Response</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+</html>

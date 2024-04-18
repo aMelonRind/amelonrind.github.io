@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="../../../../../../classContent.css"></link>
+    </head>
+    <body>
+        <header>
+            <a href="../../../../../../">
+                <----- Return to main JsMacros docs page.
+            </a>
+        </header>
+    </body>
+    <main class="classDoc">
+        <div id="subClasses"></div>
+        <h2 class="classTitle">xyz.wagyourtail.jsmacros.core.language.BaseLanguage<<div class="typeParameter"><p class="type primitiveType">U</p></div>, <div class="typeParameter"><p class="type primitiveType">T
+        <p class="classExtends">
+            <b> extends </b>
+        </p><div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/language/BaseScriptContext.html" class="type">BaseScriptContext</a><<div class="typeParameter"><p class="type primitiveType">U</p></div>></div></p></div>></h2>
+        <div class="flags">
+            <div class="flag abstractFlag">Abstract</div>
+        </div>
+        <h4 class="classExtends"></h4>
+        <p class="classSince since">1.1.3</p>
+        <p class="description">Language class for languages to be implemented on top of.</p>
+        <h3>Constructors</h3>
+        <div class="constructorDoc">
+            <div id="constructor-Extension-Core-" class="constructor classItem">
+                <h4 class="constructorTitle classItemTitle">
+                    new 
+                    BaseLanguage
+                    (<div class="constructorParams">extension, runner</div>)
+                </h4>
+                <div class="flags"></div>
+                <p class="constructorSince since"></p>
+                <div class="constructorDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>extension</td>
+                            <td><div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/extensions/Extension.html" class="type">Extension</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>runner</td>
+                            <td><div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/Core.html" class="type">Core</a><<div class="typeParameter"><p class="type primitiveType">?</p></div>, <div class="typeParameter"><p class="type primitiveType">?</p></div>></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="shortFieldMethods">
+            <div class="fieldShorts">
+                <h4>
+                    Fields
+                </h4>
+                <div class="shortField shortClassItem">
+                    <a href="#extension">extension</a>
+                    <div class="shortFlags">
+                        <div class="flag finalFlag">F</div>
+                    </div>
+                </div>
+                <div class="shortField shortClassItem">
+                    <a href="#preThread">preThread</a>
+                    <div class="shortFlags"></div>
+                </div>
+            </div>
+            <div class="methodShorts">
+                <h4>
+                    Methods
+                </h4>
+                <div class="shortMethod shortClassItem">
+                    <a href="#trigger-ScriptTrigger-BaseEvent-Runnable-Consumer-">trigger(macro, event, then, catcher)</a>
+                    <div class="shortFlags">
+                        <div class="flag finalFlag">F</div>
+                    </div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#trigger-String-String-File-BaseEvent-Runnable-Consumer-">trigger(lang, script, fakeFile, event, then, catcher)</a>
+                    <div class="shortFlags">
+                        <div class="flag finalFlag">F</div>
+                    </div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#retrieveLibs-T-">retrieveLibs(context)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#retrieveOnceLibs-">retrieveOnceLibs()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#retrievePerExecLibs-T-">retrievePerExecLibs(context)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#createContext-BaseEvent-File-">createContext(event, file)</a>
+                    <div class="shortFlags">
+                        <div class="flag abstractFlag">A</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h3>Fields</h3>
+        <div class="fieldDoc">
+            <div id="extension" class="field classItem"><h4 class="classItemTitle">.extension</h4>
+                <div class="flags">
+                    <div class="flag finalFlag">Final</div>
+                </div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/extensions/Extension.html" class="type">Extension</a></div></h5>
+                </div>
+            </div>
+            <div id="preThread" class="field classItem"><h4 class="classItemTitle">.preThread</h4>
+                <div class="flags"></div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Runnable.html" class="type" target="_blank">Runnable</a></div></h5>
+                </div>
+            </div>
+        </div>
+        <h3>Methods</h3>
+        <div class="methodDoc">
+            <div id="trigger-ScriptTrigger-BaseEvent-Runnable-Consumer-" class="method classItem"><h4 class="methodTitle classItemTitle">.trigger(<div class="methodParams">macro, event, then, catcher</div>)</h4>
+                <div class="flags">
+                    <div class="flag finalFlag">Final</div>
+                </div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>macro</td>
+                            <td><div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/config/ScriptTrigger.html" class="type">ScriptTrigger</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>event</td>
+                            <td><div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/event/BaseEvent.html" class="type">BaseEvent</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>then</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Runnable.html" class="type" target="_blank">Runnable</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>catcher</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/function/Consumer.html" class="type" target="_blank">Consumer</a><<div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Throwable.html" class="type" target="_blank">Throwable</a></div>></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/language/EventContainer.html" class="type">EventContainer</a><<div class="typeParameter"><p class="type primitiveType">T
+                    <p class="classExtends">
+                        <b> extends </b>
+                    </p><div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/language/BaseScriptContext.html" class="type">BaseScriptContext</a><<div class="typeParameter"><p class="type primitiveType">U</p></div>></div></p></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="trigger-String-String-File-BaseEvent-Runnable-Consumer-" class="method classItem"><h4 class="methodTitle classItemTitle">.trigger(<div class="methodParams">lang, script, fakeFile, event, then, catcher</div>)</h4>
+                <div class="flags">
+                    <div class="flag finalFlag">Final</div>
+                </div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>lang</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>script</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>fakeFile</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/io/File.html" class="type" target="_blank">File</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>event</td>
+                            <td><div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/event/BaseEvent.html" class="type">BaseEvent</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>then</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Runnable.html" class="type" target="_blank">Runnable</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>catcher</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/function/Consumer.html" class="type" target="_blank">Consumer</a><<div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Throwable.html" class="type" target="_blank">Throwable</a></div>></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/language/EventContainer.html" class="type">EventContainer</a><<div class="typeParameter"><p class="type primitiveType">T
+                    <p class="classExtends">
+                        <b> extends </b>
+                    </p><div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/language/BaseScriptContext.html" class="type">BaseScriptContext</a><<div class="typeParameter"><p class="type primitiveType">U</p></div>></div></p></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="retrieveLibs-T-" class="method classItem"><h4 class="methodTitle classItemTitle">.retrieveLibs(<div class="methodParams">context</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>context</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">T
+                            <p class="classExtends">
+                                <b> extends </b>
+                            </p><div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/language/BaseScriptContext.html" class="type">BaseScriptContext</a><<div class="typeParameter"><p class="type primitiveType">U</p></div>></div></p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/Map.html" class="type" target="_blank">Map</a><<div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div>, <div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/library/BaseLibrary.html" class="type">BaseLibrary</a></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="retrieveOnceLibs-" class="method classItem"><h4 class="methodTitle classItemTitle">.retrieveOnceLibs(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/Map.html" class="type" target="_blank">Map</a><<div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div>, <div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/library/BaseLibrary.html" class="type">BaseLibrary</a></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="retrievePerExecLibs-T-" class="method classItem"><h4 class="methodTitle classItemTitle">.retrievePerExecLibs(<div class="methodParams">context</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>context</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">T
+                            <p class="classExtends">
+                                <b> extends </b>
+                            </p><div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/language/BaseScriptContext.html" class="type">BaseScriptContext</a><<div class="typeParameter"><p class="type primitiveType">U</p></div>></div></p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/Map.html" class="type" target="_blank">Map</a><<div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div>, <div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/library/BaseLibrary.html" class="type">BaseLibrary</a></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="createContext-BaseEvent-File-" class="method classItem"><h4 class="methodTitle classItemTitle">.createContext(<div class="methodParams">event, file</div>)</h4>
+                <div class="flags">
+                    <div class="flag abstractFlag">Abstract</div>
+                </div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>event</td>
+                            <td><div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/event/BaseEvent.html" class="type">BaseEvent</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>file</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/io/File.html" class="type" target="_blank">File</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">T
+                    <p class="classExtends">
+                        <b> extends </b>
+                    </p><div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/language/BaseScriptContext.html" class="type">BaseScriptContext</a><<div class="typeParameter"><p class="type primitiveType">U</p></div>></div></p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+</html>

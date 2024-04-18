@@ -1,0 +1,2989 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="../../../../../../../../classContent.css"></link>
+    </head>
+    <body>
+        <header>
+            <a href="../../../../../../../../">
+                <----- Return to main JsMacros docs page.
+            </a>
+        </header>
+    </body>
+    <main class="classDoc">
+        <div id="subClasses"><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components3d/Surface.html" class="type">Surface</a></div> 
+        </div>
+        <h2 class="classTitle">xyz.wagyourtail.jsmacros.client.api.classes.render.Draw2D</h2>
+        <div class="flags"></div>
+        <h4 class="classExtends"> implements <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/IDraw2D.html" class="type">IDraw2D</a><<div class="typeParameter"><a href="#" class="type">Draw2D</a></div>></div> </h4>
+        <p class="classSince since">1.0.5</p>
+        <p class="description"></p>
+        <h3>Constructors</h3>
+        <div class="constructorDoc">
+            <div id="constructor-" class="constructor classItem">
+                <h4 class="constructorTitle classItemTitle">
+                    new 
+                    Draw2D
+                    (<div class="constructorParams"></div>)
+                </h4>
+                <div class="flags"></div>
+                <p class="constructorSince since"></p>
+                <div class="constructorDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+            </div>
+        </div>
+        <div class="shortFieldMethods">
+            <div class="fieldShorts">
+                <h4>
+                    Fields
+                </h4>
+                <div class="shortField shortClassItem">
+                    <a href="#widthSupplier">widthSupplier</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortField shortClassItem">
+                    <a href="#heightSupplier">heightSupplier</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortField shortClassItem">
+                    <a href="">zIndex</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortField shortClassItem">
+                    <a href="">visible</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortField shortClassItem">
+                    <a href="#onInit">onInit</a>
+                    <div class="shortFlags">
+                        <div class="flag deprecatedFlag">D</div>
+                    </div>
+                </div>
+                <div class="shortField shortClassItem">
+                    <a href="#catchInit">catchInit</a>
+                    <div class="shortFlags">
+                        <div class="flag deprecatedFlag">D</div>
+                    </div>
+                </div>
+            </div>
+            <div class="methodShorts">
+                <h4>
+                    Methods
+                </h4>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getWidth-">getWidth()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getHeight-">getHeight()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getTexts-">getTexts()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getRects-">getRects()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getLines-">getLines()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getItems-">getItems()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getImages-">getImages()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getDraw2Ds-">getDraw2Ds()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getElements-">getElements()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#removeElement-RenderElement-">removeElement(e)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#reAddElement-T-">reAddElement(e)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#setVisible-boolean-">setVisible(visible)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#isVisible-">isVisible()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addDraw2D-Draw2D-int-int-int-int-">addDraw2D(draw2D, x, y, width, height)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addDraw2D-Draw2D-int-int-int-int-int-">addDraw2D(draw2D, x, y, width, height, zIndex)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#removeDraw2D-Draw2DElement-">removeDraw2D(draw2D)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addText-String-int-int-int-boolean-">addText(text, x, y, color, shadow)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addText-String-int-int-int-int-boolean-">addText(text, x, y, color, zIndex, shadow)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addText-String-int-int-int-boolean-double-double-">addText(text, x, y, color, shadow, scale, rotation)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addText-String-int-int-int-int-boolean-double-double-">addText(text, x, y, color, zIndex, shadow, scale, rotation)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addText-TextHelper-int-int-int-boolean-">addText(text, x, y, color, shadow)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addText-TextHelper-int-int-int-int-boolean-">addText(text, x, y, color, zIndex, shadow)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addText-TextHelper-int-int-int-boolean-double-double-">addText(text, x, y, color, shadow, scale, rotation)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addText-TextHelper-int-int-int-int-boolean-double-double-">addText(text, x, y, color, zIndex, shadow, scale, rotation)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#removeText-Text-">removeText(t)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addImage-int-int-int-int-String-int-int-int-int-int-int-">addImage(x, y, width, height, id, imageX, imageY, regionWidth, regionHeight, textureWidth, textureHeight)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addImage-int-int-int-int-int-String-int-int-int-int-int-int-">addImage(x, y, width, height, zIndex, id, imageX, imageY, regionWidth, regionHeight, textureWidth, textureHeight)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addImage-int-int-int-int-String-int-int-int-int-int-int-double-">addImage(x, y, width, height, id, imageX, imageY, regionWidth, regionHeight, textureWidth, textureHeight, rotation)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addImage-int-int-int-int-int-String-int-int-int-int-int-int-double-">addImage(x, y, width, height, zIndex, id, imageX, imageY, regionWidth, regionHeight, textureWidth, textureHeight, rotation)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addImage-int-int-int-int-int-int-String-int-int-int-int-int-int-double-">addImage(x, y, width, height, zIndex, color, id, imageX, imageY, regionWidth, regionHeight, textureWidth, textureHeight, rotation)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addImage-int-int-int-int-int-int-int-String-int-int-int-int-int-int-double-">addImage(x, y, width, height, zIndex, alpha, color, id, imageX, imageY, regionWidth, regionHeight, textureWidth, textureHeight, rotation)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#removeImage-Image-">removeImage(i)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addRect-int-int-int-int-int-">addRect(x1, y1, x2, y2, color)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addRect-int-int-int-int-int-int-">addRect(x1, y1, x2, y2, color, alpha)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addRect-int-int-int-int-int-int-double-">addRect(x1, y1, x2, y2, color, alpha, rotation)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addRect-int-int-int-int-int-int-double-int-">addRect(x1, y1, x2, y2, color, alpha, rotation, zIndex)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#removeRect-Rect-">removeRect(r)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addLine-int-int-int-int-int-">addLine(x1, y1, x2, y2, color)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addLine-int-int-int-int-int-int-">addLine(x1, y1, x2, y2, color, zIndex)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addLine-int-int-int-int-int-double-">addLine(x1, y1, x2, y2, color, width)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addLine-int-int-int-int-int-int-double-">addLine(x1, y1, x2, y2, color, zIndex, width)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addLine-int-int-int-int-int-double-double-">addLine(x1, y1, x2, y2, color, width, rotation)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addLine-int-int-int-int-int-int-double-double-">addLine(x1, y1, x2, y2, color, zIndex, width, rotation)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#removeLine-Line-">removeLine(l)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addItem-int-int-String-">addItem(x, y, id)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addItem-int-int-int-String-">addItem(x, y, zIndex, id)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addItem-int-int-String-boolean-">addItem(x, y, id, overlay)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addItem-int-int-int-String-boolean-">addItem(x, y, zIndex, id, overlay)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addItem-int-int-String-boolean-double-double-">addItem(x, y, id, overlay, scale, rotation)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addItem-int-int-int-String-boolean-double-double-">addItem(x, y, zIndex, id, overlay, scale, rotation)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addItem-int-int-ItemStackHelper-">addItem(x, y, Item)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addItem-int-int-int-ItemStackHelper-">addItem(x, y, zIndex, item)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addItem-int-int-ItemStackHelper-boolean-">addItem(x, y, Item, overlay)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addItem-int-int-int-ItemStackHelper-boolean-">addItem(x, y, zIndex, item, overlay)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addItem-int-int-ItemStackHelper-boolean-double-double-">addItem(x, y, item, overlay, scale, rotation)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addItem-int-int-int-ItemStackHelper-boolean-double-double-">addItem(x, y, zIndex, item, overlay, scale, rotation)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#removeItem-Item-">removeItem(i)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#init-">init()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#render-DrawContext-">render(drawContext)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getElementsByZIndex-">getElementsByZIndex()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#setOnInit-MethodWrapper-">setOnInit(onInit)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#setOnFailInit-MethodWrapper-">setOnFailInit(catchInit)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#register-">register()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#unregister-">unregister()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#setZIndex-int-">setZIndex(zIndex)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getZIndex-">getZIndex()</a>
+                    <div class="shortFlags"></div>
+                </div>
+            </div>
+        </div>
+        <h3>Fields</h3>
+        <div class="fieldDoc">
+            <div id="widthSupplier" class="field classItem"><h4 class="classItemTitle">.widthSupplier</h4>
+                <div class="flags"></div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/function/IntSupplier.html" class="type" target="_blank">IntSupplier</a></div></h5>
+                </div>
+            </div>
+            <div id="heightSupplier" class="field classItem"><h4 class="classItemTitle">.heightSupplier</h4>
+                <div class="flags"></div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/function/IntSupplier.html" class="type" target="_blank">IntSupplier</a></div></h5>
+                </div>
+            </div>
+            <div id="zIndex" class="field classItem"><h4 class="classItemTitle">.zIndex</h4>
+                <div class="flags"></div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><p class="type primitiveType">int</p></div></h5>
+                </div>
+            </div>
+            <div id="visible" class="field classItem"><h4 class="classItemTitle">.visible</h4>
+                <div class="flags"></div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><p class="type primitiveType">boolean</p></div></h5>
+                </div>
+            </div>
+            <div id="onInit" class="field classItem"><h4 class="classItemTitle">.onInit</h4>
+                <div class="flags">
+                    <div class="flag deprecatedFlag">Deprecated</div>
+                </div>
+                <p class="fieldSince since">1.0.5</p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/core/MethodWrapper.html" class="type">MethodWrapper</a><<div class="typeParameter"><a href="#" class="type">Draw2D</a></div>, <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Object.html" class="type" target="_blank">Object</a></div>, <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Object.html" class="type" target="_blank">Object</a></div>, <div class="typeParameter"><p class="type primitiveType">?</p></div>></div></h5>
+                </div>
+            </div>
+            <div id="catchInit" class="field classItem"><h4 class="classItemTitle">.catchInit</h4>
+                <div class="flags">
+                    <div class="flag deprecatedFlag">Deprecated</div>
+                </div>
+                <p class="fieldSince since">1.1.9 [citation needed]</p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/core/MethodWrapper.html" class="type">MethodWrapper</a><<div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div>, <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Object.html" class="type" target="_blank">Object</a></div>, <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Object.html" class="type" target="_blank">Object</a></div>, <div class="typeParameter"><p class="type primitiveType">?</p></div>></div></h5>
+                </div>
+            </div>
+        </div>
+        <h3>Methods</h3>
+        <div class="methodDoc">
+            <div id="getWidth-" class="method classItem"><h4 class="methodTitle classItemTitle">.getWidth(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.0.5</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">int</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="getHeight-" class="method classItem"><h4 class="methodTitle classItemTitle">.getHeight(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.0.5</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">int</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="getTexts-" class="method classItem"><h4 class="methodTitle classItemTitle">.getTexts(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.0.5</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/List.html" class="type" target="_blank">List</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Text.html" class="type">Text</a></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="getRects-" class="method classItem"><h4 class="methodTitle classItemTitle">.getRects(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.0.5</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/List.html" class="type" target="_blank">List</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Rect.html" class="type">Rect</a></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="getLines-" class="method classItem"><h4 class="methodTitle classItemTitle">.getLines(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/List.html" class="type" target="_blank">List</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Line.html" class="type">Line</a></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="getItems-" class="method classItem"><h4 class="methodTitle classItemTitle">.getItems(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.0.5</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/List.html" class="type" target="_blank">List</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Item.html" class="type">Item</a></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="getImages-" class="method classItem"><h4 class="methodTitle classItemTitle">.getImages(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.2.3</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/List.html" class="type" target="_blank">List</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Image.html" class="type">Image</a></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="getDraw2Ds-" class="method classItem"><h4 class="methodTitle classItemTitle">.getDraw2Ds(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/List.html" class="type" target="_blank">List</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Draw2DElement.html" class="type">Draw2DElement</a></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="getElements-" class="method classItem"><h4 class="methodTitle classItemTitle">.getElements(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/List.html" class="type" target="_blank">List</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/RenderElement.html" class="type">RenderElement</a></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="removeElement-RenderElement-" class="method classItem"><h4 class="methodTitle classItemTitle">.removeElement(<div class="methodParams">e</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>e</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/RenderElement.html" class="type">RenderElement</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="#" class="type">Draw2D</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="reAddElement-T-" class="method classItem"><h4 class="methodTitle classItemTitle">.reAddElement<<div class="typeParameter"><p class="type primitiveType">T
+                <p class="classExtends">
+                    <b> extends </b>
+                </p><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/RenderElement.html" class="type">RenderElement</a></div></p></div>>(<div class="methodParams">e</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>e</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">T
+                            <p class="classExtends">
+                                <b> extends </b>
+                            </p><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/RenderElement.html" class="type">RenderElement</a></div></p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">T
+                    <p class="classExtends">
+                        <b> extends </b>
+                    </p><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/RenderElement.html" class="type">RenderElement</a></div></p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="setVisible-boolean-" class="method classItem"><h4 class="methodTitle classItemTitle">.setVisible(<div class="methodParams">visible</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>visible</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">boolean</p></div></td>
+                            <td>
+                            <p class="description">whether to render this element.</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="#" class="type">Draw2D</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">self for chaining.</p>
+                </div>
+            </div>
+            <div id="isVisible-" class="method classItem"><h4 class="methodTitle classItemTitle">.isVisible(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">boolean</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"><code class="inlineCode">true</code> if this draw2d is visible, <code class="inlineCode">false</code> otherwise.</p>
+                </div>
+            </div>
+            <div id="addDraw2D-Draw2D-int-int-int-int-" class="method classItem"><h4 class="methodTitle classItemTitle">.addDraw2D(<div class="methodParams">draw2D, x, y, width, height</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>draw2D</td>
+                            <td><div class="typeParameter"><a href="#" class="type">Draw2D</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>x</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>width</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>height</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Draw2DElement.html" class="type">Draw2DElement</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addDraw2D-Draw2D-int-int-int-int-int-" class="method classItem"><h4 class="methodTitle classItemTitle">.addDraw2D(<div class="methodParams">draw2D, x, y, width, height, zIndex</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>draw2D</td>
+                            <td><div class="typeParameter"><a href="#" class="type">Draw2D</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>x</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>width</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>height</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>zIndex</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Draw2DElement.html" class="type">Draw2DElement</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="removeDraw2D-Draw2DElement-" class="method classItem"><h4 class="methodTitle classItemTitle">.removeDraw2D(<div class="methodParams">draw2D</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>draw2D</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Draw2DElement.html" class="type">Draw2DElement</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="#" class="type">Draw2D</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addText-String-int-int-int-boolean-" class="method classItem"><h4 class="methodTitle classItemTitle">.addText(<div class="methodParams">text, x, y, color, shadow</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.0.5</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>text</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>x</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>color</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>shadow</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">boolean</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Text.html" class="type">Text</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addText-String-int-int-int-int-boolean-" class="method classItem"><h4 class="methodTitle classItemTitle">.addText(<div class="methodParams">text, x, y, color, zIndex, shadow</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>text</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>x</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>color</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>zIndex</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>shadow</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">boolean</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Text.html" class="type">Text</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addText-String-int-int-int-boolean-double-double-" class="method classItem"><h4 class="methodTitle classItemTitle">.addText(<div class="methodParams">text, x, y, color, shadow, scale, rotation</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.2.6</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>text</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>x</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>color</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>shadow</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">boolean</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>scale</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>rotation</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Text.html" class="type">Text</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addText-String-int-int-int-int-boolean-double-double-" class="method classItem"><h4 class="methodTitle classItemTitle">.addText(<div class="methodParams">text, x, y, color, zIndex, shadow, scale, rotation</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>text</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>x</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>color</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>zIndex</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>shadow</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">boolean</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>scale</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>rotation</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Text.html" class="type">Text</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addText-TextHelper-int-int-int-boolean-" class="method classItem"><h4 class="methodTitle classItemTitle">.addText(<div class="methodParams">text, x, y, color, shadow</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>text</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/TextHelper.html" class="type">TextHelper</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>x</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>color</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>shadow</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">boolean</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Text.html" class="type">Text</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addText-TextHelper-int-int-int-int-boolean-" class="method classItem"><h4 class="methodTitle classItemTitle">.addText(<div class="methodParams">text, x, y, color, zIndex, shadow</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>text</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/TextHelper.html" class="type">TextHelper</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>x</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>color</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>zIndex</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>shadow</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">boolean</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Text.html" class="type">Text</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addText-TextHelper-int-int-int-boolean-double-double-" class="method classItem"><h4 class="methodTitle classItemTitle">.addText(<div class="methodParams">text, x, y, color, shadow, scale, rotation</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>text</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/TextHelper.html" class="type">TextHelper</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>x</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>color</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>shadow</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">boolean</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>scale</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>rotation</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Text.html" class="type">Text</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addText-TextHelper-int-int-int-int-boolean-double-double-" class="method classItem"><h4 class="methodTitle classItemTitle">.addText(<div class="methodParams">text, x, y, color, zIndex, shadow, scale, rotation</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>text</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/TextHelper.html" class="type">TextHelper</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>x</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>color</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>zIndex</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>shadow</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">boolean</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>scale</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>rotation</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Text.html" class="type">Text</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="removeText-Text-" class="method classItem"><h4 class="methodTitle classItemTitle">.removeText(<div class="methodParams">t</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.0.5</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>t</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Text.html" class="type">Text</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="#" class="type">Draw2D</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addImage-int-int-int-int-String-int-int-int-int-int-int-" class="method classItem"><h4 class="methodTitle classItemTitle">.addImage(<div class="methodParams">x, y, width, height, id, imageX, imageY, regionWidth, regionHeight, textureWidth, textureHeight</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.2.3</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>x</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>width</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>height</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>id</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>imageX</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>imageY</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>regionWidth</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>regionHeight</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>textureWidth</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>textureHeight</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Image.html" class="type">Image</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addImage-int-int-int-int-int-String-int-int-int-int-int-int-" class="method classItem"><h4 class="methodTitle classItemTitle">.addImage(<div class="methodParams">x, y, width, height, zIndex, id, imageX, imageY, regionWidth, regionHeight, textureWidth, textureHeight</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>x</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>width</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>height</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>zIndex</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>id</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>imageX</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>imageY</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>regionWidth</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>regionHeight</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>textureWidth</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>textureHeight</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Image.html" class="type">Image</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addImage-int-int-int-int-String-int-int-int-int-int-int-double-" class="method classItem"><h4 class="methodTitle classItemTitle">.addImage(<div class="methodParams">x, y, width, height, id, imageX, imageY, regionWidth, regionHeight, textureWidth, textureHeight, rotation</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.2.6</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>x</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>width</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>height</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>id</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>imageX</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>imageY</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>regionWidth</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>regionHeight</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>textureWidth</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>textureHeight</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>rotation</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Image.html" class="type">Image</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addImage-int-int-int-int-int-String-int-int-int-int-int-int-double-" class="method classItem"><h4 class="methodTitle classItemTitle">.addImage(<div class="methodParams">x, y, width, height, zIndex, id, imageX, imageY, regionWidth, regionHeight, textureWidth, textureHeight, rotation</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.4.0</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>x</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>width</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>height</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>zIndex</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>id</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>imageX</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>imageY</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>regionWidth</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>regionHeight</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>textureWidth</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>textureHeight</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>rotation</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Image.html" class="type">Image</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addImage-int-int-int-int-int-int-String-int-int-int-int-int-int-double-" class="method classItem"><h4 class="methodTitle classItemTitle">.addImage(<div class="methodParams">x, y, width, height, zIndex, color, id, imageX, imageY, regionWidth, regionHeight, textureWidth, textureHeight, rotation</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.6.5</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>x</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>width</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>height</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>zIndex</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>color</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>id</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>imageX</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>imageY</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>regionWidth</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>regionHeight</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>textureWidth</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>textureHeight</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>rotation</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Image.html" class="type">Image</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addImage-int-int-int-int-int-int-int-String-int-int-int-int-int-int-double-" class="method classItem"><h4 class="methodTitle classItemTitle">.addImage(<div class="methodParams">x, y, width, height, zIndex, alpha, color, id, imageX, imageY, regionWidth, regionHeight, textureWidth, textureHeight, rotation</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.6.5</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>x</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>width</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>height</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>zIndex</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>alpha</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>color</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>id</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>imageX</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>imageY</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>regionWidth</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>regionHeight</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>textureWidth</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>textureHeight</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>rotation</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Image.html" class="type">Image</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="removeImage-Image-" class="method classItem"><h4 class="methodTitle classItemTitle">.removeImage(<div class="methodParams">i</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.2.3</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>i</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Image.html" class="type">Image</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="#" class="type">Draw2D</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addRect-int-int-int-int-int-" class="method classItem"><h4 class="methodTitle classItemTitle">.addRect(<div class="methodParams">x1, y1, x2, y2, color</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.0.5</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>x1</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y1</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>x2</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y2</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>color</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Rect.html" class="type">Rect</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addRect-int-int-int-int-int-int-" class="method classItem"><h4 class="methodTitle classItemTitle">.addRect(<div class="methodParams">x1, y1, x2, y2, color, alpha</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.1.8</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>x1</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y1</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>x2</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y2</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>color</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>alpha</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Rect.html" class="type">Rect</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addRect-int-int-int-int-int-int-double-" class="method classItem"><h4 class="methodTitle classItemTitle">.addRect(<div class="methodParams">x1, y1, x2, y2, color, alpha, rotation</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.2.6</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>x1</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y1</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>x2</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y2</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>color</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>alpha</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>rotation</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Rect.html" class="type">Rect</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addRect-int-int-int-int-int-int-double-int-" class="method classItem"><h4 class="methodTitle classItemTitle">.addRect(<div class="methodParams">x1, y1, x2, y2, color, alpha, rotation, zIndex</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>x1</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y1</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>x2</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y2</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>color</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>alpha</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>rotation</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>zIndex</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Rect.html" class="type">Rect</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="removeRect-Rect-" class="method classItem"><h4 class="methodTitle classItemTitle">.removeRect(<div class="methodParams">r</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.0.5</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>r</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Rect.html" class="type">Rect</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="#" class="type">Draw2D</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addLine-int-int-int-int-int-" class="method classItem"><h4 class="methodTitle classItemTitle">.addLine(<div class="methodParams">x1, y1, x2, y2, color</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>x1</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y1</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>x2</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y2</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>color</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Line.html" class="type">Line</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addLine-int-int-int-int-int-int-" class="method classItem"><h4 class="methodTitle classItemTitle">.addLine(<div class="methodParams">x1, y1, x2, y2, color, zIndex</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>x1</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y1</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>x2</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y2</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>color</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>zIndex</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Line.html" class="type">Line</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addLine-int-int-int-int-int-double-" class="method classItem"><h4 class="methodTitle classItemTitle">.addLine(<div class="methodParams">x1, y1, x2, y2, color, width</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>x1</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y1</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>x2</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y2</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>color</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>width</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Line.html" class="type">Line</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addLine-int-int-int-int-int-int-double-" class="method classItem"><h4 class="methodTitle classItemTitle">.addLine(<div class="methodParams">x1, y1, x2, y2, color, zIndex, width</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>x1</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y1</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>x2</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y2</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>color</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>zIndex</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>width</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Line.html" class="type">Line</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addLine-int-int-int-int-int-double-double-" class="method classItem"><h4 class="methodTitle classItemTitle">.addLine(<div class="methodParams">x1, y1, x2, y2, color, width, rotation</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>x1</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y1</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>x2</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y2</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>color</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>width</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>rotation</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Line.html" class="type">Line</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addLine-int-int-int-int-int-int-double-double-" class="method classItem"><h4 class="methodTitle classItemTitle">.addLine(<div class="methodParams">x1, y1, x2, y2, color, zIndex, width, rotation</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>x1</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y1</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>x2</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y2</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>color</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>zIndex</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>width</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>rotation</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Line.html" class="type">Line</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="removeLine-Line-" class="method classItem"><h4 class="methodTitle classItemTitle">.removeLine(<div class="methodParams">l</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>l</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Line.html" class="type">Line</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="#" class="type">Draw2D</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addItem-int-int-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.addItem(<div class="methodParams">x, y, id</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.0.5</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>x</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>id</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Item.html" class="type">Item</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addItem-int-int-int-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.addItem(<div class="methodParams">x, y, zIndex, id</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>x</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>zIndex</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>id</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Item.html" class="type">Item</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addItem-int-int-String-boolean-" class="method classItem"><h4 class="methodTitle classItemTitle">.addItem(<div class="methodParams">x, y, id, overlay</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.2.0</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>x</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>id</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>overlay</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">boolean</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Item.html" class="type">Item</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addItem-int-int-int-String-boolean-" class="method classItem"><h4 class="methodTitle classItemTitle">.addItem(<div class="methodParams">x, y, zIndex, id, overlay</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>x</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>zIndex</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>id</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>overlay</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">boolean</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Item.html" class="type">Item</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addItem-int-int-String-boolean-double-double-" class="method classItem"><h4 class="methodTitle classItemTitle">.addItem(<div class="methodParams">x, y, id, overlay, scale, rotation</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.2.0</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>x</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>id</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>overlay</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">boolean</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>scale</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>rotation</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Item.html" class="type">Item</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addItem-int-int-int-String-boolean-double-double-" class="method classItem"><h4 class="methodTitle classItemTitle">.addItem(<div class="methodParams">x, y, zIndex, id, overlay, scale, rotation</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>x</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>zIndex</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>id</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>overlay</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">boolean</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>scale</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>rotation</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Item.html" class="type">Item</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addItem-int-int-ItemStackHelper-" class="method classItem"><h4 class="methodTitle classItemTitle">.addItem(<div class="methodParams">x, y, Item</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.0.5</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>x</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Item</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/inventory/ItemStackHelper.html" class="type">ItemStackHelper</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Item.html" class="type">Item</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addItem-int-int-int-ItemStackHelper-" class="method classItem"><h4 class="methodTitle classItemTitle">.addItem(<div class="methodParams">x, y, zIndex, item</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>x</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>zIndex</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>item</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/inventory/ItemStackHelper.html" class="type">ItemStackHelper</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Item.html" class="type">Item</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addItem-int-int-ItemStackHelper-boolean-" class="method classItem"><h4 class="methodTitle classItemTitle">.addItem(<div class="methodParams">x, y, Item, overlay</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.2.0</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>x</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>Item</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/inventory/ItemStackHelper.html" class="type">ItemStackHelper</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>overlay</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">boolean</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Item.html" class="type">Item</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addItem-int-int-int-ItemStackHelper-boolean-" class="method classItem"><h4 class="methodTitle classItemTitle">.addItem(<div class="methodParams">x, y, zIndex, item, overlay</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>x</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>zIndex</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>item</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/inventory/ItemStackHelper.html" class="type">ItemStackHelper</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>overlay</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">boolean</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Item.html" class="type">Item</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addItem-int-int-ItemStackHelper-boolean-double-double-" class="method classItem"><h4 class="methodTitle classItemTitle">.addItem(<div class="methodParams">x, y, item, overlay, scale, rotation</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.2.6</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>x</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>item</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/inventory/ItemStackHelper.html" class="type">ItemStackHelper</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>overlay</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">boolean</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>scale</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>rotation</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Item.html" class="type">Item</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addItem-int-int-int-ItemStackHelper-boolean-double-double-" class="method classItem"><h4 class="methodTitle classItemTitle">.addItem(<div class="methodParams">x, y, zIndex, item, overlay, scale, rotation</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>x</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>zIndex</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>item</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/inventory/ItemStackHelper.html" class="type">ItemStackHelper</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>overlay</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">boolean</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>scale</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>rotation</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Item.html" class="type">Item</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="removeItem-Item-" class="method classItem"><h4 class="methodTitle classItemTitle">.removeItem(<div class="methodParams">i</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.0.5</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>i</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/Item.html" class="type">Item</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="#" class="type">Draw2D</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="init-" class="method classItem"><h4 class="methodTitle classItemTitle">.init(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="render-DrawContext-" class="method classItem"><h4 class="methodTitle classItemTitle">.render(<div class="methodParams">drawContext</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>drawContext</td>
+                            <td><div class="typeParameter"><a href="https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App?mapping=INTERMEDIARY,YARN&version=1.20.4&search=net/minecraft/client/gui/DrawContext" class="type" target="_blank">DrawContext</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="getElementsByZIndex-" class="method classItem"><h4 class="methodTitle classItemTitle">.getElementsByZIndex(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/Iterator.html" class="type" target="_blank">Iterator</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/components/RenderElement.html" class="type">RenderElement</a></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="setOnInit-MethodWrapper-" class="method classItem"><h4 class="methodTitle classItemTitle">.setOnInit(<div class="methodParams">onInit</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.2.7</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">init function, called when window is resized or screen/draw2d is registered.
+                 clears all previous elements when called.</p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>onInit</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/core/MethodWrapper.html" class="type">MethodWrapper</a><<div class="typeParameter"><a href="#" class="type">Draw2D</a></div>, <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Object.html" class="type" target="_blank">Object</a></div>, <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Object.html" class="type" target="_blank">Object</a></div>, <div class="typeParameter"><p class="type primitiveType">?</p></div>></div></td>
+                            <td>
+                            <p class="description">calls your method as a <a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/function/Consumer.html" class="type" target="_blank">Consumer</a>&lt;<a href="#" class="type">Draw2D</a>&gt;</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="#" class="type">Draw2D</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="setOnFailInit-MethodWrapper-" class="method classItem"><h4 class="methodTitle classItemTitle">.setOnFailInit(<div class="methodParams">catchInit</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.2.7</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>catchInit</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/core/MethodWrapper.html" class="type">MethodWrapper</a><<div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div>, <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Object.html" class="type" target="_blank">Object</a></div>, <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Object.html" class="type" target="_blank">Object</a></div>, <div class="typeParameter"><p class="type primitiveType">?</p></div>></div></td>
+                            <td>
+                            <p class="description">calls your method as a <a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/function/Consumer.html" class="type" target="_blank">Consumer</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a>&gt;</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="#" class="type">Draw2D</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="register-" class="method classItem"><h4 class="methodTitle classItemTitle">.register(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.6.5</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">register so the overlay actually renders</p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="#" class="type">Draw2D</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">self for chaining</p>
+                </div>
+            </div>
+            <div id="unregister-" class="method classItem"><h4 class="methodTitle classItemTitle">.unregister(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.6.5</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">unregister so the overlay stops rendering</p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="#" class="type">Draw2D</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">self for chaining</p>
+                </div>
+            </div>
+            <div id="setZIndex-int-" class="method classItem"><h4 class="methodTitle classItemTitle">.setZIndex(<div class="methodParams">zIndex</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>zIndex</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="getZIndex-" class="method classItem"><h4 class="methodTitle classItemTitle">.getZIndex(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">int</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+</html>

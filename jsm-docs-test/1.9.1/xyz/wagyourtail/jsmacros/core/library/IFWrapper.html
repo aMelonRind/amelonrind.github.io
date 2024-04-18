@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="../../../../../../classContent.css"></link>
+    </head>
+    <body>
+        <header>
+            <a href="../../../../../../">
+                <----- Return to main JsMacros docs page.
+            </a>
+        </header>
+    </body>
+    <main class="classDoc">
+        <div id="subClasses"></div>
+        <h2 class="classTitle">xyz.wagyourtail.jsmacros.core.library.IFWrapper<<div class="typeParameter"><p class="type primitiveType">T</p></div>></h2>
+        <div class="flags">
+            <div class="flag interfaceFlag">Interface</div>
+        </div>
+        <h4 class="classExtends"></h4>
+        <p class="classSince since">1.2.5, re-named from <code class="inlineCode">consumer</code> in 1.3.2</p>
+        <p class="description"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/FunctionalInterface.html" class="type" target="_blank">FunctionalInterface</a> implementation for wrapping methods to match the language spec.
+     <br><br>
+     An instance of this class is passed to scripts as the <code class="inlineCode">consumer</code> variable.
+     <br><br>
+     Javascript:
+     language spec requires that only one thread can hold an instance of the language at a time,
+     so this implementation uses a non-preemptive priority queue for the threads that call the resulting <a href="../../../../../xyz/wagyourtail/jsmacros/core/MethodWrapper.html" class="type">MethodWrapper</a>.
+     <br><br>
+     JEP:
+     language spec requires everything to be on the same thread, on the java end, so all calls to <a href="../../../../../xyz/wagyourtail/jsmacros/core/MethodWrapper.html" class="type">MethodWrapper</a>
+     call back to JEP's starting thread and wait for the call to complete.
+     <br><br>
+     Jython:
+     no limitations
+     <br><br>
+     LUA:
+     no limitations</p>
+        <div class="shortFieldMethods">
+            <div class="methodShorts">
+                <h4>
+                    Methods
+                </h4>
+                <div class="shortMethod shortClassItem">
+                    <a href="#methodToJava-T-">methodToJava(c)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#methodToJavaAsync-T-">methodToJavaAsync(c)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#methodToJavaAsync-int-T-">methodToJavaAsync(priority, c)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#deferCurrentTask-">deferCurrentTask()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#deferCurrentTask-int-">deferCurrentTask(priorityAdjust)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getCurrentPriority-">getCurrentPriority()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#stop-">stop()</a>
+                    <div class="shortFlags"></div>
+                </div>
+            </div>
+        </div>
+        <h3>Methods</h3>
+        <div class="methodDoc">
+            <div id="methodToJava-T-" class="method classItem"><h4 class="methodTitle classItemTitle">.methodToJava<<div class="typeParameter"><p class="type primitiveType">A</p></div>, <div class="typeParameter"><p class="type primitiveType">B</p></div>, <div class="typeParameter"><p class="type primitiveType">R</p></div>>(<div class="methodParams">c</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.4.0</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>c</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">T</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/MethodWrapper.html" class="type">MethodWrapper</a><<div class="typeParameter"><p class="type primitiveType">A</p></div>, <div class="typeParameter"><p class="type primitiveType">B</p></div>, <div class="typeParameter"><p class="type primitiveType">R</p></div>, <div class="typeParameter"><p class="type primitiveType">?</p></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">a new <a href="../../../../../xyz/wagyourtail/jsmacros/core/MethodWrapper.html" class="type">MethodWrapper</a></p>
+                </div>
+            </div>
+            <div id="methodToJavaAsync-T-" class="method classItem"><h4 class="methodTitle classItemTitle">.methodToJavaAsync<<div class="typeParameter"><p class="type primitiveType">A</p></div>, <div class="typeParameter"><p class="type primitiveType">B</p></div>, <div class="typeParameter"><p class="type primitiveType">R</p></div>>(<div class="methodParams">c</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.4.0</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>c</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">T</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/MethodWrapper.html" class="type">MethodWrapper</a><<div class="typeParameter"><p class="type primitiveType">A</p></div>, <div class="typeParameter"><p class="type primitiveType">B</p></div>, <div class="typeParameter"><p class="type primitiveType">R</p></div>, <div class="typeParameter"><p class="type primitiveType">?</p></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">a new <a href="../../../../../xyz/wagyourtail/jsmacros/core/MethodWrapper.html" class="type">MethodWrapper</a></p>
+                </div>
+            </div>
+            <div id="methodToJavaAsync-int-T-" class="method classItem"><h4 class="methodTitle classItemTitle">.methodToJavaAsync<<div class="typeParameter"><p class="type primitiveType">A</p></div>, <div class="typeParameter"><p class="type primitiveType">B</p></div>, <div class="typeParameter"><p class="type primitiveType">R</p></div>>(<div class="methodParams">priority, c</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.0</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">JS/JEP ONLY
+                 allows you to set the position of the thread in the queue. you can use this for return value one's too...</p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>priority</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>c</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">T</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/MethodWrapper.html" class="type">MethodWrapper</a><<div class="typeParameter"><p class="type primitiveType">A</p></div>, <div class="typeParameter"><p class="type primitiveType">B</p></div>, <div class="typeParameter"><p class="type primitiveType">R</p></div>, <div class="typeParameter"><p class="type primitiveType">?</p></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="deferCurrentTask-" class="method classItem"><h4 class="methodTitle classItemTitle">.deferCurrentTask(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.4.0 [citation needed]</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">JS/JEP only, puts current task at end of queue.
+                 use with caution, don't accidentally cause circular waiting.</p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="deferCurrentTask-int-" class="method classItem"><h4 class="methodTitle classItemTitle">.deferCurrentTask(<div class="methodParams">priorityAdjust</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.0</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">JS/JEP only, puts current task at end of queue.
+                 use with caution, don't accidentally cause circular waiting.</p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>priorityAdjust</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td>
+                            <p class="description">the amount to adjust the priority by</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="getCurrentPriority-" class="method classItem"><h4 class="methodTitle classItemTitle">.getCurrentPriority(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.0</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">JS/JEP only, get priority of current task.</p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">int</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="stop-" class="method classItem"><h4 class="methodTitle classItemTitle">.stop(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.2.2</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">Close the current context</p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+</html>

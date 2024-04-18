@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="../../../../../../../classContent.css"></link>
+    </head>
+    <body>
+        <header>
+            <a href="../../../../../../../">
+                <----- Return to main JsMacros docs page.
+            </a>
+        </header>
+    </body>
+    <main class="classDoc">
+        <div id="subClasses"></div>
+        <h2 class="classTitle">xyz.wagyourtail.jsmacros.client.api.classes.PlayerInput</h2>
+        <div class="flags"></div>
+        <h4 class="classExtends"></h4>
+        <p class="classSince since">1.4.0</p>
+        <p class="description">An object, that combines all possible player inputs</p>
+        <h3>Constructors</h3>
+        <div class="constructorDoc">
+            <div id="constructor-" class="constructor classItem">
+                <h4 class="constructorTitle classItemTitle">
+                    new 
+                    PlayerInput
+                    (<div class="constructorParams"></div>)
+                </h4>
+                <div class="flags"></div>
+                <p class="constructorSince since">1.4.0</p>
+                <div class="constructorDesc classItemDesc">
+                    <p class="description">Creates a new <code class="inlineCode">PlayerInput</code> Object with all values set either to 0 or false</p>
+                </div>
+            </div>
+            <div id="constructor-float-float-float-" class="constructor classItem">
+                <h4 class="constructorTitle classItemTitle">
+                    new 
+                    PlayerInput
+                    (<div class="constructorParams">movementForward, movementSideways, yaw</div>)
+                </h4>
+                <div class="flags"></div>
+                <p class="constructorSince since">1.4.0</p>
+                <div class="constructorDesc classItemDesc">
+                    <p class="description">Creates a new <code class="inlineCode">PlayerInput</code> Object with all other values set either to 0 or false</p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>movementForward</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">float</p></div></td>
+                            <td>
+                            <p class="description">1 = forward input (W); 0 = no input; -1 = backward input (S)</p></td>
+                        </tr>
+                        <tr>
+                            <td>movementSideways</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">float</p></div></td>
+                            <td>
+                            <p class="description">1 = left input (A); 0 = no input; -1 = right input (D)</p></td>
+                        </tr>
+                        <tr>
+                            <td>yaw</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">float</p></div></td>
+                            <td>
+                            <p class="description">yaw of the player</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="constructor-float-float-boolean-boolean-" class="constructor classItem">
+                <h4 class="constructorTitle classItemTitle">
+                    new 
+                    PlayerInput
+                    (<div class="constructorParams">movementForward, yaw, jumping, sprinting</div>)
+                </h4>
+                <div class="flags"></div>
+                <p class="constructorSince since">1.4.0</p>
+                <div class="constructorDesc classItemDesc">
+                    <p class="description">Creates a new <code class="inlineCode">PlayerInput</code> Object with all other values set either to 0 or false</p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>movementForward</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">float</p></div></td>
+                            <td>
+                            <p class="description">1 = forward input (W); 0 = no input; -1 = backward input (S)</p></td>
+                        </tr>
+                        <tr>
+                            <td>yaw</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">float</p></div></td>
+                            <td>
+                            <p class="description">yaw of the player</p></td>
+                        </tr>
+                        <tr>
+                            <td>jumping</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">boolean</p></div></td>
+                            <td>
+                            <p class="description">jump input</p></td>
+                        </tr>
+                        <tr>
+                            <td>sprinting</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">boolean</p></div></td>
+                            <td>
+                            <p class="description">sprint input</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="constructor-Input-float-float-boolean-" class="constructor classItem">
+                <h4 class="constructorTitle classItemTitle">
+                    new 
+                    PlayerInput
+                    (<div class="constructorParams">input, yaw, pitch, sprinting</div>)
+                </h4>
+                <div class="flags"></div>
+                <p class="constructorSince since">1.4.0</p>
+                <div class="constructorDesc classItemDesc">
+                    <p class="description">Creates a new <code class="inlineCode">PlayerInput</code> Object from a minecraft input with the missing values extra</p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>input</td>
+                            <td><div class="typeParameter"><a href="https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App?mapping=INTERMEDIARY,YARN&version=1.20.4&search=net/minecraft/client/input/Input" class="type" target="_blank">Input</a></div></td>
+                            <td>
+                            <p class="description">Minecraft Input to be converted.</p></td>
+                        </tr>
+                        <tr>
+                            <td>yaw</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">float</p></div></td>
+                            <td>
+                            <p class="description">yaw of the player</p></td>
+                        </tr>
+                        <tr>
+                            <td>pitch</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">float</p></div></td>
+                            <td>
+                            <p class="description">pitch of the player</p></td>
+                        </tr>
+                        <tr>
+                            <td>sprinting</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">boolean</p></div></td>
+                            <td>
+                            <p class="description">sprint input</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="constructor-double-double-double-double-boolean-boolean-boolean-" class="constructor classItem">
+                <h4 class="constructorTitle classItemTitle">
+                    new 
+                    PlayerInput
+                    (<div class="constructorParams">movementForward, movementSideways, yaw, pitch, jumping, sneaking, sprinting</div>)
+                </h4>
+                <div class="flags"></div>
+                <p class="constructorSince since">1.4.0</p>
+                <div class="constructorDesc classItemDesc">
+                    <p class="description">Creates a new <code class="inlineCode">PlayerInput</code> Object with all double values converted to floats</p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>movementForward</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td>
+                            <p class="description">1 = forward input (W); 0 = no input; -1 = backward input (S)</p></td>
+                        </tr>
+                        <tr>
+                            <td>movementSideways</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td>
+                            <p class="description">1 = left input (A); 0 = no input; -1 = right input (D)</p></td>
+                        </tr>
+                        <tr>
+                            <td>yaw</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td>
+                            <p class="description">yaw of the player</p></td>
+                        </tr>
+                        <tr>
+                            <td>pitch</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td>
+                            <p class="description">pitch of the player</p></td>
+                        </tr>
+                        <tr>
+                            <td>jumping</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">boolean</p></div></td>
+                            <td>
+                            <p class="description">jump input</p></td>
+                        </tr>
+                        <tr>
+                            <td>sneaking</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">boolean</p></div></td>
+                            <td>
+                            <p class="description">sneak input</p></td>
+                        </tr>
+                        <tr>
+                            <td>sprinting</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">boolean</p></div></td>
+                            <td>
+                            <p class="description">sprint input</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="constructor-float-float-float-float-boolean-boolean-boolean-" class="constructor classItem">
+                <h4 class="constructorTitle classItemTitle">
+                    new 
+                    PlayerInput
+                    (<div class="constructorParams">movementForward, movementSideways, yaw, pitch, jumping, sneaking, sprinting</div>)
+                </h4>
+                <div class="flags"></div>
+                <p class="constructorSince since">1.4.0</p>
+                <div class="constructorDesc classItemDesc">
+                    <p class="description">Creates a new <code class="inlineCode">PlayerInput</code> Object</p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>movementForward</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">float</p></div></td>
+                            <td>
+                            <p class="description">1 = forward input (W); 0 = no input; -1 = backward input (S)</p></td>
+                        </tr>
+                        <tr>
+                            <td>movementSideways</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">float</p></div></td>
+                            <td>
+                            <p class="description">1 = left input (A); 0 = no input; -1 = right input (D)</p></td>
+                        </tr>
+                        <tr>
+                            <td>yaw</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">float</p></div></td>
+                            <td>
+                            <p class="description">yaw of the player</p></td>
+                        </tr>
+                        <tr>
+                            <td>pitch</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">float</p></div></td>
+                            <td>
+                            <p class="description">pitch of the player</p></td>
+                        </tr>
+                        <tr>
+                            <td>jumping</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">boolean</p></div></td>
+                            <td>
+                            <p class="description">jump input</p></td>
+                        </tr>
+                        <tr>
+                            <td>sneaking</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">boolean</p></div></td>
+                            <td>
+                            <p class="description">sneak input</p></td>
+                        </tr>
+                        <tr>
+                            <td>sprinting</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">boolean</p></div></td>
+                            <td>
+                            <p class="description">sprint input</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="constructor-PlayerInput-" class="constructor classItem">
+                <h4 class="constructorTitle classItemTitle">
+                    new 
+                    PlayerInput
+                    (<div class="constructorParams">input</div>)
+                </h4>
+                <div class="flags"></div>
+                <p class="constructorSince since">1.4.0</p>
+                <div class="constructorDesc classItemDesc">
+                    <p class="description">Creates a clone <code class="inlineCode">PlayerInput</code> Object</p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>input</td>
+                            <td><div class="typeParameter"><a href="#" class="type">PlayerInput</a></div></td>
+                            <td>
+                            <p class="description">the <code class="inlineCode">PlayerInput</code> object to be cloned</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="shortFieldMethods">
+            <div class="fieldShorts">
+                <h4>
+                    Fields
+                </h4>
+                <div class="shortField shortClassItem">
+                    <a href="">movementForward</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortField shortClassItem">
+                    <a href="">movementSideways</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortField shortClassItem">
+                    <a href="">yaw</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortField shortClassItem">
+                    <a href="">pitch</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortField shortClassItem">
+                    <a href="">jumping</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortField shortClassItem">
+                    <a href="">sneaking</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortField shortClassItem">
+                    <a href="">sprinting</a>
+                    <div class="shortFlags"></div>
+                </div>
+            </div>
+            <div class="methodShorts">
+                <h4>
+                    Methods
+                </h4>
+                <div class="shortMethod shortClassItem">
+                    <a href="#fromCsv-String-">fromCsv(csv)</a>
+                    <div class="shortFlags">
+                        <div class="flag staticFlag">S</div>
+                    </div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#fromJson-String-">fromJson(json)</a>
+                    <div class="shortFlags">
+                        <div class="flag staticFlag">S</div>
+                    </div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#toString-boolean-">toString(varNames)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#toString-">toString()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#clone-">clone()</a>
+                    <div class="shortFlags"></div>
+                </div>
+            </div>
+        </div>
+        <h3>Fields</h3>
+        <div class="fieldDoc">
+            <div id="movementForward" class="field classItem"><h4 class="classItemTitle">.movementForward</h4>
+                <div class="flags"></div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><p class="type primitiveType">float</p></div></h5>
+                </div>
+            </div>
+            <div id="movementSideways" class="field classItem"><h4 class="classItemTitle">.movementSideways</h4>
+                <div class="flags"></div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><p class="type primitiveType">float</p></div></h5>
+                </div>
+            </div>
+            <div id="yaw" class="field classItem"><h4 class="classItemTitle">.yaw</h4>
+                <div class="flags"></div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><p class="type primitiveType">float</p></div></h5>
+                </div>
+            </div>
+            <div id="pitch" class="field classItem"><h4 class="classItemTitle">.pitch</h4>
+                <div class="flags"></div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><p class="type primitiveType">float</p></div></h5>
+                </div>
+            </div>
+            <div id="jumping" class="field classItem"><h4 class="classItemTitle">.jumping</h4>
+                <div class="flags"></div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><p class="type primitiveType">boolean</p></div></h5>
+                </div>
+            </div>
+            <div id="sneaking" class="field classItem"><h4 class="classItemTitle">.sneaking</h4>
+                <div class="flags"></div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><p class="type primitiveType">boolean</p></div></h5>
+                </div>
+            </div>
+            <div id="sprinting" class="field classItem"><h4 class="classItemTitle">.sprinting</h4>
+                <div class="flags"></div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><p class="type primitiveType">boolean</p></div></h5>
+                </div>
+            </div>
+        </div>
+        <h3>Methods</h3>
+        <div class="methodDoc">
+            <div id="fromCsv-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.fromCsv(<div class="methodParams">csv</div>)</h4>
+                <div class="flags">
+                    <div class="flag staticFlag">Static</div>
+                </div>
+                <p class="methodSince since">1.4.0</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">Parses each row of CSV string into a <code class="inlineCode">PlayerInput</code>.
+                 The capitalization of the header matters.<br>
+                 About the columns:
+                 <ul>
+                   <li> <code class="inlineCode">movementForward</code> and <code class="inlineCode">movementSideways</code> as a number</li>
+                   <li><code class="inlineCode">yaw</code> and <code class="inlineCode">pitch</code> as an absolute number</li>
+                   <li><code class="inlineCode">jumping</code>, <code class="inlineCode">sneaking</code> and <code class="inlineCode">sprinting</code> have to be boolean</li>
+                 </ul>
+                 <p>
+                 The separation must be a "," it's a csv...(but spaces don't matter)<br>
+                 Quoted values don't work</p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>csv</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description">CSV string to be parsed</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/List.html" class="type" target="_blank">List</a><<div class="typeParameter"><a href="#" class="type">PlayerInput</a></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"><code class="inlineCode">List<PlayerInput></code> Each row parsed as a <code class="inlineCode">PlayerInput</code></p>
+                </div>
+            </div>
+            <div id="fromJson-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.fromJson(<div class="methodParams">json</div>)</h4>
+                <div class="flags">
+                    <div class="flag staticFlag">Static</div>
+                </div>
+                <p class="methodSince since">1.4.0</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">Parses a JSON string into a <code class="inlineCode">PlayerInput</code> Object<br>
+                 Capitalization of the keys matters.</p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>json</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description">JSON string to be parsed</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="#" class="type">PlayerInput</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">The JSON parsed into a <code class="inlineCode">PlayerInput</code></p>
+                </div>
+            </div>
+            <div id="toString-boolean-" class="method classItem"><h4 class="methodTitle classItemTitle">.toString(<div class="methodParams">varNames</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.4.0</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">Converts the current object into a string.
+                 This can be used to convert current inputs created using <code class="inlineCode">Player.getCurrentPlayerInput()</code>
+                 to either JSON or CSV.
+                 <p>
+                 The output can be converted into a PlayerInput object again by using either
+                 <code class="inlineCode">fromCsv(String, String)</code> or <code class="inlineCode">fromJson(String)</code>.</p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>varNames</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">boolean</p></div></td>
+                            <td>
+                            <p class="description">whether to include variable Names(=JSON) or not(=CSV)</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">The <code class="inlineCode">PlayerInput</code> object as a string</p>
+                </div>
+            </div>
+            <div id="toString-" class="method classItem"><h4 class="methodTitle classItemTitle">.toString(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="clone-" class="method classItem"><h4 class="methodTitle classItemTitle">.clone(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="#" class="type">PlayerInput</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+</html>

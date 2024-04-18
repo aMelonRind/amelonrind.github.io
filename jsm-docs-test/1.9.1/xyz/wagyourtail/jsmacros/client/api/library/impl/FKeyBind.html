@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="../../../../../../../../classContent.css"></link>
+    </head>
+    <body>
+        <header>
+            <a href="../../../../../../../../">
+                <----- Return to main JsMacros docs page.
+            </a>
+        </header>
+    </body>
+    <main class="classDoc">
+        <div id="subClasses"></div>
+        <h2 class="classTitle">xyz.wagyourtail.jsmacros.client.api.library.impl.FKeyBind</h2>
+        <div class="flags"></div>
+        <h4 class="classExtends">extends <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/core/library/BaseLibrary.html" class="type">BaseLibrary</a></div></h4>
+        <p class="classSince since"></p>
+        <p class="description">Functions for getting and modifying key pressed states.
+     <p>
+     An instance of this class is passed to scripts as the <code class="inlineCode">KeyBind</code> variable.</p>
+        <div class="shortFieldMethods">
+            <div class="methodShorts">
+                <h4>
+                    Methods
+                </h4>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getKeyCode-String-">getKeyCode(keyName)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getKeyBindings-">getKeyBindings()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#setKeyBind-String-String-">setKeyBind(bind, key)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#key-String-boolean-">key(keyName, keyState)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#pressKey-String-">pressKey(keyName)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#releaseKey-String-">releaseKey(keyName)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#keyBind-String-boolean-">keyBind(keyBind, keyState)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#pressKeyBind-String-">pressKeyBind(keyBind)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#releaseKeyBind-String-">releaseKeyBind(keyBind)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getPressedKeys-">getPressedKeys()</a>
+                    <div class="shortFlags"></div>
+                </div>
+            </div>
+        </div>
+        <h3>Methods</h3>
+        <div class="methodDoc">
+            <div id="getKeyCode-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.getKeyCode(<div class="methodParams">keyName</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">Dont use this one... get the raw minecraft keycode class.</p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>keyName</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App?mapping=INTERMEDIARY,YARN&version=1.20.4&search=net/minecraft/client/util/InputUtil$Key" class="type" target="_blank">InputUtil$Key</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">the raw minecraft keycode class</p>
+                </div>
+            </div>
+            <div id="getKeyBindings-" class="method classItem"><h4 class="methodTitle classItemTitle">.getKeyBindings(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.2.2</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/Map.html" class="type" target="_blank">Map</a><<div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div>, <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">A <a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/Map.html" class="type" target="_blank">Map</a> of all the minecraft keybinds.</p>
+                </div>
+            </div>
+            <div id="setKeyBind-String-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.setKeyBind(<div class="methodParams">bind, key</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.2.2</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">Sets a minecraft keybind to the specified key.</p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>bind</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>key</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="key-String-boolean-" class="method classItem"><h4 class="methodTitle classItemTitle">.key(<div class="methodParams">keyName, keyState</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">Set a key-state for a key.</p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>keyName</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>keyState</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">boolean</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="pressKey-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.pressKey(<div class="methodParams">keyName</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">Calls <a href="#key-String-boolean-" class="type">FKeyBind#key(java.lang.String,boolean)</a> with keyState set to true.</p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>keyName</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description">the name of the key to press</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="releaseKey-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.releaseKey(<div class="methodParams">keyName</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">Calls <a href="#key-String-boolean-" class="type">FKeyBind#key(java.lang.String,boolean)</a> with keyState set to false.</p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>keyName</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description">the name of the key to release</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="keyBind-String-boolean-" class="method classItem"><h4 class="methodTitle classItemTitle">.keyBind(<div class="methodParams">keyBind, keyState</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.2.2</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">Set a key-state using the name of the keybind rather than the name of the key.
+                 <p>
+                 This is probably the one you should use.</p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>keyBind</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>keyState</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">boolean</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="pressKeyBind-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.pressKeyBind(<div class="methodParams">keyBind</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">Calls <a href="#keyBind-String-boolean-" class="type">FKeyBind#keyBind(java.lang.String,boolean)</a> with keyState set to true.</p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>keyBind</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description">the name of the keybinding to press</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="releaseKeyBind-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.releaseKeyBind(<div class="methodParams">keyBind</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">Calls <a href="#keyBind-String-boolean-" class="type">FKeyBind#keyBind(java.lang.String,boolean)</a> with keyState set to false.</p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>keyBind</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description">the name of the keybinding to release</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="getPressedKeys-" class="method classItem"><h4 class="methodTitle classItemTitle">.getPressedKeys(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.2.6 (turned into set instead of list in 1.6.5)</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/Set.html" class="type" target="_blank">Set</a><<div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">a set of currently pressed keys.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+</html>

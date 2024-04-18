@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="../../../../../../classContent.css"></link>
+    </head>
+    <body>
+        <header>
+            <a href="../../../../../../">
+                <----- Return to main JsMacros docs page.
+            </a>
+        </header>
+    </body>
+    <main class="classDoc">
+        <div id="subClasses"></div>
+        <h2 class="classTitle">xyz.wagyourtail.jsmacros.core.config.ConfigManager</h2>
+        <div class="flags"></div>
+        <h4 class="classExtends"></h4>
+        <p class="classSince since"></p>
+        <p class="description"></p>
+        <h3>Constructors</h3>
+        <div class="constructorDoc">
+            <div id="constructor-File-File-Logger-" class="constructor classItem">
+                <h4 class="constructorTitle classItemTitle">
+                    new 
+                    ConfigManager
+                    (<div class="constructorParams">configFolder, macroFolder, logger</div>)
+                </h4>
+                <div class="flags"></div>
+                <p class="constructorSince since"></p>
+                <div class="constructorDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>configFolder</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/io/File.html" class="type" target="_blank">File</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>macroFolder</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/io/File.html" class="type" target="_blank">File</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>logger</td>
+                            <td><div class="typeParameter"><a href="https://www.javadoc.io/doc/org.slf4j/slf4j-api/1.7.30/index.html?org/slf4j/Logger.html" class="type" target="_blank">Logger</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="shortFieldMethods">
+            <div class="fieldShorts">
+                <h4>
+                    Fields
+                </h4>
+                <div class="shortField shortClassItem">
+                    <a href="#optionClasses">optionClasses</a>
+                    <div class="shortFlags">
+                        <div class="flag finalFlag">F</div>
+                    </div>
+                </div>
+                <div class="shortField shortClassItem">
+                    <a href="#options">options</a>
+                    <div class="shortFlags">
+                        <div class="flag finalFlag">F</div>
+                    </div>
+                </div>
+                <div class="shortField shortClassItem">
+                    <a href="#configFolder">configFolder</a>
+                    <div class="shortFlags">
+                        <div class="flag finalFlag">F</div>
+                    </div>
+                </div>
+                <div class="shortField shortClassItem">
+                    <a href="#macroFolder">macroFolder</a>
+                    <div class="shortFlags">
+                        <div class="flag finalFlag">F</div>
+                    </div>
+                </div>
+                <div class="shortField shortClassItem">
+                    <a href="#configFile">configFile</a>
+                    <div class="shortFlags">
+                        <div class="flag finalFlag">F</div>
+                    </div>
+                </div>
+                <div class="shortField shortClassItem">
+                    <a href="#LOGGER">LOGGER</a>
+                    <div class="shortFlags">
+                        <div class="flag finalFlag">F</div>
+                    </div>
+                </div>
+                <div class="shortField shortClassItem">
+                    <a href="#rawOptions">rawOptions</a>
+                    <div class="shortFlags"></div>
+                </div>
+            </div>
+            <div class="methodShorts">
+                <h4>
+                    Methods
+                </h4>
+                <div class="shortMethod shortClassItem">
+                    <a href="#reloadRawConfigFromFile-">reloadRawConfigFromFile()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#convertConfigFormat-">convertConfigFormat()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#convertConfigFormat-Class-">convertConfigFormat(clazz)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getOptions-Class-">getOptions(optionClass)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addOptions-String-Class-">addOptions(key, optionClass)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#loadConfig-">loadConfig()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#loadDefaults-">loadDefaults()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#saveConfig-">saveConfig()</a>
+                    <div class="shortFlags"></div>
+                </div>
+            </div>
+        </div>
+        <h3>Fields</h3>
+        <div class="fieldDoc">
+            <div id="optionClasses" class="field classItem"><h4 class="classItemTitle">.optionClasses</h4>
+                <div class="flags">
+                    <div class="flag finalFlag">Final</div>
+                </div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/Map.html" class="type" target="_blank">Map</a><<div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div>, <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Class.html" class="type" target="_blank">Class</a><<div class="typeParameter"><p class="type primitiveType">?</p></div>></div>></div></h5>
+                </div>
+            </div>
+            <div id="options" class="field classItem"><h4 class="classItemTitle">.options</h4>
+                <div class="flags">
+                    <div class="flag finalFlag">Final</div>
+                </div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/Map.html" class="type" target="_blank">Map</a><<div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Class.html" class="type" target="_blank">Class</a><<div class="typeParameter"><p class="type primitiveType">?</p></div>></div>, <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Object.html" class="type" target="_blank">Object</a></div>></div></h5>
+                </div>
+            </div>
+            <div id="configFolder" class="field classItem"><h4 class="classItemTitle">.configFolder</h4>
+                <div class="flags">
+                    <div class="flag finalFlag">Final</div>
+                </div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/io/File.html" class="type" target="_blank">File</a></div></h5>
+                </div>
+            </div>
+            <div id="macroFolder" class="field classItem"><h4 class="classItemTitle">.macroFolder</h4>
+                <div class="flags">
+                    <div class="flag finalFlag">Final</div>
+                </div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/io/File.html" class="type" target="_blank">File</a></div></h5>
+                </div>
+            </div>
+            <div id="configFile" class="field classItem"><h4 class="classItemTitle">.configFile</h4>
+                <div class="flags">
+                    <div class="flag finalFlag">Final</div>
+                </div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/io/File.html" class="type" target="_blank">File</a></div></h5>
+                </div>
+            </div>
+            <div id="LOGGER" class="field classItem"><h4 class="classItemTitle">.LOGGER</h4>
+                <div class="flags">
+                    <div class="flag finalFlag">Final</div>
+                </div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><a href="https://www.javadoc.io/doc/org.slf4j/slf4j-api/1.7.30/index.html?org/slf4j/Logger.html" class="type" target="_blank">Logger</a></div></h5>
+                </div>
+            </div>
+            <div id="rawOptions" class="field classItem"><h4 class="classItemTitle">.rawOptions</h4>
+                <div class="flags"></div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><a href="" class="type deadType">JsonObject</a></div></h5>
+                </div>
+            </div>
+        </div>
+        <h3>Methods</h3>
+        <div class="methodDoc">
+            <div id="reloadRawConfigFromFile-" class="method classItem"><h4 class="methodTitle classItemTitle">.reloadRawConfigFromFile(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="convertConfigFormat-" class="method classItem"><h4 class="methodTitle classItemTitle">.convertConfigFormat(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="convertConfigFormat-Class-" class="method classItem"><h4 class="methodTitle classItemTitle">.convertConfigFormat(<div class="methodParams">clazz</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>clazz</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Class.html" class="type" target="_blank">Class</a><<div class="typeParameter"><p class="type primitiveType">?</p></div>></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="getOptions-Class-" class="method classItem"><h4 class="methodTitle classItemTitle">.getOptions<<div class="typeParameter"><p class="type primitiveType">T</p></div>>(<div class="methodParams">optionClass</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>optionClass</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Class.html" class="type" target="_blank">Class</a><<div class="typeParameter"><p class="type primitiveType">T</p></div>></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">T</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addOptions-String-Class-" class="method classItem"><h4 class="methodTitle classItemTitle">.addOptions(<div class="methodParams">key, optionClass</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>key</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>optionClass</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Class.html" class="type" target="_blank">Class</a><<div class="typeParameter"><p class="type primitiveType">?</p></div>></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="loadConfig-" class="method classItem"><h4 class="methodTitle classItemTitle">.loadConfig(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="loadDefaults-" class="method classItem"><h4 class="methodTitle classItemTitle">.loadDefaults(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="saveConfig-" class="method classItem"><h4 class="methodTitle classItemTitle">.saveConfig(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+</html>

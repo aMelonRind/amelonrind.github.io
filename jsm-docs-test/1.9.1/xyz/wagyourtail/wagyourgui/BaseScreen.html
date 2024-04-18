@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="../../../../classContent.css"></link>
+    </head>
+    <body>
+        <header>
+            <a href="../../../../">
+                <----- Return to main JsMacros docs page.
+            </a>
+        </header>
+    </body>
+    <main class="classDoc">
+        <div id="subClasses"><div class="typeParameter"><a href="../../../xyz/wagyourtail/jsmacros/client/api/classes/render/ScriptScreen.html" class="type">ScriptScreen</a></div> <div class="typeParameter"><a href="../../../xyz/wagyourtail/jsmacros/client/gui/screens/CancelScreen.html" class="type">CancelScreen</a></div> <div class="typeParameter"><a href="../../../xyz/wagyourtail/jsmacros/client/gui/screens/EditorScreen.html" class="type">EditorScreen</a></div> <div class="typeParameter"><a href="../../../xyz/wagyourtail/jsmacros/client/gui/screens/EventMacrosScreen.html" class="type">EventMacrosScreen</a></div> <div class="typeParameter"><a href="../../../xyz/wagyourtail/jsmacros/client/gui/screens/KeyMacrosScreen.html" class="type">KeyMacrosScreen</a></div> <div class="typeParameter"><a href="../../../xyz/wagyourtail/jsmacros/client/gui/screens/MacroScreen.html" class="type">MacroScreen</a></div> <div class="typeParameter"><a href="../../../xyz/wagyourtail/jsmacros/client/gui/screens/ServiceScreen.html" class="type">ServiceScreen</a></div> 
+        </div>
+        <h2 class="classTitle">xyz.wagyourtail.wagyourgui.BaseScreen</h2>
+        <div class="flags">
+            <div class="flag abstractFlag">Abstract</div>
+        </div>
+        <h4 class="classExtends">extends <div class="typeParameter"><a href="https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App?mapping=INTERMEDIARY,YARN&version=1.20.4&search=net/minecraft/client/gui/screen/Screen" class="type" target="_blank">Screen</a></div> implements <div class="typeParameter"><a href="../../../xyz/wagyourtail/wagyourgui/overlays/IOverlayParent.html" class="type">IOverlayParent</a></div> </h4>
+        <p class="classSince since"></p>
+        <p class="description"></p>
+        <div class="shortFieldMethods">
+            <div class="methodShorts">
+                <h4>
+                    Methods
+                </h4>
+                <div class="shortMethod shortClassItem">
+                    <a href="#trimmed-TextRenderer-StringVisitable-int-">trimmed(textRenderer, str, width)</a>
+                    <div class="shortFlags">
+                        <div class="flag staticFlag">S</div>
+                    </div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#setParent-Screen-">setParent(parent)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#reload-">reload()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#removed-">removed()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#openOverlay-OverlayContainer-">openOverlay(overlay)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getFirstOverlayParent-">getFirstOverlayParent()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getChildOverlay-">getChildOverlay()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#openOverlay-OverlayContainer-boolean-">openOverlay(overlay, disableButtons)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#closeOverlay-OverlayContainer-">closeOverlay(overlay)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#remove-Element-">remove(btn)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addDrawableChild-T-">addDrawableChild(drawableElement)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#setFocused-Element-">setFocused(focused)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#keyPressed-int-int-int-">keyPressed(keyCode, scanCode, modifiers)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#mouseScrolled-double-double-double-double-">mouseScrolled(mouseX, mouseY, horiz, vert)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#mouseClicked-double-double-int-">mouseClicked(mouseX, mouseY, button)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#render-DrawContext-int-int-float-">render(drawContext, mouseX, mouseY, delta)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#shouldCloseOnEsc-">shouldCloseOnEsc()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#updateSettings-">updateSettings()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#close-">close()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#openParent-">openParent()</a>
+                    <div class="shortFlags"></div>
+                </div>
+            </div>
+        </div>
+        <h3>Methods</h3>
+        <div class="methodDoc">
+            <div id="trimmed-TextRenderer-StringVisitable-int-" class="method classItem"><h4 class="methodTitle classItemTitle">.trimmed(<div class="methodParams">textRenderer, str, width</div>)</h4>
+                <div class="flags">
+                    <div class="flag staticFlag">Static</div>
+                </div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>textRenderer</td>
+                            <td><div class="typeParameter"><a href="https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App?mapping=INTERMEDIARY,YARN&version=1.20.4&search=net/minecraft/client/font/TextRenderer" class="type" target="_blank">TextRenderer</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>str</td>
+                            <td><div class="typeParameter"><a href="https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App?mapping=INTERMEDIARY,YARN&version=1.20.4&search=net/minecraft/text/StringVisitable" class="type" target="_blank">StringVisitable</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>width</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App?mapping=INTERMEDIARY,YARN&version=1.20.4&search=net/minecraft/text/OrderedText" class="type" target="_blank">OrderedText</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="setParent-Screen-" class="method classItem"><h4 class="methodTitle classItemTitle">.setParent(<div class="methodParams">parent</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>parent</td>
+                            <td><div class="typeParameter"><a href="https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App?mapping=INTERMEDIARY,YARN&version=1.20.4&search=net/minecraft/client/gui/screen/Screen" class="type" target="_blank">Screen</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="reload-" class="method classItem"><h4 class="methodTitle classItemTitle">.reload(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="removed-" class="method classItem"><h4 class="methodTitle classItemTitle">.removed(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="openOverlay-OverlayContainer-" class="method classItem"><h4 class="methodTitle classItemTitle">.openOverlay(<div class="methodParams">overlay</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>overlay</td>
+                            <td><div class="typeParameter"><a href="../../../xyz/wagyourtail/wagyourgui/overlays/OverlayContainer.html" class="type">OverlayContainer</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="getFirstOverlayParent-" class="method classItem"><h4 class="methodTitle classItemTitle">.getFirstOverlayParent(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../xyz/wagyourtail/wagyourgui/overlays/IOverlayParent.html" class="type">IOverlayParent</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="getChildOverlay-" class="method classItem"><h4 class="methodTitle classItemTitle">.getChildOverlay(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../xyz/wagyourtail/wagyourgui/overlays/OverlayContainer.html" class="type">OverlayContainer</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="openOverlay-OverlayContainer-boolean-" class="method classItem"><h4 class="methodTitle classItemTitle">.openOverlay(<div class="methodParams">overlay, disableButtons</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>overlay</td>
+                            <td><div class="typeParameter"><a href="../../../xyz/wagyourtail/wagyourgui/overlays/OverlayContainer.html" class="type">OverlayContainer</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>disableButtons</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">boolean</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="closeOverlay-OverlayContainer-" class="method classItem"><h4 class="methodTitle classItemTitle">.closeOverlay(<div class="methodParams">overlay</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>overlay</td>
+                            <td><div class="typeParameter"><a href="../../../xyz/wagyourtail/wagyourgui/overlays/OverlayContainer.html" class="type">OverlayContainer</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="remove-Element-" class="method classItem"><h4 class="methodTitle classItemTitle">.remove(<div class="methodParams">btn</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>btn</td>
+                            <td><div class="typeParameter"><a href="https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App?mapping=INTERMEDIARY,YARN&version=1.20.4&search=net/minecraft/client/gui/Element" class="type" target="_blank">Element</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addDrawableChild-T-" class="method classItem"><h4 class="methodTitle classItemTitle">.addDrawableChild<<div class="typeParameter"><p class="type primitiveType">T
+                <p class="classExtends">
+                    <b> extends </b>
+                </p><div class="typeParameter"></div></p></div>>(<div class="methodParams">drawableElement</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>drawableElement</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">T
+                            <p class="classExtends">
+                                <b> extends </b>
+                            </p><div class="typeParameter"></div></p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">T
+                    <p class="classExtends">
+                        <b> extends </b>
+                    </p><div class="typeParameter"></div></p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="setFocused-Element-" class="method classItem"><h4 class="methodTitle classItemTitle">.setFocused(<div class="methodParams">focused</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>focused</td>
+                            <td><div class="typeParameter"><a href="https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App?mapping=INTERMEDIARY,YARN&version=1.20.4&search=net/minecraft/client/gui/Element" class="type" target="_blank">Element</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="keyPressed-int-int-int-" class="method classItem"><h4 class="methodTitle classItemTitle">.keyPressed(<div class="methodParams">keyCode, scanCode, modifiers</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>keyCode</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>scanCode</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>modifiers</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">boolean</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="mouseScrolled-double-double-double-double-" class="method classItem"><h4 class="methodTitle classItemTitle">.mouseScrolled(<div class="methodParams">mouseX, mouseY, horiz, vert</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>mouseX</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>mouseY</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>horiz</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>vert</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">boolean</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="mouseClicked-double-double-int-" class="method classItem"><h4 class="methodTitle classItemTitle">.mouseClicked(<div class="methodParams">mouseX, mouseY, button</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>mouseX</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>mouseY</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>button</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">boolean</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="render-DrawContext-int-int-float-" class="method classItem"><h4 class="methodTitle classItemTitle">.render(<div class="methodParams">drawContext, mouseX, mouseY, delta</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>drawContext</td>
+                            <td><div class="typeParameter"><a href="https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App?mapping=INTERMEDIARY,YARN&version=1.20.4&search=net/minecraft/client/gui/DrawContext" class="type" target="_blank">DrawContext</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>mouseX</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>mouseY</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>delta</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">float</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="shouldCloseOnEsc-" class="method classItem"><h4 class="methodTitle classItemTitle">.shouldCloseOnEsc(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">boolean</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="updateSettings-" class="method classItem"><h4 class="methodTitle classItemTitle">.updateSettings(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="close-" class="method classItem"><h4 class="methodTitle classItemTitle">.close(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="openParent-" class="method classItem"><h4 class="methodTitle classItemTitle">.openParent(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+</html>

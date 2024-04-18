@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="../../../../../../classContent.css"></link>
+    </head>
+    <body>
+        <header>
+            <a href="../../../../../../">
+                <----- Return to main JsMacros docs page.
+            </a>
+        </header>
+    </body>
+    <main class="classDoc">
+        <div id="subClasses"></div>
+        <h2 class="classTitle">xyz.wagyourtail.jsmacros.core.extensions.Extension</h2>
+        <div class="flags">
+            <div class="flag interfaceFlag">Interface</div>
+        </div>
+        <h4 class="classExtends"></h4>
+        <p class="classSince since"></p>
+        <p class="description"></p>
+        <div class="shortFieldMethods">
+            <div class="methodShorts">
+                <h4>
+                    Methods
+                </h4>
+                <div class="shortMethod shortClassItem">
+                    <a href="#minCoreVersion-">minCoreVersion()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#maxCoreVersion-">maxCoreVersion()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#init-">init()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getPriority-">getPriority()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getLanguageImplName-">getLanguageImplName()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#extensionMatch-File-">extensionMatch(file)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#defaultFileExtension-">defaultFileExtension()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getLanguage-Core-">getLanguage(runner)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getLibraries-">getLibraries()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getDependencies-">getDependencies()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getDependenciesInternal-Class-String-">getDependenciesInternal(clazz, fname)</a>
+                    <div class="shortFlags">
+                        <div class="flag staticFlag">S</div>
+                    </div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#wrapException-Throwable-">wrapException(t)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getTranslations-String-">getTranslations(lang)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getTranslationsInternal-Class-String-">getTranslationsInternal(clazz, fname)</a>
+                    <div class="shortFlags">
+                        <div class="flag staticFlag">S</div>
+                    </div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#isGuestObject-Object-">isGuestObject(o)</a>
+                    <div class="shortFlags"></div>
+                </div>
+            </div>
+        </div>
+        <h3>Methods</h3>
+        <div class="methodDoc">
+            <div id="minCoreVersion-" class="method classItem"><h4 class="methodTitle classItemTitle">.minCoreVersion(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.9.0</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">the *minimum* version of the jsMacros core that this extension is compatible with.</p>
+                </div>
+            </div>
+            <div id="maxCoreVersion-" class="method classItem"><h4 class="methodTitle classItemTitle">.maxCoreVersion(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.9.0</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">the *maximum* version of the jsMacros core that this extension is compatible with.</p>
+                </div>
+            </div>
+            <div id="init-" class="method classItem"><h4 class="methodTitle classItemTitle">.init(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="getPriority-" class="method classItem"><h4 class="methodTitle classItemTitle">.getPriority(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">int</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="getLanguageImplName-" class="method classItem"><h4 class="methodTitle classItemTitle">.getLanguageImplName(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="extensionMatch-File-" class="method classItem"><h4 class="methodTitle classItemTitle">.extensionMatch(<div class="methodParams">file</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>file</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/io/File.html" class="type" target="_blank">File</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/extensions/Extension.ExtMatch.html" class="type">Extension$ExtMatch</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="defaultFileExtension-" class="method classItem"><h4 class="methodTitle classItemTitle">.defaultFileExtension(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="getLanguage-Core-" class="method classItem"><h4 class="methodTitle classItemTitle">.getLanguage(<div class="methodParams">runner</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>runner</td>
+                            <td><div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/Core.html" class="type">Core</a><<div class="typeParameter"><p class="type primitiveType">?</p></div>, <div class="typeParameter"><p class="type primitiveType">?</p></div>></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/language/BaseLanguage.html" class="type">BaseLanguage</a><<div class="typeParameter"><p class="type primitiveType">?</p></div>, <div class="typeParameter"><p class="type primitiveType">?</p></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">a single static instance of the language definition</p>
+                </div>
+            </div>
+            <div id="getLibraries-" class="method classItem"><h4 class="methodTitle classItemTitle">.getLibraries(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/Set.html" class="type" target="_blank">Set</a><<div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Class.html" class="type" target="_blank">Class</a><<div class="typeParameter"><p class="type primitiveType">?</p></div>></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="getDependencies-" class="method classItem"><h4 class="methodTitle classItemTitle">.getDependencies(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/Set.html" class="type" target="_blank">Set</a><<div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/net/URL.html" class="type" target="_blank">URL</a></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="getDependenciesInternal-Class-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.getDependenciesInternal(<div class="methodParams">clazz, fname</div>)</h4>
+                <div class="flags">
+                    <div class="flag staticFlag">Static</div>
+                </div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>clazz</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Class.html" class="type" target="_blank">Class</a><<div class="typeParameter"><p class="type primitiveType">?</p></div>></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>fname</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/Set.html" class="type" target="_blank">Set</a><<div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/net/URL.html" class="type" target="_blank">URL</a></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="wrapException-Throwable-" class="method classItem"><h4 class="methodTitle classItemTitle">.wrapException(<div class="methodParams">t</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>t</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Throwable.html" class="type" target="_blank">Throwable</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/language/BaseWrappedException.html" class="type">BaseWrappedException</a><<div class="typeParameter"><p class="type primitiveType">?</p></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="getTranslations-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.getTranslations(<div class="methodParams">lang</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>lang</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/Map.html" class="type" target="_blank">Map</a><<div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div>, <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="getTranslationsInternal-Class-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.getTranslationsInternal(<div class="methodParams">clazz, fname</div>)</h4>
+                <div class="flags">
+                    <div class="flag staticFlag">Static</div>
+                </div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>clazz</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Class.html" class="type" target="_blank">Class</a><<div class="typeParameter"><p class="type primitiveType">?</p></div>></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>fname</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/Map.html" class="type" target="_blank">Map</a><<div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div>, <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="isGuestObject-Object-" class="method classItem"><h4 class="methodTitle classItemTitle">.isGuestObject(<div class="methodParams">o</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>o</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Object.html" class="type" target="_blank">Object</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">boolean</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+</html>

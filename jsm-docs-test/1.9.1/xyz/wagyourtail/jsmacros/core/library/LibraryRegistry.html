@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="../../../../../../classContent.css"></link>
+    </head>
+    <body>
+        <header>
+            <a href="../../../../../../">
+                <----- Return to main JsMacros docs page.
+            </a>
+        </header>
+    </body>
+    <main class="classDoc">
+        <div id="subClasses"></div>
+        <h2 class="classTitle">xyz.wagyourtail.jsmacros.core.library.LibraryRegistry</h2>
+        <div class="flags"></div>
+        <h4 class="classExtends"></h4>
+        <p class="classSince since"></p>
+        <p class="description"></p>
+        <h3>Constructors</h3>
+        <div class="constructorDoc">
+            <div id="constructor-" class="constructor classItem">
+                <h4 class="constructorTitle classItemTitle">
+                    new 
+                    LibraryRegistry
+                    (<div class="constructorParams"></div>)
+                </h4>
+                <div class="flags"></div>
+                <p class="constructorSince since"></p>
+                <div class="constructorDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+            </div>
+        </div>
+        <div class="shortFieldMethods">
+            <div class="fieldShorts">
+                <h4>
+                    Fields
+                </h4>
+                <div class="shortField shortClassItem">
+                    <a href="#libraries">libraries</a>
+                    <div class="shortFlags">
+                        <div class="flag finalFlag">F</div>
+                    </div>
+                </div>
+                <div class="shortField shortClassItem">
+                    <a href="#perExec">perExec</a>
+                    <div class="shortFlags">
+                        <div class="flag finalFlag">F</div>
+                    </div>
+                </div>
+                <div class="shortField shortClassItem">
+                    <a href="#perLanguage">perLanguage</a>
+                    <div class="shortFlags">
+                        <div class="flag finalFlag">F</div>
+                    </div>
+                </div>
+                <div class="shortField shortClassItem">
+                    <a href="#perExecLanguage">perExecLanguage</a>
+                    <div class="shortFlags">
+                        <div class="flag finalFlag">F</div>
+                    </div>
+                </div>
+            </div>
+            <div class="methodShorts">
+                <h4>
+                    Methods
+                </h4>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getLibraries-BaseLanguage-BaseScriptContext-">getLibraries(language, context)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getOnceLibraries-BaseLanguage-">getOnceLibraries(language)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getPerExecLibraries-BaseLanguage-BaseScriptContext-">getPerExecLibraries(language, context)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#addLibrary-Class-">addLibrary(clazz)</a>
+                    <div class="shortFlags"></div>
+                </div>
+            </div>
+        </div>
+        <h3>Fields</h3>
+        <div class="fieldDoc">
+            <div id="libraries" class="field classItem"><h4 class="classItemTitle">.libraries</h4>
+                <div class="flags">
+                    <div class="flag finalFlag">Final</div>
+                </div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/Map.html" class="type" target="_blank">Map</a><<div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/library/Library.html" class="type">Library</a></div>, <div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/library/BaseLibrary.html" class="type">BaseLibrary</a></div>></div></h5>
+                </div>
+            </div>
+            <div id="perExec" class="field classItem"><h4 class="classItemTitle">.perExec</h4>
+                <div class="flags">
+                    <div class="flag finalFlag">Final</div>
+                </div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/Map.html" class="type" target="_blank">Map</a><<div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/library/Library.html" class="type">Library</a></div>, <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Class.html" class="type" target="_blank">Class</a><<div class="typeParameter"><p class="type primitiveType">?</p></div>></div>></div></h5>
+                </div>
+            </div>
+            <div id="perLanguage" class="field classItem"><h4 class="classItemTitle">.perLanguage</h4>
+                <div class="flags">
+                    <div class="flag finalFlag">Final</div>
+                </div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/Map.html" class="type" target="_blank">Map</a><<div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Class.html" class="type" target="_blank">Class</a><<div class="typeParameter"><p class="type primitiveType">?</p></div>></div>, <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/Map.html" class="type" target="_blank">Map</a><<div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/library/Library.html" class="type">Library</a></div>, <div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/library/PerLanguageLibrary.html" class="type">PerLanguageLibrary</a></div>></div>></div></h5>
+                </div>
+            </div>
+            <div id="perExecLanguage" class="field classItem"><h4 class="classItemTitle">.perExecLanguage</h4>
+                <div class="flags">
+                    <div class="flag finalFlag">Final</div>
+                </div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/Map.html" class="type" target="_blank">Map</a><<div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Class.html" class="type" target="_blank">Class</a><<div class="typeParameter"><p class="type primitiveType">?</p></div>></div>, <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/Map.html" class="type" target="_blank">Map</a><<div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/library/Library.html" class="type">Library</a></div>, <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Class.html" class="type" target="_blank">Class</a><<div class="typeParameter"><p class="type primitiveType">?</p></div>></div>></div>></div></h5>
+                </div>
+            </div>
+        </div>
+        <h3>Methods</h3>
+        <div class="methodDoc">
+            <div id="getLibraries-BaseLanguage-BaseScriptContext-" class="method classItem"><h4 class="methodTitle classItemTitle">.getLibraries(<div class="methodParams">language, context</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>language</td>
+                            <td><div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/language/BaseLanguage.html" class="type">BaseLanguage</a><<div class="typeParameter"><p class="type primitiveType">?</p></div>, <div class="typeParameter"><p class="type primitiveType">?</p></div>></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>context</td>
+                            <td><div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/language/BaseScriptContext.html" class="type">BaseScriptContext</a><<div class="typeParameter"><p class="type primitiveType">?</p></div>></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/Map.html" class="type" target="_blank">Map</a><<div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div>, <div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/library/BaseLibrary.html" class="type">BaseLibrary</a></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="getOnceLibraries-BaseLanguage-" class="method classItem"><h4 class="methodTitle classItemTitle">.getOnceLibraries(<div class="methodParams">language</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>language</td>
+                            <td><div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/language/BaseLanguage.html" class="type">BaseLanguage</a><<div class="typeParameter"><p class="type primitiveType">?</p></div>, <div class="typeParameter"><p class="type primitiveType">?</p></div>></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/Map.html" class="type" target="_blank">Map</a><<div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div>, <div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/library/BaseLibrary.html" class="type">BaseLibrary</a></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="getPerExecLibraries-BaseLanguage-BaseScriptContext-" class="method classItem"><h4 class="methodTitle classItemTitle">.getPerExecLibraries(<div class="methodParams">language, context</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>language</td>
+                            <td><div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/language/BaseLanguage.html" class="type">BaseLanguage</a><<div class="typeParameter"><p class="type primitiveType">?</p></div>, <div class="typeParameter"><p class="type primitiveType">?</p></div>></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>context</td>
+                            <td><div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/language/BaseScriptContext.html" class="type">BaseScriptContext</a><<div class="typeParameter"><p class="type primitiveType">?</p></div>></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/Map.html" class="type" target="_blank">Map</a><<div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div>, <div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/library/BaseLibrary.html" class="type">BaseLibrary</a></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="addLibrary-Class-" class="method classItem"><h4 class="methodTitle classItemTitle">.addLibrary(<div class="methodParams">clazz</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>clazz</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Class.html" class="type" target="_blank">Class</a><<div class="typeParameter"><p class="type primitiveType">?</p></div>></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+</html>

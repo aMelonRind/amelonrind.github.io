@@ -1,12 +1,11 @@
-const officalHost = 'https://jsmacros.wagyourtail.xyz'
+
 let prevSearch = null;
 
 /**
- * @typedef {Map<string, Set<{ name: string; url: string; group: string; }>>} SearchMap
  * @type {{
- *  classes: SearchMap
- *  fields: SearchMap
- *  methods: SearchMap
+ *  classes: Map<string, Set<{ group: string; name: string; url: string; }>>;
+ *  fields:  Map<string, Set<{ class: string; name: string; url: string; }>>;
+ *  methods: Map<string, Set<{ class: string; name: string; url: string; }>>;
  * }}
  */
 const searchMaps = {
@@ -14,76 +13,83 @@ const searchMaps = {
     fields: new Map(),
     methods: new Map()
 };
-let syncId = 0n;
+let reloadSyncId = 0n;
 let classGroups = new Set();
 let loaded = false;
+globalThis.searchMaps = searchMaps
 
 async function reloadSearchMap() {
-    const id = ++syncId;
+    const syncId = ++reloadSyncId;
     for (const val of Object.values(searchMaps)) val.clear();
     classGroups.clear();
-    const res = await fetch(`${officalHost}/${versionSelect.value}/search-list`);
+    const res = await fetch(`${versionSelect.value}/search-list`);
     if (res.status == 200) {
-        if (id !== syncId) return;
+        if (syncId !== reloadSyncId) return;
         const text = (await res.text()).split("\n");
-        if (id !== syncId) return;
-        for (const line of text) {
-            if (line == "") continue;
+        if (syncId !== reloadSyncId) return;
+        const time = Date.now();
+        let lastClass = '\x00';
+        for (const line of text) if (line) {
             const parts = line.split("\t");
             switch (parts[0]) {
-                case "C":
-                    if (!searchMaps.classes.has(parts[4] ?? parts[1]))
-                        searchMaps.classes.set(parts[4] ?? parts[1], new Set());
-                    searchMaps.classes.get(parts[4] ?? parts[1]).add({
-                        name: parts[1],
-                        url: parts[2],
-                        group: parts[3] ?? "Class"
-                    });
-                    if (parts[3] && parts[3] !== "Class") classGroups.add(parts[3]);
-                    break;
-                case "M": {
-                    let methodStuff = {class: parts[1].split("#")[0], name: parts[1].split("#")[1], url: parts[2]}
-                    let cname = methodStuff.class;
-                    if (!searchMaps.classes.has(cname)) {
-                        for (const [name, st] of searchMaps.classes) {
-                            for (const clazz of st) {
-                                if (clazz.name === cname) {
-                                    cname = name;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    searchMaps.methods.set(`${cname}#${methodStuff.name}`, methodStuff);
+                case "C": {
+                    const key = parts[4] ?? parts[1];
+                    lastClass = key;
+                    if (!searchMaps.classes.has(key)) searchMaps.classes.set(key, new Set());
+                    const group = parts[3] ?? "Class";
+                    searchMaps.classes.get(key).add({ group, name: parts[1], url: parts[2] });
+                    classGroups.add(group);
                     break;
                 }
+                case "M":
                 case "F": {
-                    let fieldStuff = {class: parts[1].split("#")[0], name: parts[1].split("#")[1], url: parts[2]}
-                    let cname = fieldStuff.class;
-                    if (!searchMaps.classes.has(cname)) {
+                    const split = parts[1].split("#", 2);
+                    let methodStuff = { class: split[0], name: split[1], url: parts[2] };
+                    let cname = methodStuff.class;
+                    if (!searchMaps.classes.has(cname)) block: {
+                        for (const clazz of searchMaps.classes.get(lastClass)) {
+                            if (clazz.name === cname) {
+                                cname = lastClass;
+                                break block;
+                            }
+                        }
                         for (const [name, st] of searchMaps.classes) {
                             for (const clazz of st) {
                                 if (clazz.name === cname) {
                                     cname = name;
-                                    break;
+                                    break block;
                                 }
                             }
                         }
                     }
-                    searchMaps.fields.set(`${cname}#${fieldStuff.name}`, fieldStuff);
+                    searchMaps[parts[0] === "M" ? "methods" : "fields"].set(`${cname}#${methodStuff.name}`, methodStuff);
                     break;
                 }
                 default:
-                    alert(`unsupported line: ${line}`)
+                    alert(`unsupported line: ${line}`);
             }
         }
+        sortMap(searchMaps.classes);
+        sortMap(searchMaps.methods);
+        sortMap(searchMaps.fields);
+        console.log(`Search map took ${Date.now() - time}ms`);
     } else {
         alert(`error ${res.status}\n${res.statusText}`);
     }
-    searchMaps.classes = new Map([...searchMaps.classes.entries()].sort());
-    searchMaps.methods = new Map([...searchMaps.methods.entries()].sort());
-    searchMaps.fields = new Map([...searchMaps.fields.entries()].sort());
-    classGroups.add("Class");
+}
+
+/**
+ * @template T
+ * @param {Map<string, T>} map 
+ */
+function sortMap(map) {
+    const clone = new Map(map);
+    const keys = [...clone.keys()].sort();
+    map.clear();
+    for (const key of keys) {
+        map.set(key, clone.get(key));
+    }
+    return map;
 }
 
 function updateClassGroups() {
@@ -100,13 +106,11 @@ function updateClassGroups() {
         input.setAttribute("class", "SearchCheck");
         input.setAttribute("name", `${name}Check`);
         input.setAttribute("checked", null);
-        input.setAttribute("onclick", "searchF(search.value, true)")
+        input.setAttribute("onclick", "searchF(search.value, true)");
         div.appendChild(input);
 
         classGroupChecks.appendChild(div);
-
     }
-
 }
 
 async function searchF(val, force = false) {
@@ -182,3 +186,5 @@ function appendSearchResult(name, url, type) {
 }
 
 const loadingSearchMap = reloadSearchMap();
+
+loadingSearchMap.then(updateClassGroups).then(() => searchF(search.value));

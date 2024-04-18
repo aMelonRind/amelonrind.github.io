@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="../../../../../classContent.css"></link>
+    </head>
+    <body>
+        <header>
+            <a href="../../../../../">
+                <----- Return to main JsMacros docs page.
+            </a>
+        </header>
+    </body>
+    <main class="classDoc">
+        <div id="subClasses"></div>
+        <h2 class="classTitle">xyz.wagyourtail.wagyourgui.elements.TextInput</h2>
+        <div class="flags"></div>
+        <h4 class="classExtends">extends <div class="typeParameter"><a href="../../../../xyz/wagyourtail/wagyourgui/elements/Button.html" class="type">Button</a></div></h4>
+        <p class="classSince since"></p>
+        <p class="description"></p>
+        <h3>Constructors</h3>
+        <div class="constructorDoc">
+            <div id="constructor-int-int-int-int-TextRenderer-int-int-int-int-String-Consumer-Consumer-" class="constructor classItem">
+                <h4 class="constructorTitle classItemTitle">
+                    new 
+                    TextInput
+                    (<div class="constructorParams">x, y, width, height, textRenderer, color, borderColor, highlightColor, textColor, message, onClick, onChange</div>)
+                </h4>
+                <div class="flags"></div>
+                <p class="constructorSince since"></p>
+                <div class="constructorDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>x</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>y</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>width</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>height</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>textRenderer</td>
+                            <td><div class="typeParameter"><a href="https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App?mapping=INTERMEDIARY,YARN&version=1.20.4&search=net/minecraft/client/font/TextRenderer" class="type" target="_blank">TextRenderer</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>color</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>borderColor</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>highlightColor</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>textColor</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>message</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>onClick</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/function/Consumer.html" class="type" target="_blank">Consumer</a><<div class="typeParameter"><a href="../../../../xyz/wagyourtail/wagyourgui/elements/Button.html" class="type">Button</a></div>></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>onChange</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/function/Consumer.html" class="type" target="_blank">Consumer</a><<div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div>></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="shortFieldMethods">
+            <div class="fieldShorts">
+                <h4>
+                    Fields
+                </h4>
+                <div class="shortField shortClassItem">
+                    <a href="#onChange">onChange</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortField shortClassItem">
+                    <a href="#mask">mask</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortField shortClassItem">
+                    <a href="#content">content</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortField shortClassItem">
+                    <a href="">selStartIndex</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortField shortClassItem">
+                    <a href="">selEndIndex</a>
+                    <div class="shortFlags"></div>
+                </div>
+            </div>
+            <div class="methodShorts">
+                <h4>
+                    Methods
+                </h4>
+                <div class="shortMethod shortClassItem">
+                    <a href="#setMessage-String-">setMessage(message)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#updateSelStart-int-">updateSelStart(startIndex)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#updateSelEnd-int-">updateSelEnd(endIndex)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#mouseClicked-double-double-int-">mouseClicked(mouseX, mouseY, button)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#mouseDragged-double-double-int-double-double-">mouseDragged(mouseX, mouseY, button, deltaX, deltaY)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#swapStartEnd-">swapStartEnd()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#keyPressed-int-int-int-">keyPressed(keyCode, scanCode, modifiers)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#charTyped-char-int-">charTyped(chr, keyCode)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#clicked-double-double-">clicked(mouseX, mouseY)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#setSelected-boolean-">setSelected(sel)</a>
+                    <div class="shortFlags"></div>
+                </div>
+            </div>
+        </div>
+        <h3>Fields</h3>
+        <div class="fieldDoc">
+            <div id="onChange" class="field classItem"><h4 class="classItemTitle">.onChange</h4>
+                <div class="flags"></div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/function/Consumer.html" class="type" target="_blank">Consumer</a><<div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div>></div></h5>
+                </div>
+            </div>
+            <div id="mask" class="field classItem"><h4 class="classItemTitle">.mask</h4>
+                <div class="flags"></div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></h5>
+                </div>
+            </div>
+            <div id="content" class="field classItem"><h4 class="classItemTitle">.content</h4>
+                <div class="flags"></div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></h5>
+                </div>
+            </div>
+            <div id="selStartIndex" class="field classItem"><h4 class="classItemTitle">.selStartIndex</h4>
+                <div class="flags"></div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><p class="type primitiveType">int</p></div></h5>
+                </div>
+            </div>
+            <div id="selEndIndex" class="field classItem"><h4 class="classItemTitle">.selEndIndex</h4>
+                <div class="flags"></div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><p class="type primitiveType">int</p></div></h5>
+                </div>
+            </div>
+        </div>
+        <h3>Methods</h3>
+        <div class="methodDoc">
+            <div id="setMessage-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.setMessage(<div class="methodParams">message</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>message</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="updateSelStart-int-" class="method classItem"><h4 class="methodTitle classItemTitle">.updateSelStart(<div class="methodParams">startIndex</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>startIndex</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="updateSelEnd-int-" class="method classItem"><h4 class="methodTitle classItemTitle">.updateSelEnd(<div class="methodParams">endIndex</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>endIndex</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="mouseClicked-double-double-int-" class="method classItem"><h4 class="methodTitle classItemTitle">.mouseClicked(<div class="methodParams">mouseX, mouseY, button</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>mouseX</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>mouseY</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>button</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">boolean</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="mouseDragged-double-double-int-double-double-" class="method classItem"><h4 class="methodTitle classItemTitle">.mouseDragged(<div class="methodParams">mouseX, mouseY, button, deltaX, deltaY</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>mouseX</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>mouseY</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>button</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>deltaX</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>deltaY</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">boolean</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="swapStartEnd-" class="method classItem"><h4 class="methodTitle classItemTitle">.swapStartEnd(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="keyPressed-int-int-int-" class="method classItem"><h4 class="methodTitle classItemTitle">.keyPressed(<div class="methodParams">keyCode, scanCode, modifiers</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>keyCode</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>scanCode</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>modifiers</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">boolean</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="charTyped-char-int-" class="method classItem"><h4 class="methodTitle classItemTitle">.charTyped(<div class="methodParams">chr, keyCode</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>chr</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">char</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>keyCode</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">boolean</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="clicked-double-double-" class="method classItem"><h4 class="methodTitle classItemTitle">.clicked(<div class="methodParams">mouseX, mouseY</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>mouseX</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>mouseY</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">boolean</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="setSelected-boolean-" class="method classItem"><h4 class="methodTitle classItemTitle">.setSelected(<div class="methodParams">sel</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>sel</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">boolean</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+</html>

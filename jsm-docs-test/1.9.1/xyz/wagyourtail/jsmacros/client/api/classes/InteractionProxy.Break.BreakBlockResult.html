@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="../../../../../../../classContent.css"></link>
+    </head>
+    <body>
+        <header>
+            <a href="../../../../../../../">
+                <----- Return to main JsMacros docs page.
+            </a>
+        </header>
+    </body>
+    <main class="classDoc">
+        <div id="subClasses"></div>
+        <h2 class="classTitle">xyz.wagyourtail.jsmacros.client.api.classes.InteractionProxy$Break$BreakBlockResult</h2>
+        <div class="flags">
+            <div class="flag staticFlag">Static</div>
+        </div>
+        <h4 class="classExtends"></h4>
+        <p class="classSince since"></p>
+        <p class="description"></p>
+        <h3>Constructors</h3>
+        <div class="constructorDoc">
+            <div id="constructor-String-BlockPosHelper-" class="constructor classItem">
+                <h4 class="constructorTitle classItemTitle">
+                    new 
+                    InteractionProxy$Break$BreakBlockResult
+                    (<div class="constructorParams">reason, pos</div>)
+                </h4>
+                <div class="flags"></div>
+                <p class="constructorSince since"></p>
+                <div class="constructorDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>reason</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>pos</td>
+                            <td><div class="typeParameter"><a href="../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/world/BlockPosHelper.html" class="type">BlockPosHelper</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="shortFieldMethods">
+            <div class="fieldShorts">
+                <h4>
+                    Fields
+                </h4>
+                <div class="shortField shortClassItem">
+                    <a href="#UNAVAILABLE">UNAVAILABLE</a>
+                    <div class="shortFlags">
+                        <div class="flag staticFlag">S</div>
+                        <div class="flag finalFlag">F</div>
+                    </div>
+                </div>
+                <div class="shortField shortClassItem">
+                    <a href="#reason">reason</a>
+                    <div class="shortFlags">
+                        <div class="flag finalFlag">F</div>
+                    </div>
+                </div>
+                <div class="shortField shortClassItem">
+                    <a href="#pos">pos</a>
+                    <div class="shortFlags">
+                        <div class="flag finalFlag">F</div>
+                    </div>
+                </div>
+            </div>
+            <div class="methodShorts">
+                <h4>
+                    Methods
+                </h4>
+                <div class="shortMethod shortClassItem">
+                    <a href="#toString-">toString()</a>
+                    <div class="shortFlags"></div>
+                </div>
+            </div>
+        </div>
+        <h3>Fields</h3>
+        <div class="fieldDoc">
+            <div id="UNAVAILABLE" class="field classItem"><h4 class="classItemTitle">.UNAVAILABLE</h4>
+                <div class="flags">
+                    <div class="flag staticFlag">Static</div>
+                    <div class="flag finalFlag">Final</div>
+                </div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><a href="#" class="type">InteractionProxy$Break$BreakBlockResult</a></div></h5>
+                </div>
+            </div>
+            <div id="reason" class="field classItem"><h4 class="classItemTitle">.reason</h4>
+                <div class="flags">
+                    <div class="flag finalFlag">Final</div>
+                </div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description">Can be one of the following reason:<br>
+                 * `SUCCESS` - the block has been destroyed on client side, no promise that the server will accept it.<br>
+                      for example if the block is in protected area, or the server is lagging very hard, then the break will get ignored.<br>
+                 * `CANCELLED` - if <a href="../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/InteractionManagerHelper.html#cancelBreakBlock-" class="type">InteractionManagerHelper#cancelBreakBlock()</a> was called.<br>
+                 * `INTERRUPTED` - if block breaking was interrupted by attack key. (left mouse by default)<br>
+                 * `NOT_BREAKING` - if the block breaking was invalid for some reason.<br>
+                 * `RESET` - if interaction proxy has been reset or not in a world.<br>
+                 * `NO_OVERRIDE` - if block breaking override was false but there's remaining callback for some reason.<br>
+                 * `IS_AIR` - if the targeted block was air.<br>
+                 * `NO_TARGET` - if there's no targeted block.<br>
+                 * `TARGET_LOST` - if there's no longer a targeted block.<br>
+                 * `TARGET_CHANGE` - if the targeted block has changed.<br>
+                 * `UNAVAILABLE` - if InteractionManager was unavailable. (mc.interactionManager is null)<br>
+                 * null - unknown. (proxy method has been called outside the api)<br></p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></h5>
+                </div>
+            </div>
+            <div id="pos" class="field classItem"><h4 class="classItemTitle">.pos</h4>
+                <div class="flags">
+                    <div class="flag finalFlag">Final</div>
+                </div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><a href="../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/world/BlockPosHelper.html" class="type">BlockPosHelper</a></div></h5>
+                </div>
+            </div>
+        </div>
+        <h3>Methods</h3>
+        <div class="methodDoc">
+            <div id="toString-" class="method classItem"><h4 class="methodTitle classItemTitle">.toString(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+</html>

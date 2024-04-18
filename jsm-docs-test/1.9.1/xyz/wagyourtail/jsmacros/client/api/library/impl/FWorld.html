@@ -1,0 +1,1981 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="../../../../../../../../classContent.css"></link>
+    </head>
+    <body>
+        <header>
+            <a href="../../../../../../../../">
+                <----- Return to main JsMacros docs page.
+            </a>
+        </header>
+    </body>
+    <main class="classDoc">
+        <div id="subClasses"></div>
+        <h2 class="classTitle">xyz.wagyourtail.jsmacros.client.api.library.impl.FWorld</h2>
+        <div class="flags"></div>
+        <h4 class="classExtends">extends <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/core/library/BaseLibrary.html" class="type">BaseLibrary</a></div></h4>
+        <p class="classSince since"></p>
+        <p class="description">Functions for getting and using world data.
+     <p>
+     An instance of this class is passed to scripts as the <code class="inlineCode">World</code> variable.</p>
+        <div class="shortFieldMethods">
+            <div class="fieldShorts">
+                <h4>
+                    Fields
+                </h4>
+                <div class="shortField shortClassItem">
+                    <a href="">serverInstantTPS</a>
+                    <div class="shortFlags">
+                        <div class="flag staticFlag">S</div>
+                    </div>
+                </div>
+                <div class="shortField shortClassItem">
+                    <a href="">server1MAverageTPS</a>
+                    <div class="shortFlags">
+                        <div class="flag staticFlag">S</div>
+                    </div>
+                </div>
+                <div class="shortField shortClassItem">
+                    <a href="">server5MAverageTPS</a>
+                    <div class="shortFlags">
+                        <div class="flag staticFlag">S</div>
+                    </div>
+                </div>
+                <div class="shortField shortClassItem">
+                    <a href="">server15MAverageTPS</a>
+                    <div class="shortFlags">
+                        <div class="flag staticFlag">S</div>
+                    </div>
+                </div>
+            </div>
+            <div class="methodShorts">
+                <h4>
+                    Methods
+                </h4>
+                <div class="shortMethod shortClassItem">
+                    <a href="#isWorldLoaded-">isWorldLoaded()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getLoadedPlayers-">getLoadedPlayers()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getPlayers-">getPlayers()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getPlayerEntry-String-">getPlayerEntry(name)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getBlock-int-int-int-">getBlock(x, y, z)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getBlock-Pos3D-">getBlock(pos)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getBlock-BlockPosHelper-">getBlock(pos)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getChunk-int-int-">getChunk(x, z)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getWorldScanner-">getWorldScanner()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getWorldScanner-MethodWrapper-MethodWrapper-">getWorldScanner(blockFilter, stateFilter)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#findBlocksMatching-int-int-String-int-">findBlocksMatching(centerX, centerZ, id, chunkrange)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#findBlocksMatching-String-int-">findBlocksMatching(id, chunkrange)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#findBlocksMatching-String[]-int-">findBlocksMatching(ids, chunkrange)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#findBlocksMatching-int-int-String[]-int-">findBlocksMatching(centerX, centerZ, ids, chunkrange)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#findBlocksMatching-MethodWrapper-MethodWrapper-int-">findBlocksMatching(blockFilter, stateFilter, chunkrange)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#findBlocksMatching-int-int-MethodWrapper-MethodWrapper-int-">findBlocksMatching(chunkX, chunkZ, blockFilter, stateFilter, chunkrange)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#iterateSphere-BlockPosHelper-int-MethodWrapper-">iterateSphere(pos, radius, callback)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#iterateSphere-BlockPosHelper-int-boolean-MethodWrapper-">iterateSphere(pos, radius, ignoreAir, callback)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#iterateBox-BlockPosHelper-BlockPosHelper-MethodWrapper-">iterateBox(pos1, pos2, callback)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#iterateBox-BlockPosHelper-BlockPosHelper-boolean-MethodWrapper-">iterateBox(pos1, pos2, ignoreAir, callback)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getScoreboards-">getScoreboards()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getEntities-">getEntities()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getEntities-String[]-">getEntities(types)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getEntities-double-">getEntities(distance)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getEntities-double-String[]-">getEntities(distance, types)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getEntities-MethodWrapper-">getEntities(filter)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#rayTraceBlock-double-double-double-double-double-double-boolean-">rayTraceBlock(x1, y1, z1, x2, y2, z2, fluid)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#rayTraceEntity-double-double-double-double-double-double-">rayTraceEntity(x1, y1, z1, x2, y2, z2)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getDimension-">getDimension()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getBiome-">getBiome()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getTime-">getTime()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getTimeOfDay-">getTimeOfDay()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#isDay-">isDay()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#isNight-">isNight()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#isRaining-">isRaining()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#isThundering-">isThundering()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getWorldIdentifier-">getWorldIdentifier()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getRespawnPos-">getRespawnPos()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getDifficulty-">getDifficulty()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getMoonPhase-">getMoonPhase()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getSkyLight-int-int-int-">getSkyLight(x, y, z)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getBlockLight-int-int-int-">getBlockLight(x, y, z)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#playSoundFile-String-double-">playSoundFile(file, volume)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#playSound-String-">playSound(id)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#playSound-String-double-">playSound(id, volume)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#playSound-String-double-double-">playSound(id, volume, pitch)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#playSound-String-double-double-double-double-double-">playSound(id, volume, pitch, x, y, z)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getBossBars-">getBossBars()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#isChunkLoaded-int-int-">isChunkLoaded(chunkX, chunkZ)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getCurrentServerAddress-">getCurrentServerAddress()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getBiomeAt-int-int-">getBiomeAt(x, z)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getBiomeAt-int-int-int-">getBiomeAt(x, y, z)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getServerTPS-">getServerTPS()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getTabListHeader-">getTabListHeader()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getTabListFooter-">getTabListFooter()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#spawnParticle-String-double-double-double-int-">spawnParticle(id, x, y, z, count)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#spawnParticle-String-double-double-double-double-double-double-double-int-boolean-">spawnParticle(id, x, y, z, deltaX, deltaY, deltaZ, speed, count, force)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getRaw-">getRaw()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getServerInstantTPS-">getServerInstantTPS()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getServer1MAverageTPS-">getServer1MAverageTPS()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getServer5MAverageTPS-">getServer5MAverageTPS()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getServer15MAverageTPS-">getServer15MAverageTPS()</a>
+                    <div class="shortFlags"></div>
+                </div>
+            </div>
+        </div>
+        <h3>Fields</h3>
+        <div class="fieldDoc">
+            <div id="serverInstantTPS" class="field classItem"><h4 class="classItemTitle">.serverInstantTPS</h4>
+                <div class="flags">
+                    <div class="flag staticFlag">Static</div>
+                </div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description">Don't modify.</p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><p class="type primitiveType">double</p></div></h5>
+                </div>
+            </div>
+            <div id="server1MAverageTPS" class="field classItem"><h4 class="classItemTitle">.server1MAverageTPS</h4>
+                <div class="flags">
+                    <div class="flag staticFlag">Static</div>
+                </div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description">Don't modify.</p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><p class="type primitiveType">double</p></div></h5>
+                </div>
+            </div>
+            <div id="server5MAverageTPS" class="field classItem"><h4 class="classItemTitle">.server5MAverageTPS</h4>
+                <div class="flags">
+                    <div class="flag staticFlag">Static</div>
+                </div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description">Don't modify.</p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><p class="type primitiveType">double</p></div></h5>
+                </div>
+            </div>
+            <div id="server15MAverageTPS" class="field classItem"><h4 class="classItemTitle">.server15MAverageTPS</h4>
+                <div class="flags">
+                    <div class="flag staticFlag">Static</div>
+                </div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description">Don't modify.</p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><p class="type primitiveType">double</p></div></h5>
+                </div>
+            </div>
+        </div>
+        <h3>Methods</h3>
+        <div class="methodDoc">
+            <div id="isWorldLoaded-" class="method classItem"><h4 class="methodTitle classItemTitle">.isWorldLoaded(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.3.0</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">returns whether a world is currently loaded</p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">boolean</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="getLoadedPlayers-" class="method classItem"><h4 class="methodTitle classItemTitle">.getLoadedPlayers(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/List.html" class="type" target="_blank">List</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/world/entity/PlayerEntityHelper.html" class="type">PlayerEntityHelper</a><<div class="typeParameter"><a href="https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App?mapping=INTERMEDIARY,YARN&version=1.20.4&search=net/minecraft/entity/player/PlayerEntity" class="type" target="_blank">PlayerEntity</a></div>></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">players within render distance.</p>
+                </div>
+            </div>
+            <div id="getPlayers-" class="method classItem"><h4 class="methodTitle classItemTitle">.getPlayers(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/List.html" class="type" target="_blank">List</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/world/PlayerListEntryHelper.html" class="type">PlayerListEntryHelper</a></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">players on the tablist.</p>
+                </div>
+            </div>
+            <div id="getPlayerEntry-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.getPlayerEntry(<div class="methodParams">name</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>name</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description">the name of the player to get the entry for</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/world/PlayerListEntryHelper.html" class="type">PlayerListEntryHelper</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">player entry for the given player's name or <code class="inlineCode">null</code> if not found.</p>
+                </div>
+            </div>
+            <div id="getBlock-int-int-int-" class="method classItem"><h4 class="methodTitle classItemTitle">.getBlock(<div class="methodParams">x, y, z</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>x</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>y</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>z</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/world/BlockDataHelper.html" class="type">BlockDataHelper</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">The block at that position.</p>
+                </div>
+            </div>
+            <div id="getBlock-Pos3D-" class="method classItem"><h4 class="methodTitle classItemTitle">.getBlock(<div class="methodParams">pos</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>pos</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/math/Pos3D.html" class="type">Pos3D</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/world/BlockDataHelper.html" class="type">BlockDataHelper</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="getBlock-BlockPosHelper-" class="method classItem"><h4 class="methodTitle classItemTitle">.getBlock(<div class="methodParams">pos</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>pos</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/world/BlockPosHelper.html" class="type">BlockPosHelper</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/world/BlockDataHelper.html" class="type">BlockDataHelper</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="getChunk-int-int-" class="method classItem"><h4 class="methodTitle classItemTitle">.getChunk(<div class="methodParams">x, z</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">The x and z position of the chunk can be calculated by the following formula: xChunk =
+                 x >> 4; zChunk = z >> 4;</p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>x</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td>
+                            <p class="description">the x coordinate of the chunk, not the absolute position</p></td>
+                        </tr>
+                        <tr>
+                            <td>z</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td>
+                            <p class="description">the z coordinate of the chunk, not the absolute position</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/world/ChunkHelper.html" class="type">ChunkHelper</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">ChunkHelper for the chunk coordinates <a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/world/ChunkHelper.html" class="type">ChunkHelper</a>.</p>
+                </div>
+            </div>
+            <div id="getWorldScanner-" class="method classItem"><h4 class="methodTitle classItemTitle">.getWorldScanner(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.6.5</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">Usage: <br>
+                 This will return all blocks that are facing south, don't require a tool to break,
+                 have a hardness of 10 or less and whose name contains either chest or barrel.
+                 <pre>
+                 World.getWorldScanner()
+                     .withBlockFilter("getHardness").is("<=", 10)
+                     .andStringBlockFilter().contains("chest", "barrel")
+                     .withStringStateFilter().contains("facing=south")
+                     .andStateFilter("isToolRequired").is(false)
+                     .build()
+                 </pre></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/worldscanner/WorldScannerBuilder.html" class="type">WorldScannerBuilder</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">a builder to create a WorldScanner.</p>
+                </div>
+            </div>
+            <div id="getWorldScanner-MethodWrapper-MethodWrapper-" class="method classItem"><h4 class="methodTitle classItemTitle">.getWorldScanner(<div class="methodParams">blockFilter, stateFilter</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.6.5</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>blockFilter</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/core/MethodWrapper.html" class="type">MethodWrapper</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/world/BlockHelper.html" class="type">BlockHelper</a></div>, <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Object.html" class="type" target="_blank">Object</a></div>, <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Boolean.html" class="type" target="_blank">Boolean</a></div>, <div class="typeParameter"><p class="type primitiveType">?</p></div>></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>stateFilter</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/core/MethodWrapper.html" class="type">MethodWrapper</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/world/BlockStateHelper.html" class="type">BlockStateHelper</a></div>, <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Object.html" class="type" target="_blank">Object</a></div>, <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Boolean.html" class="type" target="_blank">Boolean</a></div>, <div class="typeParameter"><p class="type primitiveType">?</p></div>></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/worldscanner/WorldScanner.html" class="type">WorldScanner</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">a scanner for the current world.</p>
+                </div>
+            </div>
+            <div id="findBlocksMatching-int-int-String-int-" class="method classItem"><h4 class="methodTitle classItemTitle">.findBlocksMatching(<div class="methodParams">centerX, centerZ, id, chunkrange</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.6.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>centerX</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>centerZ</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>id</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>chunkrange</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/List.html" class="type" target="_blank">List</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/math/Pos3D.html" class="type">Pos3D</a></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="findBlocksMatching-String-int-" class="method classItem"><h4 class="methodTitle classItemTitle">.findBlocksMatching(<div class="methodParams">id, chunkrange</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.6.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>id</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>chunkrange</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/List.html" class="type" target="_blank">List</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/math/Pos3D.html" class="type">Pos3D</a></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="findBlocksMatching-String[]-int-" class="method classItem"><h4 class="methodTitle classItemTitle">.findBlocksMatching(<div class="methodParams">ids, chunkrange</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.6.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>ids</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a>[]</div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>chunkrange</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/List.html" class="type" target="_blank">List</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/math/Pos3D.html" class="type">Pos3D</a></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="findBlocksMatching-int-int-String[]-int-" class="method classItem"><h4 class="methodTitle classItemTitle">.findBlocksMatching(<div class="methodParams">centerX, centerZ, ids, chunkrange</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.6.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>centerX</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>centerZ</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>ids</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a>[]</div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>chunkrange</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/List.html" class="type" target="_blank">List</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/math/Pos3D.html" class="type">Pos3D</a></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="findBlocksMatching-MethodWrapper-MethodWrapper-int-" class="method classItem"><h4 class="methodTitle classItemTitle">.findBlocksMatching(<div class="methodParams">blockFilter, stateFilter, chunkrange</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.6.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>blockFilter</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/core/MethodWrapper.html" class="type">MethodWrapper</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/world/BlockHelper.html" class="type">BlockHelper</a></div>, <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Object.html" class="type" target="_blank">Object</a></div>, <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Boolean.html" class="type" target="_blank">Boolean</a></div>, <div class="typeParameter"><p class="type primitiveType">?</p></div>></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>stateFilter</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/core/MethodWrapper.html" class="type">MethodWrapper</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/world/BlockStateHelper.html" class="type">BlockStateHelper</a></div>, <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Object.html" class="type" target="_blank">Object</a></div>, <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Boolean.html" class="type" target="_blank">Boolean</a></div>, <div class="typeParameter"><p class="type primitiveType">?</p></div>></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>chunkrange</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/List.html" class="type" target="_blank">List</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/math/Pos3D.html" class="type">Pos3D</a></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="findBlocksMatching-int-int-MethodWrapper-MethodWrapper-int-" class="method classItem"><h4 class="methodTitle classItemTitle">.findBlocksMatching(<div class="methodParams">chunkX, chunkZ, blockFilter, stateFilter, chunkrange</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.6.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>chunkX</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>chunkZ</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>blockFilter</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/core/MethodWrapper.html" class="type">MethodWrapper</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/world/BlockHelper.html" class="type">BlockHelper</a></div>, <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Object.html" class="type" target="_blank">Object</a></div>, <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Boolean.html" class="type" target="_blank">Boolean</a></div>, <div class="typeParameter"><p class="type primitiveType">?</p></div>></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>stateFilter</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/core/MethodWrapper.html" class="type">MethodWrapper</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/world/BlockStateHelper.html" class="type">BlockStateHelper</a></div>, <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Object.html" class="type" target="_blank">Object</a></div>, <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Boolean.html" class="type" target="_blank">Boolean</a></div>, <div class="typeParameter"><p class="type primitiveType">?</p></div>></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>chunkrange</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/List.html" class="type" target="_blank">List</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/math/Pos3D.html" class="type">Pos3D</a></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="iterateSphere-BlockPosHelper-int-MethodWrapper-" class="method classItem"><h4 class="methodTitle classItemTitle">.iterateSphere(<div class="methodParams">pos, radius, callback</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">By default, air blocks are ignored and the callback is only called for real blocks.</p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>pos</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/world/BlockPosHelper.html" class="type">BlockPosHelper</a></div></td>
+                            <td>
+                            <p class="description">the center position</p></td>
+                        </tr>
+                        <tr>
+                            <td>radius</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td>
+                            <p class="description">the radius to scan</p></td>
+                        </tr>
+                        <tr>
+                            <td>callback</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/core/MethodWrapper.html" class="type">MethodWrapper</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/world/BlockDataHelper.html" class="type">BlockDataHelper</a></div>, <div class="typeParameter"><p class="type primitiveType">?</p></div>, <div class="typeParameter"><p class="type primitiveType">?</p></div>, <div class="typeParameter"><p class="type primitiveType">?</p></div>></div></td>
+                            <td>
+                            <p class="description">the callback to call for each block</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="iterateSphere-BlockPosHelper-int-boolean-MethodWrapper-" class="method classItem"><h4 class="methodTitle classItemTitle">.iterateSphere(<div class="methodParams">pos, radius, ignoreAir, callback</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>pos</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/world/BlockPosHelper.html" class="type">BlockPosHelper</a></div></td>
+                            <td>
+                            <p class="description">the center position</p></td>
+                        </tr>
+                        <tr>
+                            <td>radius</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td>
+                            <p class="description">the radius to scan</p></td>
+                        </tr>
+                        <tr>
+                            <td>ignoreAir</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">boolean</p></div></td>
+                            <td>
+                            <p class="description">whether to ignore air blocks</p></td>
+                        </tr>
+                        <tr>
+                            <td>callback</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/core/MethodWrapper.html" class="type">MethodWrapper</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/world/BlockDataHelper.html" class="type">BlockDataHelper</a></div>, <div class="typeParameter"><p class="type primitiveType">?</p></div>, <div class="typeParameter"><p class="type primitiveType">?</p></div>, <div class="typeParameter"><p class="type primitiveType">?</p></div>></div></td>
+                            <td>
+                            <p class="description">the callback to call for each block</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="iterateBox-BlockPosHelper-BlockPosHelper-MethodWrapper-" class="method classItem"><h4 class="methodTitle classItemTitle">.iterateBox(<div class="methodParams">pos1, pos2, callback</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>pos1</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/world/BlockPosHelper.html" class="type">BlockPosHelper</a></div></td>
+                            <td>
+                            <p class="description">the first position</p></td>
+                        </tr>
+                        <tr>
+                            <td>pos2</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/world/BlockPosHelper.html" class="type">BlockPosHelper</a></div></td>
+                            <td>
+                            <p class="description">the second position</p></td>
+                        </tr>
+                        <tr>
+                            <td>callback</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/core/MethodWrapper.html" class="type">MethodWrapper</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/world/BlockDataHelper.html" class="type">BlockDataHelper</a></div>, <div class="typeParameter"><p class="type primitiveType">?</p></div>, <div class="typeParameter"><p class="type primitiveType">?</p></div>, <div class="typeParameter"><p class="type primitiveType">?</p></div>></div></td>
+                            <td>
+                            <p class="description">the callback to call for each block</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="iterateBox-BlockPosHelper-BlockPosHelper-boolean-MethodWrapper-" class="method classItem"><h4 class="methodTitle classItemTitle">.iterateBox(<div class="methodParams">pos1, pos2, ignoreAir, callback</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>pos1</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/world/BlockPosHelper.html" class="type">BlockPosHelper</a></div></td>
+                            <td>
+                            <p class="description">the first position</p></td>
+                        </tr>
+                        <tr>
+                            <td>pos2</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/world/BlockPosHelper.html" class="type">BlockPosHelper</a></div></td>
+                            <td>
+                            <p class="description">the second position</p></td>
+                        </tr>
+                        <tr>
+                            <td>ignoreAir</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">boolean</p></div></td>
+                            <td>
+                            <p class="description">whether to ignore air blocks</p></td>
+                        </tr>
+                        <tr>
+                            <td>callback</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/core/MethodWrapper.html" class="type">MethodWrapper</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/world/BlockDataHelper.html" class="type">BlockDataHelper</a></div>, <div class="typeParameter"><p class="type primitiveType">?</p></div>, <div class="typeParameter"><p class="type primitiveType">?</p></div>, <div class="typeParameter"><p class="type primitiveType">?</p></div>></div></td>
+                            <td>
+                            <p class="description">the callback to call for each block</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="getScoreboards-" class="method classItem"><h4 class="methodTitle classItemTitle">.getScoreboards(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.2.9</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/world/ScoreboardsHelper.html" class="type">ScoreboardsHelper</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">a helper for the scoreboards provided to the client.</p>
+                </div>
+            </div>
+            <div id="getEntities-" class="method classItem"><h4 class="methodTitle classItemTitle">.getEntities(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/List.html" class="type" target="_blank">List</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/world/entity/EntityHelper.html" class="type">EntityHelper</a><<div class="typeParameter"><p class="type primitiveType">?</p></div>></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">all entities in the render distance.</p>
+                </div>
+            </div>
+            <div id="getEntities-String[]-" class="method classItem"><h4 class="methodTitle classItemTitle">.getEntities(<div class="methodParams">types</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>types</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a>[]</div></td>
+                            <td>
+                            <p class="description">the entity types to consider</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/List.html" class="type" target="_blank">List</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/world/entity/EntityHelper.html" class="type">EntityHelper</a><<div class="typeParameter"><p class="type primitiveType">?</p></div>></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">all entities in the render distance, that match the specified entity type.</p>
+                </div>
+            </div>
+            <div id="getEntities-double-" class="method classItem"><h4 class="methodTitle classItemTitle">.getEntities(<div class="methodParams">distance</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>distance</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td>
+                            <p class="description">the maximum distance to search for entities</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/List.html" class="type" target="_blank">List</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/world/entity/EntityHelper.html" class="type">EntityHelper</a><<div class="typeParameter"><p class="type primitiveType">?</p></div>></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">a list of entities within the specified distance to the player.</p>
+                </div>
+            </div>
+            <div id="getEntities-double-String[]-" class="method classItem"><h4 class="methodTitle classItemTitle">.getEntities(<div class="methodParams">distance, types</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>distance</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td>
+                            <p class="description">the maximum distance to search for entities</p></td>
+                        </tr>
+                        <tr>
+                            <td>types</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a>[]</div></td>
+                            <td>
+                            <p class="description">the entity types to consider</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/List.html" class="type" target="_blank">List</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/world/entity/EntityHelper.html" class="type">EntityHelper</a><<div class="typeParameter"><p class="type primitiveType">?</p></div>></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">a list of entities within the specified distance to the player, that match the specified entity type.</p>
+                </div>
+            </div>
+            <div id="getEntities-MethodWrapper-" class="method classItem"><h4 class="methodTitle classItemTitle">.getEntities(<div class="methodParams">filter</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>filter</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/core/MethodWrapper.html" class="type">MethodWrapper</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/world/entity/EntityHelper.html" class="type">EntityHelper</a><<div class="typeParameter"><p class="type primitiveType">?</p></div>></div>, <div class="typeParameter"><p class="type primitiveType">?</p></div>, <div class="typeParameter"><p class="type primitiveType">?</p></div>, <div class="typeParameter"><p class="type primitiveType">?</p></div>></div></td>
+                            <td>
+                            <p class="description">the entity filter</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/List.html" class="type" target="_blank">List</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/world/entity/EntityHelper.html" class="type">EntityHelper</a><<div class="typeParameter"><p class="type primitiveType">?</p></div>></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">a list of entities that match the specified filter.</p>
+                </div>
+            </div>
+            <div id="rayTraceBlock-double-double-double-double-double-double-boolean-" class="method classItem"><h4 class="methodTitle classItemTitle">.rayTraceBlock(<div class="methodParams">x1, y1, z1, x2, y2, z2, fluid</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.6.5</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">raytrace between two points returning the first block hit.</p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>x1</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>y1</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>z1</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>x2</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>y2</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>z2</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>fluid</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">boolean</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/world/BlockDataHelper.html" class="type">BlockDataHelper</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="rayTraceEntity-double-double-double-double-double-double-" class="method classItem"><h4 class="methodTitle classItemTitle">.rayTraceEntity(<div class="methodParams">x1, y1, z1, x2, y2, z2</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.3</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">raytrace between two points returning the first entity hit.</p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>x1</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>y1</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>z1</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>x2</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>y2</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>z2</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/world/entity/EntityHelper.html" class="type">EntityHelper</a><<div class="typeParameter"><p class="type primitiveType">?</p></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="getDimension-" class="method classItem"><h4 class="methodTitle classItemTitle">.getDimension(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.1.2</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">note that some server might utilize dimension identifiers for mods to distinguish between worlds.</p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">the current dimension.</p>
+                </div>
+            </div>
+            <div id="getBiome-" class="method classItem"><h4 class="methodTitle classItemTitle">.getBiome(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.1.5</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">the current biome.</p>
+                </div>
+            </div>
+            <div id="getTime-" class="method classItem"><h4 class="methodTitle classItemTitle">.getTime(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.1.5</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">ticks processed since world was started.</p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">long</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">the current world time. <code class="inlineCode">-1</code> if world is not loaded.</p>
+                </div>
+            </div>
+            <div id="getTimeOfDay-" class="method classItem"><h4 class="methodTitle classItemTitle">.getTimeOfDay(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.1.5</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">ticks passed since world was started INCLUDING those skipped when nights were cut short with sleeping.</p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">long</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">the current world time of day. <code class="inlineCode">-1</code> if world is not loaded.</p>
+                </div>
+            </div>
+            <div id="isDay-" class="method classItem"><h4 class="methodTitle classItemTitle">.isDay(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">boolean</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"><code class="inlineCode">true</code> if it is daytime, <code class="inlineCode">false</code> otherwise.</p>
+                </div>
+            </div>
+            <div id="isNight-" class="method classItem"><h4 class="methodTitle classItemTitle">.isNight(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">boolean</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"><code class="inlineCode">true</code> if it is nighttime, <code class="inlineCode">false</code> otherwise.</p>
+                </div>
+            </div>
+            <div id="isRaining-" class="method classItem"><h4 class="methodTitle classItemTitle">.isRaining(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">boolean</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"><code class="inlineCode">true</code> if it is raining, <code class="inlineCode">false</code> otherwise.</p>
+                </div>
+            </div>
+            <div id="isThundering-" class="method classItem"><h4 class="methodTitle classItemTitle">.isThundering(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">boolean</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"><code class="inlineCode">true</code> if it is thundering, <code class="inlineCode">false</code> otherwise.</p>
+                </div>
+            </div>
+            <div id="getWorldIdentifier-" class="method classItem"><h4 class="methodTitle classItemTitle">.getWorldIdentifier(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">an identifier for the loaded world that is based on the world's name or server ip and
+                 thus most likely unique enough to identify a specific world, or
+                 <code class="inlineCode">"UNKNOWN_NAME"</code> if no world was found.</p>
+                </div>
+            </div>
+            <div id="getRespawnPos-" class="method classItem"><h4 class="methodTitle classItemTitle">.getRespawnPos(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.2.6</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/world/BlockPosHelper.html" class="type">BlockPosHelper</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">respawn position.</p>
+                </div>
+            </div>
+            <div id="getDifficulty-" class="method classItem"><h4 class="methodTitle classItemTitle">.getDifficulty(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.2.6</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">int</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">world difficulty as an <a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Integer.html" class="type" target="_blank">Integer</a>. <code class="inlineCode">-1</code> if world is not loaded.</p>
+                </div>
+            </div>
+            <div id="getMoonPhase-" class="method classItem"><h4 class="methodTitle classItemTitle">.getMoonPhase(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.2.6</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">int</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">moon phase as an <a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Integer.html" class="type" target="_blank">Integer</a>. <code class="inlineCode">-1</code> if world is not loaded.</p>
+                </div>
+            </div>
+            <div id="getSkyLight-int-int-int-" class="method classItem"><h4 class="methodTitle classItemTitle">.getSkyLight(<div class="methodParams">x, y, z</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.1.2</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>x</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>y</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>z</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">int</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">sky light as an <a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Integer.html" class="type" target="_blank">Integer</a>. <code class="inlineCode">-1</code> if world is not loaded.</p>
+                </div>
+            </div>
+            <div id="getBlockLight-int-int-int-" class="method classItem"><h4 class="methodTitle classItemTitle">.getBlockLight(<div class="methodParams">x, y, z</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.1.2</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>x</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>y</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>z</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">int</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">block light as an <a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Integer.html" class="type" target="_blank">Integer</a>. <code class="inlineCode">-1</code> if world is not loaded.</p>
+                </div>
+            </div>
+            <div id="playSoundFile-String-double-" class="method classItem"><h4 class="methodTitle classItemTitle">.playSoundFile(<div class="methodParams">file, volume</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.1.7</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">plays a sound file using javax's sound stuff.</p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>file</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>volume</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?javax/sound/sampled/Clip.html" class="type" target="_blank">Clip</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="playSound-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.playSound(<div class="methodParams">id</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.1.7</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>id</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="playSound-String-double-" class="method classItem"><h4 class="methodTitle classItemTitle">.playSound(<div class="methodParams">id, volume</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.1.7</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>id</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>volume</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="playSound-String-double-double-" class="method classItem"><h4 class="methodTitle classItemTitle">.playSound(<div class="methodParams">id, volume, pitch</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.1.7</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>id</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>volume</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>pitch</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="playSound-String-double-double-double-double-double-" class="method classItem"><h4 class="methodTitle classItemTitle">.playSound(<div class="methodParams">id, volume, pitch, x, y, z</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.1.7</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">plays a minecraft sound using the internal system.</p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>id</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>volume</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>pitch</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>x</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>y</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>z</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="getBossBars-" class="method classItem"><h4 class="methodTitle classItemTitle">.getBossBars(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.2.1</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/Map.html" class="type" target="_blank">Map</a><<div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div>, <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/world/entity/BossBarHelper.html" class="type">BossBarHelper</a></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">a map of boss bars by the boss bar's UUID.</p>
+                </div>
+            </div>
+            <div id="isChunkLoaded-int-int-" class="method classItem"><h4 class="methodTitle classItemTitle">.isChunkLoaded(<div class="methodParams">chunkX, chunkZ</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.2.2</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">Check whether a chunk is within the render distance and loaded.</p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>chunkX</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>chunkZ</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">boolean</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="getCurrentServerAddress-" class="method classItem"><h4 class="methodTitle classItemTitle">.getCurrentServerAddress(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.2.2</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">the current server address as a string (<code class="inlineCode">server.address/server.ip:port</code>).</p>
+                </div>
+            </div>
+            <div id="getBiomeAt-int-int-" class="method classItem"><h4 class="methodTitle classItemTitle">.getBiomeAt(<div class="methodParams">x, z</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.2.2 [Citation Needed]</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>x</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>z</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">biome at specified location, only works if the block/chunk is loaded.</p>
+                </div>
+            </div>
+            <div id="getBiomeAt-int-int-int-" class="method classItem"><h4 class="methodTitle classItemTitle">.getBiomeAt(<div class="methodParams">x, y, z</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>x</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>y</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>z</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">biome at specified location, only works if the block/chunk is loaded.</p>
+                </div>
+            </div>
+            <div id="getServerTPS-" class="method classItem"><h4 class="methodTitle classItemTitle">.getServerTPS(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.2.7</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">best attempt to measure and give the server tps with various timings.</p>
+                </div>
+            </div>
+            <div id="getTabListHeader-" class="method classItem"><h4 class="methodTitle classItemTitle">.getTabListHeader(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.3.1</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/TextHelper.html" class="type">TextHelper</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">text helper for the top part of the tab list (above the players)</p>
+                </div>
+            </div>
+            <div id="getTabListFooter-" class="method classItem"><h4 class="methodTitle classItemTitle">.getTabListFooter(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.3.1</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/helpers/TextHelper.html" class="type">TextHelper</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">text helper for the bottom part of the tab list (below the players)</p>
+                </div>
+            </div>
+            <div id="spawnParticle-String-double-double-double-int-" class="method classItem"><h4 class="methodTitle classItemTitle">.spawnParticle(<div class="methodParams">id, x, y, z, count</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">Summons the amount of particles at the desired position.</p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>id</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description">the particle id</p></td>
+                        </tr>
+                        <tr>
+                            <td>x</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td>
+                            <p class="description">the x position to spawn the particle</p></td>
+                        </tr>
+                        <tr>
+                            <td>y</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td>
+                            <p class="description">the y position to spawn the particle</p></td>
+                        </tr>
+                        <tr>
+                            <td>z</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td>
+                            <p class="description">the z position to spawn the particle</p></td>
+                        </tr>
+                        <tr>
+                            <td>count</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td>
+                            <p class="description">the amount of particles to spawn</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="spawnParticle-String-double-double-double-double-double-double-double-int-boolean-" class="method classItem"><h4 class="methodTitle classItemTitle">.spawnParticle(<div class="methodParams">id, x, y, z, deltaX, deltaY, deltaZ, speed, count, force</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">Summons the amount of particles at the desired position with some variation of delta and the
+                 given speed.</p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>id</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description">the particle id</p></td>
+                        </tr>
+                        <tr>
+                            <td>x</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td>
+                            <p class="description">the x position to spawn the particle</p></td>
+                        </tr>
+                        <tr>
+                            <td>y</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td>
+                            <p class="description">the y position to spawn the particle</p></td>
+                        </tr>
+                        <tr>
+                            <td>z</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td>
+                            <p class="description">the z position to spawn the particle</p></td>
+                        </tr>
+                        <tr>
+                            <td>deltaX</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td>
+                            <p class="description">the x variation of the particle</p></td>
+                        </tr>
+                        <tr>
+                            <td>deltaY</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td>
+                            <p class="description">the y variation of the particle</p></td>
+                        </tr>
+                        <tr>
+                            <td>deltaZ</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td>
+                            <p class="description">the z variation of the particle</p></td>
+                        </tr>
+                        <tr>
+                            <td>speed</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">double</p></div></td>
+                            <td>
+                            <p class="description">the speed of the particle</p></td>
+                        </tr>
+                        <tr>
+                            <td>count</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td>
+                            <p class="description">the amount of particles to spawn</p></td>
+                        </tr>
+                        <tr>
+                            <td>force</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">boolean</p></div></td>
+                            <td>
+                            <p class="description">whether to show the particle if it's more than 32 blocks away</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="getRaw-" class="method classItem"><h4 class="methodTitle classItemTitle">.getRaw(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.9.1</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App?mapping=INTERMEDIARY,YARN&version=1.20.4&search=net/minecraft/client/world/ClientWorld" class="type" target="_blank">ClientWorld</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">the raw minecraft world.</p>
+                </div>
+            </div>
+            <div id="getServerInstantTPS-" class="method classItem"><h4 class="methodTitle classItemTitle">.getServerInstantTPS(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.2.7</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">double</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">best attempt to measure and give the server tps.</p>
+                </div>
+            </div>
+            <div id="getServer1MAverageTPS-" class="method classItem"><h4 class="methodTitle classItemTitle">.getServer1MAverageTPS(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.2.7</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">double</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">best attempt to measure and give the server tps over the previous 1 minute average.</p>
+                </div>
+            </div>
+            <div id="getServer5MAverageTPS-" class="method classItem"><h4 class="methodTitle classItemTitle">.getServer5MAverageTPS(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.2.7</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">double</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">best attempt to measure and give the server tps over the previous 5 minute average.</p>
+                </div>
+            </div>
+            <div id="getServer15MAverageTPS-" class="method classItem"><h4 class="methodTitle classItemTitle">.getServer15MAverageTPS(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.2.7</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">double</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">best attempt to measure and give the server tps over the previous 15 minute average.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+</html>

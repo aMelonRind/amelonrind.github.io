@@ -29,7 +29,7 @@ function populateClassSidebar() {
     for (const [name, st] of searchMaps.classes) {
         for (const clazz of st) {
             const a = document.createElement("a");
-            a.setAttribute("href", `${officalHost}/${versionSelect.value}/${clazz.url.replace(/(#|$)/, ".html$1")}`);
+            a.setAttribute("href", `${versionSelect.value}/${clazz.url.replace(/(#|$)/, ".html$1")}`);
             frameLink(a);
             a.innerHTML = name;
             document.getElementById(`${clazz.group}List`).appendChild(a);
@@ -57,7 +57,7 @@ async function openMain(url, dontpush) {
     mainContent.innerHTML = doc.innerHTML;
     for (const a of mainContent.getElementsByTagName("a")) {
         if (!a.hasAttribute("target") && !a.getAttribute("href")?.startsWith("#") && !a.hasAttribute("onclick")) {
-            a.setAttribute("href", a.getAttribute("href").replace(/(\.\.\/)*/, `${officalHost}/${versionSelect.value}/`));
+            a.setAttribute("href", a.getAttribute("href").replace(/(\.\.\/)*/, `${versionSelect.value}/`));
             frameLink(a);
         }
     }

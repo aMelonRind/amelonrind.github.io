@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="../../../../../../../classContent.css"></link>
+    </head>
+    <body>
+        <header>
+            <a href="../../../../../../../">
+                <----- Return to main JsMacros docs page.
+            </a>
+        </header>
+    </body>
+    <main class="classDoc">
+        <div id="subClasses"></div>
+        <h2 class="classTitle">xyz.wagyourtail.jsmacros.client.mixins.events.MixinClientPlayNetworkHandler</h2>
+        <div class="flags">
+            <div class="flag abstractFlag">Abstract</div>
+        </div>
+        <h4 class="classExtends">extends <div class="typeParameter"><a href="https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App?mapping=INTERMEDIARY,YARN&version=1.20.4&search=net/minecraft/client/network/ClientCommonNetworkHandler" class="type" target="_blank">ClientCommonNetworkHandler</a></div></h4>
+        <p class="classSince since"></p>
+        <p class="description"></p>
+        <div class="shortFieldMethods">
+            <div class="methodShorts">
+                <h4>
+                    Methods
+                </h4>
+                <div class="shortMethod shortClassItem">
+                    <a href="#onPlayerList-PlayerListS2CPacket-CallbackInfo-Iterator-PlayerListS2CPacket$Entry-PlayerListEntry-">onPlayerList(packet, ci, var2, entry, playerListEntry)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#onPlayerListEnd-PlayerRemoveS2CPacket-CallbackInfo-Iterator-UUID-PlayerListEntry-">onPlayerListEnd(packet, ci, var2, uUID, playerListEntry)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#onTitle-Text-">onTitle(title)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#onSubtitle-Text-">onSubtitle(title)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#onBossBar-BossBarS2CPacket-CallbackInfo-">onBossBar(packet, info)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#onItemPickupAnimation-ItemPickupAnimationS2CPacket-CallbackInfo-">onItemPickupAnimation(packet, info)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#onGameJoin-GameJoinS2CPacket-CallbackInfo-">onGameJoin(packet, info)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#onChunkData-ChunkDataS2CPacket-CallbackInfo-">onChunkData(packet, info)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#onBlockUpdate-BlockUpdateS2CPacket-CallbackInfo-">onBlockUpdate(packet, info)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#onChunkDeltaUpdate-ChunkDeltaUpdateS2CPacket-CallbackInfo-">onChunkDeltaUpdate(packet, info)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#onBlockEntityUpdate-BlockEntityUpdateS2CPacket-CallbackInfo-">onBlockEntityUpdate(packet, info)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#onUnloadChunk-UnloadChunkS2CPacket-CallbackInfo-">onUnloadChunk(packet, info)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#onEntityStatusEffect-EntityStatusEffectS2CPacket-CallbackInfo-">onEntityStatusEffect(packet, info)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#onEntityStatusEffect-RemoveEntityStatusEffectS2CPacket-CallbackInfo-">onEntityStatusEffect(packet, info)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#onHeldSlotUpdate-ScreenHandlerSlotUpdateS2CPacket-CallbackInfo-">onHeldSlotUpdate(packet, ci)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#onInventorySlotUpdate-ScreenHandlerSlotUpdateS2CPacket-CallbackInfo-">onInventorySlotUpdate(packet, ci)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#onScreenSlotUpdate-ScreenHandlerSlotUpdateS2CPacket-CallbackInfo-">onScreenSlotUpdate(packet, ci)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#onScreenSlotUpdate2-ScreenHandlerSlotUpdateS2CPacket-CallbackInfo-">onScreenSlotUpdate2(packet, ci)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#onInventoryUpdate-InventoryS2CPacket-CallbackInfo-">onInventoryUpdate(packet, ci)</a>
+                    <div class="shortFlags"></div>
+                </div>
+            </div>
+        </div>
+        <h3>Methods</h3>
+        <div class="methodDoc">
+            <div id="onPlayerList-PlayerListS2CPacket-CallbackInfo-Iterator-PlayerListS2CPacket$Entry-PlayerListEntry-" class="method classItem"><h4 class="methodTitle classItemTitle">.onPlayerList(<div class="methodParams">packet, ci, var2, entry, playerListEntry</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>packet</td>
+                            <td><div class="typeParameter"><a href="https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App?mapping=INTERMEDIARY,YARN&version=1.20.4&search=net/minecraft/network/packet/s2c/play/PlayerListS2CPacket" class="type" target="_blank">PlayerListS2CPacket</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>ci</td>
+                            <td><div class="typeParameter"><a href="" class="type deadType">CallbackInfo</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>var2</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/Iterator.html" class="type" target="_blank">Iterator</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>entry</td>
+                            <td><div class="typeParameter"><a href="https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App?mapping=INTERMEDIARY,YARN&version=1.20.4&search=net/minecraft/network/packet/s2c/play/PlayerListS2CPacket$Entry" class="type" target="_blank">PlayerListS2CPacket$Entry</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>playerListEntry</td>
+                            <td><div class="typeParameter"><a href="https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App?mapping=INTERMEDIARY,YARN&version=1.20.4&search=net/minecraft/client/network/PlayerListEntry" class="type" target="_blank">PlayerListEntry</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="onPlayerListEnd-PlayerRemoveS2CPacket-CallbackInfo-Iterator-UUID-PlayerListEntry-" class="method classItem"><h4 class="methodTitle classItemTitle">.onPlayerListEnd(<div class="methodParams">packet, ci, var2, uUID, playerListEntry</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>packet</td>
+                            <td><div class="typeParameter"><a href="https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App?mapping=INTERMEDIARY,YARN&version=1.20.4&search=net/minecraft/network/packet/s2c/play/PlayerRemoveS2CPacket" class="type" target="_blank">PlayerRemoveS2CPacket</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>ci</td>
+                            <td><div class="typeParameter"><a href="" class="type deadType">CallbackInfo</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>var2</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/Iterator.html" class="type" target="_blank">Iterator</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>uUID</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/UUID.html" class="type" target="_blank">UUID</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>playerListEntry</td>
+                            <td><div class="typeParameter"><a href="https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App?mapping=INTERMEDIARY,YARN&version=1.20.4&search=net/minecraft/client/network/PlayerListEntry" class="type" target="_blank">PlayerListEntry</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="onTitle-Text-" class="method classItem"><h4 class="methodTitle classItemTitle">.onTitle(<div class="methodParams">title</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>title</td>
+                            <td><div class="typeParameter"><a href="https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App?mapping=INTERMEDIARY,YARN&version=1.20.4&search=net/minecraft/text/Text" class="type" target="_blank">Text</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App?mapping=INTERMEDIARY,YARN&version=1.20.4&search=net/minecraft/text/Text" class="type" target="_blank">Text</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="onSubtitle-Text-" class="method classItem"><h4 class="methodTitle classItemTitle">.onSubtitle(<div class="methodParams">title</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>title</td>
+                            <td><div class="typeParameter"><a href="https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App?mapping=INTERMEDIARY,YARN&version=1.20.4&search=net/minecraft/text/Text" class="type" target="_blank">Text</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App?mapping=INTERMEDIARY,YARN&version=1.20.4&search=net/minecraft/text/Text" class="type" target="_blank">Text</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="onBossBar-BossBarS2CPacket-CallbackInfo-" class="method classItem"><h4 class="methodTitle classItemTitle">.onBossBar(<div class="methodParams">packet, info</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>packet</td>
+                            <td><div class="typeParameter"><a href="https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App?mapping=INTERMEDIARY,YARN&version=1.20.4&search=net/minecraft/network/packet/s2c/play/BossBarS2CPacket" class="type" target="_blank">BossBarS2CPacket</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>info</td>
+                            <td><div class="typeParameter"><a href="" class="type deadType">CallbackInfo</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="onItemPickupAnimation-ItemPickupAnimationS2CPacket-CallbackInfo-" class="method classItem"><h4 class="methodTitle classItemTitle">.onItemPickupAnimation(<div class="methodParams">packet, info</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>packet</td>
+                            <td><div class="typeParameter"><a href="https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App?mapping=INTERMEDIARY,YARN&version=1.20.4&search=net/minecraft/network/packet/s2c/play/ItemPickupAnimationS2CPacket" class="type" target="_blank">ItemPickupAnimationS2CPacket</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>info</td>
+                            <td><div class="typeParameter"><a href="" class="type deadType">CallbackInfo</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="onGameJoin-GameJoinS2CPacket-CallbackInfo-" class="method classItem"><h4 class="methodTitle classItemTitle">.onGameJoin(<div class="methodParams">packet, info</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>packet</td>
+                            <td><div class="typeParameter"><a href="https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App?mapping=INTERMEDIARY,YARN&version=1.20.4&search=net/minecraft/network/packet/s2c/play/GameJoinS2CPacket" class="type" target="_blank">GameJoinS2CPacket</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>info</td>
+                            <td><div class="typeParameter"><a href="" class="type deadType">CallbackInfo</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="onChunkData-ChunkDataS2CPacket-CallbackInfo-" class="method classItem"><h4 class="methodTitle classItemTitle">.onChunkData(<div class="methodParams">packet, info</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>packet</td>
+                            <td><div class="typeParameter"><a href="https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App?mapping=INTERMEDIARY,YARN&version=1.20.4&search=net/minecraft/network/packet/s2c/play/ChunkDataS2CPacket" class="type" target="_blank">ChunkDataS2CPacket</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>info</td>
+                            <td><div class="typeParameter"><a href="" class="type deadType">CallbackInfo</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="onBlockUpdate-BlockUpdateS2CPacket-CallbackInfo-" class="method classItem"><h4 class="methodTitle classItemTitle">.onBlockUpdate(<div class="methodParams">packet, info</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>packet</td>
+                            <td><div class="typeParameter"><a href="https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App?mapping=INTERMEDIARY,YARN&version=1.20.4&search=net/minecraft/network/packet/s2c/play/BlockUpdateS2CPacket" class="type" target="_blank">BlockUpdateS2CPacket</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>info</td>
+                            <td><div class="typeParameter"><a href="" class="type deadType">CallbackInfo</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="onChunkDeltaUpdate-ChunkDeltaUpdateS2CPacket-CallbackInfo-" class="method classItem"><h4 class="methodTitle classItemTitle">.onChunkDeltaUpdate(<div class="methodParams">packet, info</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>packet</td>
+                            <td><div class="typeParameter"><a href="https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App?mapping=INTERMEDIARY,YARN&version=1.20.4&search=net/minecraft/network/packet/s2c/play/ChunkDeltaUpdateS2CPacket" class="type" target="_blank">ChunkDeltaUpdateS2CPacket</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>info</td>
+                            <td><div class="typeParameter"><a href="" class="type deadType">CallbackInfo</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="onBlockEntityUpdate-BlockEntityUpdateS2CPacket-CallbackInfo-" class="method classItem"><h4 class="methodTitle classItemTitle">.onBlockEntityUpdate(<div class="methodParams">packet, info</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>packet</td>
+                            <td><div class="typeParameter"><a href="https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App?mapping=INTERMEDIARY,YARN&version=1.20.4&search=net/minecraft/network/packet/s2c/play/BlockEntityUpdateS2CPacket" class="type" target="_blank">BlockEntityUpdateS2CPacket</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>info</td>
+                            <td><div class="typeParameter"><a href="" class="type deadType">CallbackInfo</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="onUnloadChunk-UnloadChunkS2CPacket-CallbackInfo-" class="method classItem"><h4 class="methodTitle classItemTitle">.onUnloadChunk(<div class="methodParams">packet, info</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>packet</td>
+                            <td><div class="typeParameter"><a href="https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App?mapping=INTERMEDIARY,YARN&version=1.20.4&search=net/minecraft/network/packet/s2c/play/UnloadChunkS2CPacket" class="type" target="_blank">UnloadChunkS2CPacket</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>info</td>
+                            <td><div class="typeParameter"><a href="" class="type deadType">CallbackInfo</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="onEntityStatusEffect-EntityStatusEffectS2CPacket-CallbackInfo-" class="method classItem"><h4 class="methodTitle classItemTitle">.onEntityStatusEffect(<div class="methodParams">packet, info</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>packet</td>
+                            <td><div class="typeParameter"><a href="https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App?mapping=INTERMEDIARY,YARN&version=1.20.4&search=net/minecraft/network/packet/s2c/play/EntityStatusEffectS2CPacket" class="type" target="_blank">EntityStatusEffectS2CPacket</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>info</td>
+                            <td><div class="typeParameter"><a href="" class="type deadType">CallbackInfo</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="onEntityStatusEffect-RemoveEntityStatusEffectS2CPacket-CallbackInfo-" class="method classItem"><h4 class="methodTitle classItemTitle">.onEntityStatusEffect(<div class="methodParams">packet, info</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>packet</td>
+                            <td><div class="typeParameter"><a href="https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App?mapping=INTERMEDIARY,YARN&version=1.20.4&search=net/minecraft/network/packet/s2c/play/RemoveEntityStatusEffectS2CPacket" class="type" target="_blank">RemoveEntityStatusEffectS2CPacket</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>info</td>
+                            <td><div class="typeParameter"><a href="" class="type deadType">CallbackInfo</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="onHeldSlotUpdate-ScreenHandlerSlotUpdateS2CPacket-CallbackInfo-" class="method classItem"><h4 class="methodTitle classItemTitle">.onHeldSlotUpdate(<div class="methodParams">packet, ci</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>packet</td>
+                            <td><div class="typeParameter"><a href="https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App?mapping=INTERMEDIARY,YARN&version=1.20.4&search=net/minecraft/network/packet/s2c/play/ScreenHandlerSlotUpdateS2CPacket" class="type" target="_blank">ScreenHandlerSlotUpdateS2CPacket</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>ci</td>
+                            <td><div class="typeParameter"><a href="" class="type deadType">CallbackInfo</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="onInventorySlotUpdate-ScreenHandlerSlotUpdateS2CPacket-CallbackInfo-" class="method classItem"><h4 class="methodTitle classItemTitle">.onInventorySlotUpdate(<div class="methodParams">packet, ci</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>packet</td>
+                            <td><div class="typeParameter"><a href="https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App?mapping=INTERMEDIARY,YARN&version=1.20.4&search=net/minecraft/network/packet/s2c/play/ScreenHandlerSlotUpdateS2CPacket" class="type" target="_blank">ScreenHandlerSlotUpdateS2CPacket</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>ci</td>
+                            <td><div class="typeParameter"><a href="" class="type deadType">CallbackInfo</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="onScreenSlotUpdate-ScreenHandlerSlotUpdateS2CPacket-CallbackInfo-" class="method classItem"><h4 class="methodTitle classItemTitle">.onScreenSlotUpdate(<div class="methodParams">packet, ci</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>packet</td>
+                            <td><div class="typeParameter"><a href="https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App?mapping=INTERMEDIARY,YARN&version=1.20.4&search=net/minecraft/network/packet/s2c/play/ScreenHandlerSlotUpdateS2CPacket" class="type" target="_blank">ScreenHandlerSlotUpdateS2CPacket</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>ci</td>
+                            <td><div class="typeParameter"><a href="" class="type deadType">CallbackInfo</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="onScreenSlotUpdate2-ScreenHandlerSlotUpdateS2CPacket-CallbackInfo-" class="method classItem"><h4 class="methodTitle classItemTitle">.onScreenSlotUpdate2(<div class="methodParams">packet, ci</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>packet</td>
+                            <td><div class="typeParameter"><a href="https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App?mapping=INTERMEDIARY,YARN&version=1.20.4&search=net/minecraft/network/packet/s2c/play/ScreenHandlerSlotUpdateS2CPacket" class="type" target="_blank">ScreenHandlerSlotUpdateS2CPacket</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>ci</td>
+                            <td><div class="typeParameter"><a href="" class="type deadType">CallbackInfo</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="onInventoryUpdate-InventoryS2CPacket-CallbackInfo-" class="method classItem"><h4 class="methodTitle classItemTitle">.onInventoryUpdate(<div class="methodParams">packet, ci</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>packet</td>
+                            <td><div class="typeParameter"><a href="https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App?mapping=INTERMEDIARY,YARN&version=1.20.4&search=net/minecraft/network/packet/s2c/play/InventoryS2CPacket" class="type" target="_blank">InventoryS2CPacket</a></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>ci</td>
+                            <td><div class="typeParameter"><a href="" class="type deadType">CallbackInfo</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+</html>

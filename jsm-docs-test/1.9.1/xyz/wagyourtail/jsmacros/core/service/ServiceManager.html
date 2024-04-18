@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="../../../../../../classContent.css"></link>
+    </head>
+    <body>
+        <header>
+            <a href="../../../../../../">
+                <----- Return to main JsMacros docs page.
+            </a>
+        </header>
+    </body>
+    <main class="classDoc">
+        <div id="subClasses"></div>
+        <h2 class="classTitle">xyz.wagyourtail.jsmacros.core.service.ServiceManager</h2>
+        <div class="flags"></div>
+        <h4 class="classExtends"></h4>
+        <p class="classSince since">1.6.3</p>
+        <p class="description"></p>
+        <h3>Constructors</h3>
+        <div class="constructorDoc">
+            <div id="constructor-Core-" class="constructor classItem">
+                <h4 class="constructorTitle classItemTitle">
+                    new 
+                    ServiceManager
+                    (<div class="constructorParams">runner</div>)
+                </h4>
+                <div class="flags"></div>
+                <p class="constructorSince since"></p>
+                <div class="constructorDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>runner</td>
+                            <td><div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/Core.html" class="type">Core</a><<div class="typeParameter"><p class="type primitiveType">?</p></div>, <div class="typeParameter"><p class="type primitiveType">?</p></div>></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="shortFieldMethods">
+            <div class="methodShorts">
+                <h4>
+                    Methods
+                </h4>
+                <div class="shortMethod shortClassItem">
+                    <a href="#registerService-String-String-">registerService(name, pathToFile)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#registerService-String-String-boolean-">registerService(name, pathToFile, enabled)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#registerService-String-ServiceTrigger-">registerService(name, trigger)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#unregisterService-String-">unregisterService(name)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#disableReload-String-">disableReload(serviceName)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#renameService-String-String-">renameService(oldName, newName)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getServices-">getServices()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#startService-String-">startService(name)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#stopService-String-">stopService(name)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#restartService-String-">restartService(name)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#enableService-String-">enableService(name)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#disableService-String-">disableService(name)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#isRunning-String-">isRunning(name)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#isEnabled-String-">isEnabled(name)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#status-String-">status(name)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getServiceData-String-">getServiceData(name)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getTrigger-String-">getTrigger(name)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#load-">load()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#save-">save()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#stopReloadListener-">stopReloadListener()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#startReloadListener-">startReloadListener()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#markCrashed-String-">markCrashed(serviceName)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#isCrashed-String-">isCrashed(serviceName)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#tickReloadListener-">tickReloadListener()</a>
+                    <div class="shortFlags"></div>
+                </div>
+            </div>
+        </div>
+        <h3>Methods</h3>
+        <div class="methodDoc">
+            <div id="registerService-String-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.registerService(<div class="methodParams">name, pathToFile</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>name</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>pathToFile</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description">relative to macro folder</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">boolean</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">false if service with that name is already registered</p>
+                </div>
+            </div>
+            <div id="registerService-String-String-boolean-" class="method classItem"><h4 class="methodTitle classItemTitle">.registerService(<div class="methodParams">name, pathToFile, enabled</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>name</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>pathToFile</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description">relative to macro folder</p></td>
+                        </tr>
+                        <tr>
+                            <td>enabled</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">boolean</p></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">boolean</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">false if service with that name is already registered</p>
+                </div>
+            </div>
+            <div id="registerService-String-ServiceTrigger-" class="method classItem"><h4 class="methodTitle classItemTitle">.registerService(<div class="methodParams">name, trigger</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>name</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>trigger</td>
+                            <td><div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/service/ServiceTrigger.html" class="type">ServiceTrigger</a></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">boolean</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">false if service with that name already registered</p>
+                </div>
+            </div>
+            <div id="unregisterService-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.unregisterService(<div class="methodParams">name</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>name</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">boolean</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="disableReload-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.disableReload(<div class="methodParams">serviceName</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>serviceName</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description">the name of the service to disable the reload feature for</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="renameService-String-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.renameService(<div class="methodParams">oldName, newName</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>oldName</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>newName</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">boolean</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">false if service with new name already registered or old name doesn't exist</p>
+                </div>
+            </div>
+            <div id="getServices-" class="method classItem"><h4 class="methodTitle classItemTitle">.getServices(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/Set.html" class="type" target="_blank">Set</a><<div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">registered service names</p>
+                </div>
+            </div>
+            <div id="startService-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.startService(<div class="methodParams">name</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">starts service once</p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>name</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description">service name</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/service/ServiceManager.ServiceStatus.html" class="type">ServiceManager$ServiceStatus</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">previous state (or <a href="../../../../../xyz/wagyourtail/jsmacros/core/service/ServiceManager.ServiceStatus.html#UNKNOWN" class="type">ServiceManager$ServiceStatus#UNKNOWN</a> if unknown service)</p>
+                </div>
+            </div>
+            <div id="stopService-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.stopService(<div class="methodParams">name</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>name</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description">service name</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/service/ServiceManager.ServiceStatus.html" class="type">ServiceManager$ServiceStatus</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">previous state (or <a href="../../../../../xyz/wagyourtail/jsmacros/core/service/ServiceManager.ServiceStatus.html#UNKNOWN" class="type">ServiceManager$ServiceStatus#UNKNOWN</a> if unknown service)</p>
+                </div>
+            </div>
+            <div id="restartService-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.restartService(<div class="methodParams">name</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>name</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description">service name</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/service/ServiceManager.ServiceStatus.html" class="type">ServiceManager$ServiceStatus</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">state before "restarting" (or <a href="../../../../../xyz/wagyourtail/jsmacros/core/service/ServiceManager.ServiceStatus.html#UNKNOWN" class="type">ServiceManager$ServiceStatus#UNKNOWN</a> if unknown service)</p>
+                </div>
+            </div>
+            <div id="enableService-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.enableService(<div class="methodParams">name</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>name</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description">service name</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/service/ServiceManager.ServiceStatus.html" class="type">ServiceManager$ServiceStatus</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">previous state (or <a href="../../../../../xyz/wagyourtail/jsmacros/core/service/ServiceManager.ServiceStatus.html#UNKNOWN" class="type">ServiceManager$ServiceStatus#UNKNOWN</a> if unknown service)</p>
+                </div>
+            </div>
+            <div id="disableService-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.disableService(<div class="methodParams">name</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>name</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description">service name</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/service/ServiceManager.ServiceStatus.html" class="type">ServiceManager$ServiceStatus</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">previous state (or <a href="../../../../../xyz/wagyourtail/jsmacros/core/service/ServiceManager.ServiceStatus.html#UNKNOWN" class="type">ServiceManager$ServiceStatus#UNKNOWN</a> if unknown service)</p>
+                </div>
+            </div>
+            <div id="isRunning-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.isRunning(<div class="methodParams">name</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>name</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description">the name of the service to check</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">boolean</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"><code class="inlineCode">true</code> if the service is running, <code class="inlineCode">false</code> otherwise.</p>
+                </div>
+            </div>
+            <div id="isEnabled-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.isEnabled(<div class="methodParams">name</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>name</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description">the name of the service to check</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">boolean</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"><code class="inlineCode">true</code> if the service is enabled, <code class="inlineCode">false</code> otherwise.</p>
+                </div>
+            </div>
+            <div id="status-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.status(<div class="methodParams">name</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>name</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description">service name</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/service/ServiceManager.ServiceStatus.html" class="type">ServiceManager$ServiceStatus</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"><a href="../../../../../xyz/wagyourtail/jsmacros/core/service/ServiceManager.ServiceStatus.html#UNKNOWN" class="type">ServiceManager$ServiceStatus#UNKNOWN</a> if unknown service, <a href="../../../../../xyz/wagyourtail/jsmacros/core/service/ServiceManager.ServiceStatus.html#RUNNING" class="type">ServiceManager$ServiceStatus#RUNNING</a> if disabled and running, <a href="../../../../../xyz/wagyourtail/jsmacros/core/service/ServiceManager.ServiceStatus.html#DISABLED" class="type">ServiceManager$ServiceStatus#DISABLED</a> if disabled and stopped, <a href="../../../../../xyz/wagyourtail/jsmacros/core/service/ServiceManager.ServiceStatus.html#STOPPED" class="type">ServiceManager$ServiceStatus#STOPPED</a> if enabled and stopped, <a href="../../../../../xyz/wagyourtail/jsmacros/core/service/ServiceManager.ServiceStatus.html#ENABLED" class="type">ServiceManager$ServiceStatus#ENABLED</a> if enabled and running.</p>
+                </div>
+            </div>
+            <div id="getServiceData-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.getServiceData(<div class="methodParams">name</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.6.5</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">this might throw if the service is not running...</p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>name</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/service/EventService.html" class="type">EventService</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">the event that is current for the service</p>
+                </div>
+            </div>
+            <div id="getTrigger-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.getTrigger(<div class="methodParams">name</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.6.5 [named getServiceData previously]</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>name</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../xyz/wagyourtail/jsmacros/core/service/ServiceTrigger.html" class="type">ServiceTrigger</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="load-" class="method classItem"><h4 class="methodTitle classItemTitle">.load(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">load services from config</p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="save-" class="method classItem"><h4 class="methodTitle classItemTitle">.save(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">save current registered services & enabled/disabled status to config</p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="stopReloadListener-" class="method classItem"><h4 class="methodTitle classItemTitle">.stopReloadListener(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">Stops the service manager from reloading scrips on file changes.</p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="startReloadListener-" class="method classItem"><h4 class="methodTitle classItemTitle">.startReloadListener(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">Will make the service manager reload scripts on file changes.</p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="markCrashed-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.markCrashed(<div class="methodParams">serviceName</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">Mark a service as crashed so that it can be reloaded when its file changes. Crashed services
+                 must be marked so that file change listener knows to restart them even if they are not
+                 running because they crashed.</p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>serviceName</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description">the name of the service to mark as crashed</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="isCrashed-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.isCrashed(<div class="methodParams">serviceName</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>serviceName</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description">the name of the service to check</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">boolean</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"><code class="inlineCode">true</code> if the service previously crashed, <code class="inlineCode">false</code> otherwise.</p>
+                </div>
+            </div>
+            <div id="tickReloadListener-" class="method classItem"><h4 class="methodTitle classItemTitle">.tickReloadListener(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">Ticks the service manager. This will check if any services need to be reloaded and reloads
+                 them if necessary.</p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+</html>

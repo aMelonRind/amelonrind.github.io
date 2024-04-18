@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="../../../../../classContent.css"></link>
+    </head>
+    <body>
+        <header>
+            <a href="../../../../../">
+                <----- Return to main JsMacros docs page.
+            </a>
+        </header>
+    </body>
+    <main class="classDoc">
+        <div id="subClasses"><div class="typeParameter"><a href="../../../../xyz/wagyourtail/jsmacros/core/library/impl/classes/WrappedScript.html" class="type">WrappedScript</a><<div class="typeParameter"><p class="type primitiveType">T</p></div>, <div class="typeParameter"><p class="type primitiveType">U</p></div>, <div class="typeParameter"><p class="type primitiveType">V</p></div>></div> 
+        </div>
+        <h2 class="classTitle">xyz.wagyourtail.jsmacros.core.MethodWrapper<<div class="typeParameter"><p class="type primitiveType">T</p></div>, <div class="typeParameter"><p class="type primitiveType">U</p></div>, <div class="typeParameter"><p class="type primitiveType">R</p></div>, <div class="typeParameter"><p class="type primitiveType">C
+        <p class="classExtends">
+            <b> extends </b>
+        </p><div class="typeParameter"><a href="../../../../xyz/wagyourtail/jsmacros/core/language/BaseScriptContext.html" class="type">BaseScriptContext</a><<div class="typeParameter"><p class="type primitiveType">?</p></div>></div></p></div>></h2>
+        <div class="flags">
+            <div class="flag abstractFlag">Abstract</div>
+        </div>
+        <h4 class="classExtends"> implements <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/function/Consumer.html" class="type" target="_blank">Consumer</a><<div class="typeParameter"><p class="type primitiveType">T</p></div>></div> <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/function/BiConsumer.html" class="type" target="_blank">BiConsumer</a><<div class="typeParameter"><p class="type primitiveType">T</p></div>, <div class="typeParameter"><p class="type primitiveType">U</p></div>></div> <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/function/Function.html" class="type" target="_blank">Function</a><<div class="typeParameter"><p class="type primitiveType">T</p></div>, <div class="typeParameter"><p class="type primitiveType">R</p></div>></div> <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/function/BiFunction.html" class="type" target="_blank">BiFunction</a><<div class="typeParameter"><p class="type primitiveType">T</p></div>, <div class="typeParameter"><p class="type primitiveType">U</p></div>, <div class="typeParameter"><p class="type primitiveType">R</p></div>></div> <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/function/Predicate.html" class="type" target="_blank">Predicate</a><<div class="typeParameter"><p class="type primitiveType">T</p></div>></div> <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/function/BiPredicate.html" class="type" target="_blank">BiPredicate</a><<div class="typeParameter"><p class="type primitiveType">T</p></div>, <div class="typeParameter"><p class="type primitiveType">U</p></div>></div> <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Runnable.html" class="type" target="_blank">Runnable</a></div> <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/function/Supplier.html" class="type" target="_blank">Supplier</a><<div class="typeParameter"><p class="type primitiveType">R</p></div>></div> <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/Comparator.html" class="type" target="_blank">Comparator</a><<div class="typeParameter"><p class="type primitiveType">T</p></div>></div> </h4>
+        <p class="classSince since"></p>
+        <p class="description">Wraps most of the important functional interfaces.</p>
+        <h3>Constructors</h3>
+        <div class="constructorDoc">
+            <div id="constructor-C-" class="constructor classItem">
+                <h4 class="constructorTitle classItemTitle">
+                    new 
+                    MethodWrapper
+                    (<div class="constructorParams">containingContext</div>)
+                </h4>
+                <div class="flags"></div>
+                <p class="constructorSince since"></p>
+                <div class="constructorDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>containingContext</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">C
+                            <p class="classExtends">
+                                <b> extends </b>
+                            </p><div class="typeParameter"><a href="../../../../xyz/wagyourtail/jsmacros/core/language/BaseScriptContext.html" class="type">BaseScriptContext</a><<div class="typeParameter"><p class="type primitiveType">?</p></div>></div></p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="shortFieldMethods">
+            <div class="methodShorts">
+                <h4>
+                    Methods
+                </h4>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getCtx-">getCtx()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#accept-T-">accept(t)</a>
+                    <div class="shortFlags">
+                        <div class="flag abstractFlag">A</div>
+                    </div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#accept-T-U-">accept(t, u)</a>
+                    <div class="shortFlags">
+                        <div class="flag abstractFlag">A</div>
+                    </div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#apply-T-">apply(t)</a>
+                    <div class="shortFlags">
+                        <div class="flag abstractFlag">A</div>
+                    </div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#apply-T-U-">apply(t, u)</a>
+                    <div class="shortFlags">
+                        <div class="flag abstractFlag">A</div>
+                    </div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#test-T-">test(t)</a>
+                    <div class="shortFlags">
+                        <div class="flag abstractFlag">A</div>
+                    </div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#test-T-U-">test(t, u)</a>
+                    <div class="shortFlags">
+                        <div class="flag abstractFlag">A</div>
+                    </div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#preventSameScriptJoin-">preventSameScriptJoin()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#overrideThread-">overrideThread()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#andThen-Function-">andThen(after)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#negate-">negate()</a>
+                    <div class="shortFlags"></div>
+                </div>
+            </div>
+        </div>
+        <h3>Methods</h3>
+        <div class="methodDoc">
+            <div id="getCtx-" class="method classItem"><h4 class="methodTitle classItemTitle">.getCtx(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">C
+                    <p class="classExtends">
+                        <b> extends </b>
+                    </p><div class="typeParameter"><a href="../../../../xyz/wagyourtail/jsmacros/core/language/BaseScriptContext.html" class="type">BaseScriptContext</a><<div class="typeParameter"><p class="type primitiveType">?</p></div>></div></p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="accept-T-" class="method classItem"><h4 class="methodTitle classItemTitle">.accept(<div class="methodParams">t</div>)</h4>
+                <div class="flags">
+                    <div class="flag abstractFlag">Abstract</div>
+                </div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>t</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">T</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="accept-T-U-" class="method classItem"><h4 class="methodTitle classItemTitle">.accept(<div class="methodParams">t, u</div>)</h4>
+                <div class="flags">
+                    <div class="flag abstractFlag">Abstract</div>
+                </div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>t</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">T</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>u</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">U</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="apply-T-" class="method classItem"><h4 class="methodTitle classItemTitle">.apply(<div class="methodParams">t</div>)</h4>
+                <div class="flags">
+                    <div class="flag abstractFlag">Abstract</div>
+                </div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>t</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">T</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">R</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="apply-T-U-" class="method classItem"><h4 class="methodTitle classItemTitle">.apply(<div class="methodParams">t, u</div>)</h4>
+                <div class="flags">
+                    <div class="flag abstractFlag">Abstract</div>
+                </div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>t</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">T</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>u</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">U</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">R</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="test-T-" class="method classItem"><h4 class="methodTitle classItemTitle">.test(<div class="methodParams">t</div>)</h4>
+                <div class="flags">
+                    <div class="flag abstractFlag">Abstract</div>
+                </div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>t</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">T</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">boolean</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="test-T-U-" class="method classItem"><h4 class="methodTitle classItemTitle">.test(<div class="methodParams">t, u</div>)</h4>
+                <div class="flags">
+                    <div class="flag abstractFlag">Abstract</div>
+                </div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>t</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">T</p></div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>u</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">U</p></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">boolean</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="preventSameScriptJoin-" class="method classItem"><h4 class="methodTitle classItemTitle">.preventSameScriptJoin(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">override to return true if the method can't join to the context it was wrapped/created in, ie for languages that don't allow multithreading.</p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">boolean</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="overrideThread-" class="method classItem"><h4 class="methodTitle classItemTitle">.overrideThread(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">make return something to override the thread set in <a href="../../../../xyz/wagyourtail/jsmacros/core/library/impl/FJsMacros.html#on-String-MethodWrapper-" class="type">FJsMacros#on(java.lang.String,xyz.wagyourtail.jsmacros.core.MethodWrapper<xyz.wagyourtail.jsmacros.core.event.BaseEvent,xyz.wagyourtail.jsmacros.core.language.EventContainer<?>,java.lang.Object,?>)</a>
+                 (hi jep)</p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Thread.html" class="type" target="_blank">Thread</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="andThen-Function-" class="method classItem"><h4 class="methodTitle classItemTitle">.andThen<<div class="typeParameter"><p class="type primitiveType">V</p></div>>(<div class="methodParams">after</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">Makes <a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/function/Function.html" class="type" target="_blank">Function</a> and <a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/function/BiFunction.html" class="type" target="_blank">BiFunction</a> work together.
+                 Extended so it's called on every type not just those 2.</p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>after</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/function/Function.html" class="type" target="_blank">Function</a><<div class="typeParameter"><p class="type primitiveType">?</p></div>, <div class="typeParameter"><p class="type primitiveType">?</p></div>></div></td>
+                            <td>
+                            <p class="description">put a <a href="#" class="type">MethodWrapper</a> here when using in scripts.</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="#" class="type">MethodWrapper</a><<div class="typeParameter"><p class="type primitiveType">T</p></div>, <div class="typeParameter"><p class="type primitiveType">U</p></div>, <div class="typeParameter"><p class="type primitiveType">V</p></div>, <div class="typeParameter"><p class="type primitiveType">C
+                    <p class="classExtends">
+                        <b> extends </b>
+                    </p><div class="typeParameter"><a href="../../../../xyz/wagyourtail/jsmacros/core/language/BaseScriptContext.html" class="type">BaseScriptContext</a><<div class="typeParameter"><p class="type primitiveType">?</p></div>></div></p></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="negate-" class="method classItem"><h4 class="methodTitle classItemTitle">.negate(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since"></p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">Makes <a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/function/Predicate.html" class="type" target="_blank">Predicate</a> and <a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/function/BiPredicate.html" class="type" target="_blank">BiPredicate</a> work together</p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="#" class="type">MethodWrapper</a><<div class="typeParameter"><p class="type primitiveType">T</p></div>, <div class="typeParameter"><p class="type primitiveType">U</p></div>, <div class="typeParameter"><p class="type primitiveType">R</p></div>, <div class="typeParameter"><p class="type primitiveType">C
+                    <p class="classExtends">
+                        <b> extends </b>
+                    </p><div class="typeParameter"><a href="../../../../xyz/wagyourtail/jsmacros/core/language/BaseScriptContext.html" class="type">BaseScriptContext</a><<div class="typeParameter"><p class="type primitiveType">?</p></div>></div></p></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+</html>

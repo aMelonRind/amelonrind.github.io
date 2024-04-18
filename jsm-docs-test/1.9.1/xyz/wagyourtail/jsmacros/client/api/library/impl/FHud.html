@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="../../../../../../../../classContent.css"></link>
+    </head>
+    <body>
+        <header>
+            <a href="../../../../../../../../">
+                <----- Return to main JsMacros docs page.
+            </a>
+        </header>
+    </body>
+    <main class="classDoc">
+        <div id="subClasses"></div>
+        <h2 class="classTitle">xyz.wagyourtail.jsmacros.client.api.library.impl.FHud</h2>
+        <div class="flags"></div>
+        <h4 class="classExtends">extends <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/core/library/BaseLibrary.html" class="type">BaseLibrary</a></div></h4>
+        <p class="classSince since">1.0.5</p>
+        <p class="description">Functions for displaying stuff in 2 to 3 dimensions
+     <p>
+     An instance of this class is passed to scripts as the <code class="inlineCode">Hud</code> variable.</p>
+        <div class="shortFieldMethods">
+            <div class="fieldShorts">
+                <h4>
+                    Fields
+                </h4>
+                <div class="shortField shortClassItem">
+                    <a href="#overlays">overlays</a>
+                    <div class="shortFlags">
+                        <div class="flag staticFlag">S</div>
+                        <div class="flag finalFlag">F</div>
+                    </div>
+                </div>
+                <div class="shortField shortClassItem">
+                    <a href="#renders">renders</a>
+                    <div class="shortFlags">
+                        <div class="flag staticFlag">S</div>
+                        <div class="flag finalFlag">F</div>
+                    </div>
+                </div>
+            </div>
+            <div class="methodShorts">
+                <h4>
+                    Methods
+                </h4>
+                <div class="shortMethod shortClassItem">
+                    <a href="#createScreen-String-boolean-">createScreen(title, dirtBG)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#openScreen-IScreen-">openScreen(s)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getOpenScreen-">getOpenScreen()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#createTexture-int-int-String-">createTexture(width, height, name)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#createTexture-String-String-">createTexture(path, name)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getRegisteredTextures-">getRegisteredTextures()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getScaleFactor-">getScaleFactor()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getOpenScreenName-">getOpenScreenName()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#isContainer-">isContainer()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#createDraw2D-">createDraw2D()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#registerDraw2D-IDraw2D-">registerDraw2D(overlay)</a>
+                    <div class="shortFlags">
+                        <div class="flag deprecatedFlag">D</div>
+                    </div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#unregisterDraw2D-IDraw2D-">unregisterDraw2D(overlay)</a>
+                    <div class="shortFlags">
+                        <div class="flag deprecatedFlag">D</div>
+                    </div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#listDraw2Ds-">listDraw2Ds()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#clearDraw2Ds-">clearDraw2Ds()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#createDraw3D-">createDraw3D()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#registerDraw3D-Draw3D-">registerDraw3D(draw)</a>
+                    <div class="shortFlags">
+                        <div class="flag deprecatedFlag">D</div>
+                    </div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#unregisterDraw3D-Draw3D-">unregisterDraw3D(draw)</a>
+                    <div class="shortFlags">
+                        <div class="flag deprecatedFlag">D</div>
+                    </div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#listDraw3Ds-">listDraw3Ds()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#clearDraw3Ds-">clearDraw3Ds()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getMouseX-">getMouseX()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getMouseY-">getMouseY()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getWindowWidth-">getWindowWidth()</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#getWindowHeight-">getWindowHeight()</a>
+                    <div class="shortFlags"></div>
+                </div>
+            </div>
+        </div>
+        <h3>Fields</h3>
+        <div class="fieldDoc">
+            <div id="overlays" class="field classItem"><h4 class="classItemTitle">.overlays</h4>
+                <div class="flags">
+                    <div class="flag staticFlag">Static</div>
+                    <div class="flag finalFlag">Final</div>
+                </div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description">Don't touch this here</p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/Set.html" class="type" target="_blank">Set</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/IDraw2D.html" class="type">IDraw2D</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/Draw2D.html" class="type">Draw2D</a></div>></div>></div></h5>
+                </div>
+            </div>
+            <div id="renders" class="field classItem"><h4 class="classItemTitle">.renders</h4>
+                <div class="flags">
+                    <div class="flag staticFlag">Static</div>
+                    <div class="flag finalFlag">Final</div>
+                </div>
+                <p class="fieldSince since"></p>
+                <div class="fieldDesc classItemDesc">
+                    <p class="description">Don't touch this here</p>
+                </div>
+                <div class="fieldReturn classItemType">
+                    <h5 class="fieldTypeTitle classItemTypeTitle">Type: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/Set.html" class="type" target="_blank">Set</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/Draw3D.html" class="type">Draw3D</a></div>></div></h5>
+                </div>
+            </div>
+        </div>
+        <h3>Methods</h3>
+        <div class="methodDoc">
+            <div id="createScreen-String-boolean-" class="method classItem"><h4 class="methodTitle classItemTitle">.createScreen(<div class="methodParams">title, dirtBG</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.0.5</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>title</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                        <tr>
+                            <td>dirtBG</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">boolean</p></div></td>
+                            <td>
+                            <p class="description">boolean of whether to use a dirt background or not.</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/ScriptScreen.html" class="type">ScriptScreen</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">a new <a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/IScreen.html" class="type">IScreen</a> Object.</p>
+                </div>
+            </div>
+            <div id="openScreen-IScreen-" class="method classItem"><h4 class="methodTitle classItemTitle">.openScreen(<div class="methodParams">s</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.0.5</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">Opens a <a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/IScreen.html" class="type">IScreen</a> Object.</p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>s</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/IScreen.html" class="type">IScreen</a></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="getOpenScreen-" class="method classItem"><h4 class="methodTitle classItemTitle">.getOpenScreen(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.2.7</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/IScreen.html" class="type">IScreen</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">the currently open Screen as an <a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/IScreen.html" class="type">IScreen</a></p>
+                </div>
+            </div>
+            <div id="createTexture-int-int-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.createTexture(<div class="methodParams">width, height, name</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>width</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td>
+                            <p class="description">the width of the canvas</p></td>
+                        </tr>
+                        <tr>
+                            <td>height</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">int</p></div></td>
+                            <td>
+                            <p class="description">the height of the canvas</p></td>
+                        </tr>
+                        <tr>
+                            <td>name</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/CustomImage.html" class="type">CustomImage</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">a <a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/CustomImage.html" class="type">CustomImage</a> that can be used as a texture for screen backgrounds, rendering
+                 images, etc.</p>
+                </div>
+            </div>
+            <div id="createTexture-String-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.createTexture(<div class="methodParams">path, name</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>path</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description">absolute path to an image file</p></td>
+                        </tr>
+                        <tr>
+                            <td>name</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/CustomImage.html" class="type">CustomImage</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">a <a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/CustomImage.html" class="type">CustomImage</a> that can be used as a texture for screen backgrounds, rendering
+                 images, etc.</p>
+                </div>
+            </div>
+            <div id="getRegisteredTextures-" class="method classItem"><h4 class="methodTitle classItemTitle">.getRegisteredTextures(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/Map.html" class="type" target="_blank">Map</a><<div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div>, <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/CustomImage.html" class="type">CustomImage</a></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">an immutable Map of all registered custom textures.</p>
+                </div>
+            </div>
+            <div id="getScaleFactor-" class="method classItem"><h4 class="methodTitle classItemTitle">.getScaleFactor(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">int</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">the current gui scale factor of minecraft.</p>
+                </div>
+            </div>
+            <div id="getOpenScreenName-" class="method classItem"><h4 class="methodTitle classItemTitle">.getOpenScreenName(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.0.5, renamed from <code class="inlineCode">getOpenScreen</code> in 1.2.7</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">The name of the currently open screen.</p>
+                </div>
+            </div>
+            <div id="isContainer-" class="method classItem"><h4 class="methodTitle classItemTitle">.isContainer(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.1.2</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">boolean</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">a <a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/Boolean.html" class="type" target="_blank">Boolean</a> denoting if the currently open screen is a container.</p>
+                </div>
+            </div>
+            <div id="createDraw2D-" class="method classItem"><h4 class="methodTitle classItemTitle">.createDraw2D(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.0.5</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/Draw2D.html" class="type">Draw2D</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="registerDraw2D-IDraw2D-" class="method classItem"><h4 class="methodTitle classItemTitle">.registerDraw2D(<div class="methodParams">overlay</div>)</h4>
+                <div class="flags">
+                    <div class="flag deprecatedFlag">Deprecated</div>
+                </div>
+                <p class="methodSince since">1.0.5
+             <p>
+             Registers an <a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/IDraw2D.html" class="type">IDraw2D</a> to be rendered.</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>overlay</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/IDraw2D.html" class="type">IDraw2D</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/Draw2D.html" class="type">Draw2D</a></div>></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="unregisterDraw2D-IDraw2D-" class="method classItem"><h4 class="methodTitle classItemTitle">.unregisterDraw2D(<div class="methodParams">overlay</div>)</h4>
+                <div class="flags">
+                    <div class="flag deprecatedFlag">Deprecated</div>
+                </div>
+                <p class="methodSince since">1.0.5
+             <p>
+             Unregisters an <a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/IDraw2D.html" class="type">IDraw2D</a> to stop it being rendered.</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>overlay</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/IDraw2D.html" class="type">IDraw2D</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/Draw2D.html" class="type">Draw2D</a></div>></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="listDraw2Ds-" class="method classItem"><h4 class="methodTitle classItemTitle">.listDraw2Ds(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.0.5</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/List.html" class="type" target="_blank">List</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/IDraw2D.html" class="type">IDraw2D</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/Draw2D.html" class="type">Draw2D</a></div>></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">A list of current <a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/IDraw2D.html" class="type">IDraw2D</a>.</p>
+                </div>
+            </div>
+            <div id="clearDraw2Ds-" class="method classItem"><h4 class="methodTitle classItemTitle">.clearDraw2Ds(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.0.5
+             <p>
+             clears the Draw2D render list.</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="createDraw3D-" class="method classItem"><h4 class="methodTitle classItemTitle">.createDraw3D(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.0.6</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/Draw3D.html" class="type">Draw3D</a></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">a new <a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/Draw3D.html" class="type">Draw3D</a>.</p>
+                </div>
+            </div>
+            <div id="registerDraw3D-Draw3D-" class="method classItem"><h4 class="methodTitle classItemTitle">.registerDraw3D(<div class="methodParams">draw</div>)</h4>
+                <div class="flags">
+                    <div class="flag deprecatedFlag">Deprecated</div>
+                </div>
+                <p class="methodSince since">1.0.6
+             <p>
+             Registers an <a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/Draw3D.html" class="type">Draw3D</a> to be rendered.</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>draw</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/Draw3D.html" class="type">Draw3D</a></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="unregisterDraw3D-Draw3D-" class="method classItem"><h4 class="methodTitle classItemTitle">.unregisterDraw3D(<div class="methodParams">draw</div>)</h4>
+                <div class="flags">
+                    <div class="flag deprecatedFlag">Deprecated</div>
+                </div>
+                <p class="methodSince since">1.0.6
+             <p>
+             Unregisters an <a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/Draw3D.html" class="type">Draw3D</a> to stop it being rendered.</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>draw</td>
+                            <td><div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/Draw3D.html" class="type">Draw3D</a></div></td>
+                            <td>
+                            <p class="description"></p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="listDraw3Ds-" class="method classItem"><h4 class="methodTitle classItemTitle">.listDraw3Ds(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.0.6</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/util/List.html" class="type" target="_blank">List</a><<div class="typeParameter"><a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/Draw3D.html" class="type">Draw3D</a></div>></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">A list of current <a href="../../../../../../../xyz/wagyourtail/jsmacros/client/api/classes/render/Draw3D.html" class="type">Draw3D</a>.</p>
+                </div>
+            </div>
+            <div id="clearDraw3Ds-" class="method classItem"><h4 class="methodTitle classItemTitle">.clearDraw3Ds(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.0.6
+             <p>
+             clears the Draw3D render list.</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">void</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"></p>
+                </div>
+            </div>
+            <div id="getMouseX-" class="method classItem"><h4 class="methodTitle classItemTitle">.getMouseX(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.1.3</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">double</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">the current X coordinate of the mouse</p>
+                </div>
+            </div>
+            <div id="getMouseY-" class="method classItem"><h4 class="methodTitle classItemTitle">.getMouseY(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.1.3</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">double</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">the current Y coordinate of the mouse</p>
+                </div>
+            </div>
+            <div id="getWindowWidth-" class="method classItem"><h4 class="methodTitle classItemTitle">.getWindowWidth(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">int</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">the current window width.</p>
+                </div>
+            </div>
+            <div id="getWindowHeight-" class="method classItem"><h4 class="methodTitle classItemTitle">.getWindowHeight(<div class="methodParams"></div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.8.4</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description"></p>
+                </div>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">int</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc">the current window height.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+</html>
