@@ -186,5 +186,3 @@ function appendSearchResult(name, url, type) {
 }
 
 const loadingSearchMap = reloadSearchMap();
-
-loadingSearchMap.then(updateClassGroups).then(() => searchF(search.value));
