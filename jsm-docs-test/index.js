@@ -1,16 +1,11 @@
 function getColorMode() {
-    let colorMode = localStorage.getItem('colorMode') || "light";
-    localStorage.setItem('colorMode', colorMode);
-    return colorMode;
+    return localStorage.getItem('colorMode') || (localStorage.setItem('colorMode', "dark"), "dark");
 }
 
 function changeColorMode() {
-    if (getColorMode() === "light") {
-        localStorage.setItem('colorMode', "dark");
-    } else {
-        localStorage.setItem('colorMode', "light");
-    }
-    document.documentElement.setAttribute("color-mode", getColorMode());
+    const mode = getColorMode() === "light" ? "dark" : "light";
+    localStorage.setItem('colorMode', mode);
+    document.documentElement.setAttribute("color-mode", mode);
 }
 
 document.documentElement.setAttribute("color-mode", getColorMode());
@@ -56,12 +51,21 @@ async function openMain(url, dontpush) {
     mainContent.setAttribute("class", cname);
     mainContent.innerHTML = doc.innerHTML;
     for (const a of mainContent.getElementsByTagName("a")) {
-        if (!a.hasAttribute("target") && !a.getAttribute("href")?.startsWith("#") && !a.hasAttribute("onclick")) {
-            a.setAttribute("href", a.getAttribute("href").replace(/(\.\.\/)*/, `${versionSelect.value}/`));
-            frameLink(a);
+        if (!a.getAttribute("href")?.startsWith("#") && !a.hasAttribute("onclick")) {
+            let href = a.getAttribute("href");
+            if (!a.hasAttribute("target")) {
+                a.setAttribute("href", href.replace(/(\.\.\/)*/, `${versionSelect.value}/`));
+                frameLink(a);
+            } else if (href.startsWith("https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App")) {
+                const url = new URL(href);
+                href = "https://linkie.shedaniel.dev/mappings?namespace=yarn";
+                href += `&version=${url.searchParams.get('version') ?? "1.20.4"}`;
+                href += `&search=${url.searchParams.get("search")?.replaceAll(/\//g, ".") ?? "net.minecraft.MinecraftClient"}`;
+                a.setAttribute("href", href);
+            }
         }
     }
-    if (cname == "searchMain") {
+    if (cname === "searchMain") {
         updateClassGroups();
     }
     scrlTo(url);
@@ -80,18 +84,13 @@ function scrlTo(url) {
 }
 
 async function searchBox(val) {
-    if (mainContent.getAttribute("class") != "searchMain") {
+    if (mainContent.getAttribute("class") !== "searchMain") {
         await openMain("./search.html");
     }
     if (loadingSearchMap == null) {
-        console.error("loadingSearchMap is null")
+        console.error("loadingSearchMap is null");
     }
-    await loadingSearchMap
-    populateClassSidebar();
     await searchF(val);
-    for (const resultItem of document.getElementsByClassName("resultItem")) {
-        frameLink(resultItem.getElementsByTagName("a")[0]);
-    }
 }
 
 async function changeVersion() {
@@ -106,11 +105,7 @@ loadingSearchMap.then(populateClassSidebar).then(() => {
 });
 
 menuBtn.onclick = () => {
-    if (mainNav.parentElement.style.display) {
-        mainNav.parentElement.style.display = null;
-    } else {
-        mainNav.parentElement.style.display = "block";
-    }
+    mainNav.parentElement.style.display = mainNav.parentElement.style.display ? null : "block";
 };
 
 window.addEventListener("popstate", (e) => {
