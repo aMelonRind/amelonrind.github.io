@@ -122,9 +122,9 @@ function updateClassGroups() {
 
 async function searchF(query, force = false) {
     const syncId = ++searchSyncId;
-    const _style = document.getElementById("search").attributeStyleMap ?? new Map();
-    if (query) _style.set("background-color", localStorage.getItem('colorMode') === "light" ? "cyan" : "darkcyan");
-    else _style.delete("background-color");
+    const _style = document.getElementById("search").style ?? {};
+    if (query) _style.backgroundColor = localStorage.getItem('colorMode') === "light" ? "cyan" : "darkcyan";
+    else _style.backgroundColor = "";
     await new Promise(res => setTimeout(res, 80));
     if (syncId !== searchSyncId) return;
 
@@ -134,7 +134,7 @@ async function searchF(query, force = false) {
     query = query.toLowerCase();
     console.log(query === prevSearch);
     if (query === prevSearch && prevSearchFinished && !force) {
-        _style.delete("background-color");
+        _style.backgroundColor = "";
         return;
     }
     prevSearch = query;
@@ -142,7 +142,7 @@ async function searchF(query, force = false) {
     searchResults.innerHTML = "";
     if (query === "") {
         prevSearchFinished = true;
-        _style.delete("background-color");
+        _style.backgroundColor = "";
         return;
     }
 
@@ -204,7 +204,7 @@ async function searchF(query, force = false) {
     }
 
     prevSearchFinished = true;
-    _style.delete("background-color");
+    _style.backgroundColor = "";
 }
 
 function appendSearchResult(name, url, type) {
