@@ -149,6 +149,10 @@ body > div {
     text-align: center;
 }
 
+#generalListLinks, #exampleListLinks, #classLists {
+    text-wrap: nowrap;
+}
+
 #classLists a {
     display: block;
     text-decoration: none;

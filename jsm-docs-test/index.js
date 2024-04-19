@@ -26,7 +26,12 @@ function populateClassSidebar() {
             const a = document.createElement("a");
             a.setAttribute("href", `${versionSelect.value}/${clazz.url.replace(/(#|$)/, ".html$1")}`);
             frameLink(a);
-            a.innerHTML = name;
+            if (name.includes(".")) {
+                const split = name.split(".");
+                a.innerHTML = `${"\u00A0".repeat(split.length * 3 - 3)}$${split.at(-1)}`;
+            } else {
+                a.innerHTML = name;
+            }
             document.getElementById(`${clazz.group}List`).appendChild(a);
         }
     }
