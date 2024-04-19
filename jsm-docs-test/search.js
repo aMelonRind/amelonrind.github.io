@@ -218,7 +218,7 @@ function appendSearchResult(name, url, type) {
     flags.appendChild(typed);
     div.appendChild(flags);
     const a = document.createElement("a");
-    a.setAttribute("href", `${versionSelect.value}/${url.replace(/(#|$)/, ".html$1")}`)
+    a.setAttribute("href", `${versionSelect.value}/${url.replace(/(#|$)/, ".html$1")}`);
     a.innerHTML = name;
     frameLink?.(a);
     div.appendChild(a);

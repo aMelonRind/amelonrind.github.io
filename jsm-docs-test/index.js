@@ -1,10 +1,10 @@
 function getColorMode() {
-    return localStorage.getItem('colorMode') || (localStorage.setItem('colorMode', "dark"), "dark");
+    return localStorage.getItem("colorMode") || (localStorage.setItem("colorMode", "dark"), "dark");
 }
 
 function changeColorMode() {
     const mode = getColorMode() === "light" ? "dark" : "light";
-    localStorage.setItem('colorMode', mode);
+    localStorage.setItem("colorMode", mode);
     document.documentElement.setAttribute("color-mode", mode);
 }
 
@@ -40,7 +40,7 @@ async function openMain(url, dontpush) {
     url = url.replace(/https?:\/\/.+?\//, "/");
     if (!dontpush) window.history.pushState({}, '', `${window.location.href.split('?')[0].replace(/#.*\??/, "")}?${url}`);
     const req = await fetch(url);
-    if (req.status != 200) {
+    if (req.status !== 200) {
         alert(`failed to load ${req.status}: \n${req.statusText}`);
         return;
     }
