@@ -4456,6 +4456,8 @@ M	FUtils#hashString(message, algorithm)	xyz/wagyourtail/jsmacros/client/api/libr
 M	FUtils#hashString(message, algorithm, base64)	xyz/wagyourtail/jsmacros/client/api/library/impl/FUtils#hashString-String-String-Boolean-
 M	FUtils#encode(message)	xyz/wagyourtail/jsmacros/client/api/library/impl/FUtils#encode-String-
 M	FUtils#decode(message)	xyz/wagyourtail/jsmacros/client/api/library/impl/FUtils#decode-String-
+M	FUtils#requireNonNull(obj)	xyz/wagyourtail/jsmacros/client/api/library/impl/FUtils#requireNonNull-T-
+M	FUtils#requireNonNull(obj, message)	xyz/wagyourtail/jsmacros/client/api/library/impl/FUtils#requireNonNull-T-String-
 C	FWorld	xyz/wagyourtail/jsmacros/client/api/library/impl/FWorld	Library	World
 F	FWorld#mc	xyz/wagyourtail/jsmacros/client/api/library/impl/FWorld#mc
 F	FWorld#serverInstantTPS	xyz/wagyourtail/jsmacros/client/api/library/impl/FWorld#serverInstantTPS

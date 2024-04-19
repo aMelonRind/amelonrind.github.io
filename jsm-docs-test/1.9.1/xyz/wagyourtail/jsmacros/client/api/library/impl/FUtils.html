@@ -74,6 +74,14 @@
                     <a href="#decode-String-">decode(message)</a>
                     <div class="shortFlags"></div>
                 </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#requireNonNull-T-">requireNonNull(obj)</a>
+                    <div class="shortFlags"></div>
+                </div>
+                <div class="shortMethod shortClassItem">
+                    <a href="#requireNonNull-T-String-">requireNonNull(obj, message)</a>
+                    <div class="shortFlags"></div>
+                </div>
             </div>
         </div>
         <h3>Methods</h3>
@@ -425,6 +433,66 @@
                 <div class="methodReturn classItemType">
                     <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></h5>
                     <p class="methodReturnDesc classItemTypeDesc">the decoded message.</p>
+                </div>
+            </div>
+            <div id="requireNonNull-T-" class="method classItem"><h4 class="methodTitle classItemTitle">.requireNonNull<<div class="typeParameter"><p class="type primitiveType">T</p></div>>(<div class="methodParams">obj</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.9.1</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">Checks that the specified object reference is not <code class="inlineCode">null</code>.</p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>obj</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">T</p></div></td>
+                            <td>
+                            <p class="description">the object reference to check for nullity</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">T</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"><code class="inlineCode">obj</code> if not <code class="inlineCode">null</code></p>
+                </div>
+            </div>
+            <div id="requireNonNull-T-String-" class="method classItem"><h4 class="methodTitle classItemTitle">.requireNonNull<<div class="typeParameter"><p class="type primitiveType">T</p></div>>(<div class="methodParams">obj, message</div>)</h4>
+                <div class="flags"></div>
+                <p class="methodSince since">1.9.1</p>
+                <div class="methodDesc classItemDesc">
+                    <p class="description">Checks that the specified object reference is not <code class="inlineCode">null</code> and
+                 throws a customized <a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/NullPointerException.html" class="type" target="_blank">NullPointerException</a> if it is.</p>
+                </div>
+                <table class="paramTable">
+                    <thead>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>obj</td>
+                            <td><div class="typeParameter"><p class="type primitiveType">T</p></div></td>
+                            <td>
+                            <p class="description">the object reference to check for nullity</p></td>
+                        </tr>
+                        <tr>
+                            <td>message</td>
+                            <td><div class="typeParameter"><a href="https://docs.oracle.com/javase/8/docs/api/index.html?java/lang/String.html" class="type" target="_blank">String</a></div></td>
+                            <td>
+                            <p class="description">detail message to be used in the event that a <code class="inlineCode">
+                                        NullPointerException</code> is thrown</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="methodReturn classItemType">
+                    <h5 class="methodReturnTitle classItemTypeTitle">Returns: <div class="typeParameter"><p class="type primitiveType">T</p></div></h5>
+                    <p class="methodReturnDesc classItemTypeDesc"><code class="inlineCode">obj</code> if not <code class="inlineCode">null</code></p>
                 </div>
             </div>
         </div>
