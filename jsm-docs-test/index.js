@@ -51,15 +51,15 @@ async function openMain(url, dontpush) {
     mainContent.setAttribute("class", cname);
     mainContent.innerHTML = doc.innerHTML;
     for (const a of mainContent.getElementsByTagName("a")) {
-        if (!a.getAttribute("href")?.startsWith("#") && !a.hasAttribute("onclick")) {
-            let href = a.getAttribute("href");
+        let href = a.getAttribute("href");
+        if (!href?.startsWith("#") && !a.hasAttribute("onclick")) {
             if (!a.hasAttribute("target")) {
                 a.setAttribute("href", href.replace(/(\.\.\/)*/, `${versionSelect.value}/`));
                 frameLink(a);
             } else if (href.startsWith("https://wagyourtail.xyz/Projects/MinecraftMappingViewer/App")) {
                 const url = new URL(href);
                 href = "https://linkie.shedaniel.dev/mappings?namespace=yarn";
-                href += `&version=${url.searchParams.get('version') ?? "1.20.4"}`;
+                href += `&version=${url.searchParams.get("version") ?? "1.20.4"}`;
                 href += `&search=${url.searchParams.get("search")?.replaceAll(/\//g, ".") ?? "net.minecraft.MinecraftClient"}`;
                 a.setAttribute("href", href);
             }
