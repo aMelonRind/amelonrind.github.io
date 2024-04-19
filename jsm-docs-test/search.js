@@ -122,9 +122,9 @@ function updateClassGroups() {
 
 async function searchF(query, force = false) {
     const syncId = ++searchSyncId;
-    const style = document.getElementById("search").attributeStyleMap;
-    if (query) style.set("background-color", localStorage.getItem('colorMode') === "light" ? "cyan" : "darkcyan");
-    else style.delete("background-color");
+    const _style = document.getElementById("search").attributeStyleMap ?? new Map();
+    if (query) _style.set("background-color", localStorage.getItem('colorMode') === "light" ? "cyan" : "darkcyan");
+    else _style.delete("background-color");
     await new Promise(res => setTimeout(res, 80));
     if (syncId !== searchSyncId) return;
 
@@ -134,7 +134,7 @@ async function searchF(query, force = false) {
     query = query.toLowerCase();
     console.log(query === prevSearch);
     if (query === prevSearch && prevSearchFinished && !force) {
-        style.delete("background-color");
+        _style.delete("background-color");
         return;
     }
     prevSearch = query;
@@ -142,7 +142,7 @@ async function searchF(query, force = false) {
     searchResults.innerHTML = "";
     if (query === "") {
         prevSearchFinished = true;
-        style.delete("background-color");
+        _style.delete("background-color");
         return;
     }
 
@@ -204,7 +204,7 @@ async function searchF(query, force = false) {
     }
 
     prevSearchFinished = true;
-    style.delete("background-color");
+    _style.delete("background-color");
 }
 
 function appendSearchResult(name, url, type) {
