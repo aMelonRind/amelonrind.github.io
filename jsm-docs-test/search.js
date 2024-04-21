@@ -38,7 +38,7 @@ async function reloadSearchMap() {
     const text = (await res.text()).split("\n");
     if (syncId !== reloadSyncId) return;
 
-    let lastClass = '\x00';
+    let lastClass = "\x00";
     for (const line of text) if (line) {
         const parts = line.split("\t");
         switch (parts[0]) {
@@ -100,7 +100,7 @@ function sortMap(map) {
 }
 
 function updateClassGroups() {
-    classGroupChecks.innerHTML = '';
+    classGroupChecks.innerHTML = "";
     for (const name of classGroups) {
         const div = document.createElement("div");
         const label = document.createElement("label");
@@ -123,9 +123,9 @@ function updateClassGroups() {
 async function searchF(query, force = false) {
     const syncId = ++searchSyncId;
     const _style = document.getElementById("search").style ?? {};
-    if (query) _style.backgroundColor = localStorage.getItem('colorMode') === "light" ? "cyan" : "darkcyan";
+    if (query) _style.backgroundColor = localStorage.getItem("colorMode") === "light" ? "cyan" : "darkcyan";
     else _style.backgroundColor = "";
-    await new Promise(res => setTimeout(res, 80));
+    await sleep(80);
     if (syncId !== searchSyncId) return;
 
     await loadingSearchMap;
@@ -155,7 +155,7 @@ async function searchF(query, force = false) {
     let time = Date.now();
     const asyncCheck = async () => {
         if (Date.now() - time > 20) {
-            await new Promise(res => setTimeout(res, 1));
+            await sleep(1);
             if (syncId !== searchSyncId) return true;
             time = Date.now();
         }
@@ -223,5 +223,25 @@ function appendSearchResult(name, url, type) {
     div.appendChild(a);
     document.getElementById(`${type}Results`).appendChild(div);
 }
+
+function sleep(ms) {
+    return new Promise(res => setTimeout(res, ms));
+}
+
+window.addEventListener("popstate", async e => {
+    if (e.type === "popstate" && e.currentTarget?.location?.href?.endsWith("search.html")) {
+        const until = Date.now() + 2000;
+        await sleep(100);
+        while (Date.now() < until) {
+            try {
+                searchResults;
+                search;
+                break;
+            } catch {}
+            await sleep(50);
+        }
+        searchF(search.value, true).catch(() => {});
+    }
+});
 
 let loadingSearchMap = reloadSearchMap();
