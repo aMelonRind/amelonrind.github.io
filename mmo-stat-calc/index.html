@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Equipment Combinator</title>
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="stylesheet" href="index.css"/>
+  <script src="DamageCalculator.js"></script>
+  <script src="index.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Equipment Combinator</h1>
+    <form id="statForm">
+      <!-- Dropdown -->
+      <label for="dropdown">Damage Type:</label>
+      <select id="damageType">
+        <option value="none">None</option>
+        <option value="physical">Physical</option>
+        <option value="magic">Magic</option>
+      </select>
+      
+      <!-- Numeric Inputs -->
+      <label for="basePhysical">Base Physical:</label>
+      <input type="number" id="basePhysical" placeholder="Enter value">
+      
+      <label for="baseMagic">Base Magic:</label>
+      <input type="number" id="baseMagic" placeholder="Enter value">
+      
+      <label for="baseCritChance">Base Crit Chance:</label>
+      <input type="number" id="baseCritChance" placeholder="Enter value">
+      
+      <label for="baseCritDmg">Base Crit Dmg:</label>
+      <input type="number" id="baseCritDmg" placeholder="Enter value">
+      
+      <label for="gemSlots">Gem Slots:</label>
+      <input type="number" id="gemSlots" placeholder="Enter value" min="0" max="20">
+
+      <!-- Checkbox -->
+      <label for="critOnly">
+        <input type="checkbox" id="critOnly"> 100% Crit Only
+      </label>
+      <br>
+      <button type="button" onclick="calculateStats()">Calculate</button>
+    </form>
+  </div>
+
+  <!-- Result Area -->
+  <div class="result-area">
+    <h2>Results</h2>
+    <ul class="grid-container" id="resultGrid">
+      <!-- Results will be appended here -->
+    </ul>
+  </div>
+  <script>
+    const cacheStr = window.localStorage.getItem('inputCache')
+    if (cacheStr) {
+      const cache = JSON.parse(cacheStr)
+      document.getElementById('damageType').value = cache[0]
+      document.getElementById('basePhysical').value = cache[1]
+      document.getElementById('baseMagic').value = cache[2]
+      document.getElementById('baseCritChance').value = cache[3]
+      document.getElementById('baseCritDmg').value = cache[4]
+      document.getElementById('gemSlots').value = cache[5]
+      document.getElementById('critOnly').checked = cache[6]
+    }
+  </script>
+</body>
+</html>
