@@ -64,3 +64,10 @@ label {
   white-space: pre-wrap;
   font-family: Consolas, monospace;
 }
+
+#visitor-counter {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 1000; /* Ensures it is on top of other content */
+}
