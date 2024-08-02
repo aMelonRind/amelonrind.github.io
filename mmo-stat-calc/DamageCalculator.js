@@ -176,7 +176,7 @@ function iterateGems(nameStack, gems, index, gemSlots, scoreFunc, physical, magi
   } else if (gem.critChanceOnly && critOnly) {
     const need = Math.max(0, Math.ceil((100 - critChance) / gem.critChance))
     if (gemSlots < need) return
-    iterateGems(`${nameStack}, ${need}x ${gem.name}`, gems, index + 1, gemSlots - need, scoreFunc, physical, magic, critChance + gem.critChance * need, critDmg, critOnly, collector)
+    iterateGems(need ? `${nameStack}, ${need}x ${gem.name}` : nameStack, gems, index + 1, gemSlots - need, scoreFunc, physical, magic, critChance + gem.critChance * need, critDmg, critOnly, collector)
   } else {
     const max = gem.critChanceOnly ? Math.min(Math.max(0, Math.ceil((100 - critChance) / gem.critChance)), gemSlots) : gemSlots
     for (let i = 0; i <= max; i++) {
