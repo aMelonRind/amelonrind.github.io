@@ -98,7 +98,7 @@ const scoreFunc = {
 function baseScoreFunc(base = 100, crit = 200, chance = 0) {
   if (chance <= 0) return base / 100
   else if (chance >= 100) return base * crit / 10000
-  return (base / 100) * ((crit / 100 - 1) * (chance / 100) + 1)
+  return Math.round((base / 100) * ((crit / 100 - 1) * (chance / 100) + 1) * 1e12) / 1e12
 }
 /** @type {{ [K in DamageType]: (e: Equipment) => boolean }} */
 const equipmentFilter = {
