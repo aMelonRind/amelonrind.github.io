@@ -23,13 +23,10 @@ if (p) {
     if (!nbt) continue
     for (const [i, id] of stats.entries()) {
       const hstry = nbt.get(`HSTRY_${id}`)?.asString()
-      if (hstry) {
-        const n = JSON.parse(hstry)?.OGStory?.[0]?.[`MMOITEMS_${id}_ñdbl`]
-        if (n) res[i] += n
-      } else {
-        const n = nbt.get(`MMOITEMS_${id}`)?.asNumberHelper().asDouble()
-        if (n) res[i] += n
-      }
+      const n = hstry
+      ? JSON.parse(hstry)?.OGStory?.[0]?.[`MMOITEMS_${id}_ñdbl`]
+      : nbt.get(`MMOITEMS_${id}`)?.asNumberHelper().asDouble()
+      if (n) res[i] += n
     }
   }
   Utils.copyToClipboard(res.join('\n'))

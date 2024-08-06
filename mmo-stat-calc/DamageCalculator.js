@@ -6,6 +6,7 @@ class Equipment {
   /** @readonly @type {number} */ magic
   /** @readonly @type {number} */ critChance
   /** @readonly @type {number} */ critDmg
+  /** @readonly @type {number} */ gemSlots
 
   /** @readonly @type {boolean} */ meleeOnly
   /** @readonly @type {boolean} */ magicOnly
@@ -14,10 +15,10 @@ class Equipment {
 
   /**
    * @param {string} name 
-   * @param {{ physical?: number, magic?: number, critChance?: number, critDmg?: number }} attributes 
+   * @param {{ physical?: number, magic?: number, critChance?: number, critDmg?: number, gemSlots?: number }} attributes 
    */
-  constructor(name, { physical = 0, magic = 0, critChance = 0, critDmg = 0 }) {
-    if (!physical && !magic && !critChance && !critDmg) {
+  constructor(name, { physical = 0, magic = 0, critChance = 0, critDmg = 0, gemSlots = 0 }) {
+    if (!physical && !magic && !critChance && !critDmg && !gemSlots) {
       throw `There's equipment with zero stats (${name})`
     }
     this.name = name
@@ -25,13 +26,22 @@ class Equipment {
     this.magic = magic
     this.critChance = critChance
     this.critDmg = critDmg
+    this.gemSlots = gemSlots
 
-    this.noCritStat = !critChance && !critDmg
+    this.noCritStat = !critChance && !critDmg && !gemSlots
     this.meleeOnly = this.noCritStat && !magic
     this.magicOnly = this.noCritStat && !physical
-    this.critChanceOnly = !physical && !magic && !critDmg
+    this.critChanceOnly = !physical && !magic && !critDmg && !gemSlots
   }
 }
+
+const boots = [
+  new Equipment('四級鞋子', { physical: 30, gemSlots: 2 }),
+  new Equipment('炙炎流星鞋子', { physical: 14, gemSlots: 2 }),
+  new Equipment('日曜堅盾鞋子', { physical: 8, gemSlots: 2 }),
+  new Equipment('弒神鞋子', { critChance: 3, critDmg: 20, gemSlots: 2 }),
+  new Equipment('霓虹伊甸鞋子', { gemSlots: 2 }),
+]
 
 const engraves = [
   new Equipment('爆裂魔法師刻印', { magic: 30 }),
@@ -117,8 +127,8 @@ const equipmentFilter = {
  * @param {boolean} critOnly 
  * @param {number} amount 
  */
-function calcStats(damageType = 'none', basePhysical = 0, baseMagic = 0, baseCritChance = 0, baseCritDmg = 200, gemSlots = 10, critOnly = false, amount = 20) {
-  const list = [engraves, talisman, rings, rings].map(es => es.filter(equipmentFilter[damageType]))
+function calcStats(damageType = 'none', equipments = [engraves, talisman, rings, rings], basePhysical = 0, baseMagic = 0, baseCritChance = 0, baseCritDmg = 200, gemSlots = 10, critOnly = false, amount = 20) {
+  const list = equipments.map(es => es.filter(equipmentFilter[damageType]))
   const filteredGems = gems.filter(equipmentFilter[damageType])
   const collector = new ResultCollector(amount)
   iterate('', list, 0, filteredGems, gemSlots, scoreFunc[damageType], basePhysical, baseMagic, baseCritChance, baseCritDmg, critOnly, collector)
@@ -146,7 +156,7 @@ function iterate(nameStack, list, index, gems, gemSlots, scoreFunc, physical, ma
   }
   for (const e of list[index]) {
     if (e.critChanceOnly && critChance >= 100) continue
-    iterate(`${nameStack}, ${e.name}`, list, index + 1, gems, gemSlots, scoreFunc, physical + e.physical, magic + e.magic, critChance + e.critChance, critDmg + e.critDmg, critOnly, collector)
+    iterate(`${nameStack}${index === 4 ? '\n' : ', '}${e.name}`, list, index + 1, gems, gemSlots + e.gemSlots, scoreFunc, physical + e.physical, magic + e.magic, critChance + e.critChance, critDmg + e.critDmg, critOnly, collector)
   }
 }
 
