@@ -18,12 +18,12 @@
     <!-- End of CuterCounter Code -->
     <h1>Equipment Combinator</h1>
     <form id="statForm">
-      <label for="damageType">Damage Type:</label>
+      <!-- <label for="damageType">Damage Type:</label>
       <select id="damageType">
         <option value="none">None</option>
         <option value="physical">Physical</option>
         <option value="magic">Magic</option>
-      </select>
+      </select> -->
 
       <label for="boots">Boots:</label>
       <select id="boots">
@@ -43,8 +43,8 @@
       <label for="basePhysical">Base Physical:</label>
       <input type="number" id="basePhysical" placeholder="Enter value">
       
-      <label for="baseMagic">Base Magic:</label>
-      <input type="number" id="baseMagic" placeholder="Enter value">
+      <!-- <label for="baseMagic">Base Magic:</label>
+      <input type="number" id="baseMagic" placeholder="Enter value"> -->
       
       <label for="baseCritChance">Base Crit Chance:</label>
       <input type="number" id="baseCritChance" placeholder="Enter value">
@@ -75,19 +75,19 @@
     if (cacheStr) {
       const cache = JSON.parse(cacheStr)
       if (Array.isArray(cache)) {
-        document.getElementById('damageType').value = cache[0]
+        // document.getElementById('damageType').value = cache[0]
         document.getElementById('basePhysical').value = cache[1]
-        document.getElementById('baseMagic').value = cache[2]
+        // document.getElementById('baseMagic').value = cache[2]
         document.getElementById('baseCritChance').value = cache[3]
         document.getElementById('baseCritDmg').value = cache[4]
         document.getElementById('gemSlots').value = cache[5]
         document.getElementById('critOnly').checked = cache[6]
       } else {
-        const { damageType, bootIndex, basePhysical, baseMagic, baseCritChance, baseCritDmg, gemSlots, critOnly } = cache
-        document.getElementById('damageType').value = damageType ?? 'none'
+        const { bootIndex, basePhysical, baseCritChance, baseCritDmg, gemSlots, critOnly } = cache
+        // document.getElementById('damageType').value = damageType ?? 'none'
         document.getElementById('boots').value = bootIndex ?? 'any'
         document.getElementById('basePhysical').value = basePhysical ?? 0
-        document.getElementById('baseMagic').value = baseMagic ?? 0
+        // document.getElementById('baseMagic').value = baseMagic ?? 0
         document.getElementById('baseCritChance').value = baseCritChance ?? 0
         document.getElementById('baseCritDmg').value = baseCritDmg ?? 200
         document.getElementById('gemSlots').value = gemSlots ?? 0

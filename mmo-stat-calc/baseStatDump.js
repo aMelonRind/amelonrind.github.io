@@ -1,11 +1,11 @@
 
 const stats = [
   'PHYSICAL_DAMAGE',
-  'MAGIC_DAMAGE',
+  // 'MAGIC_DAMAGE',
   'CRITICAL_STRIKE_CHANCE',
   'CRITICAL_STRIKE_POWER',
 ]
-const res = [0, 0, 0, 200]
+const res = [0, 0, 200]
 
 const p = Player.getPlayer()
 if (p) {
