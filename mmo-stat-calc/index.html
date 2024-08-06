@@ -37,20 +37,27 @@
 
       <br>
       <div style="padding-top: 10px; padding-bottom: 0px;font-family: Consolas, monospace; font-size: smaller;">
-        base stats are the sum stat of your worldboss accessory, helmet, chestplate, leggings, offhand, mainhand, and the base crit damage of 200.
+        base stats are the sum stat of your worldboss accessory, helmet,
+        chestplate, leggings, offhand, mainhand, and the base crit damage of 200.
       </div>
 
-      <label for="basePhysical">Base Physical:</label>
-      <input type="number" id="basePhysical" placeholder="Enter value">
+      <label for="basePhysical">Base Damage Bonus:</label>
+      <div class="percentage-input">
+        <input type="number" id="basePhysical" placeholder="Enter value">
+      </div>
       
       <!-- <label for="baseMagic">Base Magic:</label>
       <input type="number" id="baseMagic" placeholder="Enter value"> -->
       
       <label for="baseCritChance">Base Crit Chance:</label>
-      <input type="number" id="baseCritChance" placeholder="Enter value">
+      <div class="percentage-input">
+        <input type="number" id="baseCritChance" placeholder="Enter value">
+      </div>
       
       <label for="baseCritDmg">Base Crit Dmg:</label>
-      <input type="number" id="baseCritDmg" placeholder="Enter value">
+      <div class="percentage-input">
+        <input type="number" id="baseCritDmg" placeholder="Enter value">
+      </div>
       
       <label for="gemSlots">Gem Slots:</label>
       <input type="number" id="gemSlots" placeholder="Enter value" min="0" max="20">

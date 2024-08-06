@@ -29,9 +29,18 @@ body {
 
 input[type="number"], select {
   padding: 10px;
-  width: 120px;
+  width: 80px;
   border: 1px solid #ccc;
   border-radius: 5px;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 
 label {
@@ -70,4 +79,20 @@ label {
   top: 0px;
   left: 0px;
   z-index: 1000; /* Ensures it is on top of other content */
+}
+
+.percentage-input {
+  position: relative;
+  display: inline-block;
+}
+
+.percentage-input::after {
+  content: '%';
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none; /* Ensures that the % symbol does not interfere with input */
+  color: #333;
+  font-weight: bold;
 }
