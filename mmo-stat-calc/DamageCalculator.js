@@ -139,7 +139,7 @@ function scoreFunc(base = 100, chance = 0, crit = 200) {
   base += 100
   if (chance <= 0) return base / 100
   else if (chance >= 100) return base * crit / 10000
-  return Math.round((base / 100) * ((crit / 100 - 1) * (chance / 100) + 1) * 1e12) / 1e12
+  return (base / 100) * ((crit / 100 - 1) * (chance / 100) + 1)
 }
 // /** @type {{ [K in DamageType]: (e: Equipment) => boolean }} */
 // const equipmentFilter = {
@@ -207,7 +207,7 @@ function iterateGems(nameStack, gems, index, gemSlots, physical, critChance, cri
   if (index >= gems.length || !gemSlots) {
     if (critOnly && critChance < 100) return
     const score = scoreFunc(physical, critChance, critDmg)
-    collector.collect(() => `${nameStack.replace(/^, /gm, '')}\nDmg: +${physical}%, CC: ${critChance}%, CD: ${critDmg}%\nScore: ${score}`, score)
+    collector.collect(() => `${nameStack.replace(/^, /gm, '')}\nDmg: +${physical.toFixed(3).replace(/\.?0+$/, '')}%, CC: ${critChance.toFixed(3).replace(/\.?0+$/, '')}%, CD: ${critDmg.toFixed(3).replace(/\.?0+$/, '')}%\nScore: ${Math.round(score * 1e12) / 1e12}`, score)
     return
   }
   const gem = gems[index]
