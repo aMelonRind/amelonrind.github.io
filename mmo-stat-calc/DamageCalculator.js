@@ -63,14 +63,14 @@ class GemFactory {
 
 }
 
-const boots = [
-  new Equipment('四級鞋子', { physical: 30, gemSlots: 2 }),
-  new Equipment('炙炎流星鞋子', { physical: 14, gemSlots: 2 }),
-  new Equipment('日曜堅盾鞋子', { physical: 8, gemSlots: 2 }),
-  new Equipment('弒神鞋子', { critChance: 3, critDmg: 20, gemSlots: 2 }),
-  new Equipment('霓虹伊甸鞋子', { gemSlots: 2 }),
-  new Equipment('末日救贖鞋子', { physical: 50, critChance: 10, critDmg: 50, gemSlots: 2 }),
-]
+// const boots = [
+//   new Equipment('四級鞋子', { physical: 30, gemSlots: 2 }),
+//   new Equipment('炙炎流星鞋子', { physical: 14, gemSlots: 2 }),
+//   new Equipment('日曜堅盾鞋子', { physical: 8, gemSlots: 2 }),
+//   new Equipment('弒神鞋子', { critChance: 3, critDmg: 20, gemSlots: 2 }),
+//   new Equipment('霓虹伊甸鞋子', { gemSlots: 2 }),
+//   new Equipment('末日救贖鞋子', { physical: 50, critChance: 10, critDmg: 50, gemSlots: 2 }),
+// ]
 
 const engraves = [
   // new Equipment('爆裂魔法師刻印', { magic: 30 }),

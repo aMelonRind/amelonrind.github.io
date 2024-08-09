@@ -25,7 +25,7 @@
         <option value="magic">Magic</option>
       </select> -->
 
-      <label for="boots">Boots:</label>
+      <!-- <label for="boots">Boots:</label>
       <select id="boots" style="width: 160px;">
         <option value="any">any</option>
         <option value="0">四級鞋子</option>
@@ -34,12 +34,11 @@
         <option value="3">弒神鞋子</option>
         <option value="4">霓虹伊甸鞋子</option>
         <option value="5">末日救贖鞋子</option>
-      </select>
+      </select> -->
 
       <br>
-      <div style="padding-top: 10px; padding-bottom: 0px;font-family: Consolas, monospace; font-size: smaller;">
-        base stats are the sum stat of your worldboss accessory, helmet,
-        chestplate, leggings, offhand, mainhand, and the base crit damage of 200.
+      <div style="padding-bottom: 0px;font-family: Consolas, monospace; font-size: smaller;"> <!-- padding-top: 10px;  -->
+        base stats are the sum stat of your worldboss accessory, armors, offhand, mainhand, and the base crit damage of 200.
       </div>
 
       <label for="basePhysical">Base Damage Bonus:</label>
@@ -96,9 +95,9 @@
         document.getElementById('gemSlots').value = cache[5]
         document.getElementById('critOnly').checked = cache[6]
       } else {
-        const { bootIndex, basePhysical, baseCritChance, baseCritDmg, gemSlots, gemQuality, critOnly } = cache
+        const { basePhysical, baseCritChance, baseCritDmg, gemSlots, gemQuality, critOnly } = cache
         // document.getElementById('damageType').value = damageType ?? 'none'
-        document.getElementById('boots').value = bootIndex ?? 'any'
+        // document.getElementById('boots').value = bootIndex ?? 'any'
         document.getElementById('basePhysical').value = basePhysical ?? 0
         // document.getElementById('baseMagic').value = baseMagic ?? 0
         document.getElementById('baseCritChance').value = baseCritChance ?? 0

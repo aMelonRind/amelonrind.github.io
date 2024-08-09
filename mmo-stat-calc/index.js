@@ -4,7 +4,7 @@ function calculateStats() {
   resultGrid.innerHTML = ''
   // Example function to calculate and display some results
   // const damageType = document.getElementById('damageType').value
-  const bootIndex = document.getElementById('boots').value
+  // const bootIndex = document.getElementById('boots').value
   const basePhysicalElement = document.getElementById('basePhysical')
   // const baseMagicElement = document.getElementById('baseMagic')
   const baseCritChanceElement = document.getElementById('baseCritChance')
@@ -25,23 +25,23 @@ function calculateStats() {
   gemSlotsElement.value = gemSlots
   gemQualityElement.value = gemQuality
   const critOnly = document.getElementById('critOnly').checked
-  window.localStorage.setItem('inputCache', JSON.stringify({ bootIndex, basePhysical, baseCritChance, baseCritDmg, gemSlots, gemQuality, critOnly }))
+  window.localStorage.setItem('inputCache', JSON.stringify({ basePhysical, baseCritChance, baseCritDmg, gemSlots, gemQuality, critOnly }))
 
-  const equipments = [engraves, talisman, rings, rings]
-  if (bootIndex === 'any') {
-    equipments.push(boots)
-  } else {
-    const boot = boots[bootIndex]
-    if (boot) {
-      basePhysical += boot.physical
-      // baseMagic += boot.magic
-      baseCritChance += boot.critChance
-      baseCritDmg += boot.critDmg
-      gemSlots += boot.gemSlots
-    }
-  }
+  // const equipments = [engraves, talisman, rings, rings]
+  // if (bootIndex === 'any') {
+  //   equipments.push(boots)
+  // } else {
+  //   const boot = boots[bootIndex]
+  //   if (boot) {
+  //     basePhysical += boot.physical
+  //     // baseMagic += boot.magic
+  //     baseCritChance += boot.critChance
+  //     baseCritDmg += boot.critDmg
+  //     gemSlots += boot.gemSlots
+  //   }
+  // }
 
-  const res = calcStats(equipments, basePhysical, baseCritChance, baseCritDmg, gemSlots, gemQuality / 100, critOnly, 60).map(v => v.name())
+  const res = calcStats(undefined, basePhysical, baseCritChance, baseCritDmg, gemSlots, gemQuality / 100, critOnly, 60).map(v => v.name())
 
   if (!res.length) {
     resultGrid.innerHTML = 'no results'
