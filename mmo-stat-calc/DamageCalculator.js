@@ -41,12 +41,14 @@ const boots = [
   new Equipment('日曜堅盾鞋子', { physical: 8, gemSlots: 2 }),
   new Equipment('弒神鞋子', { critChance: 3, critDmg: 20, gemSlots: 2 }),
   new Equipment('霓虹伊甸鞋子', { gemSlots: 2 }),
+  new Equipment('末日救贖鞋子', { physical: 50, critChance: 10, critDmg: 50, gemSlots: 2 }),
 ]
 
 const engraves = [
   // new Equipment('爆裂魔法師刻印', { magic: 30 }),
   new Equipment('獵頭者刻印', { critChance: 6, critDmg: 40 }),
-  new Equipment('高階槍手刻印', { physical: 20 }),
+  // new Equipment('高階槍手刻印', { physical: 20 }), // 比收割者刻印弱
+  new Equipment('收割者刻印', { physical: 40, critChance: 8 }),
 ]
 
 const talisman = [
