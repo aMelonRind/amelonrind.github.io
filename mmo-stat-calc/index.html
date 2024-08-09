@@ -62,6 +62,11 @@
       
       <label for="gemSlots">Gem Slots:</label>
       <input type="number" id="gemSlots" placeholder="Enter value" min="0" max="20">
+      
+      <label for="gemQuality">Gem Quality:</label>
+      <div class="percentage-input">
+        <input type="number" id="gemQuality" placeholder="Enter value" title="for *max*, input 99.5; for decent, input 95.">
+      </div>
 
       <label for="critOnly">
         <input type="checkbox" id="critOnly"> 100% Crit Only
@@ -91,7 +96,7 @@
         document.getElementById('gemSlots').value = cache[5]
         document.getElementById('critOnly').checked = cache[6]
       } else {
-        const { bootIndex, basePhysical, baseCritChance, baseCritDmg, gemSlots, critOnly } = cache
+        const { bootIndex, basePhysical, baseCritChance, baseCritDmg, gemSlots, gemQuality, critOnly } = cache
         // document.getElementById('damageType').value = damageType ?? 'none'
         document.getElementById('boots').value = bootIndex ?? 'any'
         document.getElementById('basePhysical').value = basePhysical ?? 0
@@ -99,6 +104,7 @@
         document.getElementById('baseCritChance').value = baseCritChance ?? 0
         document.getElementById('baseCritDmg').value = baseCritDmg ?? 200
         document.getElementById('gemSlots').value = gemSlots ?? 0
+        document.getElementById('gemQuality').value = gemQuality ?? 99.5
         document.getElementById('critOnly').checked = critOnly ?? false
       }
     }

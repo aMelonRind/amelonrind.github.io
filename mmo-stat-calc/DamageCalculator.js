@@ -35,6 +35,34 @@ class Equipment {
   }
 }
 
+class GemFactory {
+  /** @readonly @type {string} */ name
+  /** @readonly @type {string} */ attribute
+  /** @readonly @type {number} */ min
+  /** @readonly @type {number} */ max
+
+  /**
+   * @param {string} name 
+   * @param {'physical' | 'critChance' | 'critDmg'} attribute 
+   * @param {number} min 
+   * @param {number} max 
+   */
+  constructor(name, attribute, min, max) {
+    this.name = name
+    this.attribute = attribute
+    this.min = min
+    this.max = max
+  }
+
+  /**
+   * @param {number} quality 
+   */
+  build(quality) {
+    return new Equipment(this.name, { [this.attribute]: this.min + (this.max - this.min) * quality })
+  }
+
+}
+
 const boots = [
   new Equipment('四級鞋子', { physical: 30, gemSlots: 2 }),
   new Equipment('炙炎流星鞋子', { physical: 14, gemSlots: 2 }),
@@ -66,10 +94,10 @@ const rings = [
 ]
 
 const gems = [
-  new Equipment('傷害寶石', { physical: 25 }),
-  // new Equipment('法傷寶石', { magic: 45 }),
-  new Equipment('暴率寶石', { critChance: 10 }),
-  new Equipment('暴傷寶石', { critDmg: 75 }),
+  new GemFactory('傷害寶石', 'physical', 20, 25),
+  // new GemFactory('法傷寶石', 'magic', 40, 45),
+  new GemFactory('暴率寶石', 'critChance', 8, 10),
+  new GemFactory('暴傷寶石', 'critDmg', 70, 75),
 ]
 
 class ResultCollector {
@@ -130,10 +158,10 @@ function scoreFunc(base = 100, chance = 0, crit = 200) {
  * @param {boolean} critOnly 
  * @param {number} amount 
  */
-function calcStats(equipments = [engraves, talisman, rings, rings], basePhysical = 0, baseCritChance = 0, baseCritDmg = 200, gemSlots = 10, critOnly = false, amount = 20) {
+function calcStats(equipments = [engraves, talisman, rings, rings], basePhysical = 0, baseCritChance = 0, baseCritDmg = 200, gemSlots = 10, gemQuaity = 0.995, critOnly = false, amount = 20) {
   const list = equipments
   const collector = new ResultCollector(amount)
-  iterate('', list, 0, gems, gemSlots, basePhysical, baseCritChance, baseCritDmg, critOnly, collector)
+  iterate('', list, 0, gems.map(f => f.build(gemQuaity)), gemSlots, basePhysical, baseCritChance, baseCritDmg, critOnly, collector)
   return collector.list
 }
 
