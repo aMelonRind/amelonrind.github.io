@@ -87,10 +87,9 @@ const talisman = [
 ]
 
 const rings = [
-  new Equipment('爆能戒指', { physical: 12 }),
-  // new Equipment('永夜戒指', { magic: 18 }),
-  new Equipment('爆率戒指IV', { critChance: 8 }),
-  new Equipment('爆傷戒指IV', { critDmg: 40 }),
+  new Equipment('暴力戒指', { physical: 20 }),
+  new Equipment('爆率戒指V', { critChance: 10 }),
+  new Equipment('爆傷戒指V', { critDmg: 50 }),
 ]
 
 const gems = [
