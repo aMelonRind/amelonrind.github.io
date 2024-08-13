@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blue Archive Equipment Calculator</title>
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="stylesheet" href="index.css"/>
+</head>
+<body>
+  <!-- Start of CuterCounter Code -->
+  <div id="visitor-counter">
+    <a href="https://www.cutercounter.com/" target="_blank"><img src="https://www.cutercounter.com/hits.php?id=hxpqqaf&nd=6&style=16" border="0" alt="counter for blog"></a>
+  </div>
+  <!-- End of CuterCounter Code -->
+
+  <div class="container">
+    <div class = "box">
+      <div class="site-description">
+        input + to expand matrix width.
+        I know it's not aligned. I hate css.
+      </div>
+      <label for="maxTier">
+        Max Tier: <input type="number" id="maxTier" placeholder="" value="9">
+      </label>
+      <label for="halfReleased">
+        <input type="checkbox" id="halfReleased" title="If the highest tier is half released" checked> Half Released
+      </label>
+  
+      <label for="baseCost">Base Cost:</label><div id="baseCost" class="matrix"></div>
+      <label for="stackedCost">Stacked Cost:</label><div id="stackedCost" class="matrix"></div>
+    </div>
+    <div class = "box">
+      <label for="counts">Counts:</label><div id="counts" class="clickableMatrix"></div>
+      <label for="requiredBlueprints">Required Blueprints:</label><div id="requiredBlueprints" class="matrix"></div>
+    </div>
+    <div class = "box">
+      <label for="currentBlueprints">Current Owned Blueprints:</label><div id="currentBlueprints" class="matrix"></div>
+      <label for="requiredMinusCurrent">Required Minus Current:</label><div id="requiredMinusCurrent" class="matrix"></div>
+    </div>
+
+  </div>
+
+  <script src="ClickableMatrix.js"></script>
+  <script src="Matrix.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>
