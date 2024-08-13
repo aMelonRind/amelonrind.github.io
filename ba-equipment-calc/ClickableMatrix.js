@@ -46,8 +46,10 @@ class ClickableMatrix {
   }
 
   normalizeData() {
+    this.data.length = this.rows.length
     for (let i = 0; i < this.rows.length; i++) {
       const arr = (this.data[i] ||= [])
+      arr.length = this.cols.length
       for (let i = 0; i < this.cols.length; i++) {
         arr[i] ||= 0
       }
