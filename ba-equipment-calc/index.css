@@ -21,9 +21,9 @@ body {
   white-space: pre-line;
 }
 
-.container {
+/* .container {
   scale: 1.1;
-}
+} */
 
 .box {
   display: inline-table;
