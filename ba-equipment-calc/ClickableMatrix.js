@@ -76,6 +76,11 @@ class ClickableMatrix {
       }
     }
     this.div.append(reset)
+    const sumDiv = document.createElement('div')
+    sumDiv.className = 'sum'
+    const sum = this.data.flat().reduce((p, v) => p + v)
+    sumDiv.innerText = `Sum: ${sum}, Div: ${Math.floor(sum / 3)}...${sum % 3}`
+    this.div.append(sumDiv)
 
     const row = document.createElement('tr')
     table.append(row)
@@ -99,6 +104,8 @@ class ClickableMatrix {
         const update = () => {
           this.onChange(this.data, this)
           td.innerHTML = `${this.data[i][j]}`
+          const sum = this.data.flat().reduce((p, v) => p + v)
+          sumDiv.innerText = `Sum: ${sum}, Div: ${Math.floor(sum / 3)}...${sum % 3}`
           localStorage.setItem(`${this.divId}:data`, JSON.stringify(this.data))
         }
         const add = (n = 1) => this.data[i][j] += n

@@ -99,6 +99,11 @@ textarea {
   border-style: groove;
 }
 
+.clickableMatrix > .sum {
+  display: inline;
+  padding-left: 20px;
+}
+
 .description {
   font-size: small;
   padding: 0px;
