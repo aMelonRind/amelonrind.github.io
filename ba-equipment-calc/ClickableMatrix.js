@@ -72,6 +72,7 @@ class ClickableMatrix {
       if (confirm('Are you sure you want to reset?')) {
         this.data = []
         this.write()
+        this.onChange(this.data, this)
       }
     }
     this.div.append(reset)
