@@ -30,7 +30,7 @@ const baseCostMatrix = new Matrix('baseCost', 'target\\material', false, true, t
     }
   }
 }, defaultBaseCost)
-const stackedCostMatrix = new Matrix('stackedCost', 'target\\material', true, true, tiers, tiers)
+const stackedCostMatrix = new Matrix('stackedCost', 'target\\material', true, true, tiers, tiers.map((_, i) => `T${i + 1}`))
 const countsMatrix = new ClickableMatrix('counts', "input students' equipment counts here\nuse mouse left and right button, press shift for 10x\n\ntype\\count", ['T1', ...tiers], equipments)
 const requiredBlueprintsMatrix = new Matrix('requiredBlueprints', 'type\\tier', true, true, tiers, equipments)
 const currentBlueprintsMatrix = new Matrix('currentBlueprints', 'type\\tier', false, true, tiers, equipments)
@@ -51,6 +51,7 @@ function calculateStats() {
       tiers[i] = `T${i + 2}`
     }
     countsMatrix.cols = ['T1', ...tiers]
+    stackedCostMatrix.rows = tiers.map((_, i) => `T${i + 1}`)
     baseCostMatrix.write()
     countsMatrix.write()
     currentBlueprintsMatrix.write()
