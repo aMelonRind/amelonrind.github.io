@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapart Converter</title>
+  <link rel="shortcut icon" href="favicon.ico?v=2">
+  <link rel="stylesheet" href="index.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+  <script type="module">
+    import * as NBT from 'https://cdn.jsdelivr.net/npm/nbtify@2.0.0/+esm'
+    globalThis.NBT = NBT
+  </script>
+  <script src="src/Readers.js"></script>
+  <script src="src/MainContext.js"></script>
+  <script defer src="index.js"></script>
+</head>
+<body>
+  <div id="maindiv">
+    <canvas id="canvas" width="256" height="256"></canvas>
+    <br>
+    <button id="download" type="button" onclick="downloadCanvasAsPNG()">Download as PNG</button>
+    <br>
+    <p style="max-width: 200px; white-space: pre;">
+      This website is WIP, intended to import/export
+        common file types related to minecraft mapart.
+      Also planned to implement advanced image
+        dithering dedicated to anime images.
+      Currently only importing
+        images/.nbt/.schematic/.litematic/map_*.dat
+        and exporting png are available.
+    </p>
+  </div>
+</body>
+</html>
