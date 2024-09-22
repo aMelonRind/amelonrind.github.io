@@ -227,11 +227,7 @@ class ImageReaders {
 }
 
 class BlockImageBuilder {
-  // const WATER_DEPTH_1 = (1 <<  1) - 1 // LIGHT
-  /** @readonly */ static WATER_DEPTH_2 = (1 <<  3) - 1 // LIGHT / MID
-  /** @readonly */ static WATER_DEPTH_3 = (1 <<  5) - 1 // MID
-  /** @readonly */ static WATER_DEPTH_4 = (1 <<  7) - 1 // MID / DARK
-  /** @readonly */ static WATER_DEPTH_5 = (1 << 10) - 1 // DARK
+  /** @readonly */ static WATER_MASK = (1 << 10) - 1 // deepest water color
   /** @type {Record<string, number | { if: string, is: string, then: number, else: number }>} */ static map
   /** @type {{ [key: number]: number }} */ static pre13map // index = data_id << 8 | block_id
   /** @readonly @type {Uint8Array} */ blocks
@@ -308,19 +304,21 @@ class BlockImageBuilder {
       if (this.heights[index] < y) {
         this.blocks[index] = color
         this.heights[index] = y
+        this.waters[index] = 0
       }
     } else { // water
       const dy = this.heights[index] - y
       if (dy < 0) {
+        this.heights[index] = y
         this.blocks[index] = 0
         if (-dy > 10) {
           this.waters[index] = 1
         } else {
           const w = this.waters[index]
           if (w) {
-            this.waters[index] = (w << -dy) & BlockImageBuilder.WATER_DEPTH_5 | 1
+            this.waters[index] = (w << -dy) & BlockImageBuilder.WATER_MASK | 1
           } else {
-            this.waters[index] |= 1
+            this.waters[index] = 1
           }
         }
       } else if (dy < 10 && this.waters[index] && !this.blocks[index]) {
@@ -334,16 +332,96 @@ class BlockImageBuilder {
    */
   build() {
     const heightSet = new Set(this.heights)
-    const topY = heightSet.size === 1 ? [...heightSet][0] : -32000
-    const res = this.blocks.map((v, i) => v * 4 + Math.sign(this.heights[i] - (this.heights[i - this.width] ?? topY)) + 1)
-    // TODO detect water mode
-    this.waters.forEach((v, i) => {
-      if (v && !this.blocks[i]) {
-        res[i] = 48 + Math.sign(this.heights[i] - (this.heights[i - this.width] ?? topY)) + 1
+    const isFlat = heightSet.size === 1
+    const topY = isFlat ? heightSet[Symbol.iterator]().next().value : -32000
+    const getSlope = index => Math.sign(this.heights[index] - (this.heights[index - this.width] ?? topY)) + 1
+    let res = this.blocks.map((v, i) => v * 4 + getSlope(i))
+
+    const hasTopRow = this.width % 128 === 0 && this.height % 128 === 1
+    const waterSet = new Set(hasTopRow ? this.waters.subarray(this.width) : this.waters)
+    waterSet.delete(0)
+    if (waterSet.size) {
+      const isStair = (() => {
+        // staircase won't have multiple depths
+        if (waterSet.size !== 1) return false
+
+        // staircase won't have depths more than two (single and double mode)
+        if (waterSet[Symbol.iterator]().next().value > 2) return false
+
+        // slope detection
+        if (!isFlat && this.waters.some((v, i) => {
+          if (!v) return false
+          const h = this.heights[i]
+          const ni = i - this.width
+          const hn = this.heights[ni]
+          if (hn > h) { // north is higher
+            if (this.waters[ni]) return true // unnecessary in depth mode
+            if (this.heights[ni - this.width] > hn) return true // north north is higher than north, unnecessary in depth mode
+          } else {
+            if (h > hn && this.waters[i + this.width]) return true // water down slope, unnecessary in depth mode
+          }
+        })) return true
+
+        // technically i can also check if the source of water has block near it, but too lazy
+
+        // ask user for help
+        return confirm(`
+          The application is unsure that if this blueprint's water should be treated as staircase or depth.
+          Choose OK for staircase, cancel for depth.
+          The waters generated from rebane2001/mapcraft are staircase.
+          This website generates depth, which is the correct way for minecraft to render.
+        `.trim().replace(/^\s*/gm, '  '))
+      })()
+
+      console.log(`building water color in ${isStair ? 'staircase' : 'depth'} mode.`)
+      if (isStair) {
+        this.waters.forEach(isFlat ? (v, i) => {
+          if (v && !this.blocks[i]) {
+            res[i] = 49
+          }
+        } : (v, i) => {
+          if (v && !this.blocks[i]) {
+            res[i] = 48 + getSlope(i)
+          }
+        })
+      } else {
+        const WATER_DEPTH_2 = (1 <<  3) - 1 // LIGHT / MID
+        const WATER_DEPTH_3 = (1 <<  5) - 1 // MID
+        const WATER_DEPTH_4 = (1 <<  7) - 1 // MID / DARK
+        const WATER_DEPTH_5 = (1 << 10) - 1 // DARK
+        const rcpWidth = 1 / this.width
+        /** @type {(i: number) => boolean | number} */
+        const isShallow = hasTopRow
+        ? ((this.width & 1) ? (i =>   i & 1 ) : (i =>   (i + i * rcpWidth) & 1 ))
+        : ((this.width & 1) ? (i => !(i & 1)) : (i => !((i + i * rcpWidth) & 1)))
+        this.waters.forEach((v, i) => {
+          if (v && !this.blocks[i]) {
+            if (isShallow(i)) {
+              if ((v & WATER_DEPTH_5) === WATER_DEPTH_5) {
+                res[i] = 48
+              } else if ((v & WATER_DEPTH_3) === WATER_DEPTH_3) {
+                res[i] = 49
+              } else {
+                res[i] = 50
+              }
+            } else {
+              if ((v & WATER_DEPTH_4) === WATER_DEPTH_4) {
+                res[i] = 48
+              } else if ((v & WATER_DEPTH_2) === WATER_DEPTH_2) {
+                res[i] = 49
+              } else {
+                res[i] = 50
+              }
+            }
+          }
+        })
       }
-    })
-    // and size detection
-    return new BlockImage(this.width, this.height, res)
+    }
+
+    if (hasTopRow) {
+      res = res.subarray(this.width)
+    }
+    return new BlockImage(this.width, hasTopRow ? this.height - 1 : this.height, res)
   }
 
 }

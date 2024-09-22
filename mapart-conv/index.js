@@ -33,7 +33,7 @@ function classof(obj) {
 }
 
 function updateScale() {
-  const scale = Math.max(1, Math.min(64,
+  const scale = Math.max(1, Math.min(5,
     Math.floor(window.innerWidth * 0.9 / canvas.width),
     Math.floor(window.innerHeight * 0.9 / canvas.height)
   ))
