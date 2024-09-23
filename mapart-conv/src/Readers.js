@@ -16,7 +16,7 @@ class Readers {
     for (const item of items) {
       if (item.type === 'text/plain') { // urls
         return new Promise(res => {
-          item.getAsString(async str => res(await ImageReaders.readURL(str)))
+          item.getAsString(async str => res(str.startsWith('https://rebane2001.com/mapartcraft/?preset=') ? null : await ImageReaders.readURL(str)))
         })
       } else if (item.type.startsWith('image/')) { // image/*
         const file = item.getAsFile()

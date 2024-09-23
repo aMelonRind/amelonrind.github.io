@@ -2,7 +2,7 @@
 /// <reference path = "../index.d.ts"/>
 
 /**
- * one import = one context
+ * one data import = one context
  */
 class MainContext {
   static #initd = false
@@ -20,16 +20,15 @@ class MainContext {
       handleItems(e.clipboardData?.items)
     })
 
-  /**
-   * @param {DataTransferItemList | null | undefined} items 
-   */
+    /**
+     * @param {DataTransferItemList | null | undefined} items 
+     */
     async function handleItems(items) {
       const res = await Readers.readItems(items)
       if (!res) return
       if (res instanceof HTMLImageElement) {
         const canvas = new OffscreenCanvas(res.width, res.height)
-        const ctx = canvas.getContext('2d')
-        if (!ctx) throw 'impossible'
+        const ctx = requireNonNull(canvas.getContext('2d'))
         ctx.drawImage(res, 0, 0)
         MainContext.onNewImage(ctx.getImageData(0, 0, res.width, res.height))
       } else {
