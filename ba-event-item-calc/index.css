@@ -1,0 +1,13 @@
+
+body {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  height: 100vh;
+  margin: 0;
+  font-family: Monaco, Menlo, Consolas, 'Droid Sans Mono', Inconsolata, 'Courier New', monospace;
+}
+
+#maindiv {
+  padding-top: 10px;
+}

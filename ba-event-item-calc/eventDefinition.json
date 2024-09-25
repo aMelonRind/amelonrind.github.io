@@ -1,0 +1,31 @@
+{
+  "default": "Get Hyped and March On!",
+  "events": {
+    "Get Hyped and March On!": {
+      "wiki": "https://bluearchive.wiki/wiki/Get_Hyped_and_March_On!",
+      "itemTypes": 3,
+      "icons": [
+        "https://static.miraheze.org/bluearchivewiki/thumb/c/ce/Item_Icon_Event_Token_0_S37.png/120px-Item_Icon_Event_Token_0_S37.png",
+        "https://static.miraheze.org/bluearchivewiki/thumb/2/21/Item_Icon_Event_Token_1_S37.png/120px-Item_Icon_Event_Token_1_S37.png",
+        "https://static.miraheze.org/bluearchivewiki/thumb/f/fe/Item_Icon_Event_Token_2_S37.png/120px-Item_Icon_Event_Token_2_S37.png"
+      ],
+      "transferRates": [
+        {"amount": 5, "of": 1, "to": 2}
+      ],
+      "levels": [
+        {"ap": 10, "items": [10, 3, 3]},
+        {"ap": 10, "items": [0, 13, 3]},
+        {"ap": 10, "items": [0, 3, 13]},
+        {"ap": 10, "items": [16, 0, 0]},
+        {"ap": 15, "items": [16, 4, 4]},
+        {"ap": 15, "items": [0, 20, 4]},
+        {"ap": 15, "items": [0, 4, 20]},
+        {"ap": 15, "items": [24, 0, 0]},
+        {"ap": 20, "items": [24, 4, 4]},
+        {"ap": 20, "items": [4, 28, 0]},
+        {"ap": 20, "items": [4, 0, 28]},
+        {"ap": 20, "items": [32, 0, 0]}
+      ]
+    }
+  }
+}
