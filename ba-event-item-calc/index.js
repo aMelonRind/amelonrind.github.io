@@ -49,7 +49,6 @@ output.style.whiteSpace = 'pre'
 async function main() {
   definition = await fetch('eventDefinition.json').then(res => res.json())
   eventSelect.onchange = () => onSelectEvent(eventSelect.value)
-  definition.default = "Trip-Trap-Train" // TODO remove this line
   updateEventSelect()
 
   root.innerHTML = ''
@@ -182,7 +181,17 @@ async function calculate() {
     futurebits: 0,
     itemRcp: rcpDummy
   }))
-  const log = rawLevels.map(l => `${l.name.padEnd(4, ' ')} ${l.ap}AP ${Array.from(l.items, v => `${v || '-'}`.padStart(2, ' ')).join(' ')}`)
+  
+  const list = rawLevels.map((l, i) => [
+    l.name,
+    l.ap + 'AP',
+    ...Array.from(l.items, v => `${v || '-'}`),
+    '  ',
+    // calculate minimal bonus to get this amount
+    ...Array.from(l.items, (v, j) => v ? `+${(Math.floor(((v - 1) / def.levels[i].items[j] - 1) * 20) + 1) * 5}%` : '-')
+  ])
+  const maxs = Uint8Array.from(list[0], (_, i) => Math.max(...list.map(v => v[i].length)))
+  const log = list.map(row => row.map((v, i) => i === 0 ? v.padEnd(maxs[i], ' ') : v.padStart(maxs[i], ' ')).join(' '))
   log.unshift('Levels with bonus:')
   log.push('')
   /** @type {{ [name: string]: Float32Array }} */
@@ -419,7 +428,7 @@ async function calculate() {
     const maxs = Uint8Array.from(list[0], (_, i) => Math.max(...list.map(v => v[i].length)))
     maxs[1] = Math.max(maxs[1], 'sum'.length - 1 - maxs[0])
     maxs[2] = Math.max(maxs[2], 'requires'.length - 1 - maxs[0] - 1 - maxs[1])
-    const strList = list.map(row => row.map((v, i) => v.padStart(maxs[i], ' ')).join(' '))
+    const strList = list.map(row => row.map((v, i) => i === 1 ? v.padEnd(maxs[i], ' ') : v.padStart(maxs[i], ' ')).join(' '))
     const len = strList.length
     strList[len - 2] = 'sum' + strList[len - 2].slice(3)
     strList[len - 1] = 'requires' + strList[len - 1].slice(8)
