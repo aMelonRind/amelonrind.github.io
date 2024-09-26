@@ -110,7 +110,7 @@ function onSelectEvent(event = definition.default) {
 
   const headRow = document.createElement('tr')
   headRow.appendChild(document.createElement('td'))
-  for (const url of Array.from(base, (_, i) => def.icons[i] ?? emptyIcon)) {
+  for (const url of Array.from(base, (_, i) => def.icons[i] || emptyIcon)) {
     const th = document.createElement('th')
     const img = document.createElement('img')
     img.src = url
@@ -260,6 +260,7 @@ async function calculate() {
       return d.some(v => v > 0) || level.ap <= l.ap && d.every(v => v === 0)
     })
   })
+  for (const level of levels) level.itemRcp = Float32Array.from(level.items, v => 1 / v)
 
   log.push(`Level pool: ${levels.length}\n`)
 
@@ -439,38 +440,37 @@ async function calculate() {
  * @param {Collector} collector 
  */
 function calc(levels, requires, usedAP, route, collector) {
-  // if (usedAP > collector.ap) {
-  //   collector.collect(usedAP, 'Abandoned route.')
-  //   return
-  // }
-  const reqBits = requires.reduce((p, v, i) => p | (+(v > 0) << i), 0)
+  const len = requires.length
+  let reqBits = 0
+  let i = 0, j = 0, k = 0, v = 0
+  for (j = 0; j < len; j++) {
+    if (requires[j]) reqBits |= 1 << j
+  }
   if (reqBits === 0) {
     collector.collect(usedAP, route.slice(2))
     return
   }
 
-  const clone = new Uint32Array(requires.length)
-  for (const l of levels) {
-    for (let i = 0; i < requires.length; i++) {
-      const bit = 1 << i
-      if (!(reqBits & l.bitflag & bit)) continue
-      const amount = Math.ceil(requires[i] / l.items[i])
-      const uap = usedAP + l.ap * amount
+  const clone = new Uint32Array(len)
+  for (i = 0; i < levels.length; i++) {
+    const { bitflag, itemRcp, ap, items, name } = levels[i]
+    for (j = 0; j < len; j++) {
+      if (~(reqBits & bitflag) & (1 << j)) continue
+      const amount = Math.ceil(requires[j] * itemRcp[j])
+      const uap = usedAP + ap * amount
       if (uap > collector.ap) {
         collector.collect(uap, 'Abandoned route.')
         continue
       }
-      clone.set(requires)
-      for (let i = 0; i < clone.length; i++) {
-        if (l.items[i] && clone[i]) {
-          clone[i] = Math.max(0, clone[i] - l.items[i] * amount)
-        }
+      for (k = 0; k < len; k++) {
+        v = requires[k]
+        clone[k] = (v && items[k]) ? Math.max(0, v - items[k] * amount) : v
       }
       calc(
         levels,
         clone,
         uap,
-        `${route}, ${amount}x ${l.name}`,
+        `${route}, ${amount}x ${name}`,
         collector
       )
     }
