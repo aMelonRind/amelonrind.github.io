@@ -174,7 +174,7 @@ async function calculate() {
 
   const rcpDummy = new Float32Array(0)
   const rawLevels = def.levels.map((d, i) => ({
-    name: `ch${i + 1}`,
+    name: `q${i + 1}`,
     ap: d.ap,
     items: Uint16Array.from(bonuses, (b, i) => Math.ceil((d.items[i] ?? 0) * b)),
     bitflag: d.items.slice(0, bonuses.length).reduce((p, v, i) => p | (+(v > 0) << i), 0),
@@ -317,7 +317,7 @@ async function calculate() {
     const counts = {}
     for (const str of collector.route.split(', ')) {
       if (!str) continue
-      const match = str.match(/^(\d+)x (ch\d+(?: and ch\d+)*)$/)
+      const match = str.match(/^(\d+)x (q\d+(?: and q\d+)*)$/)
       if (!match) {
         log.push(`error: string doesn't match: "${str}"`)
         break outer
@@ -372,7 +372,7 @@ async function calculate() {
       calcFurther(levels, 0, clone, clones, 0, '', collector)
       for (const str of collector.route.split(', ')) {
         if (!str) continue
-        const match = str.match(/^(\d+)x (ch\d+)$/)
+        const match = str.match(/^(\d+)x (q\d+)$/)
         if (!match) {
           log.push(`error: string doesn't match: "${str}"`)
           break outer
