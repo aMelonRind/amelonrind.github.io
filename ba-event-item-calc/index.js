@@ -1,7 +1,7 @@
 //@ts-check
 if (0) module.exports = 0
 
-const emptyIcon = ''
+const emptyIcon = 'https://static.miraheze.org/bluearchivewiki/thumb/8/8f/Item_Icon_Event_Item_0.png/90px-Item_Icon_Event_Item_0.png'
 
 const root = document.getElementById('script-root') ?? document.body
 
