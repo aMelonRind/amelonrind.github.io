@@ -1,4 +1,5 @@
 //@ts-check
+if (0) module.exports = 0
 
 const emptyIcon = ''
 
@@ -25,14 +26,6 @@ eventLabel.htmlFor = 'eventSelect'
 eventLabel.innerText = 'Event:'
 const eventSelect = document.createElement('select')
 eventSelect.id = 'eventSelect'
-
-const apLabel = document.createElement('label')
-apLabel.id = 'apLabel'
-apLabel.htmlFor = 'apInput'
-apLabel.innerText = 'Max AP:'
-const apInput = document.createElement('input')
-apInput.type = 'number'
-apInput.id = 'apInput'
 
 const wikiDiv = document.createElement('div')
 wikiDiv.style.visibility = 'none'
@@ -62,9 +55,6 @@ async function main() {
   root.appendChild(eventLabel)
   root.appendChild(eventSelect)
   br()
-  // root.appendChild(apLabel)
-  // root.appendChild(apInput)
-  // br()
   root.appendChild(wikiDiv)
   br()
   root.appendChild(numberInputs)
@@ -72,8 +62,7 @@ async function main() {
   root.appendChild(output)
 
   console.log('loaded!')
-  output.innerText = "This is currently trash. Don't use."
-  // test()
+  test()
 }
 
 function updateEventSelect() {
@@ -133,7 +122,9 @@ function onSelectEvent(event = definition.default) {
   bonusesRow.appendChild(th1)
   for (const input of state.bonuses) {
     const td = document.createElement('td')
+    td.append('+')
     td.appendChild(input)
+    td.append('%')
     bonusesRow.appendChild(td)
   }
 
@@ -143,6 +134,8 @@ function onSelectEvent(event = definition.default) {
   requiresRow.appendChild(th2)
   for (const input of state.requires) {
     const td = document.createElement('td')
+    td.style.whiteSpace = 'pre'
+    td.append(' ')
     td.appendChild(input)
     requiresRow.appendChild(td)
   }
@@ -154,32 +147,34 @@ function onSelectEvent(event = definition.default) {
   numberInputs.appendChild(table)
 }
 
-function calculate() {
+async function calculate() {
   const def = state.selected
   if (!def) return
 
   const bonuses = Float32Array.from(state.bonuses, input => (input.valueAsNumber || 0) / 100 + 1)
-  const requires = Uint16Array.from(state.requires, input => Math.max(-1, Math.min(65535, input.valueAsNumber || 0)))
-  const levels = def.levels.map((d, i) => ({
+  const requires = Uint32Array.from(state.requires, input => Math.max(-1, Math.min(4294967295, input.valueAsNumber || 0)))
+  const rcpDummy = new Float32Array(0)
+  const rawLevels = def.levels.map((d, i) => ({
     name: `ch${i + 1}`,
     ap: d.ap,
     items: Uint16Array.from(bonuses, (b, i) => Math.ceil((d.items[i] ?? 0) * b)),
     bitflag: d.items.slice(0, bonuses.length).reduce((p, v, i) => p | (+(v > 0) << i), 0),
-    futurebits: 0
+    futurebits: 0,
+    itemRcp: rcpDummy
   }))
-  const log = levels.map(l => `${l.name.padEnd(4, ' ')} ${l.ap}AP ${Array.from(l.items, v => `${v || '-'}`.padStart(2, ' ')).join(' ')}`)
+  const log = rawLevels.map(l => `${l.name.padEnd(4, ' ')} ${l.ap}AP ${Array.from(l.items, v => `${v || '-'}`.padStart(2, ' ')).join(' ')}`)
   log.unshift('Levels with bonus:')
   log.push('')
   /** @type {{ [name: string]: Float32Array }} */
   const normalized = {}
-  levels.forEach(l => normalized[l.name] = Float32Array.from(l.items, v => v / l.ap))
+  rawLevels.forEach(l => normalized[l.name] = Float32Array.from(l.items, v => v / l.ap))
 
-  let filteredLevels = levels.filter(level => {
+  let levels = rawLevels.filter(level => {
     const a = normalized[level.name]
-    return levels.every(l => {
+    return rawLevels.every(l => {
       if (level === l) return true
       const d = normalized[l.name].map((v, i) => a[i] - v)
-      if (!d.every(v => v <= 0)) return true
+      if (d.some(v => v > 0)) return true
       if (d.every(v => v === 0)) {
         if (level.ap <= l.ap) return true
         log.push(`${level.name} has been out by ${l.name} for being the same but more AP requirement.`)
@@ -191,7 +186,7 @@ function calculate() {
   })
   if (requires.some(v => v === 0)) {
     const mask = requires.reduce((p, v, i) => p | (+(v > 0) << i), 0)
-    filteredLevels = filteredLevels.filter(level => {
+    levels = levels.filter(level => {
       if (!(level.bitflag & mask)) {
         log.push(`${level.name} has been filtered out because it's not needed.`)
         return false
@@ -199,16 +194,8 @@ function calculate() {
       return true
     })
   }
-  if (log.at(-1) !== '') {
-    log.push('')
-  }
 
-  filteredLevels.sort((a, b) => b.bitflag - a.bitflag)
-  let bits = 0
-  for (let i = filteredLevels.length - 1; i >= 0; i--) {
-    filteredLevels[i].futurebits = bits
-    bits |= filteredLevels[i].bitflag
-  }
+  const bits = rawLevels.reduce((p, v) => p | v.bitflag, 0)
   if (bits < (1 << requires.length) - 1) {
     for (let i = requires.length; i >= 0; i--) {
       if ((bits & (1 << i)) === 0) {
@@ -218,122 +205,317 @@ function calculate() {
     }
   }
 
-  const collector = new Collector()
+  /** @type {CalculatedLevel[]} */
+  const duoLevels = levels.flatMap((a, i) => levels.slice(i + 1).map(b => ({
+    name: `${a.name} and ${b.name}`,
+    ap: a.ap + b.ap,
+    items: a.items.map((v, i) => v + b.items[i]),
+    bitflag: a.bitflag | b.bitflag,
+    futurebits: NaN,
+    itemRcp: rcpDummy
+  })))
+  duoLevels.forEach(l => normalized[l.name] = Float32Array.from(l.items, v => v / l.ap))
+  levels.push(...duoLevels)
+  levels = levels.filter(level => {
+    const a = normalized[level.name]
+    return levels.every(l => {
+      if (level === l) return true
+      const d = normalized[l.name].map((v, i) => a[i] - v)
+      return d.some(v => v > 0) || level.ap <= l.ap && d.every(v => v === 0)
+    })
+  })
+
+  log.push(`Level pool: ${levels.length}\n`)
+
   def.transferRates // TODO use this
-  calc(filteredLevels, 0, requires, 0, 0, '', collector)
+  // too hard to implement
+
+  const collector = new Collector()
+  const time = performance.now()
+  calc(levels, requires, 0, '', collector)
+  log.push(`Recursive calculation costs ${(performance.now() - time).toFixed(1)}ms.`)
   if (collector.ap === Infinity) {
     log.push(`Didn't find any route for some reason...`)
-  } else {
+  } else outer: {
     log.push(
       `Explored ${collector.count} possibilities, found this route:`,
       `Uses ${collector.ap} AP.`,
-      `Route: ${collector.route}` // todo: further analysis
+      `Route: ${collector.route}`,
+      'Performing further approach...\n'
+    )
+    output.innerText = log.join('\n') + '\n'.repeat(24)
+    await new Promise(res => setTimeout(res, 1))
+
+    levels = rawLevels.filter(level => {
+      const a = normalized[level.name]
+      return rawLevels.every(l => {
+        if (level === l) return true
+        const d = normalized[l.name].map((v, i) => a[i] - v)
+        if (d.some(v => v > 0)) return true
+        return level.ap > l.ap && Number.isInteger(level.ap / l.ap)
+      })
+    })
+    levels.sort((a, b) => b.bitflag - a.bitflag)
+    let bits = 0
+    for (let i = levels.length - 1; i >= 0; i--) {
+      levels[i].futurebits = bits
+      bits |= levels[i].bitflag
+    }
+    for (const level of levels) level.itemRcp = Float32Array.from(level.items, v => 1 / v)
+
+    /** @type {{ [name: string]: CalculatedLevel }} */
+    const byName = {}
+    for (const l of levels) {
+      byName[l.name] = l
+    }
+    /** @type {{ [name: string]: number }} */
+    const counts = {}
+    for (const str of collector.route.split(', ')) {
+      if (!str) continue
+      const match = str.match(/^(\d+)x (ch\d+(?: and ch\d+)?)$/)
+      if (!match) {
+        log.push(`error: string doesn't match: "${str}"`)
+        break outer
+      }
+      const amount = parseInt(match[1])
+      if (amount <= 0) continue
+      for (const name of match[2].split(' and ')) {
+        if (!(name in byName)) {
+          log.push(`error: level doesn't exist: "${name}"`)
+          break outer
+        }
+        counts[name] = (counts[name] ?? 0) + amount
+      }
+    }
+
+    const time = performance.now()
+    let lastAP = Object.entries(counts).reduce((p, [name, amount]) => p + byName[name].ap * amount, 0)
+    let count = 0
+    const clones = levels.map(() => new Uint32Array(requires.length)) // for performace
+    while (true) {
+      /** @type {{ [name: string]: number }} */
+      const extracted = {}
+      const clone = Uint32Array.from(requires)
+      let extractedAP = 0
+      let extractedRoute = ''
+      for (const name in counts) {
+        const l = byName[name]
+        if (counts[name] <= 3) {
+          const amount = counts[name]
+          delete counts[name]
+          extracted[name] = amount
+
+          extractedAP += amount * l.ap
+          extractedRoute += `, ${amount}x ${l.name}`
+        } else {
+          counts[name] -= 3
+          extracted[name] = 3
+
+          for (let i = 0; i < clone.length; i++) {
+            if (l.items[i] && clone[i]) {
+              clone[i] = Math.max(0, clone[i] - l.items[i] * counts[name])
+            }
+          }
+
+          extractedAP += 3 * l.ap
+          extractedRoute += `, 3x ${l.name}`
+        }
+      }
+
+      const collector = new Collector()
+      collector.collect(extractedAP, extractedRoute.slice(2))
+      calcFurther(levels, 0, clone, clones, 0, '', collector)
+      for (const str of collector.route.split(', ')) {
+        if (!str) continue
+        const match = str.match(/^(\d+)x (ch\d+)$/)
+        if (!match) {
+          log.push(`error: string doesn't match: "${str}"`)
+          break outer
+        }
+        const amount = parseInt(match[1])
+        if (amount <= 0) continue
+        const name = match[2]
+        if (!(name in byName)) {
+          log.push(`error: level doesn't exist: "${name}"`)
+          break outer
+        }
+        counts[name] = (counts[name] ?? 0) + amount
+      }
+
+      count++
+      const ap = Object.entries(counts).reduce((p, [name, amount]) => p + byName[name].ap * amount, 0)
+      if (ap === lastAP) break
+      if (ap < lastAP) lastAP = ap
+    }
+    log.push(
+      `Further recursive calculation iterated ${count} time${count === 1 ? '' : 's'}, costs ${(performance.now() - time).toFixed(1)}ms.`,
+      'Result:\n'
+    )
+
+    let sumAP = 0
+    let sumAPForItem0 = 0
+    const sumItems = new Uint32Array(requires.length)
+    const list = Object.entries(counts).sort(([_, a], [$, b]) => b - a).map(([name, amount]) => {
+      const l = byName[name]
+      const ap = l.ap * amount
+      sumAP += ap
+      if (l.bitflag === 1) sumAPForItem0 += ap
+      return [
+        amount + 'x',
+        name,
+        ap + 'AP',
+        ...Array.from(l.items, (v, i) => {
+          const n = v * amount
+          sumItems[i] += n
+          return n.toString()
+        })
+      ]
+    })
+    if (list.length === 0) {
+      log.push('Empty')
+      break outer
+    }
+    list.push(
+      ['', '', sumAP + 'AP', ...Array.from(sumItems, v => v.toString())],
+      ['', '', '', ...Array.from(requires, v => v.toString())]
+    )
+    const maxs = Uint8Array.from(list[0], (_, i) => Math.max(...list.map(v => v[i].length)))
+    maxs[1] = Math.max(maxs[1], 'sum'.length - 1 - maxs[0])
+    maxs[2] = Math.max(maxs[2], 'requires'.length - 1 - maxs[0] - 1 - maxs[1])
+    const strList = list.map(row => row.map((v, i) => v.padStart(maxs[i], ' ')).join(' '))
+    const len = strList.length
+    strList[len - 2] = 'sum' + strList[len - 2].slice(3)
+    strList[len - 1] = 'requires' + strList[len - 1].slice(8)
+    log.push(
+      strList.join('\n'),
+      `\nSum AP for non-first items: ${sumAP - sumAPForItem0}`
     )
   }
 
-  output.innerText = log.join('\n')
+  output.innerText = log.join('\n') + '\n'.repeat(8)
 }
 
 /**
  * @param {CalculatedLevel[]} levels 
- * @param {number} lvIndex 
- * @param {Uint16Array} requires 
- * @param {number} reqIndex 
+ * @param {Uint32Array} requires 
  * @param {number} usedAP 
  * @param {string} route 
  * @param {Collector} collector 
- * @returns {number} used ap for calculation
  */
-function calc(levels, lvIndex, requires, reqIndex, usedAP, route, collector) {
-  if (usedAP - 500 > collector.ap) {
-    collector.collect(Infinity, 'Abandoned route.')
-    return Infinity
-  }
-  if (requires[reqIndex] === 0) {
-    reqIndex++
-    if (reqIndex === requires.length) {
-      if (requires.every(v => v === 0)) {
-        collector.collect(usedAP, route.slice(2))
-        return usedAP
-      }
-    }
-    return calc(levels, lvIndex, requires, reqIndex, usedAP, route, collector)
-  }
-  if (reqIndex >= requires.length || lvIndex >= levels.length) {
-    collector.collect(-999, `something really bad happened. (${JSON.stringify({
-      levels: levels.map(v => ({...v, items: Array.from(v.items)})),
-      lvIndex,
-      requires: Array.from(requires),
-      reqIndex, usedAP, route
-    }, undefined, '  ')})`)
-    return Infinity
-  }
-  const lv = levels[lvIndex]
+function calc(levels, requires, usedAP, route, collector) {
+  // if (usedAP > collector.ap) {
+  //   collector.collect(usedAP, 'Abandoned route.')
+  //   return
+  // }
   const reqBits = requires.reduce((p, v, i) => p | (+(v > 0) << i), 0)
-  if ((reqBits & lv.bitflag) === 0) {
-    return calc(levels, lvIndex + 1, requires, reqIndex, usedAP, route, collector)
+  if (reqBits === 0) {
+    collector.collect(usedAP, route.slice(2))
+    return
   }
-  const min = Math.max(...requires.map((v, i) => (lv.futurebits & (1 << i)) ? 0 : Math.ceil(v / lv.items[i])))
-  const max = Math.max(min, Math.ceil((collector.ap - usedAP) / lv.ap))
-  const set = new Set()
 
-  // prepare amounts for first iteration
-  requires.forEach((v, i) => {
-    if (!v || !lv.items[i]) return
-    set.add(Math.max(min, Math.min(max, Math.ceil(v / lv.items[i]))))
-  })
-  set.delete(Infinity)
-  set.add(min)
-  set.add(max)
-  let list = [...set]
-  for (let i = 0; i < list.length; i++) {
-    const v = list[i]
-    for (let j = i + 1; j < list.length; j++) {
-      set.add(Math.floor((v + list[j]) / 2))
-    }
-  }
-  list = [...set]
-  /** @type {{ [amount: number]: number }} */
-  const cache = {}
-  let res = Infinity
-
-  const clone = new Uint16Array(requires.length)
-  while (true) {
-    // iterate through prepared amounts
-    for (const amount of list) {
-      if (amount in cache) continue
+  const clone = new Uint32Array(requires.length)
+  for (const l of levels) {
+    for (let i = 0; i < requires.length; i++) {
+      const bit = 1 << i
+      if (!(reqBits & l.bitflag & bit)) continue
+      const amount = Math.ceil(requires[i] / l.items[i])
+      const uap = usedAP + l.ap * amount
+      if (uap > collector.ap) {
+        collector.collect(uap, 'Abandoned route.')
+        continue
+      }
       clone.set(requires)
-      lv.items.forEach((v, i) => {
-        if (v) clone[i] = Math.max(0, clone[i] - v * amount)
-      })
-      cache[amount] = calc(
+      for (let i = 0; i < clone.length; i++) {
+        if (l.items[i] && clone[i]) {
+          clone[i] = Math.max(0, clone[i] - l.items[i] * amount)
+        }
+      }
+      calc(
         levels,
-        lvIndex + 1,
         clone,
-        reqIndex,
-        usedAP + lv.ap * amount,
-        amount ? route + `, ${amount}x ${lv.name}` : route,
+        uap,
+        `${route}, ${amount}x ${l.name}`,
         collector
       )
     }
-    // check result
-    const lastRes = res
-    res = Math.min(Infinity, ...Object.values(cache))
-    if (lastRes === res) break
-    // sort and filter list, prepare next iteration
-    set.clear()
-    const limit = res * 0.9
-    for (const n of list.slice(0, 5)) {
-      if (cache[n] < limit) continue
-      for (let i = 1; i <= 16; i *= 2) {
-        set.add(Math.max(min, Math.min(max, n - i)))
-        set.add(Math.max(min, Math.min(max, n + i)))
+  }
+}
+
+/**
+ * this recursive function sacrificed some readability for performance.
+ * @param {CalculatedLevel[]} levels 
+ * @param {number} lvIndex 
+ * @param {Uint32Array} requires 
+ * @param {Uint32Array[]} clones for performance
+ * @param {number} usedAP 
+ * @param {string} route 
+ * @param {Collector} collector 
+ */
+function calcFurther(levels, lvIndex, requires, clones, usedAP, route, collector) {
+  // if (usedAP > collector.ap) return // commented out for performance
+  const len = requires.length
+  let i = 0, j = 0
+  endCheck: {
+    for (i = 0; i < len; i++) {
+      if (requires[i]) break endCheck
+    }
+    collector.collect(usedAP, route.slice(2))
+    return
+  }
+
+  if (lvIndex === levels.length) return
+  const { name, items, ap, futurebits, itemRcp } = levels[lvIndex]
+
+  let min = 0
+  for (i = 0; i < len; i++) {
+    if ((~futurebits & (1 << i)) && requires[i]) {
+      j = requires[i] * itemRcp[i]
+      if (j > min) min = j
+    }
+  }
+  if (min) {
+    min = Math.ceil(min)
+  }
+
+  if (!futurebits) { // last item
+    usedAP += ap * min
+    if (usedAP > collector.ap) return
+    collector.collect(usedAP, `${route}, ${min}x ${name}`.slice(2))
+    return
+  }
+
+  const clone = clones[lvIndex]
+  for (i = 0; i < len; i++) clone[i] = requires[i]
+  lvIndex++
+
+  // do first
+  if (min) {
+    usedAP += ap * min
+    if (usedAP > collector.ap) return
+    for (j = 0; j < len; j++) {
+      if (items[j] && clone[j]) {
+        clone[j] = Math.max(0, clone[j] - items[j] * min)
       }
     }
-    set.delete(Infinity)
-    list = [...set]
+    calcFurther(levels, lvIndex, clone, clones, usedAP, `${route}, ${min}x ${name}`, collector)
+  } else {
+    calcFurther(levels, lvIndex, clone, clones, usedAP, route, collector) // 0
   }
-  return res
+
+  let clear = true
+  for (i = min + 1;; i++) {
+    usedAP += ap
+    if (usedAP > collector.ap) break
+    clear = true
+    for (j = 0; j < len; j++) {
+      if (items[j] && clone[j]) {
+        clone[j] = Math.max(0, clone[j] - items[j])
+        clear = false
+      }
+    }
+    if (clear) break
+    calcFurther(levels, lvIndex, clone, clones, usedAP, `${route}, ${i}x ${name}`, collector)
+  }
 }
 
 class Collector {
@@ -347,7 +529,7 @@ class Collector {
    */
   collect(ap, route) {
     this.count++
-    if (ap > this.ap) return
+    if (ap >= this.ap) return
     this.ap = ap
     this.route = route
   }
@@ -362,6 +544,7 @@ main()
  *  items: Uint16Array;
  *  bitflag: number;
  *  futurebits: number;
+ *  itemRcp: Float32Array;
  * }} CalculatedLevel
  */
 
@@ -369,8 +552,8 @@ function test() {
   state.bonuses[0].valueAsNumber = 90
   state.bonuses[1].valueAsNumber = 60
   state.bonuses[2].valueAsNumber = 45
-  state.requires[0].valueAsNumber = 999
-  state.requires[1].valueAsNumber = 9
-  state.requires[2].valueAsNumber = 0
+  state.requires[0].valueAsNumber = 6
+  state.requires[1].valueAsNumber = 10773
+  state.requires[2].valueAsNumber = 11303
   calculate()
 }

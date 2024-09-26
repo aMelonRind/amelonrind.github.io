@@ -11,3 +11,7 @@ body {
 #maindiv {
   padding-top: 10px;
 }
+
+.bonusInput, .requireInput {
+  max-width: 10ch;
+}
