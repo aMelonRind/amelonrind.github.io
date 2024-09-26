@@ -49,6 +49,7 @@ output.style.whiteSpace = 'pre'
 async function main() {
   definition = await fetch('eventDefinition.json').then(res => res.json())
   eventSelect.onchange = () => onSelectEvent(eventSelect.value)
+  definition.default = "Trip-Trap-Train" // TODO remove this line
   updateEventSelect()
 
   root.innerHTML = ''
@@ -225,7 +226,7 @@ async function calculate() {
   }
 
   /** @type {CalculatedLevel[]} */
-  const duoLevels = levels.flatMap((a, i) => levels.slice(i + 1).map(b => ({
+  const groupLevels = levels.flatMap((a, i) => levels.slice(i + 1).map(b => ({
     name: `${a.name} and ${b.name}`,
     ap: a.ap + b.ap,
     items: a.items.map((v, i) => v + b.items[i]),
@@ -233,8 +234,24 @@ async function calculate() {
     futurebits: NaN,
     itemRcp: rcpDummy
   })))
-  duoLevels.forEach(l => normalized[l.name] = Float32Array.from(l.items, v => v / l.ap))
-  levels.push(...duoLevels)
+  for (const ap of new Set(rawLevels.map(l => l.ap))) {
+    const group = rawLevels.filter(l => l.ap === ap)
+    for (let size = 3; size <= group.length; size++) {
+      for (let i = 0; i + size <= group.length; i++) {
+        const ls = group.slice(i, i + size)
+        groupLevels.push({
+          name: ls.map(l => l.name).join(' and '),
+          ap: ls.reduce((p, v) => p + v.ap, 0),
+          items: ls[0].items.map((_, i) => ls.reduce((p, v) => p + v.items[i], 0)),
+          bitflag: ls.reduce((p, v) => p | v.bitflag, 0),
+          futurebits: NaN,
+          itemRcp: rcpDummy
+        })
+      }
+    }
+  }
+  groupLevels.forEach(l => normalized[l.name] = Float32Array.from(l.items, v => v / l.ap))
+  levels.push(...groupLevels)
   levels = levels.filter(level => {
     const a = normalized[level.name]
     return levels.every(l => {
@@ -291,7 +308,7 @@ async function calculate() {
     const counts = {}
     for (const str of collector.route.split(', ')) {
       if (!str) continue
-      const match = str.match(/^(\d+)x (ch\d+(?: and ch\d+)?)$/)
+      const match = str.match(/^(\d+)x (ch\d+(?: and ch\d+)*)$/)
       if (!match) {
         log.push(`error: string doesn't match: "${str}"`)
         break outer
