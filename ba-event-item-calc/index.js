@@ -12,6 +12,7 @@ let definition = {
 }
 
 const state = {
+  selectedName: '',
   /** @type {(typeof import('./eventDefinition.json')['events']['Get Hyped and March On!'])?} */
   selected: null,
   /** @type {HTMLInputElement[]} */
@@ -62,7 +63,6 @@ async function main() {
   root.appendChild(output)
 
   console.log('loaded!')
-  test()
 }
 
 function updateEventSelect() {
@@ -80,6 +80,7 @@ function updateEventSelect() {
 function onSelectEvent(event = definition.default) {
   numberInputs.innerHTML = ''
   output.innerText = ''
+  state.selectedName = event
   const def = state.selected = definition.events[event] ?? null
   if (!def) return
   if (def.wiki) {
@@ -143,6 +144,15 @@ function onSelectEvent(event = definition.default) {
   table.appendChild(headRow)
   table.appendChild(bonusesRow)
   table.appendChild(requiresRow)
+  
+  try {
+    const data = getStoredInputs()[event]
+    if (data) {
+      state.bonuses.forEach((e, i) => e.valueAsNumber = data.bonuses[i])
+      state.requires.forEach((e, i) => e.valueAsNumber = data.requires[i])
+      calculate()
+    }
+  } catch {}
 
   numberInputs.appendChild(table)
 }
@@ -151,8 +161,17 @@ async function calculate() {
   const def = state.selected
   if (!def) return
 
-  const bonuses = Float32Array.from(state.bonuses, input => (input.valueAsNumber || 0) / 100 + 1)
+  const bonusesInput = Uint16Array.from(state.bonuses, input => Math.max(0, Math.min(65535, input.valueAsNumber || 0)))
+  const bonuses = Float32Array.from(bonusesInput, v => v / 100 + 1)
   const requires = Uint32Array.from(state.requires, input => Math.max(-1, Math.min(4294967295, input.valueAsNumber || 0)))
+
+  const data = getStoredInputs()
+  data[state.selectedName] = {
+    bonuses: Array.from(bonusesInput),
+    requires: Array.from(requires)
+  }
+  localStorage.setItem('inputs', JSON.stringify(data))
+
   const rcpDummy = new Float32Array(0)
   const rawLevels = def.levels.map((d, i) => ({
     name: `ch${i + 1}`,
@@ -535,6 +554,21 @@ class Collector {
   }
 }
 
+/**
+ * @returns {{ [event: string]: {
+ *  bonuses: number[],
+ *  requires: number[]
+ * } }}
+ */
+function getStoredInputs() {
+  const raw = localStorage.getItem('inputs')
+  if (!raw) return {}
+  try {
+    return JSON.parse(raw)
+  } catch {}
+  return {}
+}
+
 main()
 
 /**
@@ -547,13 +581,3 @@ main()
  *  itemRcp: Float32Array;
  * }} CalculatedLevel
  */
-
-function test() {
-  state.bonuses[0].valueAsNumber = 90
-  state.bonuses[1].valueAsNumber = 60
-  state.bonuses[2].valueAsNumber = 45
-  state.requires[0].valueAsNumber = 6
-  state.requires[1].valueAsNumber = 10773
-  state.requires[2].valueAsNumber = 11303
-  calculate()
-}
