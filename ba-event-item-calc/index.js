@@ -213,16 +213,14 @@ async function calculate() {
       return false
     })
   })
-  if (requires.some(v => v === 0)) {
-    const mask = requires.reduce((p, v, i) => p | (+(v > 0) << i), 0)
-    levels = levels.filter(level => {
-      if (!(level.bitflag & mask)) {
-        log.push(`${level.name} has been filtered out because it's not needed.`)
-        return false
-      }
-      return true
-    })
-  }
+  const mask = requires.reduce((p, v, i) => p | (+(v > 0) << i), 0)
+  levels = levels.filter(level => {
+    if (!(level.bitflag & mask)) {
+      log.push(`${level.name} has been filtered out because it's not needed.`)
+      return false
+    }
+    return true
+  })
 
   const bits = rawLevels.reduce((p, v) => p | v.bitflag, 0)
   if (bits < (1 << requires.length) - 1) {
@@ -262,6 +260,7 @@ async function calculate() {
   groupLevels.forEach(l => normalized[l.name] = Float32Array.from(l.items, v => v / l.ap))
   levels.push(...groupLevels)
   levels = levels.filter(level => {
+    if (!(level.bitflag & mask)) return false
     const a = normalized[level.name]
     return levels.every(l => {
       if (level === l) return true
