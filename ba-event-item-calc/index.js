@@ -172,11 +172,11 @@ async function calculate() {
   }
   localStorage.setItem('inputs', JSON.stringify(data))
 
-  const rcpDummy = new Float32Array(0)
+  const rcpDummy = new Float64Array(0)
   const rawLevels = def.levels.map((d, i) => ({
     name: `q${i + 1}`,
     ap: d.ap,
-    items: Uint16Array.from(bonuses, (b, i) => Math.ceil(Math.round((d.items[i] ?? 0) * b * 1000) / 1000)),
+    items: Uint16Array.from(bonuses, (b, i) => Math.ceil(roundFloat((d.items[i] ?? 0) * b))),
     bitflag: d.items.slice(0, bonuses.length).reduce((p, v, i) => p | (+(v > 0) << i), 0),
     futurebits: 0,
     itemRcp: rcpDummy
@@ -188,7 +188,7 @@ async function calculate() {
     ...Array.from(l.items, v => `${v || '-'}`),
     '  ',
     // calculate minimal bonus to get this amount
-    ...Array.from(l.items, (v, j) => v ? `+${(Math.floor(((v - 1) / def.levels[i].items[j] - 1) * 20) + 1) * 5}%` : '-')
+    ...Array.from(l.items, (v, j) => v ? `+${(Math.floor(roundFloat(((v - 1) / def.levels[i].items[j] - 1) * 20)) + 1) * 5}%` : '-')
   ])
   const maxs = Uint8Array.from(list[0], (_, i) => Math.max(...list.map(v => v[i].length)))
   const log = list.map(row => row.map((v, i) => i === 0 ? v.padEnd(maxs[i], ' ') : v.padStart(maxs[i], ' ')).join(' '))
@@ -268,7 +268,7 @@ async function calculate() {
       return d.some(v => v > 0) || level.ap <= l.ap && d.every(v => v === 0)
     })
   })
-  for (const level of levels) level.itemRcp = Float32Array.from(level.items, v => 1 / v)
+  for (const level of levels) level.itemRcp = Float64Array.from(level.items, v => 1 / v)
 
   log.push(`Level pool: ${levels.length}\n`)
 
@@ -306,7 +306,7 @@ async function calculate() {
       levels[i].futurebits = bits
       bits |= levels[i].bitflag
     }
-    for (const level of levels) level.itemRcp = Float32Array.from(level.items, v => 1 / v)
+    for (const level of levels) level.itemRcp = Float64Array.from(level.items, v => 1 / v)
 
     /** @type {{ [name: string]: CalculatedLevel }} */
     const byName = {}
@@ -464,7 +464,7 @@ function calc(levels, requires, usedAP, route, collector) {
     const { bitflag, itemRcp, ap, items, name } = levels[i]
     for (j = 0; j < len; j++) {
       if (~(reqBits & bitflag) & (1 << j)) continue
-      const amount = Math.ceil(requires[j] * itemRcp[j])
+      const amount = Math.ceil(Math.fround(requires[j] * itemRcp[j]))
       const uap = usedAP + ap * amount
       if (uap > collector.ap) {
         collector.collect(uap, 'Abandoned route.')
@@ -518,7 +518,7 @@ function calcFurther(levels, lvIndex, requires, clones, usedAP, route, collector
     }
   }
   if (min) {
-    min = Math.ceil(min)
+    min = Math.ceil(Math.fround(min))
   }
 
   if (!futurebits) { // last item
@@ -594,6 +594,13 @@ function getStoredInputs() {
   return {}
 }
 
+/**
+ * @param {number} n 
+ */
+function roundFloat(n) {
+  return Math.round(n * 10000) / 10000
+}
+
 main()
 
 /**
@@ -603,6 +610,6 @@ main()
  *  items: Uint16Array;
  *  bitflag: number;
  *  futurebits: number;
- *  itemRcp: Float32Array;
+ *  itemRcp: Float64Array;
  * }} CalculatedLevel
  */
