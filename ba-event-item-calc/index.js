@@ -176,7 +176,7 @@ async function calculate() {
   const rawLevels = def.levels.map((d, i) => ({
     name: `q${i + 1}`,
     ap: d.ap,
-    items: Uint16Array.from(bonuses, (b, i) => Math.ceil((d.items[i] ?? 0) * b)),
+    items: Uint16Array.from(bonuses, (b, i) => Math.ceil(Math.round((d.items[i] ?? 0) * b * 1000) / 1000)),
     bitflag: d.items.slice(0, bonuses.length).reduce((p, v, i) => p | (+(v > 0) << i), 0),
     futurebits: 0,
     itemRcp: rcpDummy
