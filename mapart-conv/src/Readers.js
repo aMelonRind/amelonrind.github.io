@@ -39,8 +39,7 @@ class Readers {
           case 'litematic': //@ts-ignore
             return this.readLitematic(await NBT.read(file))
           case 'zip': {
-            return this.readZip(file)
-            break
+            return await this.readZip(file)
           }
         }
       }
@@ -50,7 +49,7 @@ class Readers {
 
   /**
    * @param {StructureNbt} root 
-   * @returns {BlockImage}
+   * @returns {Promise<BlockImage>}
    */
   static readStructure(root) {
     const palette = BlockImageBuilder.readMcPalette(root.data.palette)
@@ -63,7 +62,7 @@ class Readers {
 
   /**
    * @param {SchematicNbt} root 
-   * @returns {BlockImage}
+   * @returns {Promise<BlockImage>}
    */
   static readSchematic(root) {
     const w = root.data.Width.valueOf()
@@ -84,12 +83,14 @@ class Readers {
    * @returns {BlockImage}
    */
   static readMapDat(root) {
-    return new BlockImage(128, 128, Uint8Array.from(root.data.data.colors))
+    const data = new Uint8Array(16384)
+    data.set(root.data.data.colors)
+    return new BlockImage(128, 128, data)
   }
 
   /**
    * @param {LitematicNbt} root 
-   * @returns {BlockImage}
+   * @returns {Promise<BlockImage>}
    */
   static readLitematic(root) {
     const regions = Object.values(root.data.Regions)
@@ -182,10 +183,112 @@ class Readers {
 
   /**
    * @param {File} file 
-   * @returns {BlockImage | HTMLImageElement}
+   * @returns {Promise<BlockImage>}
    */
-  static readZip(file) {
-    throw 'not implemented'
+  static async readZip(file) {
+    const zip = await JSZip.loadAsync(file)
+    console.log('zip:', zip)
+    /** @type {RegExpMatchArray[]} */
+    const matches = []
+    for (const [name, file] of Object.entries(zip.files)) {
+      if (file.dir) continue
+      const match = name.match(/^(.+[^A-Za-z0-9])?(\d+|x)[^A-Za-z0-9](\d+)\.(nbt|schematic|dat|litematic)$/)
+      if (match) {
+        matches.push(match)
+      }
+    }
+    console.log('matches:', matches)
+    if (matches.length === 0) {
+      throw new Error('no match result')
+    }
+    /** @type {{ [prefix: string]: number }} */
+    const counts = {}
+    for (const [, pref] of matches) {
+      counts[pref] = (counts[pref] ?? 0) + 1
+    }
+    console.log('counts:', counts)
+    const max = Object.entries(counts).sort((a, b) => a[1] - b[1]).at(-1)?.[0] ?? null
+    console.log('max:', max)
+
+    /** @type {{ [name: string]: BlockImage }} */
+    const data = {}
+    const promises = []
+    let minX = Infinity
+    let minY = 0
+    let maxX = 0
+    let maxY = 0
+    let maxWildRowWidth = 128
+    /** @type {Set<number>} */
+    const Ws = new Set()
+    /** @type {Set<number>} */
+    const Hs = new Set()
+    isStairPromise = new IsStairPromise(Math.max(...Object.values(counts)))
+    for (const [name, pref, x, y, type] of matches) {
+      if (pref !== max) continue
+      if (x !== 'x') {
+        const nx = parseInt(x)
+        if (nx < minX) minX = nx
+        if (nx > maxX) maxX = nx
+      }
+      const ny = parseInt(y)
+      if (ny < minY) minY = ny
+      if (ny > maxY) maxY = ny
+      promises.push(new Promise(async (res, rej) => {
+        /** @type {*} */
+        const nbt = await zip.files[name].async('arraybuffer').then(buf => NBT.read(buf))
+        switch (type) {
+          case 'nbt':
+            res(this.readStructure(nbt))
+            break
+          case 'schematic':
+            res(this.readSchematic(nbt))
+            break
+          case 'dat':
+            res(this.readMapDat(nbt))
+            break
+          case 'litematic':
+            res(this.readLitematic(nbt))
+            break
+          default:
+            rej()
+        }
+      }).then((/** @type {BlockImage} */ res) => {
+        data[`${x},${y}`] = res
+        if (x !== 'x') {
+          Ws.add(res.width)
+        } else {
+          if (res.width > maxWildRowWidth) maxWildRowWidth = res.width
+        }
+        Hs.add(res.height)
+      }).finally(() => isStairPromise?.count()))
+    }
+    await Promise.allSettled(promises)
+    isStairPromise = null
+    console.log('data:', data)
+    if (minX > maxX) minX = maxX
+    let unitW = 128
+    let unitH = 128
+    if (Ws.size === 1) {
+      unitW = firstValue(Ws)
+    }
+    if (Hs.size === 1) {
+      unitH = firstValue(Hs)
+    }
+    const width = Math.max((maxX - minX + 1) * unitW, maxWildRowWidth)
+    const height = (maxY - minY + 1) * unitH
+    const res = new Uint8Array(width * height)
+    for (const [pos, { width: iw, height: ih, data: idat }] of Object.entries(data)) {
+      const h = Math.min(unitH, ih)
+      const w = pos.startsWith('x,') ? Math.min(width, iw) : Math.min(unitW, iw)
+      const sp = pos.split(',')
+      const x = sp[0] === 'x' ? 0 : parseInt(sp[0])
+      const y = parseInt(sp[1])
+      const orig = y * unitH * width + x * unitW
+      for (let y = 0; y < h; y++) {
+        res.set(idat.subarray(y * iw, y * iw + w), orig + y * width)
+      }
+    }
+    return new BlockImage(width, height, res)
   }
 
 }
@@ -225,6 +328,9 @@ class ImageReaders {
   }
 
 }
+
+/** @type {IsStairPromise?} */
+let isStairPromise = null
 
 class BlockImageBuilder {
   /** @readonly */ static WATER_MASK = (1 << 10) - 1 // deepest water color
@@ -328,12 +434,12 @@ class BlockImageBuilder {
   }
 
   /**
-   * @returns {BlockImage}
+   * @returns {Promise<BlockImage>}
    */
-  build() {
+  async build() {
     const heightSet = new Set(this.heights)
     const isFlat = heightSet.size === 1
-    const topY = isFlat ? heightSet[Symbol.iterator]().next().value : -32000
+    const topY = isFlat ? firstValue(heightSet) : -32000
     const getSlope = index => Math.sign(this.heights[index] - (this.heights[index - this.width] ?? topY)) + 1
     let res = this.blocks.map((v, i) => v * 4 + getSlope(i))
 
@@ -341,12 +447,12 @@ class BlockImageBuilder {
     const waterSet = new Set(hasTopRow ? this.waters.subarray(this.width) : this.waters)
     waterSet.delete(0)
     if (waterSet.size) {
-      const isStair = (() => {
+      const isStair = isStairPromise?.value ?? await (async () => {
         // staircase won't have multiple depths
         if (waterSet.size !== 1) return false
 
         // staircase won't have depths more than two (single and double mode)
-        if (waterSet[Symbol.iterator]().next().value > 2) return false
+        if (firstValue(waterSet) > 2) return false
 
         // slope detection
         if (!isFlat && this.waters.some((v, i) => {
@@ -365,13 +471,15 @@ class BlockImageBuilder {
         // technically i can also check if the source of water has block near it, but too lazy
 
         // ask user for help
-        return confirm(`
+        await isStairPromise?.wait()
+        return isStairPromise?.value ?? confirm(`
           The application is unsure that if this blueprint's water should be treated as staircase or depth.
           Choose OK for staircase, cancel for depth.
           The waters generated from rebane2001/mapcraft are staircase.
           This website generates depth, which is the correct way for minecraft to render.
         `.trim().replace(/^\s*/gm, '  '))
       })()
+      isStairPromise?.resolve(isStair)
 
       console.log(`building water color in ${isStair ? 'staircase' : 'depth'} mode.`)
       if (isStair) {
@@ -472,4 +580,62 @@ class BlockImage {
     return new ImageData(res, this.width, this.height)
   }
 
+}
+
+/**
+ * a class specifically made for water handling...
+ */
+class IsStairPromise {
+  resolved = false
+  _count = 0
+  max = 0
+  #resolve
+  /** @type {Promise<void>} */
+  #promise = new Promise(res => {
+    this.#resolve = res
+    if (this.resolved) res()
+  })
+  /** @type {boolean?} */
+  value = null
+
+  /**
+   * @param {number} max 
+   */
+  constructor (max) {
+    this.max = max
+  }
+
+  count() {
+    if (!this.resolved && ++this._count >= this.max) {
+      this.resolve(null)
+    }
+  }
+
+  wait(count = true) {
+    if (count) {
+      this.count()
+    }
+    return this.#promise
+  }
+
+  /**
+   * @param {boolean?} value 
+   */
+  resolve(value) {
+    this.value ??= value
+    if (!this.resolved) {
+      this.resolved = true
+      this.#resolve?.()
+    }
+  }
+
+}
+
+/**
+ * @template T
+ * @param {Iterable<T>} iterable 
+ * @returns {T}
+ */
+function firstValue(iterable) {
+  return iterable[Symbol.iterator]().next().value
 }

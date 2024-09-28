@@ -11,12 +11,17 @@ class MainContext {
     if (this.#initd) return
     this.#initd = true
 
-    window.addEventListener('dragover', e => e.preventDefault())
+    window.addEventListener('dragover', e => {
+      if (e.target instanceof HTMLInputElement) return
+      e.preventDefault()
+    })
     window.addEventListener('drop', e => {
+      if (e.target instanceof HTMLInputElement) return
       e.preventDefault()
       handleItems(e.dataTransfer?.items)
     })
     window.addEventListener('paste', e => {
+      if (e.target instanceof HTMLInputElement) return
       handleItems(e.clipboardData?.items)
     })
 
