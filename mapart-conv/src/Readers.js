@@ -192,8 +192,9 @@ class Readers {
     const matches = []
     for (const [name, file] of Object.entries(zip.files)) {
       if (file.dir) continue
-      const match = name.match(/^(.+[^A-Za-z0-9])?(\d+|x)[^A-Za-z0-9](\d+)\.(nbt|schematic|dat|litematic)$/)
+      const match = name.match(/^(.+[^A-Za-z0-9])?(\d+|x|row)[^A-Za-z0-9](\d+)\.(nbt|schematic|dat|litematic)$/)
       if (match) {
+        if (match[2] === 'row') match[2] = 'x'
         matches.push(match)
       }
     }
@@ -279,7 +280,7 @@ class Readers {
     const res = new Uint8Array(width * height)
     for (const [pos, { width: iw, height: ih, data: idat }] of Object.entries(data)) {
       const h = Math.min(unitH, ih)
-      const w = pos.startsWith('x,') ? Math.min(width, iw) : Math.min(unitW, iw)
+      const w = Math.min(pos.startsWith('x,') ? width : unitW, iw)
       const sp = pos.split(',')
       const x = sp[0] === 'x' ? 0 : parseInt(sp[0])
       const y = parseInt(sp[1])
@@ -530,54 +531,6 @@ class BlockImageBuilder {
       res = res.subarray(this.width)
     }
     return new BlockImage(this.width, hasTopRow ? this.height - 1 : this.height, res)
-  }
-
-}
-
-class BlockImage {
-  /** @readonly @type {Uint8Array} */ static colors = new Uint8Array(64 * 4 * 3) // 64 colors -> 4 brightness -> rgb
-  /** @readonly @type {number} */ width 
-  /** @readonly @type {number} */ height 
-  /** @readonly @type {Uint8Array} */ data // same as MapDatNbt.data.colors but unsigned and unlimited length
-
-  static async load() {
-    const colors = fetch('src/colors.json').then(res => res.json())
-    /** @type {number[]} */
-    const rawcolors = await colors
-    const Brightness = Float32Array.from([ 180, 220, 255, 135 ], v => v / 255) // LOW, NORMAL, HIGH, LOWEST
-    rawcolors.forEach((v, i) => {
-      const rgb = Uint8Array.of(0xFF & (v >> 16), 0xFF & (v >> 8), 0xFF & v)
-      const index = i * 4 * 3
-      this.colors.set(rgb.map(v => v * Brightness[0]), index)
-      this.colors.set(rgb.map(v => v * Brightness[1]), index + 3)
-      this.colors.set(rgb.map(v => v * Brightness[2]), index + 6)
-      this.colors.set(rgb.map(v => v * Brightness[3]), index + 9)
-    })
-  }
-
-  /**
-   * @param {number} width 
-   * @param {number} height 
-   * @param {Uint8Array} data 
-   */
-  constructor(width, height, data) {
-    if (width * height !== data.length) throw `invalid length (${width}, ${height}, ${width * height}, ${data.length})`
-    this.width = width
-    this.height = height
-    this.data = data
-  }
-
-  /**
-   * @returns {ImageData}
-   */
-  toImageData() {
-    const res = new Uint8ClampedArray(this.data.length * 4)
-    this.data.forEach((v, i) => {
-      if (v < 4) return
-      res.set(BlockImage.colors.subarray(v * 3, v * 3 + 3), i * 4)
-      res[i * 4 + 3] = 255
-    })
-    return new ImageData(res, this.width, this.height)
   }
 
 }

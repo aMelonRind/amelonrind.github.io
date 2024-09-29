@@ -1,4 +1,5 @@
 //@ts-check
+///<reference path = "./index.d.ts"/>
 let test
 
 const root = document.getElementById('script-root') ?? document.body
@@ -10,7 +11,7 @@ const ctx = requireNonNull(canvas.getContext('2d'))
 
 const infoText = document.createElement('div')
 infoText.id = 'infoText'
-infoText.innerText = "Drag 'n' drop or paste to import..."
+infoText.innerText = "Drag 'n' drop or paste to import...\nAccepts images/.nbt/.schematic/.litematic/map_*.dat/.zip"
 
 const pngDlButton = document.createElement('button')
 pngDlButton.type = 'button'

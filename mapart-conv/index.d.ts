@@ -1,5 +1,7 @@
 
-/// <reference path="./src/**/*.js"/>
+/// <reference path="./src/BlockImage.js"/>
+/// <reference path="./src/MainContext.js"/>
+/// <reference path="./src/Readers.js"/>
 
 declare const JSZip: import('jszip');
 namespace NBT {
@@ -33,6 +35,10 @@ type LitematicNbt = { // .litematic
     TimeCreated: bigint,
     TimeModified: bigint,
     EnclosingSize: NBT.Vec3i,
+    /**
+     * see WidgetSchematicBrowser.java#L295
+     * basically, ARGB array with squared size
+     */
     PreviewImageData?: NBT.IntArrayTag
   },
   Regions: { [name: string]: {
