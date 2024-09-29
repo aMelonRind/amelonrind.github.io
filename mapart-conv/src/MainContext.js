@@ -37,6 +37,7 @@ class MainContext {
         ctx.drawImage(res, 0, 0)
         MainContext.onNewImage(ctx.getImageData(0, 0, res.width, res.height))
       } else {
+        test = res
         MainContext.onNewImage(res.toImageData())
       }
     }

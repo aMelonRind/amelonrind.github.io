@@ -31,13 +31,13 @@ class Readers {
         const ext = (lastDotIndex !== -1 && lastDotIndex < name.length - 1) ? name.slice(lastDotIndex + 1) : ''
         switch (ext) {
           case 'nbt': //@ts-ignore
-            return this.readStructure(await NBT.read(file))
+            return this.readStructure(await NBT.read(file), file.name)
           case 'schematic': //@ts-ignore
-            return this.readSchematic(await NBT.read(file))
+            return this.readSchematic(await NBT.read(file), file.name)
           case 'dat': //@ts-ignore
-            return this.readMapDat(await NBT.read(file))
+            return this.readMapDat(await NBT.read(file), file.name)
           case 'litematic': //@ts-ignore
-            return this.readLitematic(await NBT.read(file))
+            return this.readLitematic(await NBT.read(file), file.name)
           case 'zip': {
             return await this.readZip(file)
           }
@@ -49,22 +49,32 @@ class Readers {
 
   /**
    * @param {StructureNbt} root 
+   * @param {string?} filename 
    * @returns {Promise<BlockImage>}
    */
-  static readStructure(root) {
+  static async readStructure(root, filename = null) {
     const palette = BlockImageBuilder.readMcPalette(root.data.palette)
     const builder = new BlockImageBuilder(root.data.size[0].valueOf(), root.data.size[2].valueOf())
     root.data.blocks.forEach(b => {
       builder.putPos(b.pos[0].valueOf(), b.pos[1].valueOf(), b.pos[2].valueOf(), palette[b.state.valueOf()])
     })
-    return builder.build()
+    const img = await builder.build()
+    if (filename) {
+      img.description = `From ${filename}`
+      img.filename = filename.slice(0, -'.nbt'.length)
+    }
+    if (root.data.author) {
+      img.author = `${root.data.author}`
+    }
+    return img
   }
 
   /**
    * @param {SchematicNbt} root 
+   * @param {string?} filename 
    * @returns {Promise<BlockImage>}
    */
-  static readSchematic(root) {
+  static async readSchematic(root, filename = null) {
     const w = root.data.Width.valueOf()
     const h = root.data.Height.valueOf()
     const l = root.data.Length.valueOf()
@@ -75,24 +85,36 @@ class Readers {
     for (let y = 0; y < h; y++) {
       data.subarray(y * area, y * area + area).forEach((c, i) => builder.putIndex(i, y, c))
     }
-    return builder.build()
+    const img = await builder.build()
+    if (filename) {
+      img.description = `From ${filename}`
+      img.filename = filename.slice(0, -'.schematic'.length)
+    }
+    return img
   }
 
   /**
    * @param {MapDatNbt} root 
+   * @param {string?} filename 
    * @returns {BlockImage}
    */
-  static readMapDat(root) {
+  static readMapDat(root, filename = null) {
     const data = new Uint8Array(16384)
     data.set(root.data.data.colors)
-    return new BlockImage(128, 128, data)
+    const img = new BlockImage(128, 128, data)
+    if (filename) {
+      img.description = `From ${filename}`
+      img.filename = filename.slice(0, -'.dat'.length)
+    }
+    return img
   }
 
   /**
    * @param {LitematicNbt} root 
+   * @param {string?} filename 
    * @returns {Promise<BlockImage>}
    */
-  static readLitematic(root) {
+  static async readLitematic(root, filename = null) {
     const regions = Object.values(root.data.Regions)
     if (regions.length === 0) throw `no regions`
     
@@ -178,7 +200,33 @@ class Readers {
         }
       }
     })
-    return builder.build()
+    const img = await builder.build()
+    if (filename) {
+      img.description = `From ${filename}`
+      img.filename = filename.slice(0, -'.litematic'.length)
+    }
+    const meta = root.data.Metadata
+    if (meta) {
+      if (meta.Name) {
+        img.name = `${meta.Name}`
+      }
+      if (meta.Author) {
+        img.author = `${meta.Author}`
+      }
+      if (meta.Description) {
+        img.description = `${meta.Description}`
+      }
+      if (meta.TimeCreated) {
+        /** @type {*} */
+        const time = meta.TimeCreated
+        if (typeof time === 'bigint') {
+          img.timeCreated = time
+        } else if (typeof time === 'number') {
+          img.timeCreated = BigInt(time < 1e10 ? time * 1000 : time)
+        }
+      }
+    }
+    return img
   }
 
   /**
@@ -192,7 +240,7 @@ class Readers {
     const matches = []
     for (const [name, file] of Object.entries(zip.files)) {
       if (file.dir) continue
-      const match = name.match(/^(.+[^A-Za-z0-9])?(\d+|x|row)[^A-Za-z0-9](\d+)\.(nbt|schematic|dat|litematic)$/)
+      const match = name.match(/^(.*\D)?(\d+|x|row)[^A-Za-z0-9](\d+)\.(nbt|schematic|dat|litematic)$/)
       if (match) {
         if (match[2] === 'row') match[2] = 'x'
         matches.push(match)
@@ -210,6 +258,9 @@ class Readers {
     console.log('counts:', counts)
     const max = Object.entries(counts).sort((a, b) => a[1] - b[1]).at(-1)?.[0] ?? null
     console.log('max:', max)
+    if (max == null) {
+      throw new Error('no mapart found in zip')
+    }
 
     /** @type {{ [name: string]: BlockImage }} */
     const data = {}
@@ -266,6 +317,9 @@ class Readers {
     await Promise.allSettled(promises)
     isStairPromise = null
     console.log('data:', data)
+    if (Object.values(data).length === 0) {
+      throw new Error('no data loaded')
+    }
     if (minX > maxX) minX = maxX
     let unitW = 128
     let unitH = 128
@@ -286,10 +340,18 @@ class Readers {
       const y = parseInt(sp[1])
       const orig = y * unitH * width + x * unitW
       for (let y = 0; y < h; y++) {
-        res.set(idat.subarray(y * iw, y * iw + w), orig + y * width)
+        const i = y * iw
+        res.set(idat.subarray(i, i + w), orig + y * width)
       }
     }
-    return new BlockImage(width, height, res)
+    const img = new BlockImage(width, height, res)
+    const main = data[`${minX},${minY}`] ?? data[`x,${minY}`] ?? Object.values(data)[0]
+    img.filename = (/[^A-Za-z]$/.test(max) ? max.slice(0, -1) : max) || img.filename
+    img.name = main.name || Object.values(data).find(img => img.name)?.name || null
+    img.author = main.author || Object.values(data).find(img => img.author)?.author || img.author
+    img.description = main.description?.trim() || Object.values(data).find(img => img.description?.trim())?.description?.trim() || null
+    img.timeCreated = Object.values(data).map(img => img.timeCreated).reduce((p, v) => p < v ? p : v, img.timeCreated)
+    return img
   }
 
 }

@@ -105,11 +105,7 @@ function updateScale() {
 }
 
 function downloadCanvasAsPNG() {
-  const dataURL = canvas.toDataURL('image/png')
-  const a = document.createElement('a')
-  a.href = dataURL
-  a.download = 'unnamed.png'
-  a.click()
+  downloadURL(canvas.toDataURL('image/png'), 'unnamed.png')
 }
 
 /**
@@ -121,4 +117,26 @@ function downloadCanvasAsPNG() {
 function requireNonNull(obj, message = 'Object is null!') {
   if (obj == null) throw message
   return obj
+}
+
+/**
+ * @param {string} data 
+ * @param {string} fileName 
+ */
+function downloadBlob(data, fileName) {
+  const blob = new Blob([data], { type: 'application/octet-stream' })
+  const url = URL.createObjectURL(blob)
+  downloadURL(url, fileName)
+  setTimeout(() => URL.revokeObjectURL(url), 5000)
+}
+
+/**
+ * @param {string} dataURL 
+ * @param {string} fileName 
+ */
+function downloadURL(dataURL, fileName) {
+  const a = document.createElement('a')
+  a.href = dataURL
+  a.download = fileName
+  a.click()
 }
