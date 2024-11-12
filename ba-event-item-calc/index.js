@@ -188,7 +188,7 @@ async function calculate() {
     ...Array.from(l.items, v => `${v || '-'}`),
     '  ',
     // calculate minimal bonus to get this amount
-    ...Array.from(l.items, (v, j) => v ? `+${(Math.floor(roundFloat(((v - 1) / def.levels[i].items[j] - 1) * 20)) + 1) * 5}%` : '-')
+    ...Array.from(l.items, (v, j) => v ? `+${Math.max(0, Math.floor(roundFloat(((v - 1) / def.levels[i].items[j] - 1) * 20)) + 1) * 5}%` : '-')
   ])
   const maxs = Uint8Array.from(list[0], (_, i) => Math.max(...list.map(v => v[i].length)))
   const log = list.map(row => row.map((v, i) => i === 0 ? v.padEnd(maxs[i], ' ') : v.padStart(maxs[i], ' ')).join(' '))
