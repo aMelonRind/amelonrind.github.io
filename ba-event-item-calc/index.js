@@ -74,10 +74,12 @@ function updateEventSelect() {
     opt.selected = name === definition.default
     eventSelect.options.add(opt)
   }
-  onSelectEvent(definition.default)
+  const event = localStorage.getItem('selectedEvent') ?? definition.default
+  onSelectEvent((event in definition.events) ? event : definition.default)
 }
 
 function onSelectEvent(event = definition.default) {
+  localStorage.setItem('selectedEvent', event)
   numberInputs.innerHTML = ''
   output.innerText = ''
   state.selectedName = event
