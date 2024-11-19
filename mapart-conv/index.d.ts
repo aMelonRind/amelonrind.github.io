@@ -1,5 +1,7 @@
 
+/// <reference path="./index.js"/>
 /// <reference path="./src/BlockImage.js"/>
+/// <reference path="./src/ExportOptions.js"/>
 /// <reference path="./src/MainContext.js"/>
 /// <reference path="./src/Readers.js"/>
 
@@ -10,6 +12,8 @@ namespace NBT {
   export type Vec3iTuple = NBT.ListTag<NBT.Int32> & [ NBT.Int32, NBT.Int32, NBT.Int32 ];
 }
 declare const NBT: typeof import('nbtify');
+
+type NbtDataResult = Promise<{ name: string, data: Uint8Array }>;
 
 type PaletteNbt = NBT.ListTag<{
   Name: string, // block id
@@ -89,7 +93,7 @@ type StructureNbt = { // .nbt
   palette: PaletteNbt,
   size: NBT.Vec3iTuple,
   author: string,
-  DataVersion: NBT.Int32<3464> // 3953 on 1.21
+  DataVersion: NBT.Int32<3464> // 3953 for 1.21, 3463 for 1.20
 }>;
 
 // fuck schem, never used it anyways

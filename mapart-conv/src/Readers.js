@@ -4,7 +4,7 @@
 class Readers {
 
   static async load() {
-    await Promise.allSettled([BlockImageBuilder.load(), BlockImage.load()])
+    await Promise.allSettled([BlockImageBuilder.load(), BlockImage.load(), BlockPalette.load()])
   }
 
   /**
@@ -29,6 +29,7 @@ class Readers {
         console.log(`reading ${name}`)
         const lastDotIndex = name.lastIndexOf('.')
         const ext = (lastDotIndex !== -1 && lastDotIndex < name.length - 1) ? name.slice(lastDotIndex + 1) : ''
+        isStairPromise = null
         switch (ext) {
           case 'nbt': //@ts-ignore
             return this.readStructure(await NBT.read(file), file.name)
@@ -506,7 +507,7 @@ class BlockImageBuilder {
     const getSlope = index => Math.sign(this.heights[index] - (this.heights[index - this.width] ?? topY)) + 1
     let res = this.blocks.map((v, i) => v * 4 + getSlope(i))
 
-    const hasTopRow = this.width % 128 === 0 && this.height % 128 === 1
+    const hasTopRow = (this.width % 128 === 0 && this.height % 128 === 1) || this.heights.slice(0, this.width).every(v => v < -640)
     const waterSet = new Set(hasTopRow ? this.waters.subarray(this.width) : this.waters)
     waterSet.delete(0)
     if (waterSet.size) {

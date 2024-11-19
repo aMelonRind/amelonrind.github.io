@@ -1,3 +1,4 @@
+module.exports = 0
 
 function jsmBlocks2ColorGen() {
   Chat.log('dumping map colors...')
@@ -72,4 +73,5 @@ function jsmBlocks2ColorGen() {
   Utils.copyToClipboard(JSON.stringify(Object.fromEntries(Object.entries(res).sort()), undefined, '  '))
   Chat.log('copied.')
 }
+
 jsmBlocks2ColorGen()

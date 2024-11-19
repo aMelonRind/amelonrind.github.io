@@ -26,12 +26,20 @@ paletteUrlLabel.htmlFor = 'paletteUrl'
 const paletteUrlInput = document.createElement('input')
 paletteUrlInput.id = 'paletteUrl'
 paletteUrlInput.type = 'text'
+paletteUrlInput.placeholder = 'https://rebane2001.com/mapartcraft/?preset='
 paletteUrlInput.title = "The link of shared blocks generated from rebane2001's MapartCraft.\nRequired for blueprint exports."
 
 const exportButton = document.createElement('button')
 exportButton.type = 'button'
 exportButton.innerText = 'Export'
-exportButton.onclick = () => alert('WIP')
+exportButton.onclick = () => {
+  const opt = exportTypeDropdown.value
+  if (opt in exportOptions) {
+    exportOptions[opt]()
+  } else {
+    alert('undefined exportOption')
+  }
+}
 
 const exportTypeLabel = document.createElement('label')
 exportTypeLabel.innerText = ' as '
@@ -39,18 +47,7 @@ exportTypeLabel.htmlFor = 'exportType'
 
 const exportTypeDropdown = document.createElement('select')
 exportTypeDropdown.id = 'exportType'
-for (const opt of [
-  '.litematic',
-  '.nbt',
-  '.dat / zip of .dat',
-  'zip of 1x1 .litematic',
-  'zip of 1x1 .nbt',
-  'zip of rows of .litematic',
-  'zip of rows of .nbt',
-  '.litematic with separated materials',
-  'zip of 1x1 .litematic with separated materials',
-  'zip of rows of .litematic with separated materials',
-]) {
+for (const opt in exportOptions) {
   const res = document.createElement('option')
   res.value = opt
   res.innerText = opt
@@ -59,12 +56,14 @@ for (const opt of [
 
 async function main() {
   await Readers.load()
+  BlockPalette.postLoad()
 
   window.onresize = document.onresize = function() {
     updateScale()
   }
 
-  MainContext.onNewImage = image => {
+  MainContext.onNewContext(mctx => {
+    const image = mctx.getImageData()
     const w = image.width / 128
     const h = image.height / 128
     infoText.innerText = `${image.width}x${image.height} (${Number.isInteger(w) ? w : w.toFixed(2)}x${Number.isInteger(h) ? h : h.toFixed(2)})`
@@ -72,7 +71,7 @@ async function main() {
     canvas.height = image.height
     ctx.putImageData(image, 0, 0)
     updateScale()
-  }
+  })
   MainContext.init()
 
   root.innerHTML = ''
@@ -120,10 +119,10 @@ function requireNonNull(obj, message = 'Object is null!') {
 }
 
 /**
- * @param {string} data 
  * @param {string} fileName 
+ * @param {BlobPart} data 
  */
-function downloadBlob(data, fileName) {
+function downloadBlob(fileName, data) {
   const blob = new Blob([data], { type: 'application/octet-stream' })
   const url = URL.createObjectURL(blob)
   downloadURL(url, fileName)

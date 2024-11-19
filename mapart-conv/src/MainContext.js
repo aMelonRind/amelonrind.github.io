@@ -6,6 +6,21 @@
  */
 class MainContext {
   static #initd = false
+  /** @type {MainContext?} */
+  static #current = null
+  /** @type {Set<(ctx: MainContext) => any>} */
+  static #listeners = new Set()
+
+  /**
+   * @param {(ctx: MainContext) => any} cb 
+   */
+  static onNewContext(cb) {
+    this.#listeners.add(cb)
+  }
+
+  static getCurrent() {
+    return this.#current
+  }
 
   static init() {
     if (this.#initd) return
@@ -31,22 +46,34 @@ class MainContext {
     async function handleItems(items) {
       const res = await Readers.readItems(items)
       if (!res) return
-      if (res instanceof HTMLImageElement) {
-        const canvas = new OffscreenCanvas(res.width, res.height)
-        const ctx = requireNonNull(canvas.getContext('2d'))
-        ctx.drawImage(res, 0, 0)
-        MainContext.onNewImage(ctx.getImageData(0, 0, res.width, res.height))
-      } else {
-        test = res
-        MainContext.onNewImage(res.toImageData())
-      }
+      new MainContext(res).setCurrent()
     }
   }
 
   /**
-   * @param {ImageData} image 
+   * @param {HTMLImageElement | BlockImage} base 
    */
-  static onNewImage(image) {
-    //
+  constructor (base) {
+    this.base = base
   }
+
+  setCurrent() {
+    MainContext.#current = this
+    for (const cb of MainContext.#listeners) {
+      cb(this)
+    }
+    return this
+  }
+
+  getImageData() {
+    if (this.base instanceof HTMLImageElement) {
+      const canvas = new OffscreenCanvas(this.base.width, this.base.height)
+      const ctx = requireNonNull(canvas.getContext('2d'))
+      ctx.drawImage(this.base, 0, 0)
+      return ctx.getImageData(0, 0, this.base.width, this.base.height)
+    } else {
+      return this.base.toImageData()
+    }
+  }
+
 }
