@@ -39,19 +39,6 @@ const exportOptions = (() => {
       if (!image) return
       packAndDownloadZip(image, image.splitRows(), img => img.toStructure())
     },
-    async '.litematic with separated materials'(image = getBlockImage()) {
-      if (!image) return
-      const { name, data } = await image.toLitematicSeparated()
-      downloadBlob(name, data)
-    },
-    async 'zip of 1x1 .litematic with separated materials'(image = getBlockImage()) {
-      if (!image) return
-      packAndDownloadZip(image, image.split1x1(), img => img.toLitematicSeparated())
-    },
-    async 'zip of rows of .litematic with separated materials'(image = getBlockImage()) {
-      if (!image) return
-      packAndDownloadZip(image, image.splitRows(), img => img.toLitematicSeparated())
-    },
   }
 
   function getBlockImage() {
