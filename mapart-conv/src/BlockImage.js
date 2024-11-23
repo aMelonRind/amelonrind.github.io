@@ -632,7 +632,7 @@ class BlockPalette {
   /**
    * @typedef {{
    *  blocks: Set<string>,
-   *  affects: { has: (query: string) => boolean },
+   *  affects: Set<string>,
    *  action: (palette: BlockPalette, layer: Uint16Array, width: number, index: number, affected: Set<number>) => void
    * }} NSUDefinition
    */
@@ -661,7 +661,6 @@ class BlockPalette {
   }
 
   static postLoad() {
-    const self = { has() { return true } }
     const colors = [
       'black', 'blue', 'brown', 'cyan', 'gray', 'green', 'light_blue', 'light_gray',
       'lime', 'magenta', 'orange', 'pink', 'purple', 'red', 'white', 'yellow'
@@ -691,7 +690,7 @@ class BlockPalette {
       }
     }, {
       blocks: new Set(['mushroom_stem', 'brown_mushroom_block', 'red_mushroom_block']),
-      affects: self,
+      get affects() { return this.blocks },
       action(palette, layer, width, index, affected) {
         let state = null
         let modified = false
@@ -891,7 +890,11 @@ class BlockPalette {
    */
   performBlockUpdates(layers, width) {
     const idArr = this.base.map(BlockState.getId)
-    const stateSets = layers.map(layer => new Set(layer))
+    /**
+     * lazy load because it's expensive
+     * @type {Set<number>[]}
+     */
+    let stateSets
     for (const nsu of BlockPalette._needStateUpdate) {
       /** @type {Set<number>} */
       const blocksSet = new Set()
@@ -911,6 +914,7 @@ class BlockPalette {
       })
       if (affected.size === 0) continue
 
+      stateSets ??= layers.map(layer => new Set(layer))
       layers.forEach((layer, i) => {
         const set = stateSets[i]
         if (![...blocksSet].some(v => set.has(v)) || ![...affected].some(v => set.has(v))) return

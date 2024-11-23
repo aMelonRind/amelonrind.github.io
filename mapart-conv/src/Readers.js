@@ -174,9 +174,9 @@ class Readers {
       let i = 0
       outer:
       for (let y = 0; y < abssy; y++) {
-        const absy = dy + y
+        let absy = dy + y
         for (let z = 0; z < abssz; z++) {
-          const toIndex = (dz + z) * size.x + dx
+          let toIndex = (dz + z) * size.x + dx
           for (let x = 0; x < abssx; x++) {
             if (bufs < bits) {
               if (i < states.length) {
@@ -186,14 +186,32 @@ class Readers {
               }
               bufs += 64n
             }
-            if (buf) {
-              builder.putIndex(toIndex + x, absy, palette[Number(buf & bitmask)])
+            if (buf !== 0n) {
+              const pi = buf & bitmask
+              if (pi !== 0n) {
+                builder.putIndex(toIndex + x, absy, palette[Number(pi)])
+              }
               buf >>= bits
             } else {
-              const skips = Math.min(abssx - x, Number(bufs / bits)) - 1
-              if (skips > 0) {
-                x += skips
-                bufs -= BigInt(skips) * bits
+              while (states[i] === 0n) {
+                i++
+                bufs += 64n
+              }
+              const skips = bufs / bits - 1n
+              if (skips > 0n) {
+                x += Number(skips)
+                bufs -= skips * bits
+                if (x >= abssx) {
+                  z += Math.floor(x / abssx)
+                  if (z >= abssz) {
+                    y += Math.floor(z / abssz)
+                    if (y >= abssy) break outer
+                    absy = dy + y
+                    z %= abssz
+                  }
+                  toIndex = (dz + z) * size.x + dx
+                  x %= abssx
+                }
               }
             }
             bufs -= bits

@@ -104,7 +104,7 @@ function updateScale() {
 }
 
 function downloadCanvasAsPNG() {
-  downloadURL(canvas.toDataURL('image/png'), 'unnamed.png')
+  downloadURL(canvas.toDataURL('image/png'), `${MainContext.getCurrent()?.base.name ?? 'unnamed'}.png`)
 }
 
 /**
