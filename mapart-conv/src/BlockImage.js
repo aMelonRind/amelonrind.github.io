@@ -2,11 +2,11 @@
 ///<reference path = "../index.d.ts"/>
 
 class BlockImage {
-  /** @readonly @type {Uint8Array} */ static colors = new Uint8Array(64 * 4 * 3) // 64 colors -> 4 brightness -> rgb
+  /** 64 colors -> 4 brightness -> rgb @readonly @type {Uint8Array} */ static colors = new Uint8Array(64 * 4 * 3)
   /** @readonly @type {number} */ width 
   /** @readonly @type {number} */ height 
-  /** @readonly @type {Uint8Array} */ data // same as MapDatNbt.data.colors but unsigned and unlimited length
-  /** @type {string?} the part of this image, should be in `${number | 'row'}_${number}` format. null if this is the whole image. */
+  /** same as MapDatNbt.data.colors but unsigned and unlimited length @readonly @type {Uint8Array} */ data
+  /** the part of this image, should be in `${number | 'row'}_${number}` format. null if this is the whole image. @type {string?} */
   part = null
   filename = 'unnamed_mapart'
   /** @type {string?} */ name = null

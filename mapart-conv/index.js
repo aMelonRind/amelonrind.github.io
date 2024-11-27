@@ -40,6 +40,7 @@ exportButton.onclick = () => {
     alert('undefined exportOption')
   }
 }
+exportButton.disabled = true
 
 const exportTypeLabel = document.createElement('label')
 exportTypeLabel.innerText = ' as '
@@ -54,6 +55,34 @@ for (const opt in exportOptions) {
   exportTypeDropdown.options.add(res)
 }
 
+const convertButton = document.createElement('button')
+convertButton.type = 'button'
+convertButton.innerText = 'Convert'
+convertButton.onclick = () => {
+  const opt = convertTypeDropdown.value
+  if (opt in convertMethods) {
+    convertMethods[opt]()
+  } else {
+    alert('undefined convertMethods')
+  }
+}
+
+const convertTypeLabel = document.createElement('label')
+convertTypeLabel.innerText = ' by '
+convertTypeLabel.htmlFor = 'convertType'
+
+const convertTypeDropdown = document.createElement('select')
+convertTypeDropdown.id = 'convertType'
+convertTypeDropdown.title = `For normal dither types, go to Rebane's MapartCraft because they're more advanced.
+This site is mainly for special image types.
+After converting from there, copy the image and then use "nearest" convert type here.`
+for (const opt in convertMethods) {
+  const res = document.createElement('option')
+  res.value = opt
+  res.innerText = opt
+  convertTypeDropdown.options.add(res)
+}
+
 async function main() {
   await Readers.load()
   BlockPalette.postLoad()
@@ -62,15 +91,16 @@ async function main() {
     updateScale()
   }
 
-  MainContext.onNewContext(mctx => {
+  MainContext.onNewImage(mctx => {
     const image = mctx.getImageData()
     const w = image.width / 128
     const h = image.height / 128
-    infoText.innerText = `${image.width}x${image.height} (${Number.isInteger(w) ? w : w.toFixed(2)}x${Number.isInteger(h) ? h : h.toFixed(2)})`
+    infoText.innerText = `${image.width}x${image.height} (${Number.isInteger(w) ? w : w.toFixed(2)}x${Number.isInteger(h) ? h : h.toFixed(2)}) • ${mctx.base instanceof BlockImage ? 'BlockImage' : 'RGBAImage'}`
     canvas.width = image.width
     canvas.height = image.height
     ctx.putImageData(image, 0, 0)
     updateScale()
+    exportButton.disabled = !(mctx.base instanceof BlockImage)
   })
   MainContext.init()
 
@@ -82,6 +112,10 @@ async function main() {
   root.appendChild(br())
   root.appendChild(paletteUrlLabel)
   root.appendChild(paletteUrlInput)
+  root.appendChild(br())
+  root.appendChild(convertButton)
+  root.appendChild(convertTypeLabel)
+  root.appendChild(convertTypeDropdown)
   root.appendChild(br())
   root.appendChild(exportButton)
   root.appendChild(exportTypeLabel)
@@ -104,7 +138,12 @@ function updateScale() {
 }
 
 function downloadCanvasAsPNG() {
-  downloadURL(canvas.toDataURL('image/png'), `${MainContext.getCurrent()?.base.name ?? 'unnamed'}.png`)
+  let name = 'unnamed'
+  const base = MainContext.getCurrent()?.base
+  if (base instanceof BlockImage) {
+    name = base.filename
+  }
+  downloadURL(canvas.toDataURL('image/png'), `${name}.png`)
 }
 
 /**

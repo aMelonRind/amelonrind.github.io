@@ -10,11 +10,12 @@ class MainContext {
   static #current = null
   /** @type {Set<(ctx: MainContext) => any>} */
   static #listeners = new Set()
+  /** @type {HTMLImageElement | BlockImage} */ #base
 
   /**
    * @param {(ctx: MainContext) => any} cb 
    */
-  static onNewContext(cb) {
+  static onNewImage(cb) {
     this.#listeners.add(cb)
   }
 
@@ -57,12 +58,23 @@ class MainContext {
     this.base = base
   }
 
-  setCurrent() {
-    MainContext.#current = this
+  get base() {
+    return this.#base
+  }
+
+  set base(v) {
+    this.#base = v
     for (const cb of MainContext.#listeners) {
       cb(this)
     }
-    return this
+  }
+
+  setCurrent() {
+    return MainContext.#current = this
+  }
+
+  isTrueColor() {
+    return !(this.base instanceof BlockImage)
   }
 
   getImageData() {

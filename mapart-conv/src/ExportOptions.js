@@ -44,13 +44,13 @@ const exportOptions = (() => {
   function getBlockImage() {
     const ctx = MainContext.getCurrent()
     if (!ctx) {
-      alert('no context active')
+      alert('No context active.')
       return null
     }
     if (ctx.base instanceof BlockImage) {
       return ctx.base
     } else {
-      alert('data is not BlockImage')
+      alert('The data should be BlockImage in order to get exported.')
       return null
     }
   }
