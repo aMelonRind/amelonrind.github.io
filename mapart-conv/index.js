@@ -35,7 +35,7 @@ exportButton.innerText = 'Export'
 exportButton.onclick = () => {
   const opt = exportTypeDropdown.value
   if (opt in exportOptions) {
-    exportOptions[opt]()
+    TaskManager.run(`Export as ${opt}`, task => exportOptions[opt](task))
   } else {
     alert('undefined exportOption')
   }
@@ -61,7 +61,7 @@ convertButton.innerText = 'Convert'
 convertButton.onclick = () => {
   const opt = convertTypeDropdown.value
   if (opt in convertMethods) {
-    convertMethods[opt]()
+    TaskManager.run(`Convert by ${opt}`, task => convertMethods[opt](task))
   } else {
     alert('undefined convertMethods')
   }
@@ -83,9 +83,13 @@ for (const opt in convertMethods) {
   convertTypeDropdown.options.add(res)
 }
 
+const progressDisplay = document.createElement('div')
+progressDisplay.id = 'progress-display'
+
 async function main() {
   await Readers.load()
   BlockPalette.postLoad()
+  TaskManager.progressDiv = progressDisplay
 
   window.onresize = document.onresize = function() {
     updateScale()
@@ -106,6 +110,7 @@ async function main() {
 
   root.innerHTML = ''
   const br = () => document.createElement('br')
+  root.appendChild(progressDisplay)
   root.appendChild(canvas)
   root.appendChild(infoText)
   root.appendChild(pngDlButton)
@@ -138,12 +143,7 @@ function updateScale() {
 }
 
 function downloadCanvasAsPNG() {
-  let name = 'unnamed'
-  const base = MainContext.getCurrent()?.base
-  if (base instanceof BlockImage) {
-    name = base.filename
-  }
-  downloadURL(canvas.toDataURL('image/png'), `${name}.png`)
+  downloadURL(canvas.toDataURL('image/png'), `${MainContext.getCurrent()?.base.filename ?? 'unnamed'}.png`)
 }
 
 /**

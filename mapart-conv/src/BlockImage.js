@@ -1,18 +1,11 @@
 //@ts-check
 ///<reference path = "../index.d.ts"/>
 
-class BlockImage {
+class BlockImage extends BaseImage {
   /** 64 colors -> 4 brightness -> rgb @readonly @type {Uint8Array} */ static colors = new Uint8Array(64 * 4 * 3)
   /** @readonly @type {number} */ width 
   /** @readonly @type {number} */ height 
   /** same as MapDatNbt.data.colors but unsigned and unlimited length @readonly @type {Uint8Array} */ data
-  /** the part of this image, should be in `${number | 'row'}_${number}` format. null if this is the whole image. @type {string?} */
-  part = null
-  filename = 'unnamed_mapart'
-  /** @type {string?} */ name = null
-  author = 'Mapart Converter'
-  /** @type {string?} */ description = null
-  timeCreated = BigInt(Date.now())
 
   static async load() {
     /** @type {number[]} */
@@ -34,16 +27,14 @@ class BlockImage {
    * @param {Uint8Array} data 
    */
   constructor(width, height, data) {
+    super()
     if (width * height !== data.length) throw `invalid length (${width}, ${height}, ${width * height}, ${data.length})`
     this.width = width
     this.height = height
     this.data = data
   }
 
-  /**
-   * @returns {ImageData}
-   */
-  toImageData() {
+  getImageData() {
     const res = new Uint8ClampedArray(this.data.length * 4)
     this.data.forEach((v, i) => {
       if (v < 4) return
@@ -51,6 +42,21 @@ class BlockImage {
       res[i * 4 + 3] = 255
     })
     return new ImageData(res, this.width, this.height)
+  }
+
+  getWidth() {
+    return this.width
+  }
+
+  getHeight() {
+    return this.height
+  }
+
+  /**
+   * @returns {this is BlockImage}
+   */
+  isBlock() {
+    return true
   }
 
   isTransparent() {
@@ -145,24 +151,25 @@ class BlockImage {
 
   /**
    * @param {BlockPalette} palette 
-   * @returns {Uint16Array[]}
+   * @returns {Promise<Uint16Array[]>}
    */
-  #buildPalettedBlocks(palette) {
+  async #buildPalettedBlocks(palette, task = ITask.DUMMY) {
     const mask = ~3
+    await task.force().push('Building Paletted Blocks', 8)
 
     const len = this.data.length
     const data = new Uint8Array(len)
     data.set(this.data)
     const blockColors = new Set(data)
 
-    // sanitize transparents
+    await task.force().swap('Sanitizing transparents')
     for (let i = 0; i < len; i++) {
       if ((data[i] & mask) === 0 && data[i]) {
         data[i] = 0
       }
     }
 
-    // check for invalid 4th color
+    await task.force().swap('Checking for invalid 4th color')
     for (const v of blockColors) {
       if ((v & 3) === 3) {
         if (!confirm('The image contains invalid darkest color for survival structures.\n' +
@@ -185,7 +192,7 @@ class BlockImage {
       }
     }
 
-    // check for color under transparents
+    await task.force().swap('Checking color under transparents')
     for (let i = this.width; i < len; i++) {
       if (data[i] && !data[i - this.width] && (data[i] & 3) < 2 && (data[i] >> 2) !== 12) {
         if (!confirm('The image contains troublesome dark color under transparent pixels.\n' +
@@ -207,6 +214,7 @@ class BlockImage {
       }
     }
 
+    await task.force().swap('Separating data')
     // extract the lightness for convenience
     const dys = new Uint8Array(len)
     // separate water data for convenience
@@ -225,7 +233,10 @@ class BlockImage {
     const heights = new Uint16Array(len)
     let maxY = 0
 
+    await task.force().push('Converting stairs by columns', this.width)
+    await task.swap('column')
     for (let col = 0; col < this.width; col++) {
+      await task.progress(col)
       // let's assume a valley look like this
       // ....z positive -->....
       // ...■■■................
@@ -241,6 +252,13 @@ class BlockImage {
         // .........■■■■.........
         if (data[z] && (dys[z + this.width] === 2 || !data[z + this.width])) {
           for (let i = z - this.width, south = z;; south = i, i -= this.width) { // trace backwards
+            // preserve space for support block
+            if (heights[south] === 0 && data[south] && BlockPalette._needSupportBlock.has(BlockState.getId(palette.source[data[south] >> 2]))) {
+              heights[south] = 1
+              for (let j = south + this.width; dys[j] === 1 && data[j]; j += this.width) {
+                heights[j] = 1
+              }
+            }
             // breaks on transparent or lower block
             // .here.................
             // ..V■■■................
@@ -271,7 +289,7 @@ class BlockImage {
                 }
                 if (fixY) {
                   heights[south] = fixY
-                  for (let j = south + this.width; dys[j] === 1; j += this.width) {
+                  for (let j = south + this.width; dys[j] === 1 && data[j]; j += this.width) {
                     heights[j] = fixY
                   }
                 }
@@ -300,7 +318,9 @@ class BlockImage {
         }
       }
     }
+    task.pop()
 
+    await task.force().swap('Combining data')
     // put the water data back
     for (let i = 0; i < len; i++) {
       if (!waterData[i]) continue
@@ -309,6 +329,7 @@ class BlockImage {
       if (heights[i] > maxY) maxY = heights[i]
     }
 
+    await task.force().swap('Constructing layers')
     const Constants = BlockPalette.CONSTANTS
     const layerSize = this.width * (this.height + 1)
     const layers = Array.from({ length: maxY + 1 }, () => new Uint16Array(layerSize))
@@ -324,16 +345,27 @@ class BlockImage {
      * @param {number} width 
      * @param {number} i 
      */
-    function putTransparentAround(layer, width, i) {
-      for (const n of around(layer.length, width, i)) {
+    function putTransparentAround(layer, width, i, gen = around) {
+      for (const n of gen(layer.length, width, i)) {
         layer[n] ||= palette.getOrAssignIndex(Constants.TRANSPARENT_BLOCK)
       }
     }
+    /** @type {Record<number, boolean>} */
+    const nsbCache = {}
+    /** @type {Record<number, boolean>} */
+    const epCache = {}
     for (let i = 0; i < len; i++) {
       if (data[i]) {
         const id = data[i] >> 2
         if (id !== 12) {
-          cropped[heights[i]][i] = palette.getOrAssignIndexByColor(id)
+          const h = heights[i]
+          cropped[h][i] = palette.getOrAssignIndexByColor(id)
+          if (nsbCache[id] ??= BlockPalette._needSupportBlock.has(BlockState.getId(palette.source[id]))) {
+            cropped[h - 1][i] = palette.getOrAssignIndex(Constants.STONE)
+          }
+          if (epCache[id] ??= BlockPalette._endermanPickables.has(BlockState.getId(palette.source[id]))) {
+            putTransparentAround(layers[h], this.width, i + this.width)
+          }
         } else { // water
           let h = heights[i]
           const mh = Math.max(0, h - waterHeights[dys[i]]) + 1
@@ -352,8 +384,9 @@ class BlockImage {
         }
       }
     }
-    palette.performBlockUpdates(layers, this.width)
+    await palette.performBlockUpdates(layers, this.width, task)
     palette.flush()
+    task.pop()
     return layers
   }
 
@@ -361,13 +394,17 @@ class BlockImage {
    * @see StructureNbt
    * @returns {Promise<NbtDataResult>}
    */
-  async toStructure() {
+  async toStructure(task = ITask.DUMMY) {
     const palette = BlockPalette.fromRebaneUrlInput()
-    const layers = this.#buildPalettedBlocks(palette)
+    await task.force().push('Converting to structure', 3)
+    const layers = await this.#buildPalettedBlocks(palette, task)
     const { nbt: paletteNbt, map } = palette.optimize(layers)
     /** @type {NBT.ListTag<{ pos: NBT.Vec3iTuple, state: NBT.Int32 }>} */
     const blocks = []
-    layers.forEach((layer, y) => {
+    await task.push('Building by layers', layers.length)
+    await task.force().swap('layers')
+    for (const [y, layer] of layers.entries()) {
+      await task.progress(y)
       layer.forEach((v, i) => {
         if (map[v]) {
           blocks.push({
@@ -376,7 +413,8 @@ class BlockImage {
           })
         }
       })
-    })
+    }
+    task.pop()
     const nbt = new NBT.NBTData({
       blocks,
       entities: [],
@@ -385,10 +423,10 @@ class BlockImage {
       author: this.author,
       DataVersion: new NBT.Int32(3464)
     })
-    return {
-      name: this.part ? `${this.filename}_${this.part}.nbt` : `${this.filename}.nbt`,
-      data: await NBT.write(nbt, { endian: 'big', compression: 'gzip' })
-    }
+    await task.force().swap('Writing nbt')
+    const data = await NBT.write(nbt, { endian: 'big', compression: 'gzip' })
+    task.pop()
+    return { name: this.part ? `${this.filename}_${this.part}.nbt` : `${this.filename}.nbt`, data }
   }
 
   /**
@@ -397,7 +435,7 @@ class BlockImage {
    * optimally, size should not exceed 156x156. (not 256, it's not a typo)
    */
   #generateLitematicaPreview() {
-    let imageData = this.toImageData()
+    let imageData = this.getImageData()
     let long = Math.max(imageData.width, imageData.height)
     if (long > 156) {
       const w = Math.round(imageData.width / long * 156)
@@ -435,11 +473,13 @@ class BlockImage {
    * @see LitematicNbt
    * @returns {Promise<NbtDataResult>}
    */
-  async toLitematic() {
+  async toLitematic(task = ITask.DUMMY) {
     const palette = BlockPalette.fromRebaneUrlInput()
-    const layers = this.#buildPalettedBlocks(palette)
+    await task.force().push('Converting to litematic', 3)
+    const layers = await this.#buildPalettedBlocks(palette, task)
     const { nbt: paletteNbt, map } = palette.optimize(layers)
 
+    await task.push('Building by layers', layers.length)
     const volume = this.width * layers.length * (this.height + 1)
     // generate longArray and count totalBlocks
     let totalBlocks = 0
@@ -451,19 +491,24 @@ class BlockImage {
     let buf = 0n
     let bufs = 0n
     const bigIntMap = BigUint64Array.from(map, v => BigInt(v & bitMask))
-    layers.forEach(layer => layer.forEach(v => {
-      if (map[v]) {
-        totalBlocks++
-        buf |= bigIntMap[v] << bufs
-      }
-      bufs += bits
-      if (bufs >= 64n) {
-        longArr[index] = buf & mask64
-        index++
-        buf >>= 64n
-        bufs -= 64n
-      }
-    }))
+    await task.force().swap('layers')
+    for (const [i, layer] of layers.entries()) {
+      await task.progress(i)
+      layer.forEach(v => {
+        if (map[v]) {
+          totalBlocks++
+          buf |= bigIntMap[v] << bufs
+        }
+        bufs += bits
+        if (bufs >= 64n) {
+          longArr[index] = buf & mask64
+          index++
+          buf >>= 64n
+          bufs -= 64n
+        }
+      })
+    }
+    task.pop()
     if (bufs > 0n) {
       longArr[index] = buf
     }
@@ -497,10 +542,10 @@ class BlockImage {
         BlockStates: longArr
       }}
     })
-    return {
-      name: this.part ? `${this.filename}_${this.part}.litematic` : `${this.filename}.litematic`,
-      data: await NBT.write(nbt, { endian: 'big', compression: 'gzip' })
-    }
+    await task.force().swap('Writing nbt')
+    const data = await NBT.write(nbt, { endian: 'big', compression: 'gzip' })
+    task.pop()
+    return { name: this.part ? `${this.filename}_${this.part}.litematic` : `${this.filename}.litematic`, data }
   }
 
 }
@@ -532,7 +577,7 @@ class BlockState {
     obj.id = id
     if (states?.endsWith(']')) {
       for (const state of states.slice(0, -1).split(',')) {
-        const [key, value] = state.split(',')
+        const [key, value] = state.split('=')
         if (!value) continue
         obj.state[key] = value
       }
@@ -614,7 +659,7 @@ class BlockPalette {
   /** @readonly @type {string[]} */ static _default = ['air']
   /** @readonly @type {string[][]} */ static _rebane = []
   /** @readonly @type {{ [index: string]: number }} */ static _unusualIndexDict = {}
-  /** @readonly @type {string[]} */ static _needSupportBlock = []
+  /** @readonly @type {Set<string>} */ static _needSupportBlock = new Set()
 
   /** @readonly */ static CONSTANTS = {
     /** @readonly */ STONE: BlockState.sanitize('stone'),
@@ -656,8 +701,10 @@ class BlockPalette {
       delete this._unusualIndexDict[key]
     }
     Object.assign(this._unusualIndexDict, unusualIndexDict)
-    this._needSupportBlock.length = 0
-    this._needSupportBlock.push(...needSupportBlock)
+    this._needSupportBlock.clear()
+    for (const id of needSupportBlock) {
+      this._needSupportBlock.add(id)
+    }
   }
 
   static postLoad() {
@@ -874,7 +921,7 @@ class BlockPalette {
    * @param {string} state 
    */
   getOrAssignIndex(state) {
-    return this.getIndex(state) ?? this.base.push(state) - 1
+    return this.getIndex(state) ?? (this._state2IndexCache[state] = this.base.push(state) - 1)
   }
 
   /**
@@ -888,8 +935,10 @@ class BlockPalette {
    * @param {Uint16Array[]} layers 
    * @param {number} width 
    */
-  performBlockUpdates(layers, width) {
+  async performBlockUpdates(layers, width, task = ITask.DUMMY) {
     const idArr = this.base.map(BlockState.getId)
+    await task.push('Performing block updates', BlockPalette._needStateUpdate.length)
+    await task.force().progress(-1, 'update types')
     /**
      * lazy load because it's expensive
      * @type {Set<number>[]}
@@ -903,7 +952,10 @@ class BlockPalette {
           blocksSet.add(i)
         }
       })
-      if (blocksSet.size === 0) continue
+      if (blocksSet.size === 0) {
+        await task.progress()
+        continue
+      }
 
       /** @type {Set<number>} */
       const affected = new Set()
@@ -912,10 +964,16 @@ class BlockPalette {
           affected.add(i)
         }
       })
-      if (affected.size === 0) continue
+      if (affected.size === 0) {
+        await task.progress()
+        continue
+      }
 
+      await task.push(undefined, layers.length)
+      await task.force().swap('layers')
       stateSets ??= layers.map(layer => new Set(layer))
-      layers.forEach((layer, i) => {
+      for (const [i, layer] of layers.entries()) {
+        await task.progress(i)
         const set = stateSets[i]
         if (![...blocksSet].some(v => set.has(v)) || ![...affected].some(v => set.has(v))) return
         layer.forEach((v, i) => {
@@ -923,8 +981,11 @@ class BlockPalette {
             nsu.action(this, layer, width, i, affected)
           }
         })
-      })
+      }
+      task.pop()
     }
+    task.pop()
+    await TaskManager.render(true)
   }
 
   /**
@@ -960,17 +1021,38 @@ class BlockPalette {
  * @param {number} index 
  */
 function* around(length, width, index) {
+  if (index >= width) yield index - width
+  if (index < length - width) yield index + width
+  const mod = index % width
+  if (mod > 0) yield index - 1
+  if (mod < width - 1) yield index + 1
+}
+
+/**
+ * @param {number} length 
+ * @param {number} width 
+ * @param {number} index 
+ */
+function* around8(length, width, index) {
+  let north = false
+  let south = false
   if (index >= width) {
     yield index - width
+    north = true
   }
   if (index < length - width) {
     yield index + width
+    south = true
   }
   const mod = index % width
   if (mod > 0) {
     yield index - 1
+    if (north) yield index - width - 1
+    if (south) yield index + width - 1
   }
   if (mod < width - 1) {
     yield index + 1
+    if (north) yield index - width + 1
+    if (south) yield index + width + 1
   }
 }

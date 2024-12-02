@@ -1,19 +1,22 @@
 //@ts-check
 /// <reference path = "../index.d.ts"/>
 
+/** @type {Record<string, (task?: ITask, ctx?: MainContext?) => Promise<any>>} */
 const convertMethods = (() => {
   return {
-    "nearest"(ctx = MainContext.getCurrent()) {
-      if (!ctx || !ctx.isTrueColor()) return
+    async "nearest"(task = ITask.DUMMY, ctx = MainContext.getCurrent()) {
+      if (!ctx || ctx.base.isBlock()) return
       const img = ctx.getImageData()
       const cache = new LRUCache(256)
-      const bytes = Uint8Array.from({ length: img.width * img.height }, (_, i) => {
+      const length = img.width * img.height
+      await task.swap('Converting pixels')
+      const bytes = Uint8Array.from({ length }, (_, i) => {
         const rgba = img.data.subarray(i * 4, i * 4 + 4)
         const rgb = (rgba[0] << 16) | (rgba[1] << 8) | rgba[2]
         //@ts-ignore
         return cache.get(rgb) ?? cache.set(rgb, getNearest(...rgba))
       })
-      ctx.base = new BlockImage(img.width, img.height, bytes)
+      ctx.base = new BlockImage(img.width, img.height, bytes).inheritFrom(ctx.base)
     }
   }
 

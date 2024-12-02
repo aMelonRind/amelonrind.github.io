@@ -16,3 +16,11 @@ canvas {
   border: 1px solid black;
   image-rendering: pixelated;
 }
+
+#progress-display {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  white-space: pre;
+  z-index: 1000; /* Ensures it is on top of other content */
+}

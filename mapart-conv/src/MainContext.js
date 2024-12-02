@@ -10,7 +10,7 @@ class MainContext {
   static #current = null
   /** @type {Set<(ctx: MainContext) => any>} */
   static #listeners = new Set()
-  /** @type {HTMLImageElement | BlockImage} */ #base
+  /** @type {BaseImage} */ #base
 
   /**
    * @param {(ctx: MainContext) => any} cb 
@@ -44,15 +44,17 @@ class MainContext {
     /**
      * @param {DataTransferItemList | null | undefined} items 
      */
-    async function handleItems(items) {
-      const res = await Readers.readItems(items)
-      if (!res) return
-      new MainContext(res).setCurrent()
+    function handleItems(items) {
+      TaskManager.run('Import item', async task => {
+        const res = await Readers.readItems(items, task)
+        if (!res) return
+        new MainContext(res).setCurrent()
+      })
     }
   }
 
   /**
-   * @param {HTMLImageElement | BlockImage} base 
+   * @param {BaseImage} base 
    */
   constructor (base) {
     this.base = base
@@ -74,18 +76,11 @@ class MainContext {
   }
 
   isTrueColor() {
-    return !(this.base instanceof BlockImage)
+    return this.base.isRGBA()
   }
 
   getImageData() {
-    if (this.base instanceof HTMLImageElement) {
-      const canvas = new OffscreenCanvas(this.base.width, this.base.height)
-      const ctx = requireNonNull(canvas.getContext('2d'))
-      ctx.drawImage(this.base, 0, 0)
-      return ctx.getImageData(0, 0, this.base.width, this.base.height)
-    } else {
-      return this.base.toImageData()
-    }
+    return this.base.getImageData()
   }
 
 }

@@ -9,9 +9,10 @@ class Readers {
 
   /**
    * @param {DataTransferItemList | null | undefined} items 
-   * @returns {Promise<HTMLImageElement | BlockImage | null>}
+   * @param {ITask} task 
+   * @returns {Promise<BaseImage?>}
    */
-  static async readItems(items) {
+  static async readItems(items, task) {
     if (!items) return null
     for (const item of items) {
       if (item.type === 'text/plain') { // urls
@@ -31,16 +32,16 @@ class Readers {
         const ext = (lastDotIndex !== -1 && lastDotIndex < name.length - 1) ? name.slice(lastDotIndex + 1) : ''
         isStairPromise = null
         switch (ext) {
-          case 'nbt': //@ts-ignore
-            return this.readStructure(await NBT.read(file), file.name)
-          case 'schematic': //@ts-ignore
-            return this.readSchematic(await NBT.read(file), file.name)
-          case 'dat': //@ts-ignore
-            return this.readMapDat(await NBT.read(file), file.name)
-          case 'litematic': //@ts-ignore
-            return this.readLitematic(await NBT.read(file), file.name)
+          case 'nbt':
+            return this.readStructure(() => NBT.read(file), task, file.name)
+          case 'schematic':
+            return this.readSchematic(() => NBT.read(file), task, file.name)
+          case 'dat':
+            return this.readMapDat(() => NBT.read(file), task, file.name)
+          case 'litematic':
+            return this.readLitematic(() => NBT.read(file), task, file.name)
           case 'zip': {
-            return await this.readZip(file)
+            return this.readZip(file, task)
           }
         }
       }
@@ -49,17 +50,27 @@ class Readers {
   }
 
   /**
-   * @param {StructureNbt} root 
+   * @param {() => Promise<NBT.NBTData>} reader 
+   * @param {ITask} task 
    * @param {string?} filename 
    * @returns {Promise<BlockImage>}
    */
-  static async readStructure(root, filename = null) {
+  static async readStructure(reader, task = ITask.DUMMY, filename = null) {
+    await task.push('Reading as structure', 3)
+    await task.force().swap('Reading nbt')
+    /** @type {StructureNbt} *///@ts-ignore
+    const root = await reader()
     const palette = BlockImageBuilder.readMcPalette(root.data.palette)
     const builder = new BlockImageBuilder(root.data.size[0].valueOf(), root.data.size[2].valueOf())
-    root.data.blocks.forEach(b => {
+    await task.push('Reading blocks', root.data.blocks.length)
+    for (const [i, b] of root.data.blocks.entries()) {
+      await task.progress256(i)
       builder.putPos(b.pos[0].valueOf(), b.pos[1].valueOf(), b.pos[2].valueOf(), palette[b.state.valueOf()])
-    })
+    }
+    task.pop()
+    await task.force().swap('Building image')
     const img = await builder.build()
+    await task.force().swap('Reading metadata')
     if (filename) {
       img.description = `From ${filename}`
       img.filename = filename.slice(0, -'.nbt'.length)
@@ -67,15 +78,21 @@ class Readers {
     if (root.data.author) {
       img.author = `${root.data.author}`
     }
+    task.pop()
     return img
   }
 
   /**
-   * @param {SchematicNbt} root 
+   * @param {() => Promise<NBT.NBTData>} reader 
+   * @param {ITask} task 
    * @param {string?} filename 
    * @returns {Promise<BlockImage>}
    */
-  static async readSchematic(root, filename = null) {
+  static async readSchematic(reader, task = ITask.DUMMY, filename = null) {
+    await task.push('Reading as schematic', 3)
+    await task.force().swap('Reading nbt')
+    /** @type {SchematicNbt} *///@ts-ignore
+    const root = await reader()
     const w = root.data.Width.valueOf()
     const h = root.data.Height.valueOf()
     const l = root.data.Length.valueOf()
@@ -83,41 +100,61 @@ class Readers {
     const data = BlockImageBuilder.readSchematicIndexes(root.data.Blocks, root.data.Data)
     const builder = new BlockImageBuilder(root.data.Width.valueOf(), root.data.Length.valueOf())
     const area = w * l
+    await task.push('Reading blocks', h)
     for (let y = 0; y < h; y++) {
+      await task.progress(y)
       data.subarray(y * area, y * area + area).forEach((c, i) => builder.putIndex(i, y, c))
     }
+    task.pop()
+    await task.force().swap('Building image')
     const img = await builder.build()
+    await task.force().swap('Reading metadata')
     if (filename) {
       img.description = `From ${filename}`
       img.filename = filename.slice(0, -'.schematic'.length)
     }
+    task.pop()
     return img
   }
 
   /**
-   * @param {MapDatNbt} root 
+   * @param {() => Promise<NBT.NBTData>} reader 
+   * @param {ITask} task 
    * @param {string?} filename 
-   * @returns {BlockImage}
+   * @returns {Promise<BlockImage>}
    */
-  static readMapDat(root, filename = null) {
+  static async readMapDat(reader, task = ITask.DUMMY, filename = null) {
+    await task.push('Reading as dat', 2)
+    await task.force().swap('Reading nbt')
+    /** @type {MapDatNbt} *///@ts-ignore
+    const root = await reader()
     const data = new Uint8Array(16384)
+    await task.force().swap('Reading colors')
     data.set(root.data.data.colors)
     const img = new BlockImage(128, 128, data)
+    await task.force().swap('Reading metadata')
     if (filename) {
       img.description = `From ${filename}`
       img.filename = filename.slice(0, -'.dat'.length)
     }
+    task.pop()
     return img
   }
 
   /**
-   * @param {LitematicNbt} root 
+   * @param {() => Promise<NBT.NBTData>} reader 
+   * @param {ITask} task 
    * @param {string?} filename 
    * @returns {Promise<BlockImage>}
    */
-  static async readLitematic(root, filename = null) {
+  static async readLitematic(reader, task = ITask.DUMMY, filename = null) {
+    await task.push('Reading as litematic', 4)
+    await task.force().swap('Reading nbt')
+    /** @type {LitematicNbt} *///@ts-ignore
+    const root = await reader()
     const regions = Object.values(root.data.Regions)
     if (regions.length === 0) throw `no regions`
+    await task.force().push('Reading region sizes', regions.length)
     
     let minx = Infinity
     let miny = Infinity
@@ -125,7 +162,7 @@ class Readers {
     let maxx = -Infinity
     let maxy = -Infinity
     let maxz = -Infinity
-    regions.forEach(region => {
+    for (const region of regions) {
       const x1 = region.Position.x.valueOf()
       const y1 = region.Position.y.valueOf()
       const z1 = region.Position.z.valueOf()
@@ -138,7 +175,9 @@ class Readers {
       maxx = Math.max(maxx, x1, x2)
       maxy = Math.max(maxy, y1, y2)
       maxz = Math.max(maxz, z1, z2)
-    })
+      await task.progress()
+    }
+    task.pop()
     const size = {
       x: maxx - minx,
       y: maxy - miny,
@@ -146,8 +185,9 @@ class Readers {
     }
     if (size.x <= 0 || size.y <= 0 || size.z <= 0) throw `invalid size (${size.x}, ${size.y}, ${size.z})`
 
+    await task.force().push('Reading regions', regions.length)
     const builder = new BlockImageBuilder(size.x, size.z)
-    regions.forEach(region => {
+    for (const region of regions) {
       const px = region.Position.x.valueOf()
       const py = region.Position.y.valueOf()
       const pz = region.Position.z.valueOf()
@@ -172,6 +212,7 @@ class Readers {
       let buf = 0n
       let bufs = 0n
       let i = 0
+      await task.push('Reading layers', abssy)
       outer:
       for (let y = 0; y < abssy; y++) {
         let absy = dy + y
@@ -217,9 +258,14 @@ class Readers {
             bufs -= bits
           }
         }
+        await task.progress(y + 1)
       }
-    })
+      task.pop()
+    }
+    task.pop()
+    await task.force().swap('Building image')
     const img = await builder.build()
+    await task.force().swap('Reading metadata')
     if (filename) {
       img.description = `From ${filename}`
       img.filename = filename.slice(0, -'.litematic'.length)
@@ -245,15 +291,20 @@ class Readers {
         }
       }
     }
+    task.pop()
     return img
   }
 
   /**
    * @param {File} file 
+   * @param {ITask} task 
    * @returns {Promise<BlockImage>}
    */
-  static async readZip(file) {
+  static async readZip(file, task = ITask.DUMMY) {
+    await task.push('Reading zip file', 4)
+    await task.force().swap('Deserializing')
     const zip = await JSZip.loadAsync(file)
+    await task.force().swap('Determining file type')
     console.log('zip:', zip)
     /** @type {RegExpMatchArray[]} */
     const matches = []
@@ -281,6 +332,8 @@ class Readers {
       throw new Error('no mapart found in zip')
     }
 
+    await task.push('Reading files', matches.filter(m => m[1] === max).length)
+
     /** @type {{ [name: string]: BlockImage }} */
     const data = {}
     const promises = []
@@ -305,20 +358,19 @@ class Readers {
       if (ny < minY) minY = ny
       if (ny > maxY) maxY = ny
       promises.push(new Promise(async (res, rej) => {
-        /** @type {*} */
-        const nbt = await zip.files[name].async('arraybuffer').then(buf => NBT.read(buf))
+        const reader = () => zip.files[name].async('arraybuffer').then(buf => NBT.read(buf))
         switch (type) {
           case 'nbt':
-            res(this.readStructure(nbt))
+            res(this.readStructure(reader))
             break
           case 'schematic':
-            res(this.readSchematic(nbt))
+            res(this.readSchematic(reader))
             break
           case 'dat':
-            res(this.readMapDat(nbt))
+            res(this.readMapDat(reader))
             break
           case 'litematic':
-            res(this.readLitematic(nbt))
+            res(this.readLitematic(reader))
             break
           default:
             rej()
@@ -331,14 +383,18 @@ class Readers {
           if (res.width > maxWildRowWidth) maxWildRowWidth = res.width
         }
         Hs.add(res.height)
+        return task.progress()
       }).finally(() => isStairPromise?.count()))
     }
     await Promise.allSettled(promises)
+    task.pop()
     isStairPromise = null
     console.log('data:', data)
-    if (Object.values(data).length === 0) {
+    const size = Object.values(data).length
+    if (size === 0) {
       throw new Error('no data loaded')
     }
+    await task.force().push('Combining data', size)
     if (minX > maxX) minX = maxX
     let unitW = 128
     let unitH = 128
@@ -362,14 +418,18 @@ class Readers {
         const i = y * iw
         res.set(idat.subarray(i, i + w), orig + y * width)
       }
+      await task.progress()
     }
+    task.pop()
     const img = new BlockImage(width, height, res)
+    await task.force().swap('Reading metadata')
     const main = data[`${minX},${minY}`] ?? data[`x,${minY}`] ?? Object.values(data)[0]
     img.filename = (/[^A-Za-z]$/.test(max) ? max.slice(0, -1) : max) || img.filename
     img.name = main.name || Object.values(data).find(img => img.name)?.name || null
     img.author = main.author || Object.values(data).find(img => img.author)?.author || img.author
     img.description = main.description?.trim() || Object.values(data).find(img => img.description?.trim())?.description?.trim() || null
     img.timeCreated = Object.values(data).map(img => img.timeCreated).reduce((p, v) => p < v ? p : v, img.timeCreated)
+    task.pop()
     return img
   }
 
@@ -378,14 +438,14 @@ class Readers {
 class ImageReaders {
   /**
    * @param {File} file 
-   * @returns {Promise<HTMLImageElement>}
+   * @returns {Promise<RGBAImage>}
    */
   static readFile(file) {
     return new Promise((res, rej) => {
       const reader = new FileReader()
       reader.onload = () => {
         if (typeof reader.result === 'string') {
-          this.readURL(reader.result).then(res, rej)
+          this.readURL(reader.result, file.name.replace(/\.\w+$/, '')).then(res, rej)
         } else {
           rej('file did not resolve to string')
         }
@@ -397,13 +457,13 @@ class ImageReaders {
 
   /**
    * @param {string} str 
-   * @returns {Promise<HTMLImageElement>}
+   * @returns {Promise<RGBAImage>}
    */
-  static readURL(str) {
+  static readURL(str, name = str.startsWith('data:') ? null : str.match(/(?<=[\\/])[^\\/]+?(?:\.\w+)?$/)?.[1] ?? null) {
     return new Promise((res, rej) => {
       const img = new Image()
       img.crossOrigin = 'anonymous' // Allow cross-origin access if needed
-      img.onload = () => res(img)
+      img.onload = () => res(RGBAImage.from(img, name))
       img.onerror = () => rej('Failed to load image from URL.')
       img.src = str
     })

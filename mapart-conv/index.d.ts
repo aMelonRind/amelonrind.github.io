@@ -1,9 +1,13 @@
 
 /// <reference path="./index.js"/>
+/// <reference path="./src/BaseImage.js"/>
 /// <reference path="./src/BlockImage.js"/>
+/// <reference path="./src/ConvertMethods.js"/>
 /// <reference path="./src/ExportOptions.js"/>
 /// <reference path="./src/MainContext.js"/>
 /// <reference path="./src/Readers.js"/>
+/// <reference path="./src/RGBAImage.js"/>
+/// <reference path="./src/TaskManager.js"/>
 
 declare const JSZip: import('jszip');
 namespace NBT {
