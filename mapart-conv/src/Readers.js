@@ -306,7 +306,7 @@ class Readers {
     const zip = await JSZip.loadAsync(file)
     await task.force().swap('Determining file type')
     console.log('zip:', zip)
-    /** @type {RegExpMatchArray[]} */
+    /** @type {string[][]} */
     const matches = []
     for (const [name, file] of Object.entries(zip.files)) {
       if (file.dir) continue
@@ -314,6 +314,26 @@ class Readers {
       if (match) {
         if (match[2] === 'row') match[2] = 'x'
         matches.push(match)
+      }
+    }
+    if (matches.length === 0) {
+      /** @type {number[]} */
+      const dats = []
+      let max = 0
+      for (const [name, file] of Object.entries(zip.files)) {
+        if (file.dir) continue
+        const match = name.match(/^map_(\d+)\.dat$/)
+        if (match) {
+          const id = parseInt(match[1])
+          dats.push(id)
+          if (id > max) max = id
+        }
+      }
+      if (dats.length > 0) {
+        const width = Math.min(dats.length, 1 << Math.max(4, Math.ceil(Math.log2(Math.sqrt(max)))))
+        for (const id of dats) {
+          matches.push([`map_${id}.dat`, 'map_', `${id % width}`, `${Math.floor(id / width)}`, 'dat'])
+        }
       }
     }
     console.log('matches:', matches)
