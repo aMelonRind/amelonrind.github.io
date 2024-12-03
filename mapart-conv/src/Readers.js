@@ -330,9 +330,17 @@ class Readers {
         }
       }
       if (dats.length > 0) {
-        const width = Math.min(dats.length, 1 << Math.max(4, Math.ceil(Math.log2(Math.sqrt(max)))))
-        for (const id of dats) {
-          matches.push([`map_${id}.dat`, 'map_', `${id % width}`, `${Math.floor(id / width)}`, 'dat'])
+        if (max > 999 && dats.length * 3 < max) {
+          dats.sort((a, b) => a - b)
+          const width = Math.min(dats.length, 1 << Math.max(4, Math.ceil(Math.log2(Math.sqrt(dats.length)))))
+          for (const [index, id] of dats.entries()) {
+            matches.push([`map_${id}.dat`, 'map_', `${index % width}`, `${Math.floor(index / width)}`, 'dat'])
+          }
+        } else {
+          const width = Math.min(dats.length, 1 << Math.max(4, Math.ceil(Math.log2(Math.sqrt(max)))))
+          for (const id of dats) {
+            matches.push([`map_${id}.dat`, 'map_', `${id % width}`, `${Math.floor(id / width)}`, 'dat'])
+          }
         }
       }
     }
