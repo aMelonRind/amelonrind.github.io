@@ -4,11 +4,14 @@
 /// <reference path="./src/BlockImage.js"/>
 /// <reference path="./src/ConvertMethods.js"/>
 /// <reference path="./src/ExportOptions.js"/>
+/// <reference path="./src/IndexedPngWriter.js"/>
 /// <reference path="./src/MainContext.js"/>
 /// <reference path="./src/Readers.js"/>
 /// <reference path="./src/RGBAImage.js"/>
 /// <reference path="./src/TaskManager.js"/>
 
+declare const CRC32: typeof import('crc-32');
+declare const pako: typeof import('pako');
 declare const JSZip: import('jszip');
 namespace NBT {
   export * from 'nbtify';

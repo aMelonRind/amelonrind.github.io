@@ -45,6 +45,7 @@ class MainContext {
      * @param {DataTransferItemList | null | undefined} items 
      */
     function handleItems(items) {
+      if (!items) return
       TaskManager.run('Import item', async task => {
         const res = await Readers.readItems(items, task)
         if (!res) return

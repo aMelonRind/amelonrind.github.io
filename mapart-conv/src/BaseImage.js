@@ -36,6 +36,16 @@ class BaseImage {
   }
 
   /**
+   * @abstract
+   */
+  async download() {
+    const image = this.getImageData()
+    const canvas = new OffscreenCanvas(image.width, image.height)
+    canvas.getContext('2d')?.putImageData(image, 0, 0)
+    downloadBlob(`${this.filename ?? 'unnamed'}.png`, await canvas.convertToBlob())
+  }
+
+  /**
    * @returns {number}
    * @abstract
    */

@@ -44,6 +44,11 @@ class BlockImage extends BaseImage {
     return new ImageData(res, this.width, this.height)
   }
 
+  async download() {
+    const blob = createIndexedPNG(this.width, this.height, BlockImage.colors, this.data)
+    downloadBlob(`${this.filename ?? 'unnamed'}.png`, blob)
+  }
+
   getWidth() {
     return this.width
   }

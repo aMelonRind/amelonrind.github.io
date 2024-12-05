@@ -15,7 +15,7 @@ infoText.innerText = "Drag 'n' drop or paste to import...\nAccepts images/.nbt/.
 
 const pngDlButton = document.createElement('button')
 pngDlButton.type = 'button'
-pngDlButton.onclick = downloadCanvasAsPNG
+pngDlButton.onclick = () => MainContext.getCurrent()?.base.download()
 pngDlButton.innerText = 'Download as PNG'
 pngDlButton.title = 'Alternatively you can right click on the canvas'
 
@@ -102,7 +102,7 @@ async function main() {
     const image = mctx.getImageData()
     const w = image.width / 128
     const h = image.height / 128
-    infoText.innerText = `${image.width}x${image.height} (${Number.isInteger(w) ? w : w.toFixed(2)}x${Number.isInteger(h) ? h : h.toFixed(2)}) • ${mctx.base instanceof BlockImage ? 'BlockImage' : 'RGBAImage'}`
+    infoText.innerText = `${image.width}x${image.height} (${Number.isInteger(w) ? w : w.toFixed(2)}x${Number.isInteger(h) ? h : h.toFixed(2)}) • ${mctx.base.constructor.name}`
     canvas.width = image.width
     canvas.height = image.height
     ctx.putImageData(image, 0, 0)
@@ -143,10 +143,6 @@ function updateScale() {
   ))
   canvas.style.width = `${canvas.width * scale}px`
   canvas.style.height = `${canvas.height * scale}px`
-}
-
-function downloadCanvasAsPNG() {
-  downloadURL(canvas.toDataURL('image/png'), `${MainContext.getCurrent()?.base.filename ?? 'unnamed'}.png`)
 }
 
 /**
