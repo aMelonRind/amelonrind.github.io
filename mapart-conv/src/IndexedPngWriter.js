@@ -30,7 +30,6 @@ function createIndexedPNG(width, height, palette, indexedPixels) {
   const idat = createChunk('IDAT', pako.deflate(scanlines))
 
   const iend = createChunk('IEND', new Uint8Array())
-  console.log(iend)
 
   return new Blob([signature, ihdr, plte, idat, iend], { type: 'image/png' })
 
