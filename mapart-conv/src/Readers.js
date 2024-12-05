@@ -30,7 +30,6 @@ class Readers {
         console.log(`reading ${name}`)
         const lastDotIndex = name.lastIndexOf('.')
         const ext = (lastDotIndex !== -1 && lastDotIndex < name.length - 1) ? name.slice(lastDotIndex + 1) : ''
-        isStairPromise = null
         switch (ext) {
           case 'nbt':
             return this.readStructure(() => NBT.read(file), task, file.name)
@@ -374,7 +373,6 @@ class Readers {
     const Ws = new Set()
     /** @type {Set<number>} */
     const Hs = new Set()
-    isStairPromise = new IsStairPromise(Math.max(...Object.values(counts)))
     for (const [name, pref, x, y, type] of matches) {
       if (pref !== max) continue
       if (x !== 'x') {
@@ -412,11 +410,10 @@ class Readers {
         }
         Hs.add(res.height)
         return task.progress()
-      }).finally(() => isStairPromise?.count()))
+      }))
     }
     await Promise.allSettled(promises)
     task.pop()
-    isStairPromise = null
     console.log('data:', data)
     const size = Object.values(data).length
     if (size === 0) {
@@ -499,9 +496,6 @@ class ImageReaders {
 
 }
 
-/** @type {IsStairPromise?} */
-let isStairPromise = null
-
 class BlockImageBuilder {
   /** @readonly */ static WATER_MASK = (1 << 10) - 1 // deepest water color
   /** @type {Record<string, number | { if: string, is: string, then: number, else: number }>} */ static map
@@ -511,6 +505,7 @@ class BlockImageBuilder {
   /** @readonly @type {Int16Array} */ waters // bitfield map, 1 for top, 2 for second top, 4 for third...
   /** @readonly @type {number} */ width
   /** @readonly @type {number} */ height
+  #hasTransparent = false
 
   static async load() {
     const block2color = fetch('src/block2color.json').then(res => res.json())
@@ -563,9 +558,12 @@ class BlockImageBuilder {
    * @param {number} color 
    */
   putPos(x, y, z, color) {
-    if (!color) return // transparent
+    if (!color) {
+      this.#hasTransparent = true
+      return // transparent (not air)
+    }
     if (x < 0 || x >= this.width || z < 0 || z >= this.height) return
-    this.putIndex(z * this.width + x, y, color)
+    this.#putInternal(z * this.width + x, y, color)
   }
 
   /**
@@ -574,8 +572,20 @@ class BlockImageBuilder {
    * @param {number} color 
    */
   putIndex(index, y, color) {
-    if (!color) return // transparent
+    if (!color) {
+      this.#hasTransparent = true
+      return // transparent (not air)
+    }
     if (index < 0 || index > this.blocks.length) return
+    this.#putInternal(index, y, color)
+  }
+
+  /**
+   * @param {number} index 
+   * @param {number} y 
+   * @param {number} color 
+   */
+  #putInternal(index, y, color) {
     if (color !== 12) {
       if (this.heights[index] < y) {
         this.blocks[index] = color
@@ -617,7 +627,7 @@ class BlockImageBuilder {
     const waterSet = new Set(hasTopRow ? this.waters.subarray(this.width) : this.waters)
     waterSet.delete(0)
     if (waterSet.size) {
-      const isStair = isStairPromise?.value ?? await (async () => {
+      const isStair = (() => {
         // staircase won't have multiple depths
         if (waterSet.size !== 1) return false
 
@@ -638,18 +648,13 @@ class BlockImageBuilder {
           }
         })) return true
 
-        // technically i can also check if the source of water has block near it, but too lazy
+        // technically i can also check if the source of water has block near it, but too lazy.
+        // if the depth mode generator decides to put non-transparent block at the bottom of water,
+        // we might actually need to check for all neighbors.
+        // don't try to detect the block under it, because the staircase mode generator might also place it.
 
-        // ask user for help
-        await isStairPromise?.wait()
-        return isStairPromise?.value ?? confirm(`
-          The application is unsure that if this blueprint's water should be treated as staircase or depth.
-          Choose OK for staircase, cancel for depth.
-          The waters generated from rebane2001/mapcraft are staircase.
-          This website generates depth, which is the correct way for minecraft to render.
-        `.trim().replace(/^\s*/gm, '  '))
+        return !this.#hasTransparent
       })()
-      isStairPromise?.resolve(isStair)
 
       console.log(`building water color in ${isStair ? 'staircase' : 'depth'} mode.`)
       if (isStair) {
@@ -700,55 +705,6 @@ class BlockImageBuilder {
       res = res.subarray(this.width)
     }
     return new BlockImage(this.width, hasTopRow ? this.height - 1 : this.height, res)
-  }
-
-}
-
-/**
- * a class specifically made for water handling...
- */
-class IsStairPromise {
-  resolved = false
-  _count = 0
-  max = 0
-  #resolve
-  /** @type {Promise<void>} */
-  #promise = new Promise(res => {
-    this.#resolve = res
-    if (this.resolved) res()
-  })
-  /** @type {boolean?} */
-  value = null
-
-  /**
-   * @param {number} max 
-   */
-  constructor (max) {
-    this.max = max
-  }
-
-  count() {
-    if (!this.resolved && ++this._count >= this.max) {
-      this.resolve(null)
-    }
-  }
-
-  wait(count = true) {
-    if (count) {
-      this.count()
-    }
-    return this.#promise
-  }
-
-  /**
-   * @param {boolean?} value 
-   */
-  resolve(value) {
-    this.value ??= value
-    if (!this.resolved) {
-      this.resolved = true
-      this.#resolve?.()
-    }
   }
 
 }

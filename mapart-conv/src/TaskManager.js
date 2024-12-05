@@ -145,7 +145,7 @@ class MainTask extends ITask {
    * @param {number} [progress] 
    * @param {string} [desc] 
    */
-  async progress(progress = undefined, desc = '') {
+  async progress(progress = undefined, desc) {
     this._taskStack.at(-1)?.progress(progress, desc)
     await TaskManager.render(false)
   }

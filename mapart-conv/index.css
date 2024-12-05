@@ -18,7 +18,8 @@ canvas {
 }
 
 #progress-display {
-  position: absolute;
+  position: fixed;
+  background-color: gray;
   top: 0px;
   left: 0px;
   white-space: pre;

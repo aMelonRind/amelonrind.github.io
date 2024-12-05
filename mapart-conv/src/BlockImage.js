@@ -172,7 +172,7 @@ class BlockImage extends BaseImage {
     await task.force().swap('Checking for invalid 4th color')
     for (const v of blockColors) {
       if ((v & 3) === 3) {
-        if (!confirm('The image contains invalid darkest color for survival structures.\n' +
+        if (!ConfirmCache.confirm('The image contains invalid darkest color for survival structures.\n' +
           'Do you want to convert them to corresponding dark varient and continue exporting?')
         ) {
           throw 'task cancelled'
@@ -195,12 +195,12 @@ class BlockImage extends BaseImage {
     await task.force().swap('Checking color under transparents')
     for (let i = this.width; i < len; i++) {
       if (data[i] && !data[i - this.width] && (data[i] & 3) < 2 && (data[i] >> 2) !== 12) {
-        if (!confirm('The image contains troublesome dark color under transparent pixels.\n' +
+        if (!ConfirmCache.confirm('The image contains troublesome dark color under transparent pixels.\n' +
           'Do you wish to continue exporting?')
         ) {
           throw 'task cancelled'
         }
-        if (!confirm('Do you want to keep these dark varients?' +
+        if (!ConfirmCache.confirm('Do you want to keep these dark varients?\n' +
           'Choosing OK will generate scaffolding placeholder for you to process these colors;\n' +
           'Choosing cancel will convert these to corresponding light varient.')
         ) {
@@ -970,12 +970,14 @@ class BlockPalette {
       }
 
       await task.push(undefined, layers.length)
-      await task.force().swap('layers')
+      await task.force().swap('generating sets')
       stateSets ??= layers.map(layer => new Set(layer))
+      const blocksArr = [...blocksSet]
+      await task.force().progress(0, 'layers')
       for (const [i, layer] of layers.entries()) {
         await task.progress(i)
         const set = stateSets[i]
-        if (![...blocksSet].some(v => set.has(v)) || ![...affected].some(v => set.has(v))) return
+        if (!blocksArr.some(v => set.has(v)) || ![...affected].some(v => set.has(v))) continue
         layer.forEach((v, i) => {
           if (blocksSet.has(v)) {
             nsu.action(this, layer, width, i, affected)
@@ -1011,6 +1013,23 @@ class BlockPalette {
     this._cache = {}
     this._state2IndexCache = {}
     this._color2Index.length = 0
+  }
+
+}
+
+class ConfirmCache {
+  /** @type {Record<string, boolean>} */
+  static #cache = {}
+
+  /**
+   * @param {string} msg 
+   */
+  static confirm(msg) {
+    return this.#cache[msg] ??= confirm(msg)
+  }
+
+  static clear() {
+    this.#cache = {}
   }
 
 }

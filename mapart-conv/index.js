@@ -35,7 +35,10 @@ exportButton.innerText = 'Export'
 exportButton.onclick = () => {
   const opt = exportTypeDropdown.value
   if (opt in exportOptions) {
-    TaskManager.run(`Export as ${opt}`, task => exportOptions[opt](task))
+    TaskManager.run(`Export as ${opt}`, async task => {
+      ConfirmCache.clear()
+      await exportOptions[opt](task)
+    })
   } else {
     alert('undefined exportOption')
   }
