@@ -21,24 +21,24 @@ const exportOptions = (() => {
         const { name, data } = await split[0].toDat()
         downloadBlob(name, data)
       } else {
-        packAndDownloadZip(image, split, img => img.toDat(), task)
+        await packAndDownloadZip(image, split, img => img.toDat(), task)
       }
     },
     async 'zip of 1x1 .litematic'(task = ITask.DUMMY, image = getBlockImage()) {
       if (!image) return
-      packAndDownloadZip(image, image.split1x1(), (img, task) => img.toLitematic(task), task)
+      await packAndDownloadZip(image, image.split1x1(), (img, task) => img.toLitematic(task), task)
     },
     async 'zip of 1x1 .nbt'(task = ITask.DUMMY, image = getBlockImage()) {
       if (!image) return
-      packAndDownloadZip(image, image.split1x1(), (img, task) => img.toStructure(task), task)
+      await packAndDownloadZip(image, image.split1x1(), (img, task) => img.toStructure(task), task)
     },
     async 'zip of rows of .litematic'(task = ITask.DUMMY, image = getBlockImage()) {
       if (!image) return
-      packAndDownloadZip(image, image.splitRows(), (img, task) => img.toLitematic(task), task)
+      await packAndDownloadZip(image, image.splitRows(), (img, task) => img.toLitematic(task), task)
     },
     async 'zip of rows of .nbt'(task = ITask.DUMMY, image = getBlockImage()) {
       if (!image) return
-      packAndDownloadZip(image, image.splitRows(), (img, task) => img.toStructure(task), task)
+      await packAndDownloadZip(image, image.splitRows(), (img, task) => img.toStructure(task), task)
     },
   }
 
@@ -73,7 +73,7 @@ const exportOptions = (() => {
     task.pop()
     await task.force().swap('Generating blob')
     const blob = await zip.generateAsync({ type: 'blob' })
-    downloadBlob(`${image.filename}.zip`, blob)
     task.pop()
+    downloadBlob(`${image.filename}.zip`, blob)
   }
 })()
