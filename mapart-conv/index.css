@@ -23,5 +23,85 @@ canvas {
   top: 0px;
   left: 0px;
   white-space: pre;
-  z-index: 1000; /* Ensures it is on top of other content */
+  z-index: 1000;
+}
+
+.formLayer {
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: grid;
+  position: fixed;
+  z-index: 1024;
+  inset: 0;
+  box-sizing: border-box;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.4);
+  grid-template-areas: "top-start     top            top-end"
+    "center-start  center         center-end"
+    "bottom-start  bottom-center  bottom-end";
+  grid-template-rows: minmax(min-content, auto) minmax(min-content, auto) minmax(min-content, auto);
+}
+
+.formContainer {
+  grid-column: 2;
+  grid-row: 2;
+  place-self: center center;
+  background: #181a1b;
+  border: 2px solid #ccc;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  width: min-content;
+  gap: 10px;
+}
+
+.formContainer > * {
+  margin: 0;
+}
+
+.formContainer > img {
+  max-width: 100%;
+}
+
+.formItemContainer {
+  display: flex;
+  align-self: end;
+  width: max-content;
+}
+
+.formItemLabel {
+  padding-right: 1ch;
+}
+
+.formItemInvalidText {
+  color: red;
+  font-size: 0.9em;
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  align-self: stretch;
+  text-align: start;
+}
+
+.formInputComplex {
+  display: inline-flex;
+  width: calc(20ch + 1px);
+  gap: 3px;
+}
+
+.formInputComplex input {
+  flex: 1;
+  min-width: 0;
+}
+
+.formButtonDiv {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  gap: 20px;
+}
+
+.formResetButton {
+  width: fit-content;
 }

@@ -27,17 +27,18 @@ class MainContext {
     if (this.#initd) return
     this.#initd = true
 
+    const shouldIgnore = n => n instanceof HTMLInputElement || formLayer.contains(n)
     window.addEventListener('dragover', e => {
-      if (e.target instanceof HTMLInputElement) return
+      if (shouldIgnore(e.target)) return
       e.preventDefault()
     })
     window.addEventListener('drop', e => {
-      if (e.target instanceof HTMLInputElement) return
+      if (shouldIgnore(e.target)) return
       e.preventDefault()
       handleItems(e.dataTransfer?.items)
     })
     window.addEventListener('paste', e => {
-      if (e.target instanceof HTMLInputElement) return
+      if (shouldIgnore(e.target)) return
       handleItems(e.clipboardData?.items)
     })
 

@@ -4,6 +4,7 @@
 /// <reference path="./src/BlockImage.js"/>
 /// <reference path="./src/ConvertMethods.js"/>
 /// <reference path="./src/ExportOptions.js"/>
+/// <reference path="./src/Form.js"/>
 /// <reference path="./src/IndexedPngWriter.js"/>
 /// <reference path="./src/MainContext.js"/>
 /// <reference path="./src/Readers.js"/>
@@ -134,3 +135,45 @@ type MapDatNbt = { // .dat
     zCenter: NBT.Int32
   }
 }>;
+
+type FormQuery = Record<string, FormItem>;
+type TypeFromFormItem<T extends FormItem> = T extends IFormItem<infer R> ? FormItemTypes[R] : never;
+type FormResult<T extends FormQuery> = { [K in keyof T]: TypeFromFormItem<T[K]> };
+type Validator<T> = (value: T) => string | undefined | null;
+
+type FormItem =
+| IFormItem<'string'>
+| IFormItemTextarea
+| IFormItem<'number'>
+| IFormItem<'xy'>
+| IFormItem<'wh'>
+| IFormItem<'boolean'>
+| IFormItemSelect;
+
+type FormItemTypes = {
+  string: string,
+  textarea: string,
+  number: number,
+  xy: { x: number, y: number },
+  wh: { w: number, h: number },
+  boolean: boolean,
+  select: string
+};
+
+interface IFormItem<T extends keyof FormItemTypes> {
+  type: T;
+  storeLast?: boolean;
+  default: FormItemTypes[T];
+  label: string;
+  title?: string;
+  placeholder?: string;
+  validator?: Validator<FormItemTypes[T]>;
+}
+
+interface IFormItemSelect extends IFormItem<'select'> {
+  options: string[];
+}
+
+interface IFormItemTextarea extends IFormItem<'textarea'> {
+  rows?: number
+}
