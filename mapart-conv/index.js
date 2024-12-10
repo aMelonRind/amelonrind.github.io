@@ -5,6 +5,7 @@ let test
 const root = document.getElementById('script-root') ?? document.body
 
 const canvas = document.createElement('canvas')
+canvas.classList.add('mainCanvas')
 canvas.width = 64
 canvas.height = 64
 const ctx = requireNonNull(canvas.getContext('2d'))
@@ -111,23 +112,22 @@ async function main() {
   })
   MainContext.init()
 
+  document.body.append(progressDisplay)
+
   root.innerHTML = ''
   const br = () => document.createElement('br')
-  root.appendChild(progressDisplay)
-  root.appendChild(canvas)
-  root.appendChild(infoText)
-  root.appendChild(pngDlButton)
-  root.appendChild(br())
-  root.appendChild(paletteUrlLabel)
-  root.appendChild(paletteUrlInput)
-  root.appendChild(br())
-  root.appendChild(convertButton)
-  root.appendChild(convertTypeLabel)
-  root.appendChild(convertTypeDropdown)
-  root.appendChild(br())
-  root.appendChild(exportButton)
-  root.appendChild(exportTypeLabel)
-  root.appendChild(exportTypeDropdown)
+  /** @type {(...elements: (Node | string)[]) => HTMLDivElement} */
+  const group = (...elements) => {
+    const div = document.createElement('div')
+    div.classList.add('group')
+    div.append(...elements)
+    return div
+  }
+  root.append(canvas, infoText, pngDlButton,
+    group(paletteUrlLabel, paletteUrlInput),
+    group(convertButton, convertTypeLabel, convertTypeDropdown),
+    group(exportButton, exportTypeLabel, exportTypeDropdown)
+  )
 
   updateScale()
 

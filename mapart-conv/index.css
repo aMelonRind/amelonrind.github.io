@@ -12,9 +12,17 @@ body {
   padding-top: 10px;
 }
 
-canvas {
+#script-root {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.mainCanvas {
   border: 1px solid black;
   image-rendering: pixelated;
+  align-self: center;
 }
 
 #progress-display {
