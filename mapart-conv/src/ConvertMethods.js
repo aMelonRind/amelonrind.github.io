@@ -68,13 +68,17 @@ class ConvertMethod {
     let nearest = 1
     let dist = Infinity
     for (let i = 4 * 3; i < 61 * 4 * 3; i += 3) {
+      const dg = BlockImage.colors[i + 1] - g
+      let d = 4 * dg * dg
+      if (d >= dist) continue
       const rmean = (BlockImage.colors[i] + r) / 2
       const dr = BlockImage.colors[i] - r
-      const dg = BlockImage.colors[i + 1] - g
-      const db = BlockImage.colors[i + 2] - b
       const wr = 2 + rmean / 256
+      d += wr * dr * dr
+      if (d >= dist) continue
+      const db = BlockImage.colors[i + 2] - b
       const wb = 2 + (255 - rmean) / 256
-      const d = wr * dr * dr + 4 * dg * dg + wb * db * db
+      d += wb * db * db
       if (d < dist) {
         dist = d
         nearest = i / 3
@@ -100,12 +104,19 @@ new ConvertMethod({
     const cache = new LRUCache(256)
     const length = img.width * img.height
     await task.swap('Converting pixels')
-    const bytes = Uint8Array.from({ length }, (_, i) => {
-      const rgba = img.data.subarray(i * 4, i * 4 + 4)
-      const rgb = (rgba[0] << 16) | (rgba[1] << 8) | rgba[2]
+    const abgrArr = new Int32Array(img.data.buffer, img.data.byteOffset, length)
+    const bytes = new Uint8Array(length)
+    for (let i = 0; i < length; i++) {
+      // await task.progress256(i)
+      if (abgrArr[i] >= 0) {
+        bytes[i] = 0
+        continue
+      }
+      const bgr = abgrArr[i] & 0xFFFFFF
       //@ts-ignore
-      return cache.get(rgb) ?? cache.set(rgb, this.getNearest(...rgba))
-    })
+      bytes[i] = cache.get(bgr) ?? cache.set(bgr, this.getNearest(...img.data.subarray(i * 4, i * 4 + 4)))
+    }
+    // task.pop()
     ctx.base = new BlockImage(img.width, img.height, bytes).inheritFrom(ctx.base)
   }
 })
