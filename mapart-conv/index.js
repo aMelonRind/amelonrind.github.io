@@ -18,7 +18,6 @@ const pngDlButton = document.createElement('button')
 pngDlButton.type = 'button'
 pngDlButton.onclick = () => MainContext.getCurrent()?.base.download()
 pngDlButton.innerText = 'Download as PNG'
-pngDlButton.title = 'Alternatively you can right click on the canvas'
 
 const paletteUrlLabel = document.createElement('label')
 paletteUrlLabel.innerText = 'Rebane palette url: '
@@ -28,7 +27,7 @@ const paletteUrlInput = document.createElement('input')
 paletteUrlInput.id = 'paletteUrl'
 paletteUrlInput.type = 'text'
 paletteUrlInput.placeholder = 'https://rebane2001.com/mapartcraft/?preset='
-paletteUrlInput.title = "The link of shared blocks generated from rebane2001's MapartCraft.\nRequired for blueprint exports."
+paletteUrlInput.title = "The link of shared blocks generated from rebane2001's MapartCraft."
 
 const exportButton = document.createElement('button')
 exportButton.type = 'button'
@@ -64,8 +63,8 @@ convertButton.type = 'button'
 convertButton.innerText = 'Convert'
 convertButton.onclick = () => {
   const opt = convertTypeDropdown.value
-  if (opt in convertMethods) {
-    TaskManager.run(`Convert by ${opt}`, task => convertMethods[opt](task))
+  if (ConvertMethod.has(opt)) {
+    TaskManager.run(`Convert by ${opt}`, task => ConvertMethod.run(opt, task))
   } else {
     alert('undefined convertMethods')
   }
@@ -80,12 +79,7 @@ convertTypeDropdown.id = 'convertType'
 convertTypeDropdown.title = `For normal dither types, go to Rebane's MapartCraft because they're more advanced.
 This site is mainly for special image types.
 After converting from there, copy the image and then use "nearest" convert type here.`
-for (const opt in convertMethods) {
-  const res = document.createElement('option')
-  res.value = opt
-  res.innerText = opt
-  convertTypeDropdown.options.add(res)
-}
+updateConvertMethodDropdown()
 
 const progressDisplay = document.createElement('div')
 progressDisplay.id = 'progress-display'
@@ -108,6 +102,7 @@ async function main() {
     canvas.height = image.height
     ctx.putImageData(image, 0, 0)
     updateScale()
+    updateConvertMethodDropdown(mctx)
     exportButton.disabled = !(mctx.base instanceof BlockImage)
   })
   MainContext.init()
@@ -143,6 +138,22 @@ function updateScale() {
   ))
   canvas.style.width = `${canvas.width * scale}px`
   canvas.style.height = `${canvas.height * scale}px`
+}
+
+function updateConvertMethodDropdown(ctx = MainContext.getCurrent()) {
+  const prev = convertTypeDropdown.options.item(convertTypeDropdown.selectedIndex)?.value
+  convertTypeDropdown.options.length = 0
+  convertTypeDropdown.selectedIndex = 0
+  for (const [i, m] of ConvertMethod.getList(ctx).entries()) {
+    const res = document.createElement('option')
+    res.value = m.name
+    res.innerText = m.name
+    convertTypeDropdown.options.add(res)
+    if (m.name === prev) {
+      convertTypeDropdown.selectedIndex = i
+    }
+  }
+  convertButton.disabled = convertTypeDropdown.options.length === 0
 }
 
 /**

@@ -68,13 +68,17 @@ class MainContext {
 
   set base(v) {
     this.#base = v
-    for (const cb of MainContext.#listeners) {
-      cb(this)
+    if (MainContext.#current === this) {
+      for (const cb of MainContext.#listeners) {
+        cb(this)
+      }
     }
   }
 
   setCurrent() {
-    return MainContext.#current = this
+    MainContext.#current = this
+    this.base = this.base
+    return this
   }
 
   isTrueColor() {

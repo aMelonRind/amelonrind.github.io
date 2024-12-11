@@ -44,7 +44,7 @@ function formTest() {
   }, {
     title: 'Title',
     description: 'The long long long description test test test test test test test test test test test test...',
-    image: 'https://media.misskeyusercontent.jp/io/webpublic-8e1e3bca-9022-42e7-85e0-e9683a4ffc0c.webp'
+    // image: 'https://media.misskeyusercontent.jp/io/webpublic-8e1e3bca-9022-42e7-85e0-e9683a4ffc0c.webp'
   })
 }
 
@@ -111,6 +111,9 @@ class Form {
         //@ts-ignore
         res(Object.fromEntries(elements.map(([key, e]) => [key, e.get()])))
         close()
+      }
+      if (elements.length === 0) {
+        resetBtn.style.scale = '0'
       }
       const formButtonDiv = document.createElement('div')
       formButtonDiv.classList.add('formButtonDiv')

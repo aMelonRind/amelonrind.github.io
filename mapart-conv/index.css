@@ -25,6 +25,11 @@ body {
   align-self: center;
 }
 
+.group:has(#paletteUrl),
+#paletteUrl {
+  width: 99%;
+}
+
 #progress-display {
   position: fixed;
   background-color: gray;
@@ -35,7 +40,7 @@ body {
 }
 
 .formLayer {
-  overflow-x: hidden;
+  overflow-x: auto;
   overflow-y: auto;
   display: grid;
   position: fixed;
@@ -60,6 +65,7 @@ body {
   padding: 20px;
   display: flex;
   flex-direction: column;
+  min-width: 300px;
   width: min-content;
   gap: 10px;
 }
