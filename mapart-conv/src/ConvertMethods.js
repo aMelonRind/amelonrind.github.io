@@ -98,6 +98,10 @@ new ConvertMethod({
   canRun: ctx => ctx && !ctx.base.isBlock(),
   async action(task, ctx) {
     if (!ctx) return
+    await Form.send('nearest', {}, {
+      title: 'Convert Method: Nearest',
+      description: 'Convert each pixel to their nearest color in mapart palette using rmean.'
+    })
     const img = ctx.getImageData()
     const cache = new LRUCache(256)
     const length = img.width * img.height
@@ -125,7 +129,7 @@ new ConvertMethod({
 //   async action(task, ctx) {
 //     if (!ctx) return
 //     const img = ctx.getImageData()
-//     // accepts something like ./rebaneBlocks.png
+//     // accepts something like ../img/rebaneBlocks.png
 //     const w = img.width / 32
 //     const h = img.height / 32
 //     if (!Number.isInteger(w) || !Number.isInteger(h)) {
@@ -298,12 +302,17 @@ new ConvertMethod({
     canRun: ctx => ctx?.isTrueColor() && Number.isInteger(ctx.base.getWidth() / 33) && Number.isInteger(ctx.base.getHeight() / 33),
     async action(task, ctx) {
       if (!ctx) return
+      await Form.send('rebane2dRestore', {}, {
+        title: 'Convert Method: Restore from rebane 2d view',
+        description: 'Restores the mapart from rebane 2d view image.\nExample:',
+        image: './img/rebane2dViewExample.png'
+      })
       const { hashes, indexes, topSample, bottomSample } = await loader
       const img = ctx.getImageData()
       const w = img.width / 33
       const h = img.height / 33
       if (!Number.isInteger(w) || !Number.isInteger(h)) {
-        Form.send('rebane2dRestore', {}, {
+        Form.send('rebane2dRestore.33', {}, {
           title: 'Not a multiply of 33',
           description: `${img.width}x${img.height} (${w.toFixed(2)}x${h.toFixed(2)})`,
           noCancel: true

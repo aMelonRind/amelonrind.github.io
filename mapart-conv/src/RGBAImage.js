@@ -10,10 +10,10 @@ class RGBAImage extends BaseImage {
    * @returns {RGBAImage}
    */
   static from(htmlImage, filename = null) {
-    const canvas = new OffscreenCanvas(htmlImage.width, htmlImage.height)
+    const canvas = new OffscreenCanvas(htmlImage.naturalWidth, htmlImage.naturalHeight)
     const ctx = requireNonNull(canvas.getContext('2d'))
     ctx.drawImage(htmlImage, 0, 0)
-    const res = new RGBAImage(ctx.getImageData(0, 0, htmlImage.width, htmlImage.height))
+    const res = new RGBAImage(ctx.getImageData(0, 0, htmlImage.naturalWidth, htmlImage.naturalHeight))
     if (filename) {
       res.name = filename
       res.filename = filename

@@ -64,6 +64,7 @@ body {
   background: #181a1b;
   border: 2px solid #ccc;
   padding: 20px;
+  padding-bottom: 10px;
   display: flex;
   flex-direction: column;
   min-width: 300px;
@@ -77,6 +78,9 @@ body {
 
 .formContainer > img {
   max-width: 100%;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  image-rendering: -moz-crisp-edges;
 }
 
 .formItemContainer {

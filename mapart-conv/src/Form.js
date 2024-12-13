@@ -46,6 +46,7 @@ function formTest() {
     title: 'Title',
     description: 'The long long long description test test test test test test test test test test test test...',
     // image: 'https://media.misskeyusercontent.jp/io/webpublic-8e1e3bca-9022-42e7-85e0-e9683a4ffc0c.webp',
+    image: './img/palette.png',
     finalValidator: ({ ice }) => ice ? null : 'ice'
   })
 }
@@ -62,10 +63,13 @@ class Form {
    *  image?: string,
    *  noCancel?: boolean,
    *  finalValidator?: Validator<FormResult<Q>>
-   * }} [desc] 
+   * }} [args] 
    * @returns {Promise<FormResult<Q>>}
    */
   static send(id, query, { title, description, image, noCancel = false, finalValidator = () => null } = {}) {
+    if (formLayer.style.display !== 'none') {
+      throw 'Form is already active'
+    }
     return new Promise((res, rej) => {
       const elements = Object.entries(query).map(
         /** @type {(ent: [key: string, item: FormItem]) => [key: string, element: FormItemElement<>]} */

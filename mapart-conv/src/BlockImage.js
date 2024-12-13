@@ -177,11 +177,13 @@ class BlockImage extends BaseImage {
     await task.force().swap('Checking for invalid 4th color')
     for (const v of blockColors) {
       if ((v & 3) === 3) {
-        if (!ConfirmCache.confirm('The image contains invalid darkest color for survival structures.\n' +
-          'Do you want to convert them to corresponding dark varient and continue exporting?')
-        ) {
+        await ConfirmCache.send('buildPalettedBlocks.invalid4thcolor', {}, {
+          title: 'Invalid Color',
+          description: 'The image contains invalid darkest color for survival structures.\n' +
+            'Do you want to convert them to corresponding dark varient and continue exporting?'
+        }).catch(() => {
           throw 'task cancelled'
-        }
+        })
         for (let i = 0; i < len; i++) {
           if ((data[i] & 3) === 3) {
             data[i] &= mask
@@ -200,15 +202,21 @@ class BlockImage extends BaseImage {
     await task.force().swap('Checking color under transparents')
     for (let i = this.width; i < len; i++) {
       if (data[i] && !data[i - this.width] && (data[i] & 3) < 2 && (data[i] >> 2) !== 12) {
-        if (!ConfirmCache.confirm('The image contains troublesome dark color under transparent pixels.\n' +
-          'Do you wish to continue exporting?')
-        ) {
+        const { replace } = await ConfirmCache.send('buildPalettedBlocks.invalid4thcolor', {
+          replace: {
+            type: 'boolean',
+            storeLast: true,
+            label: 'Convert To Light Varient',
+            default: true,
+            title: 'Unchecking this will generate scaffolding placeholder for you to process these colors manually.'
+          }
+        }, {
+          title: 'Dark Under Transparent',
+          description: 'The image contains troublesome dark color under transparent pixels.\n'
+        }).catch(() => {
           throw 'task cancelled'
-        }
-        if (!ConfirmCache.confirm('Do you want to keep these dark varients?\n' +
-          'Choosing OK will generate scaffolding placeholder for you to process these colors;\n' +
-          'Choosing cancel will convert these to corresponding light varient.')
-        ) {
+        })
+        if (replace) {
           for (; i < len; i++) {
             if (data[i] && !data[i - this.width] && (data[i] & 3) < 2 && (data[i] >> 2) !== 12) {
               data[i] = data[i] & mask | 2
@@ -1025,16 +1033,37 @@ class BlockPalette {
 class ConfirmCache {
   /** @type {Record<string, boolean>} */
   static #cache = {}
+  /** @type {Record<string, any>} */
+  static #formCache = {}
+  /** @type {Record<string, Promise<*>?>} */
+  static #formPromise = {}
 
   /**
    * @param {string} msg 
+   * @deprecated
    */
   static confirm(msg) {
     return this.#cache[msg] ??= confirm(msg)
   }
 
+  /** @type {typeof Form.send} */
+  static async send(id, query, args) {
+    while (this.#formPromise[id]) {
+      await this.#formPromise[id]
+    }
+    if (id in this.#formCache) {
+      return this.#formCache[id]
+    }
+    const pro = Form.send(id, query, args)
+    this.#formPromise[id] = pro
+      .then(res => this.#formCache[id] = res)
+      .finally(() => this.#formPromise[id] = null)
+    return pro
+  }
+
   static clear() {
     this.#cache = {}
+    this.#formCache = {}
   }
 
 }
