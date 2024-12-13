@@ -127,6 +127,7 @@ async function main() {
   updateScale()
 
   console.log('loaded!')
+  console.log(`Convert methods:`, [...ConvertMethod.methods.keys()])
 }
 
 main()
