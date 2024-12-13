@@ -154,7 +154,9 @@ function updateConvertMethodDropdown(ctx = MainContext.getCurrent()) {
       convertTypeDropdown.selectedIndex = i
     }
   }
-  convertButton.disabled = convertTypeDropdown.options.length === 0
+  const disabled = convertTypeDropdown.options.length === 0
+  convertButton.disabled = disabled
+  convertTypeDropdown.disabled = disabled
 }
 
 /**
