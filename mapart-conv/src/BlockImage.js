@@ -701,7 +701,7 @@ class BlockPalette {
     this._default.push(...defaultPalette.map(BlockState.sanitize))
     Object.freeze(this._default)
     this._rebane.length = 0
-    this._rebane.push(...rebane.map(arr => arr.map(BlockState.sanitize)))
+    this._rebane.push(...rebane.map(arr => arr.map(v => v === null ? null : BlockState.sanitize(v))))
     for (const key in this._unusualIndexDict) {
       delete this._unusualIndexDict[key]
     }

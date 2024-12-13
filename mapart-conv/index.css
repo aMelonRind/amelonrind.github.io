@@ -27,6 +27,7 @@ body {
 
 .group:has(#paletteUrl),
 #paletteUrl {
+  max-width: 250ch;
   width: 99%;
 }
 

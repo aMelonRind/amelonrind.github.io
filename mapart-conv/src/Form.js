@@ -13,7 +13,7 @@ if (document.body) {
 }
 
 function formTest() {
-  return Form.ask('test', {
+  return Form.send('test', {
     food: {
       type: 'string',
       label: 'Fav Food',
@@ -54,10 +54,10 @@ class Form {
    * @template {FormQuery} Q
    * @param {string} id 
    * @param {Q} query 
-   * @param {{ title?: string, description?: string, image?: string }} [desc] 
+   * @param {{ title?: string, description?: string, image?: string, noCancel?: boolean }} [desc] 
    * @returns {Promise<FormResult<Q>>}
    */
-  static ask(id, query, { title, description, image } = {}) {
+  static send(id, query, { title, description, image, noCancel = false } = {}) {
     return new Promise((res, rej) => {
       const elements = Object.entries(query).map(
         /** @type {(ent: [key: string, item: FormItem]) => [key: string, element: FormItemElement<>]} */
@@ -96,14 +96,22 @@ class Form {
       const resetBtn = btn('Reset')
       const cancelBtn = btn('Cancel')
       const okBtn = btn('Ok')
-      resetBtn.onclick = () => {
-        for (const [, e] of elements) {
-          e.reset()
+      if (elements.length === 0) {
+        resetBtn.style.scale = '0'
+      } else {
+        resetBtn.onclick = () => {
+          for (const [, e] of elements) {
+            e.reset()
+          }
         }
       }
-      cancelBtn.onclick = () => {
-        rej(new Error('Form cancelled'))
-        close()
+      if (noCancel) {
+        cancelBtn.style.scale = '0'
+      } else {
+        cancelBtn.onclick = () => {
+          rej(new Error('Form cancelled'))
+          close()
+        }
       }
       okBtn.onclick = () => {
         const passes = elements.map(([, e]) => e.validate())
@@ -111,9 +119,6 @@ class Form {
         //@ts-ignore
         res(Object.fromEntries(elements.map(([key, e]) => [key, e.get()])))
         close()
-      }
-      if (elements.length === 0) {
-        resetBtn.style.scale = '0'
       }
       const formButtonDiv = document.createElement('div')
       formButtonDiv.classList.add('formButtonDiv')
@@ -247,6 +252,8 @@ class FormItemElement {
           v => select.value = v,
           v => typeof v !== 'string' ? 'Select an option' : opts.includes(v) ? ogVali(v) : 'Invalid option'
         )
+      default:
+        throw new Error(`Unknown form element type ${(definition).type}`)
     }
   }
 

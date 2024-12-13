@@ -4,7 +4,11 @@
 class Readers {
 
   static async load() {
-    await Promise.allSettled([BlockImageBuilder.load(), BlockImage.load(), BlockPalette.load()])
+    await Promise.allSettled([
+      BlockImageBuilder.load(),
+      BlockImage.load(),
+      BlockPalette.load()
+    ].map(p => p.catch(e => console.error(e))))
   }
 
   /**
