@@ -18,7 +18,8 @@ function formTest() {
       type: 'string',
       label: 'Fav Food',
       default: 'Apple',
-      validator: v => v.toLowerCase() === 'apple' ? null : 'Why is it not apple? long invalid text test test test test test test test...'
+      validator: v => v.toLowerCase() === 'apple' ? null
+        : 'Why is it not apple? long invalid text test test test test test test test...'
     },
     drink: {
       type: 'number',
@@ -44,7 +45,8 @@ function formTest() {
   }, {
     title: 'Title',
     description: 'The long long long description test test test test test test test test test test test test...',
-    // image: 'https://media.misskeyusercontent.jp/io/webpublic-8e1e3bca-9022-42e7-85e0-e9683a4ffc0c.webp'
+    // image: 'https://media.misskeyusercontent.jp/io/webpublic-8e1e3bca-9022-42e7-85e0-e9683a4ffc0c.webp',
+    finalValidator: ({ ice }) => ice ? null : 'ice'
   })
 }
 
@@ -54,10 +56,16 @@ class Form {
    * @template {FormQuery} Q
    * @param {string} id 
    * @param {Q} query 
-   * @param {{ title?: string, description?: string, image?: string, noCancel?: boolean }} [desc] 
+   * @param {{
+   *  title?: string,
+   *  description?: string,
+   *  image?: string,
+   *  noCancel?: boolean,
+   *  finalValidator?: Validator<FormResult<Q>>
+   * }} [desc] 
    * @returns {Promise<FormResult<Q>>}
    */
-  static send(id, query, { title, description, image, noCancel = false } = {}) {
+  static send(id, query, { title, description, image, noCancel = false, finalValidator = () => null } = {}) {
     return new Promise((res, rej) => {
       const elements = Object.entries(query).map(
         /** @type {(ent: [key: string, item: FormItem]) => [key: string, element: FormItemElement<>]} */
@@ -83,6 +91,8 @@ class Form {
       for (const [, { container, invalidText }] of elements) {
         div.append(container, invalidText)
       }
+      const finalInvalidText = document.createElement('div')
+      finalInvalidText.classList.add('formItemInvalidText')
       /**
        * @param {string} name 
        */
@@ -116,14 +126,21 @@ class Form {
       okBtn.onclick = () => {
         const passes = elements.map(([, e]) => e.validate())
         if (passes.some(v => !v)) return
-        //@ts-ignore
-        res(Object.fromEntries(elements.map(([key, e]) => [key, e.get()])))
-        close()
+        /** @type {FormResult<Q>} *///@ts-ignore
+        const obj = Object.fromEntries(elements.map(([key, e]) => [key, e.get()]))
+        const err = finalValidator(obj)
+        if (err) {
+          finalInvalidText.innerText = err
+        } else {
+          finalInvalidText.innerText = ''
+          res(obj)
+          close()
+        }
       }
       const formButtonDiv = document.createElement('div')
       formButtonDiv.classList.add('formButtonDiv')
       formButtonDiv.append(resetBtn, cancelBtn, okBtn)
-      div.append(formButtonDiv)
+      div.append(formButtonDiv, finalInvalidText)
       formLayer.innerHTML = ''
       formLayer.append(div)
       formLayer.style.display = ''
@@ -266,7 +283,7 @@ class FormItemElement {
    * @param {Validator<T>} validator 
    */
   constructor(inputElement, definition, key, getter, setter, validator) {
-    if (validator(definition.default) != null) {
+    if (validator(definition.default)) {
       throw new Error(`${key}'s default value is invalid!`)
     }
     this.#key = key
@@ -304,7 +321,7 @@ class FormItemElement {
     setter(definition.default)
     if (this.#store) {
       const last = safeGetLocalStorage(key)
-      if (last != null && validator(last) == null) {
+      if (last != null && !validator(last)) {
         setter(last)
       }
     }
