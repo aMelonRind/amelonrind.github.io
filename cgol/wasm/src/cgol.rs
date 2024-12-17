@@ -6,9 +6,21 @@ pub struct Universe {
     width: u32,
     height: u32,
     cells: Vec<u8>,
-    states: Vec<u8>,
     random: Random,
     cursor_place_chance: f32,
+
+    line0: Vec<u8>,
+    neighbors: [Vec<u8>; 3],
+    /// rows\[wrap(y - 1)]
+    norths: Vec<usize>,
+    /// y * w * 4
+    rows: Vec<usize>,
+    /// rows\[wrap(y + 1)]
+    souths: Vec<usize>,
+    /// wrap(x - 1)
+    wests: Vec<usize>,
+    /// wrap(x + 1)
+    easts: Vec<usize>,
 }
 
 #[wasm_bindgen]
@@ -20,9 +32,16 @@ impl Universe {
             width,
             height,
             cells: vec![],
-            states: vec![],
             random,
-            cursor_place_chance: if cursor_place_chance == 0.0f32 { 0.3 } else { cursor_place_chance }
+            cursor_place_chance: if cursor_place_chance == 0.0f32 { 0.3 } else { cursor_place_chance },
+
+            line0: vec![],
+            neighbors: [vec![], vec![], vec![]],
+            norths: vec![],
+            rows: vec![],
+            souths: vec![],
+            wests: vec![],
+            easts: vec![],
         };
         univ.resize(width, height);
         univ
@@ -30,32 +49,94 @@ impl Universe {
 
     pub fn tick(&mut self) {
         for c in 0..3 {
-            self.states.fill(0);
-            let mut i: usize = 0;
-            let mut ci: usize = c;
-            for y in 0..self.height {
-                for x in 0..self.width {
-                    if self.cells[ci] == 255 {
-                        self.states[i] |= 0b10000;
-                        for ni in self.neighbors(x, y) {
-                            self.states[ni] += 1;
-                        }
+            // // old algorithm, eats memory and cpu on self.neighbors(x, y)
+            // self.states.fill(0);
+            // let mut i: usize = 0;
+            // let mut ci: usize = c;
+            // for y in 0..self.height {
+            //     for x in 0..self.width {
+            //         if self.cells[ci] == 255 {
+            //             self.states[i] |= 0b10000;
+            //             for ni in self.neighbors(x, y) {
+            //                 self.states[ni] += 1;
+            //             }
+            //         }
+            //         i += 1;
+            //         ci += 4;
+            //     }
+            // }
+
+            // i = 0;
+            // ci = c;
+            // for _y in 0..self.height {
+            //     for _x in 0..self.width {
+            //         self.cells[ci] = match self.states[i] {
+            //             0b10010 | 0b10011 | 0b11 => 255,
+            //             _ => wither(self.cells[ci]),
+            //         };
+            //         i += 1;
+            //         ci += 4;
+            //     }
+            // }
+
+            self.line0.fill(0);
+            self.neighbors[1].fill(0);
+            self.neighbors[2].fill(0);
+            {
+                let line = self.norths[0] + c;
+                for x in 0..self.width as usize {
+                    if self.cells[line + x * 4] == 255 { // capture last line
+                        self.neighbors[1][self.wests[x]] += 1;
+                        self.neighbors[1][x] += 1;
+                        self.neighbors[1][self.easts[x]] += 1;
                     }
-                    i += 1;
-                    ci += 4;
+                    if self.cells[c + x * 4] == 255 { // capture first line
+                        self.neighbors[2][self.wests[x]] += 1;
+                        self.neighbors[2][x] |= 0b10000;
+                        self.neighbors[2][self.easts[x]] += 1;
+                        self.line0[self.wests[x]] += 1;
+                        self.line0[x] += 1;
+                        self.line0[self.easts[x]] += 1;
+                    }
+                }
+                for x in 0..self.width as usize {
+                    self.neighbors[1][x] += self.line0[x];
                 }
             }
-
-            i = 0;
-            ci = c;
-            for _y in 0..self.height {
-                for _x in 0..self.width {
-                    self.cells[ci] = match self.states[i] {
+            for y in 0..self.height as usize {
+                self.neighbors.rotate_left(1);
+                // capture next line
+                let nl = self.souths[y];
+                if nl == 0 {
+                    for x in 0..self.width as usize {
+                        // only set 0 since the other two are not used anymore
+                        self.neighbors[0][x] += self.line0[x];
+                    }
+                } else {
+                    self.neighbors[2].fill(0);
+                    let nlc = nl + c;
+                    for x in 0..self.width as usize {
+                        if self.cells[nlc + x * 4] == 255 {
+                            self.neighbors[1][self.wests[x]] += 1;
+                            self.neighbors[1][x] |= 0b10000;
+                            self.neighbors[1][self.easts[x]] += 1;
+                            self.neighbors[2][self.wests[x]] += 1;
+                            self.neighbors[2][x] += 1;
+                            self.neighbors[2][self.easts[x]] += 1;
+                        }
+                    }
+                    for x in 0..self.width as usize {
+                        self.neighbors[0][x] += self.neighbors[2][x];
+                    }
+                }
+                // transform this line
+                let l = self.rows[y] + c;
+                for x in 0..self.width as usize {
+                    let i = l + x * 4;
+                    self.cells[i] = match self.neighbors[0][x] {
                         0b10010 | 0b10011 | 0b11 => 255,
-                        _ => wither(self.cells[ci]),
+                        _ => wither(self.cells[i]),
                     };
-                    i += 1;
-                    ci += 4;
                 }
             }
         }
@@ -102,6 +183,9 @@ impl Universe {
     }
 
     pub fn resize(&mut self, width: u32, height: u32) {
+        if width == 0 || height == 0 {
+            panic!("width and height cannot be 0!")
+        }
         let pw = self.width as i32;
         let ph = self.height as i32;
         if pw == width as i32 && ph == height as i32 {
@@ -140,7 +224,31 @@ impl Universe {
                 }
             })
             .collect();
-        self.states = vec![0; (width * height) as usize];
+        self.line0 = vec![0u8; self.width as usize];
+        self.neighbors = [
+            vec![0u8; self.width as usize],
+            vec![0u8; self.width as usize],
+            vec![0u8; self.width as usize],
+        ];
+        self.rows = vec![0usize; self.height as usize];
+        let w4 = self.width as usize * 4;
+        for y in 0..self.height as usize {
+            self.rows[y] = y * w4;
+        }
+        self.norths = self.rows.clone();
+        self.souths = self.rows.clone();
+        self.norths.rotate_left(1);
+        self.norths.rotate_right(1);
+        self.wests = vec![0usize; self.width as usize];
+        for x in 0..self.width as usize {
+            self.wests[x] = if x == 0 {
+                self.width as usize - 1
+            } else {
+                x - 1
+            };
+        }
+        self.easts = self.wests.clone();
+        self.easts.rotate_right(2);
     }
 
     pub fn fill_random(&mut self) {
@@ -165,44 +273,44 @@ impl Universe {
         (y * self.width + x) as usize
     }
 
-    fn neighbors(&self, x: u32, y: u32) -> [usize; 8] {
-        let n = if y == 0 {
-            (self.height - 1) * self.width
-        } else {
-            (y - 1) * self.width
-        };
+    // fn neighbors(&self, x: u32, y: u32) -> [usize; 8] {
+    //     let n = if y == 0 {
+    //         (self.height - 1) * self.width
+    //     } else {
+    //         (y - 1) * self.width
+    //     };
     
-        let s = if y == self.height - 1 {
-            0
-        } else {
-            (y + 1) * self.width
-        };
+    //     let s = if y == self.height - 1 {
+    //         0
+    //     } else {
+    //         (y + 1) * self.width
+    //     };
     
-        let w = if x == 0 {
-            self.width - 1
-        } else {
-            x - 1
-        };
+    //     let w = if x == 0 {
+    //         self.width - 1
+    //     } else {
+    //         x - 1
+    //     };
     
-        let e = if x == self.width - 1 {
-            0
-        } else {
-            x + 1
-        };
+    //     let e = if x == self.width - 1 {
+    //         0
+    //     } else {
+    //         x + 1
+    //     };
 
-        let yw = y * self.width;
+    //     let yw = y * self.width;
 
-        [
-            (w + n) as usize,
-            (x + n) as usize,
-            (e + n) as usize,
-            (w + yw) as usize,
-            (e + yw) as usize,
-            (w + s) as usize,
-            (x + s) as usize,
-            (e + s) as usize,
-        ]
-    }
+    //     [
+    //         (w + n) as usize,
+    //         (x + n) as usize,
+    //         (e + n) as usize,
+    //         (w + yw) as usize,
+    //         (e + yw) as usize,
+    //         (w + s) as usize,
+    //         (x + s) as usize,
+    //         (e + s) as usize,
+    //     ]
+    // }
 }
 
 fn wither(n: u8) -> u8 {
