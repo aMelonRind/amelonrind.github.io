@@ -137,6 +137,9 @@ export class Universe {
     fill_random() {
         wasm.universe_fill_random(this.__wbg_ptr);
     }
+    clear() {
+        wasm.universe_clear(this.__wbg_ptr);
+    }
 }
 
 async function __wbg_load(module, imports) {

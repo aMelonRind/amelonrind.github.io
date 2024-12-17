@@ -14,13 +14,13 @@ export class Universe {
   size(): number;
   resize(width: number, height: number): void;
   fill_random(): void;
+  clear(): void;
 }
 
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
 
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
-  readonly test: (a: number, b: number) => bigint;
   readonly __wbg_universe_free: (a: number, b: number) => void;
   readonly universe_new: (a: number, b: number, c: bigint, d: number) => number;
   readonly universe_tick: (a: number) => void;
@@ -32,6 +32,8 @@ export interface InitOutput {
   readonly universe_size: (a: number) => number;
   readonly universe_resize: (a: number, b: number, c: number) => void;
   readonly universe_fill_random: (a: number) => void;
+  readonly universe_clear: (a: number) => void;
+  readonly test: (a: number, b: number) => bigint;
   readonly __wbindgen_export_0: WebAssembly.Table;
   readonly __wbindgen_malloc: (a: number, b: number) => number;
   readonly __wbindgen_start: () => void;
