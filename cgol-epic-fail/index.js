@@ -38,6 +38,7 @@ canvas.addEventListener('touchmove', e => {
 })
 
 let pause = false
+let step = false
 window.addEventListener('keydown', e => {
   if (e.ctrlKey || e.shiftKey || e.altKey || e.metaKey) return
   if (e.key === 'f') {
@@ -46,6 +47,8 @@ window.addEventListener('keydown', e => {
     univ.clear()
   } else if (e.key === 'p' || e.key === ' ' || e.key === 'Pause') {
     pause = !pause
+  } else if (e.key === 's') {
+    step = true
   }
 })
 
@@ -62,8 +65,9 @@ function cross(x, y) {
 
 function render() {
   const fpsText = fps.render()
-  if (!pause) {
+  if (!pause || step) {
     univ.tick()
+    step = false
   }
   const cells = new Uint8ClampedArray(memory.buffer, univ.cells(), univ.size())
   ctx.putImageData(new ImageData(cells, univ.width(), univ.height()), 0, 0)
