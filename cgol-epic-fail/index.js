@@ -19,8 +19,10 @@ univ.fill_random()
 window.addEventListener('resize', resize)
 let mouseHolding = false
 canvas.addEventListener('mousedown', e => {
-  cross(e.offsetX, e.offsetY)
-  mouseHolding = true
+  if (e.button === 0) { // left
+    cross(e.offsetX, e.offsetY)
+    mouseHolding = true
+  }
 })
 canvas.addEventListener('mousemove', e => {
   if (mouseHolding) {
