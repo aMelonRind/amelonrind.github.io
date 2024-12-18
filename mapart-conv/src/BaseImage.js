@@ -1,10 +1,9 @@
-//@ts-check
-/// <reference path = "../index.d.ts"/>
+import { downloadBlob } from "./utils.js"
 
 /**
  * @abstract
  */
-class BaseImage {
+export default class BaseImage {
   /** the part of this image, should be in `${number | 'row'}_${number}` format. null if this is the whole image. @type {string?} */
   part = null
   filename = 'unnamed_mapart'

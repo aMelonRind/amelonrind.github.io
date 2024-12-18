@@ -1,10 +1,12 @@
-//@ts-check
-/// <reference path = "../index.d.ts"/>
+import BaseImage from "./BaseImage.js"
+import { formLayer } from "./Form.js"
+import Readers from "./Readers.js"
+import TaskManager from "./TaskManager.js"
 
 /**
  * one data import = one context
  */
-class MainContext {
+export default class MainContext {
   static #initd = false
   /** @type {MainContext?} */
   static #current = null

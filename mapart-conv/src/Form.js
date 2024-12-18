@@ -1,7 +1,5 @@
-//@ts-check
-/// <reference path = "../index.d.ts"/>
 
-const formLayer = document.createElement('div')
+export const formLayer = document.createElement('div')
 formLayer.classList.add('formLayer')
 formLayer.style.display = 'none'
 if (document.body) {
@@ -12,7 +10,7 @@ if (document.body) {
   })
 }
 
-function formTest() {
+globalThis.formTest = function formTest() {
   return Form.send('test', {
     food: {
       type: 'string',
@@ -51,7 +49,7 @@ function formTest() {
   })
 }
 
-class Form {
+export default class Form {
 
   /**
    * @template {FormQuery} Q

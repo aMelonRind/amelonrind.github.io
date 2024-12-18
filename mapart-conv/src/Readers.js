@@ -1,7 +1,13 @@
-//@ts-check
-/// <reference path = "../index.d.ts"/>
+import * as NBT from 'https://cdn.jsdelivr.net/npm/nbtify@2.0.0/+esm'
+import block2color from "./data/block2color.json" with { type: "json" }
+import pre13color from "./data/pre13color.json" with { type: "json" }
+import BaseImage from "./BaseImage.js"
+import BlockImage, { BlockPalette } from "./BlockImage.js"
+import RGBAImage from "./RGBAImage.js"
+import { ITask } from "./TaskManager.js"
+import { firstValue } from "./utils.js"
 
-class Readers {
+export default class Readers {
 
   static async load() {
     await Promise.allSettled([
@@ -468,7 +474,7 @@ class Readers {
 
 }
 
-class ImageReaders {
+export class ImageReaders {
   /**
    * @param {File} file 
    * @returns {Promise<RGBAImage>}
@@ -504,7 +510,7 @@ class ImageReaders {
 
 }
 
-class BlockImageBuilder {
+export class BlockImageBuilder {
   /** @readonly */ static WATER_MASK = (1 << 10) - 1 // deepest water color
   /** @type {Record<string, number | { if: string, is: string, then: number, else: number }>} */ static map
   /** @type {{ [key: number]: number }} */ static pre13map // index = data_id << 8 | block_id
@@ -516,10 +522,8 @@ class BlockImageBuilder {
   #hasTransparent = false
 
   static async load() {
-    const block2color = fetch('src/block2color.json').then(res => res.json())
-    const pre13map = fetch('src/pre13color.json').then(res => res.json())
-    this.map = await block2color
-    this.pre13map = await pre13map
+    this.map = block2color
+    this.pre13map = pre13color
   }
 
   /**
@@ -715,13 +719,4 @@ class BlockImageBuilder {
     return new BlockImage(this.width, hasTopRow ? this.height - 1 : this.height, res)
   }
 
-}
-
-/**
- * @template T
- * @param {Iterable<T>} iterable 
- * @returns {T}
- */
-function firstValue(iterable) {
-  return iterable[Symbol.iterator]().next().value
 }

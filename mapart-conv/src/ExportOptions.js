@@ -1,5 +1,7 @@
-//@ts-check
-/// <reference path = "../index.d.ts"/>
+import BlockImage from "./BlockImage.js"
+import MainContext from "./MainContext.js"
+import { ITask } from "./TaskManager.js"
+import { downloadBlob } from "./utils.js"
 
 /** @type {Record<string, (task?: ITask, image?: BlockImage?) => Promise<any>>} */
 const exportOptions = (() => {
@@ -77,3 +79,5 @@ const exportOptions = (() => {
     downloadBlob(`${image.filename}.zip`, blob)
   }
 })()
+
+export default exportOptions

@@ -1,25 +1,19 @@
 
-/// <reference path="./index.js"/>
-/// <reference path="./src/BaseImage.js"/>
-/// <reference path="./src/BlockImage.js"/>
-/// <reference path="./src/ConvertMethods.js"/>
-/// <reference path="./src/ExportOptions.js"/>
-/// <reference path="./src/Form.js"/>
-/// <reference path="./src/IndexedPngWriter.js"/>
-/// <reference path="./src/MainContext.js"/>
-/// <reference path="./src/Readers.js"/>
-/// <reference path="./src/RGBAImage.js"/>
-/// <reference path="./src/TaskManager.js"/>
-
 declare const CRC32: typeof import('crc-32');
-declare const pako: typeof import('pako');
 declare const JSZip: import('jszip');
-namespace NBT {
+
+declare module 'https://cdn.jsdelivr.net/npm/nbtify@2.0.0/+esm' {
   export * from 'nbtify';
   export type Vec3i = { x: NBT.Int32, y: NBT.Int32, z: NBT.Int32 };
   export type Vec3iTuple = NBT.ListTag<NBT.Int32> & [ NBT.Int32, NBT.Int32, NBT.Int32 ];
 }
-declare const NBT: typeof import('nbtify');
+declare module 'https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.esm.mjs' {
+  import Pako from 'pako';
+  export = Pako;
+}
+
+type RGBAImage = import('./src/RGBAImage').default;
+type BlockImage = import('./src/BlockImage').default;
 
 type NbtDataResult = Promise<{ name: string, data: Uint8Array }>;
 

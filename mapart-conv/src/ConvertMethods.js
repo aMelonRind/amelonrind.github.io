@@ -1,7 +1,10 @@
-//@ts-check
-/// <reference path = "../index.d.ts"/>
+import BlockImage from "./BlockImage.js"
+import Form from "./Form.js"
+import MainContext from "./MainContext.js"
+import { ITask } from "./TaskManager.js"
+import { LRUCache } from "./utils.js"
 
-class ConvertMethod {
+export default class ConvertMethod {
   /** @readonly @type {Map<string, ConvertMethod>} */
   static methods = new Map()
   /** @readonly */ name
@@ -291,7 +294,7 @@ new ConvertMethod({
 // })
 
 {
-  const loader = fetch('src/rebane2dHashes.json').then(res => res.json()).then(json => ({
+  const loader = import("./data/rebane2dHashes.json", { with: { type: "json" } }).then(({default: json}) => ({
     hashes: Uint32Array.from(json.hashes),
     indexes: Uint8Array.from(json.indexes).map(v => v * 4),
     topSample: Uint32Array.from(json.topSample),
@@ -371,39 +374,4 @@ new ConvertMethod({
       }
     }
   })
-}
-
-class LRUCache {
-  /**
-   * @param {number} maxSize 
-   */
-  constructor(maxSize) {
-    /** @type {Map<number, number>} */
-    this.cache = new Map()
-    this.maxSize = maxSize
-  }
-
-  /**
-   * @param {number} key 
-   * @returns {number?}
-   */
-  get(key) {
-    const value = this.cache.get(key)
-    if (value === undefined) return null
-    this.cache.delete(key)
-    this.cache.set(key, value)
-    return value
-  }
-
-  /**
-   * @param {number} key 
-   * @param {number} value 
-   */
-  set(key, value) {
-    if (!this.cache.delete(key) && this.cache.size >= this.maxSize) {
-      this.cache.delete(this.cache.keys().next().value)
-    }
-    this.cache.set(key, value)
-    return value
-  }
 }

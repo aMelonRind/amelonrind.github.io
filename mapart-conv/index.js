@@ -1,6 +1,11 @@
 //@ts-check
-///<reference path = "./index.d.ts"/>
-let test
+import BlockImage, { BlockPalette, ConfirmCache } from "./src/BlockImage.js"
+import ConvertMethod from "./src/ConvertMethods.js"
+import exportOptions from "./src/ExportOptions.js"
+import MainContext from "./src/MainContext.js"
+import Readers from "./src/Readers.js"
+import TaskManager from "./src/TaskManager.js"
+import { requireNonNull } from "./src/utils.js"
 
 const root = document.getElementById('script-root') ?? document.body
 
@@ -23,7 +28,7 @@ const paletteUrlLabel = document.createElement('label')
 paletteUrlLabel.innerText = 'Rebane palette url: '
 paletteUrlLabel.htmlFor = 'paletteUrl'
 
-const paletteUrlInput = document.createElement('input')
+export const paletteUrlInput = document.createElement('input')
 paletteUrlInput.id = 'paletteUrl'
 paletteUrlInput.type = 'text'
 paletteUrlInput.placeholder = 'https://rebane2001.com/mapartcraft/?preset='
@@ -157,37 +162,4 @@ function updateConvertMethodDropdown(ctx = MainContext.getCurrent()) {
   const disabled = convertTypeDropdown.options.length === 0
   convertButton.disabled = disabled
   convertTypeDropdown.disabled = disabled
-}
-
-/**
- * @template T
- * @param {T} obj 
- * @param {string} [message] 
- * @returns {NonNullable<T>}
- */
-function requireNonNull(obj, message = 'Object is null!') {
-  if (obj == null) throw message
-  return obj
-}
-
-/**
- * @param {string} fileName 
- * @param {BlobPart} data 
- */
-function downloadBlob(fileName, data) {
-  const blob = new Blob([data], { type: 'application/octet-stream' })
-  const url = URL.createObjectURL(blob)
-  downloadURL(url, fileName)
-  setTimeout(() => URL.revokeObjectURL(url), 5000)
-}
-
-/**
- * @param {string} dataURL 
- * @param {string} fileName 
- */
-function downloadURL(dataURL, fileName) {
-  const a = document.createElement('a')
-  a.href = dataURL
-  a.download = fileName
-  a.click()
 }

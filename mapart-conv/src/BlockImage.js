@@ -1,15 +1,20 @@
-//@ts-check
-///<reference path = "../index.d.ts"/>
+import * as NBT from 'https://cdn.jsdelivr.net/npm/nbtify@2.0.0/+esm'
+import rawcolors from "./data/colors.json" with { type: "json" }
+import rawpalette from "./data/palette.json" with { type: "json" }
+import { paletteUrlInput } from "../index.js"
+import BaseImage from "./BaseImage.js"
+import Form from "./Form.js"
+import { BlockImageBuilder } from "./Readers.js"
+import TaskManager, { ITask } from "./TaskManager.js"
+import { around, createIndexedPNG, downloadBlob, requireNonNull } from "./utils.js"
 
-class BlockImage extends BaseImage {
+export default class BlockImage extends BaseImage {
   /** 64 colors -> 4 brightness -> rgb @readonly @type {Uint8Array} */ static colors = new Uint8Array(64 * 4 * 3)
   /** @readonly @type {number} */ width 
   /** @readonly @type {number} */ height 
   /** same as MapDatNbt.data.colors but unsigned and unlimited length @readonly @type {Uint8Array} */ data
 
   static async load() {
-    /** @type {number[]} */
-    const rawcolors = await fetch('src/colors.json').then(res => res.json())
     const Brightness = Float32Array.from([ 180, 220, 255, 135 ], v => v / 255) // LOW, NORMAL, HIGH, LOWEST
     rawcolors.forEach((v, i) => {
       const rgb = Uint8Array.of(0xFF & (v >> 16), 0xFF & (v >> 8), 0xFF & v)
@@ -563,7 +568,7 @@ class BlockImage extends BaseImage {
 
 }
 
-class BlockState {
+export class BlockState {
 
   /**
    * @param {string} str 
@@ -666,11 +671,11 @@ class BlockState {
 
 }
 
-class BlockPalette {
+export class BlockPalette {
   // 0Q1X2R3R4R5Q6Q7Q8S9QaQbScVdQeQfQgQhQiQjQkQlQmQnQoQpQqQrQsQtQuUvQwQxSyQzT1
   // 0Q11Q12Q13Q14Q15Q16Q17Q18Q19Q1aQ1bQ1cQ1dQ1eQ1fQ1gT1hQ1iQ1jT1kQ1lQ1mQ1nQ1oR
   /** @readonly @type {string[]} */ static _default = ['air']
-  /** @readonly @type {string[][]} */ static _rebane = []
+  /** @readonly @type {(string | null)[][]} */ static _rebane = []
   /** @readonly @type {{ [index: string]: number }} */ static _unusualIndexDict = {}
   /** @readonly @type {Set<string>} */ static _needSupportBlock = new Set()
 
@@ -698,12 +703,7 @@ class BlockPalette {
 
   static async load() {
     if (Object.isFrozen(this._default)) return
-    const {
-      defaultPalette,
-      rebane,
-      unusualIndexDict,
-      needSupportBlock
-    } = await fetch('src/palette.json').then(res => res.json())
+    const { defaultPalette, rebane, unusualIndexDict, needSupportBlock } = rawpalette
     if (Object.isFrozen(this._default)) return
     this._default.length = 0
     this._default.push(...defaultPalette.map(BlockState.sanitize))
@@ -1030,7 +1030,7 @@ class BlockPalette {
 
 }
 
-class ConfirmCache {
+export class ConfirmCache {
   /** @type {Record<string, boolean>} */
   static #cache = {}
   /** @type {Record<string, any>} */
@@ -1066,46 +1066,4 @@ class ConfirmCache {
     this.#formCache = {}
   }
 
-}
-
-/**
- * @param {number} length 
- * @param {number} width 
- * @param {number} index 
- */
-function* around(length, width, index) {
-  if (index >= width) yield index - width
-  if (index < length - width) yield index + width
-  const mod = index % width
-  if (mod > 0) yield index - 1
-  if (mod < width - 1) yield index + 1
-}
-
-/**
- * @param {number} length 
- * @param {number} width 
- * @param {number} index 
- */
-function* around8(length, width, index) {
-  let north = false
-  let south = false
-  if (index >= width) {
-    yield index - width
-    north = true
-  }
-  if (index < length - width) {
-    yield index + width
-    south = true
-  }
-  const mod = index % width
-  if (mod > 0) {
-    yield index - 1
-    if (north) yield index - width - 1
-    if (south) yield index + width - 1
-  }
-  if (mod < width - 1) {
-    yield index + 1
-    if (north) yield index - width + 1
-    if (south) yield index + width + 1
-  }
 }

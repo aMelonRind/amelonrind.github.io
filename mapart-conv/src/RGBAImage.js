@@ -1,7 +1,7 @@
-//@ts-check
-/// <reference path = "../index.d.ts"/>
+import BaseImage from "./BaseImage.js"
+import { requireNonNull } from "./utils.js"
 
-class RGBAImage extends BaseImage {
+export default class RGBAImage extends BaseImage {
   /** @readonly @type {ImageData} */ data
 
   /**

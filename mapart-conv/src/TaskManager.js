@@ -1,6 +1,5 @@
-//@ts-check
 
-class TaskManager {
+export default class TaskManager {
 
   /** @type {MainTask?} */ static _running = null
   /** @type {HTMLElement?} */ static progressDiv = null
@@ -89,7 +88,7 @@ class Task {
 /**
  * progress tracker
  */
-class ITask {
+export class ITask {
   /** @readonly */ static DUMMY = new ITask()
   /** @type {MainTask} *///@ts-ignore
   main = this
@@ -199,7 +198,7 @@ class MainTask extends ITask {
 
 }
 
-async function progressTest(len = 3000) {
+globalThis.progressTest = async function progressTest(len = 3000) {
   TaskManager.run('progressTest', async task => {
     let t = Date.now() + 1
     await task.push('running 3 tasks...', 3)
