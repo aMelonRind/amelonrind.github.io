@@ -2,7 +2,6 @@ import BlockImage from "./BlockImage.js"
 import Form from "./Form.js"
 import MainContext from "./MainContext.js"
 import { ITask } from "./TaskManager.js"
-import { LRUCache } from "./utils.js"
 
 export default class ConvertMethod {
   /** @readonly @type {Map<string, ConvertMethod>} */
@@ -67,27 +66,28 @@ export default class ConvertMethod {
    * @param {number} a 0..255
    */
   getNearest(r, g, b, a) {
-    if (a < 128) return 0
-    let nearest = 1
-    let dist = Infinity
-    for (let i = 4 * 3; i < 61 * 4 * 3; i += 3) {
-      const dg = BlockImage.colors[i + 1] - g
-      let d = 4 * dg * dg
-      if (d >= dist) continue
-      const rmean = (BlockImage.colors[i] + r) / 2
-      const dr = BlockImage.colors[i] - r
-      const wr = 2 + rmean / 256
-      d += wr * dr * dr
-      if (d >= dist) continue
-      const db = BlockImage.colors[i + 2] - b
-      const wb = 2 + (255 - rmean) / 256
-      d += wb * db * db
-      if (d < dist) {
-        dist = d
-        nearest = i / 3
-      }
-    }
-    return nearest
+    return BlockImage.colorProfile.rmean_near(r, g, b, a)
+    // if (a < 128) return 0
+    // let nearest = 1
+    // let dist = Infinity
+    // for (let i = 4 * 3; i < 61 * 4 * 3; i += 3) {
+    //   const dg = BlockImage.colors[i + 1] - g
+    //   let d = 4 * dg * dg
+    //   if (d >= dist) continue
+    //   const rmean = (BlockImage.colors[i] + r) / 2
+    //   const dr = BlockImage.colors[i] - r
+    //   const wr = 2 + rmean / 256
+    //   d += wr * dr * dr
+    //   if (d >= dist) continue
+    //   const db = BlockImage.colors[i + 2] - b
+    //   const wb = 2 + (255 - rmean) / 256
+    //   d += wb * db * db
+    //   if (d < dist) {
+    //     dist = d
+    //     nearest = i / 3
+    //   }
+    // }
+    // return nearest
   }
 
   toString() {
@@ -106,22 +106,9 @@ new ConvertMethod({
       description: 'Convert each pixel to their nearest color in mapart palette using rmean.'
     })
     const img = ctx.getImageData()
-    const cache = new LRUCache(256)
-    const length = img.width * img.height
     await task.swap('Converting pixels')
-    const abgrArr = new Int32Array(img.data.buffer, img.data.byteOffset, length)
-    const bytes = new Uint8Array(length)
-    for (let i = 0; i < length; i++) {
-      // await task.progress256(i)
-      if (abgrArr[i] >= 0) {
-        bytes[i] = 0
-        continue
-      }
-      const bgr = abgrArr[i] & 0xFFFFFF
-      //@ts-ignore
-      bytes[i] = cache.get(bgr) ?? cache.set(bgr, this.getNearest(...img.data.subarray(i * 4, i * 4 + 4)))
-    }
-    // task.pop()
+    const abgrArr = new Int32Array(img.data.buffer, img.data.byteOffset, img.width * img.height)
+    const bytes = BlockImage.colorProfile.convert_nearest(abgrArr)
     ctx.base = new BlockImage(img.width, img.height, bytes).inheritFrom(ctx.base)
   }
 })

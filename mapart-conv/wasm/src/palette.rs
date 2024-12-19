@@ -4,12 +4,14 @@ use std::io::Write;
 use flate2::Compression;
 use flate2::write::ZlibEncoder;
 use wasm_bindgen::prelude::*;
+use lru::LruCache;
+use std::num::NonZeroUsize;
 
 use crate::JsResult;
 
 #[wasm_bindgen]
 pub struct ColorProfile {
-    palette: [u8; 768]
+    palette: [u8; 768],
 }
 
 #[wasm_bindgen]
@@ -97,6 +99,64 @@ impl ColorProfile {
         Ok(bytes)
     }
 
+    pub fn convert_nearest(&self, abgrarr: &[i32]) -> Vec<u8> {
+        let mut cache: LruCache<i32, u8> = LruCache::new(NonZeroUsize::new(256).unwrap());
+        let mut bytes = vec![0u8; abgrarr.len()];
+        for i in 0..abgrarr.len() {
+            if abgrarr[i] >= 0 {
+                continue;
+            }
+            let bgr = abgrarr[i] & 0xFFFFFF;
+            bytes[i] = *cache.get_or_insert(bgr, || self.rmean_near(
+                (bgr & 0xFF) as u8,
+                ((bgr >> 8) & 0xFF) as u8,
+                (bgr >> 16) as u8,
+                255
+            ))
+        }
+        bytes
+    }
+    
+    pub fn rmean_near(&self, r: u8, g: u8, b: u8, a: u8) -> u8 {
+        if a < 128 {
+            return 0;
+        }
+        let mut nearest = 1;
+        let mut dist = f32::INFINITY;
+
+        let mut i = 4 * 3;
+        while i < 61 * 4 * 3 {
+            let dg = as_f32_sub(self.palette[i + 1], g);
+            let mut d = 4.0 * dg * dg;
+            if d >= dist {
+                i += 3;
+                continue;
+            }
+            let rmean = (self.palette[i] + r) as f32 / 2.0;
+            let dr = as_f32_sub(self.palette[i], r);
+            let wr = 2.0 + rmean / 256.0;
+            d += wr * dr * dr;
+            if d >= dist {
+                i += 3;
+                continue;
+            }
+            let db = as_f32_sub(self.palette[i + 2], b);
+            let wb = 2.0 + (255.0 - rmean) / 256.0;
+            d += wb * db * db;
+            if d < dist {
+                dist = d;
+                nearest = i / 3;
+            }
+            i += 3;
+        }
+        nearest as u8
+    }
+
+}
+
+#[inline]
+fn as_f32_sub(a: u8, b: u8) -> f32 {
+    a as f32 - b as f32
 }
 
 fn create_png_chunk(chunktype: &[u8; 4], data: &mut Vec<u8>) -> Vec<u8> {

@@ -9,6 +9,8 @@ export class ColorProfile {
   palette(): number;
   paint(data: Uint8Array): Uint8Array;
   create_indexed_png(width: number, height: number, pixels: Uint8Array, compression_level: number): Uint8Array;
+  convert_nearest(abgrarr: Int32Array): Uint8Array;
+  rmean_near(r: number, g: number, b: number, a: number): number;
 }
 /**
  * for litematica generater
@@ -44,6 +46,8 @@ export interface InitOutput {
   readonly colorprofile_palette: (a: number) => number;
   readonly colorprofile_paint: (a: number, b: number, c: number) => [number, number];
   readonly colorprofile_create_indexed_png: (a: number, b: number, c: number, d: number, e: number, f: number) => [number, number, number, number];
+  readonly colorprofile_convert_nearest: (a: number, b: number, c: number) => [number, number];
+  readonly colorprofile_rmean_near: (a: number, b: number, c: number, d: number, e: number) => number;
   readonly test: (a: number, b: number) => bigint;
   readonly test_overhead: (a: number, b: number) => number;
   readonly __wbg_wasmu16counter_free: (a: number, b: number) => void;

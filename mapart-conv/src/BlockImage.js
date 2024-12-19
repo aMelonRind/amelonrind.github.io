@@ -17,8 +17,6 @@ export default class BlockImage extends BaseImage {
   /** @readonly @type {number} */ height 
   /** same as MapDatNbt.data.colors but unsigned and unlimited length @readonly @type {Uint8Array} */ data
 
-  static async load() {}
-
   /**
    * @param {number} width 
    * @param {number} height 
@@ -642,10 +640,11 @@ export class BlockState {
 export class BlockPalette {
   // 0Q1X2R3R4R5Q6Q7Q8S9QaQbScVdQeQfQgQhQiQjQkQlQmQnQoQpQqQrQsQtQuUvQwQxSyQzT1
   // 0Q11Q12Q13Q14Q15Q16Q17Q18Q19Q1aQ1bQ1cQ1dQ1eQ1fQ1gT1hQ1iQ1jT1kQ1lQ1mQ1nQ1oR
-  /** @readonly @type {string[]} */ static _default = ['air']
-  /** @readonly @type {(string | null)[][]} */ static _rebane = []
-  /** @readonly @type {{ [index: string]: number }} */ static _unusualIndexDict = {}
-  /** @readonly @type {Set<string>} */ static _needSupportBlock = new Set()
+  /** @readonly @type {readonly string[]} */ static _default = Object.freeze(rawpalette.defaultPalette.map(BlockState.sanitize))
+  /** @readonly @type {(string | null)[][]} */ static _rebane =
+    rawpalette.rebane.map(arr => arr.map(v => v === null ? null : BlockState.sanitize(v)))
+  /** @readonly @type {{ [index: string]: number }} */ static _unusualIndexDict = rawpalette.unusualIndexDict
+  /** @readonly @type {Set<string>} */ static _needSupportBlock = new Set(rawpalette.needSupportBlock)
 
   /** @readonly */ static CONSTANTS = {
     /** @readonly */ STONE: BlockState.sanitize('stone'),
@@ -669,26 +668,7 @@ export class BlockPalette {
    */
   /** @readonly @type {NSUDefinition[]} */ static _needStateUpdate = []
 
-  static async load() {
-    if (Object.isFrozen(this._default)) return
-    const { defaultPalette, rebane, unusualIndexDict, needSupportBlock } = rawpalette
-    if (Object.isFrozen(this._default)) return
-    this._default.length = 0
-    this._default.push(...defaultPalette.map(BlockState.sanitize))
-    Object.freeze(this._default)
-    this._rebane.length = 0
-    this._rebane.push(...rebane.map(arr => arr.map(v => v === null ? null : BlockState.sanitize(v))))
-    for (const key in this._unusualIndexDict) {
-      delete this._unusualIndexDict[key]
-    }
-    Object.assign(this._unusualIndexDict, unusualIndexDict)
-    this._needSupportBlock.clear()
-    for (const id of needSupportBlock) {
-      this._needSupportBlock.add(id)
-    }
-  }
-
-  static postLoad() {
+  static { // postLoad
     const colors = [
       'black', 'blue', 'brown', 'cyan', 'gray', 'green', 'light_blue', 'light_gray',
       'lime', 'magenta', 'orange', 'pink', 'purple', 'red', 'white', 'yellow'

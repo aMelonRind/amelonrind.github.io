@@ -163,6 +163,29 @@ export class ColorProfile {
         wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
         return v2;
     }
+    /**
+     * @param {Int32Array} abgrarr
+     * @returns {Uint8Array}
+     */
+    convert_nearest(abgrarr) {
+        const ptr0 = passArray32ToWasm0(abgrarr, wasm.__wbindgen_malloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ret = wasm.colorprofile_convert_nearest(this.__wbg_ptr, ptr0, len0);
+        var v2 = getArrayU8FromWasm0(ret[0], ret[1]).slice();
+        wasm.__wbindgen_free(ret[0], ret[1] * 1, 1);
+        return v2;
+    }
+    /**
+     * @param {number} r
+     * @param {number} g
+     * @param {number} b
+     * @param {number} a
+     * @returns {number}
+     */
+    rmean_near(r, g, b, a) {
+        const ret = wasm.colorprofile_rmean_near(this.__wbg_ptr, r, g, b, a);
+        return ret;
+    }
 }
 
 const LongArrBuilderFinalization = (typeof FinalizationRegistry === 'undefined')

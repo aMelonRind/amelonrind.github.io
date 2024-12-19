@@ -93,8 +93,6 @@ const progressDisplay = document.createElement('div')
 progressDisplay.id = 'progress-display'
 
 async function main() {
-  await Readers.load()
-  BlockPalette.postLoad()
   TaskManager.progressDiv = progressDisplay
 
   window.onresize = document.onresize = function() {

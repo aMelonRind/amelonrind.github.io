@@ -2,20 +2,12 @@ import * as NBT from "../npm/nbtify/dist/index.js"
 import block2color from "./data/block2color.json" with { type: "json" }
 import pre13color from "./data/pre13color.json" with { type: "json" }
 import BaseImage from "./BaseImage.js"
-import BlockImage, { BlockPalette } from "./BlockImage.js"
+import BlockImage from "./BlockImage.js"
 import RGBAImage from "./RGBAImage.js"
 import { ITask } from "./TaskManager.js"
 import { firstValue } from "./utils.js"
 
 export default class Readers {
-
-  static async load() {
-    await Promise.allSettled([
-      BlockImageBuilder.load(),
-      BlockImage.load(),
-      BlockPalette.load()
-    ].map(p => p.catch(e => console.error(e))))
-  }
 
   /**
    * @param {DataTransferItemList | null | undefined} items 
@@ -510,19 +502,14 @@ export class ImageReaders {
 
 export class BlockImageBuilder {
   /** @readonly */ static WATER_MASK = (1 << 10) - 1 // deepest water color
-  /** @type {Record<string, number | { if: string, is: string, then: number, else: number }>} */ static map
-  /** @type {{ [key: number]: number }} */ static pre13map // index = data_id << 8 | block_id
+  /** @type {Record<string, number | { if: string, is: string, then: number, else: number }>} */ static map = block2color
+  /** @type {{ [key: number]: number }} */ static pre13map = pre13color // index = data_id << 8 | block_id
   /** @readonly @type {Uint8Array} */ blocks
   /** @readonly @type {Int16Array} */ heights
   /** @readonly @type {Int16Array} */ waters // bitfield map, 1 for top, 2 for second top, 4 for third...
   /** @readonly @type {number} */ width
   /** @readonly @type {number} */ height
   #hasTransparent = false
-
-  static async load() {
-    this.map = block2color
-    this.pre13map = pre13color
-  }
 
   /**
    * @param {PaletteNbt} palette 
