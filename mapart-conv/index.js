@@ -23,6 +23,9 @@ const pngDlButton = document.createElement('button')
 pngDlButton.type = 'button'
 pngDlButton.onclick = () => MainContext.getCurrent()?.base.download()
 pngDlButton.innerText = 'Download as PNG'
+pngDlButton.title = `Automatically names the file if available.\n`
+  + `When in BlockImage, saves as indexed png with highest compression level.\n`
+  + `So it might take some time on big image.`
 
 const paletteUrlLabel = document.createElement('label')
 paletteUrlLabel.innerText = 'Rebane palette url: '

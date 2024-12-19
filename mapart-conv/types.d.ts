@@ -2,11 +2,15 @@
 declare const CRC32: typeof import('crc-32');
 declare const JSZip: import('jszip');
 
-declare module 'https://cdn.jsdelivr.net/npm/nbtify@2.0.0/+esm' {
-  export * from 'nbtify';
+// it's needed to import twice in order to make intellisense work, bruh
+type NBT = typeof import('@/../npm/nbtify/dist/index.js') 
+declare namespace NBT {
+  import * as NBT from '@/../npm/nbtify/dist/index.js'
+  export * from '@/../npm/nbtify/dist/index.js'
   export type Vec3i = { x: NBT.Int32, y: NBT.Int32, z: NBT.Int32 };
   export type Vec3iTuple = NBT.ListTag<NBT.Int32> & [ NBT.Int32, NBT.Int32, NBT.Int32 ];
 }
+
 declare module 'https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.esm.mjs' {
   import Pako from 'pako';
   export = Pako;

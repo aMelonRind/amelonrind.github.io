@@ -1,4 +1,4 @@
-import * as NBT from 'https://cdn.jsdelivr.net/npm/nbtify@2.0.0/+esm'
+import * as NBT from "../npm/nbtify/dist/index.js"
 import block2color from "./data/block2color.json" with { type: "json" }
 import pre13color from "./data/pre13color.json" with { type: "json" }
 import BaseImage from "./BaseImage.js"
@@ -46,13 +46,13 @@ export default class Readers {
         const ext = (lastDotIndex !== -1 && lastDotIndex < name.length - 1) ? name.slice(lastDotIndex + 1) : ''
         switch (ext) {
           case 'nbt':
-            return this.readStructure(() => NBT.read(file), task, file.name)
+            return this.readStructure(() => NBT.read(file, { strict: false }), task, file.name)
           case 'schematic':
-            return this.readSchematic(() => NBT.read(file), task, file.name)
+            return this.readSchematic(() => NBT.read(file, { strict: false }), task, file.name)
           case 'dat':
-            return this.readMapDat(() => NBT.read(file), task, file.name)
+            return this.readMapDat(() => NBT.read(file, { strict: false }), task, file.name)
           case 'litematic':
-            return this.readLitematic(() => NBT.read(file), task, file.name)
+            return this.readLitematic(() => NBT.read(file, { strict: false }), task, file.name)
           case 'zip': {
             return this.readZip(file, task)
           }
@@ -75,12 +75,10 @@ export default class Readers {
     const root = await reader()
     const palette = BlockImageBuilder.readMcPalette(root.data.palette)
     const builder = new BlockImageBuilder(root.data.size[0].valueOf(), root.data.size[2].valueOf())
-    await task.push('Reading blocks', root.data.blocks.length)
-    for (const [i, b] of root.data.blocks.entries()) {
-      await task.progress256(i)
+    await task.swap('Reading blocks')
+    for (const b of root.data.blocks) {
       builder.putPos(b.pos[0].valueOf(), b.pos[1].valueOf(), b.pos[2].valueOf(), palette[b.state.valueOf()])
     }
-    task.pop()
     await task.force().swap('Building image')
     const img = await builder.build()
     await task.force().swap('Reading metadata')

@@ -1,8 +1,12 @@
-import { MUtf8Decoder } from "../../mutf-8/dist/index.js";
+// modified, by aMelonRind
 import { NBTData } from "./format.js";
 import { Int8, Int16, Int32, Float32 } from "./primitive.js";
 import { TAG, TAG_TYPE, isTagType } from "./tag.js";
 import { decompress } from "./compression.js";
+
+const listTagAttrCache = {}
+/** @type {WeakMap<Uint8Array, Record<string, Uint8Array>>} */
+const cachedDecompress = new WeakMap();
 /**
  * Converts an NBT buffer into an NBT object. Accepts an endian type, compression format, and file headers to read the data with.
  *
@@ -97,22 +101,25 @@ export async function read(data, options = {}) {
     }
     rootName;
     if (compression !== null) {
-        data = await decompress(data, compression);
+        await reader.tryDecompress(compression);
     }
     if (bedrockLevel === undefined) {
         bedrockLevel = reader.hasBedrockLevelHeader(endian);
     }
-    return reader.readRoot({ rootName, endian, compression, bedrockLevel, strict });
+    const res = reader.readRoot({ rootName, endian, compression, bedrockLevel, strict });
+    cachedDecompress.delete(data);
+    return res;
 }
 class NBTReader {
     #byteOffset = 0;
+    #rawdata;
     #data;
+    #length = 0;
     #view;
     #littleEndian;
     #varint;
-    #decoder = new MUtf8Decoder();
     constructor(data, littleEndian, varint) {
-        this.#data = data;
+        this.#rawdata = data;
         this.#view = new DataView(data.buffer, data.byteOffset, data.byteLength);
         this.#littleEndian = littleEndian;
         this.#varint = varint;
@@ -132,15 +139,29 @@ class NBTReader {
         return byteLength === this.#data.byteLength - 8;
     }
     #allocate(byteLength) {
-        if (this.#byteOffset + byteLength > this.#data.byteLength) {
+        if (this.#byteOffset + byteLength > this.#length) {
             throw new Error("Ran out of bytes to read, unexpectedly reached the end of the buffer");
         }
     }
+    async tryDecompress(compression) {
+        const ent = cachedDecompress.get(this.#rawdata) ?? {};
+        const cached = ent[compression];
+        if (cached) {
+            this.#data = cached;
+            return cached;
+        }
+        const res = await decompress(this.#rawdata, compression);
+        this.#data = res;
+        ent[compression] = res;
+        cachedDecompress.set(this.#rawdata, ent);
+    }
     async readRoot({ rootName, endian, compression, bedrockLevel, strict }) {
+        this.#data = this.#rawdata;
         if (compression !== null) {
-            this.#data = await decompress(this.#data, compression);
+            await this.tryDecompress(compression);
             this.#view = new DataView(this.#data.buffer);
         }
+        this.#length = this.#data.byteLength;
         if (bedrockLevel) {
             // const version =
             this.#readUnsignedInt();
@@ -303,23 +324,23 @@ class NBTReader {
     #readString() {
         const length = this.#varint ? this.#readVarInt() : this.#readUnsignedShort();
         this.#allocate(length);
-        const value = this.#decoder.decode(this.#data.subarray(this.#byteOffset, this.#byteOffset + length));
+        const value = decodeMutf8(this.#data, this.#byteOffset, length);
         this.#byteOffset += length;
         return value;
     }
     #readList() {
         const type = this.#readTagType();
         const length = this.#varint ? this.#readVarIntZigZag(true) : this.#readInt(true);
-        const value = [];
-        Object.defineProperty(value, TAG_TYPE, {
-            configurable: true,
-            enumerable: false,
-            writable: true,
-            value: type
-        });
+        const value = new Array(length < 0 ? 0 : length);
+        // low optimization part, unnecessary data
+        // Object.defineProperty(value, TAG_TYPE, listTagAttrCache[type] ??= {
+        //     configurable: true,
+        //     enumerable: false,
+        //     writable: true,
+        //     value: type
+        // });
         for (let i = 0; i < length; i++) {
-            const entry = this.#readTag(type);
-            value.push(entry);
+            value[i] = this.#readTag(type);
         }
         return value;
     }
@@ -337,20 +358,148 @@ class NBTReader {
     }
     #readIntArray() {
         const length = this.#readInt(true);
-        const value = new Int32Array(length);
-        for (const i in value) {
-            const entry = this.#readInt(true);
-            value[i] = entry;
+        if (this.#varint) {
+            const value = new Int32Array(length);
+            for (const i in value) {
+                const entry = this.#readInt(true);
+                value[i] = entry;
+            }
+            return value;
         }
-        return value;
+        const byteLen = length * 4;
+        this.#allocate(byteLen);
+        const byteOffset = this.#byteOffset;
+        this.#byteOffset += byteLen;
+        if (this.#littleEndian) {
+            return new Int32Array(this.#view.buffer, byteOffset, length);
+        } else {
+            const u8a = new Uint8Array(this.#view.buffer, byteOffset, byteLen).slice().reverse();
+            return new Int32Array(u8a.buffer, u8a.byteOffset, length).reverse();
+        }
     }
     #readLongArray() {
         const length = this.#readInt(true);
         const value = new BigInt64Array(length);
-        for (const i in value) {
-            const entry = this.#readLong();
-            value[i] = entry;
+        if (this.#varint) {
+            for (const i in value) {
+                const entry = this.#readLong();
+                value[i] = entry;
+            }
+            return value;
         }
-        return value;
+        const byteLen = length * 8;
+        this.#allocate(byteLen);
+        const byteOffset = this.#byteOffset;
+        this.#byteOffset += byteLen;
+        if (this.#littleEndian) {
+            return new BigInt64Array(this.#view.buffer, byteOffset, length);
+        } else {
+            const u8a = new Uint8Array(this.#view.buffer, byteOffset, byteLen).slice().reverse();
+            return new BigInt64Array(u8a.buffer, u8a.byteOffset, length).reverse();
+        }
     }
+}
+
+
+/**
+ * The following content are copied and modified from mutf-8 package, by aMelonRind.
+ * @ module mutf-8
+ * @copyright 2020 sciencesakura
+ * @license MIT
+ */
+/**
+ * Decodes the specified bytes.
+ *
+ * @param {Uint8Array} input - The bytes to be decoded.
+ * @param {number} start 
+ * @param {number} length 
+ * @returns The resultant string.
+ */
+function decodeMutf8(input, start, length) {
+    const buf = input;
+    let p = start;
+    const end = start + length
+    if (length <= 5) {
+        // vowels are placed last for efficiency
+        if (length === 5) {
+            if (buf[p + 0] === 115 &&
+                buf[p + 1] === 116 &&
+                buf[p + 3] === 116 &&
+                buf[p + 2] === 97 &&
+                buf[p + 4] === 101
+            ) return "state"
+        } else if (length === 3) {
+            if (buf[p + 0] === 112 &&
+                buf[p + 2] === 115 &&
+                buf[p + 1] === 111
+            ) return "pos"
+        } else if (length === 4) {
+            if (buf[p + 0] === 78 &&
+                buf[p + 2] === 109 &&
+                buf[p + 1] === 97 &&
+                buf[p + 3] === 101
+            ) return "Name"
+        } else if (length === 1) {
+            const b = buf[p]
+            if (!(b & 0x80) && b !== 0) {
+                return String.fromCharCode(b)
+            }
+        }
+    }
+    const result = [];
+    if (length >= 12) {
+        if (buf[p + 9] === 58 &&
+            buf[p + 8] === 116 &&
+            buf[p + 0] === 109 &&
+            buf[p + 1] === 105 &&
+            buf[p + 2] === 110 &&
+            buf[p + 3] === 101 &&
+            buf[p + 4] === 99 &&
+            buf[p + 5] === 114 &&
+            buf[p + 6] === 97 &&
+            buf[p + 7] === 102
+        ) {
+            result.push("minecraft:")
+            p += 10
+        }
+    }
+    while (p < end) {
+        const b1 = buf[p++];
+        if (!(b1 & 0x80) && b1 !== 0) {
+            // U+0001-007F
+            result.push(String.fromCharCode(b1));
+        } else if (b1 >>> 5 === 0b110) {
+            // U+0000, U+0080-07FF
+            if (end <= p) {
+                result.push("\ufffd");
+                continue;
+            }
+            const b2 = buf[p++];
+            if (b2 >>> 6 !== 0b10) {
+                result.push("\ufffd");
+                continue;
+            }
+            result.push(String.fromCharCode(((b1 & 0x1f) << 6) | (b2 & 0x3f)));
+        } else if (b1 >>> 4 === 0b1110) {
+            // U+0800-
+            if (end <= p + 1) {
+                result.push("\ufffd");
+                continue;
+            }
+            const b2 = buf[p++];
+            const b3 = buf[p++];
+            if (b2 >>> 6 !== 0b10 || b3 >>> 6 !== 0b10) {
+                result.push("\ufffd");
+                continue;
+            }
+            if (b1 === 0xef && b2 === 0xbb && b3 === 0xbf && p == start + 3) {
+                // slip a BOM `EF BB BF`
+                continue;
+            }
+            result.push(String.fromCharCode(((b1 & 0x0f) << 12) | ((b2 & 0x3f) << 6) | (b3 & 0x3f)));
+        } else {
+            result.push("\ufffd");
+        }
+    }
+    return result.join("");
 }

@@ -12,19 +12,18 @@ default = ["console_error_panic_hook"]
 
 [dependencies]
 wasm-bindgen = "0.2.84"
+flate2 = "1.0.35"
+crc32fast = "1.4.2"
+# zip = { version = "2.2.2", default-features = false, features = ["deflate", "deflate64", "lzma", "time"] }
+# getrandom = { version = "0.2.15", features = ["js"] }
 # wasm-bindgen-test = "0.3.34"
+# web-sys = { version = "0.3", features = ["console"] }
 
 # The `console_error_panic_hook` crate provides better debugging of panics by
 # logging them with `console.error`. This is great for development, but requires
 # all the `std::fmt` and `std::panicking` infrastructure, so isn't great for
 # code size when deploying.
 console_error_panic_hook = { version = "0.1.7", optional = true }
-
-# [dependencies.web-sys]
-# version = "0.3"
-# features = [
-#   "console",
-# ]
 
 [dev-dependencies]
 wasm-bindgen-test = "0.3.34"

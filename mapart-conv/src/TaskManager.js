@@ -1,5 +1,6 @@
 
 export default class TaskManager {
+  static taskStart = 0
 
   /** @type {MainTask?} */ static _running = null
   /** @type {HTMLElement?} */ static progressDiv = null
@@ -17,11 +18,13 @@ export default class TaskManager {
       console.log(`Trying to run task: ${taskName}`)
     }
     const main = new MainTask(taskName)
+    this.taskStart = performance.now()
     task(main).then(() => {
       if (main._taskStack.length > 0) {
         console.warn(`Progress bar not empty after task! Forgot to pop somewhere?`, main, main.toString())
       }
     }).finally(() => {
+      console.log(`Task finished! Took ${(performance.now() - this.taskStart).toFixed(3)}ms.`)
       this._running = null
       if (this.progressDiv) {
         this.progressDiv.innerText = ''
@@ -187,7 +190,10 @@ class MainTask extends ITask {
     this._forceNextRender = false
     this._taskStack.reduceRight((p, t) => t._updatePercentage(p), 0)
     element.innerText = this.toString()
-    await new Promise(res => requestAnimationFrame(() => setTimeout(res, 0)))
+    await new Promise(res => {
+      requestAnimationFrame(() => setTimeout(res, 0))
+      setTimeout(res, 30)
+    })
     // await new Promise(res => setTimeout(res, 0))
     this._lastRender = Date.now()
   }

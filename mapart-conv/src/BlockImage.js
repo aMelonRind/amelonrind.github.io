@@ -1,4 +1,4 @@
-import * as NBT from 'https://cdn.jsdelivr.net/npm/nbtify@2.0.0/+esm'
+import * as NBT from "../npm/nbtify/dist/index.js"
 import rawcolors from "./data/colors.json" with { type: "json" }
 import rawpalette from "./data/palette.json" with { type: "json" }
 import { paletteUrlInput } from "../index.js"
@@ -6,25 +6,18 @@ import BaseImage from "./BaseImage.js"
 import Form from "./Form.js"
 import { BlockImageBuilder } from "./Readers.js"
 import TaskManager, { ITask } from "./TaskManager.js"
-import { around, createIndexedPNG, downloadBlob, requireNonNull } from "./utils.js"
+import { around, downloadBlob, requireNonNull } from "./utils.js"
+import { ColorProfile, LongArrBuilder, memory, WasmU16Counter } from "./wasm_loader.js"
 
 export default class BlockImage extends BaseImage {
-  /** 64 colors -> 4 brightness -> rgb @readonly @type {Uint8Array} */ static colors = new Uint8Array(64 * 4 * 3)
+  /** @readonly */ static colorProfile = ColorProfile.new(Uint32Array.from(rawcolors))
+  /** 64 colors -> 4 brightness -> rgb @readonly @type {Uint8Array} */ static colors =
+    new Uint8Array(memory.buffer, this.colorProfile.palette(), 64 * 4 * 3).slice()
   /** @readonly @type {number} */ width 
   /** @readonly @type {number} */ height 
   /** same as MapDatNbt.data.colors but unsigned and unlimited length @readonly @type {Uint8Array} */ data
 
-  static async load() {
-    const Brightness = Float32Array.from([ 180, 220, 255, 135 ], v => v / 255) // LOW, NORMAL, HIGH, LOWEST
-    rawcolors.forEach((v, i) => {
-      const rgb = Uint8Array.of(0xFF & (v >> 16), 0xFF & (v >> 8), 0xFF & v)
-      const index = i * 4 * 3
-      this.colors.set(rgb.map(v => v * Brightness[0]), index)
-      this.colors.set(rgb.map(v => v * Brightness[1]), index + 3)
-      this.colors.set(rgb.map(v => v * Brightness[2]), index + 6)
-      this.colors.set(rgb.map(v => v * Brightness[3]), index + 9)
-    })
-  }
+  static async load() {}
 
   /**
    * @param {number} width 
@@ -40,18 +33,13 @@ export default class BlockImage extends BaseImage {
   }
 
   getImageData() {
-    const res = new Uint8ClampedArray(this.data.length * 4)
-    this.data.forEach((v, i) => {
-      if (v < 4) return
-      res.set(BlockImage.colors.subarray(v * 3, v * 3 + 3), i * 4)
-      res[i * 4 + 3] = 255
-    })
+    const res = new Uint8ClampedArray(BlockImage.colorProfile.paint(this.data))
     return new ImageData(res, this.width, this.height)
   }
 
   async download() {
-    const blob = createIndexedPNG(this.width, this.height, BlockImage.colors, this.data)
-    downloadBlob(`${this.filename ?? 'unnamed'}.png`, blob)
+    const u8a = BlockImage.colorProfile.create_indexed_png(this.width, this.height, this.data, 9)
+    downloadBlob(`${this.filename ?? 'unnamed'}.png`, new Blob([u8a], { type: 'image/png' }))
   }
 
   getWidth() {
@@ -500,36 +488,16 @@ export default class BlockImage extends BaseImage {
     await task.push('Building by layers', layers.length)
     const volume = this.width * layers.length * (this.height + 1)
     // generate longArray and count totalBlocks
-    let totalBlocks = 0
-    const bits = BigInt(Math.max(2, 32 - Math.clz32(paletteNbt.length - 1)))
-    const longArr = new BigUint64Array(Math.ceil(volume * Number(bits) / 64))
-    const bitMask = (1 << Number(bits)) - 1
-    const mask64 = (1n << 64n) - 1n
-    let index = 0
-    let buf = 0n
-    let bufs = 0n
-    const bigIntMap = BigUint64Array.from(map, v => BigInt(v & bitMask))
     await task.force().swap('layers')
+    const wasmBuilder = LongArrBuilder.new(paletteNbt.length, map, BigInt(volume))
     for (const [i, layer] of layers.entries()) {
       await task.progress(i)
-      layer.forEach(v => {
-        if (map[v]) {
-          totalBlocks++
-          buf |= bigIntMap[v] << bufs
-        }
-        bufs += bits
-        if (bufs >= 64n) {
-          longArr[index] = buf & mask64
-          index++
-          buf >>= 64n
-          bufs -= 64n
-        }
-      })
+      wasmBuilder.push(layer)
     }
+    wasmBuilder.finalize()
+    const longArr = new BigUint64Array(memory.buffer, wasmBuilder.longarr(), wasmBuilder.len())
+    const totalBlocks = wasmBuilder.total()
     task.pop()
-    if (bufs > 0n) {
-      longArr[index] = buf
-    }
 
     /** @type {{ x: NBT.Int32, y: NBT.Int32, z: NBT.Int32 }} */
     const size = { x: new NBT.Int32(this.width), y: new NBT.Int32(layers.length), z: new NBT.Int32(this.height + 1)}
@@ -1008,8 +976,12 @@ export class BlockPalette {
    * @returns {{ nbt: PaletteNbt, map: Uint16Array }}
    */
   optimize(layers) {
-    const used = new Set(layers.flatMap(layer => [...new Set(layer)]))
-    const newBase = ['air', ...this.base.filter((state, i) => used.has(i) && state !== 'air').sort()]
+    const counter = WasmU16Counter.new(this.base.length)
+    for (const layer of layers) {
+      counter.count(layer)
+    }
+    const wasmArr = new Uint32Array(memory.buffer, counter.ptr(), counter.len())
+    const newBase = ['air', ...this.base.filter((state, i) => wasmArr[i] && state !== 'air').sort()]
     const map = Uint16Array.from(this.base, state => ((newBase.indexOf(state) + 1) || 1) - 1)
     return { nbt: newBase.map(state => BlockState.from(state).toNbt()), map }
   }

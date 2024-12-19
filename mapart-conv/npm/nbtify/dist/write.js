@@ -1,4 +1,4 @@
-import { MUtf8Encoder } from "../../mutf-8/dist/index.js";
+// modified, by aMelonRind
 import { NBTData } from "./format.js";
 import { TAG, TAG_TYPE, isTag, getTagType } from "./tag.js";
 import { Int32 } from "./primitive.js";
@@ -40,7 +40,7 @@ class NBTWriter {
     #view = new DataView(this.#data.buffer);
     #littleEndian;
     #varint;
-    #encoder = new MUtf8Encoder();
+    #strEncodeCache = {}
     constructor(littleEndian, varint) {
         this.#littleEndian = littleEndian;
         this.#varint = varint;
@@ -224,7 +224,7 @@ class NBTWriter {
         return this;
     }
     #writeString(value) {
-        const entry = this.#encoder.encode(value);
+        const entry = (this.#strEncodeCache[value] ??= encodeMutf8(value));
         const { length } = entry;
         if (this.#varint) {
             this.#writeVarInt(length);
@@ -258,7 +258,8 @@ class NBTWriter {
         return this;
     }
     #writeCompound(value) {
-        for (const [name, entry] of Object.entries(value)) {
+        for (const name in value) {
+            const entry = value[name]
             if (entry === undefined)
                 continue;
             const type = getTagType(entry);
@@ -274,17 +275,71 @@ class NBTWriter {
     #writeIntArray(value) {
         const { length } = value;
         this.#writeInt(length);
-        for (const entry of value) {
-            this.#writeInt(entry);
+        if (this.#varint) {
+            for (const entry of value) {
+                this.#writeInt(entry);
+            }
+        } else {
+            const byteLen = length * 4;
+            this.#allocate(byteLen);
+            this.#data.set(this.#littleEndian ? value : new Uint8Array(value.slice().reverse().buffer).reverse(), this.#byteOffset);
+            this.#byteOffset += byteLen;
         }
         return this;
     }
     #writeLongArray(value) {
         const { length } = value;
         this.#writeInt(length);
-        for (const entry of value) {
-            this.#writeLong(entry);
+        if (this.#varint) {
+            for (const entry of value) {
+                this.#writeLong(entry);
+            }
+        } else {
+            const byteLen = length * 8;
+            this.#allocate(byteLen);
+            this.#data.set(this.#littleEndian ? value : new Uint8Array(value.slice().reverse().buffer).reverse(), this.#byteOffset);
+            this.#byteOffset += byteLen;
         }
         return this;
     }
+}
+
+/**
+ * The following content are copied from mutf-8 package, by aMelonRind.
+ * @ module mutf-8
+ * @copyright 2020 sciencesakura
+ * @license MIT
+ */
+/**
+ * Encodes the specified string in MUTF-8.
+ *
+ * @param input - The string to be encoded.
+ * @returns The resultant bytes.
+ */
+function encodeMutf8(input = "") {
+    const bin = [];
+    for (const c of input) {
+        const code = c.codePointAt(0);
+        if (0x0001 <= code && code <= 0x007f) {
+            bin.push(code);
+        }
+        else if (code <= 0x07ff) {
+            bin.push(0xc0 | (code >>> 6));
+            bin.push(0x80 | (0x3f & code));
+        }
+        else if (code <= 0xffff) {
+            bin.push(0xe0 | (code >>> 12));
+            bin.push(0x80 | (0x3f & (code >>> 6)));
+            bin.push(0x80 | (0x3f & code));
+        }
+        else {
+            bin.push(0xed);
+            bin.push(0xa0 | ((code >>> 16) - 1));
+            bin.push(0x80 | (0x3f & (code >>> 10)));
+            bin.push(0xed);
+            bin.push(0xb0 | (0x0f & (code >>> 6)));
+            bin.push(0x80 | (0x3f & code));
+        }
+    }
+    return new Uint8Array(bin);
 }

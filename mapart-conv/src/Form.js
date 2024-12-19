@@ -1,3 +1,4 @@
+import TaskManager from "./TaskManager.js"
 
 export const formLayer = document.createElement('div')
 formLayer.classList.add('formLayer')
@@ -150,6 +151,7 @@ export default class Form {
       function close() {
         formLayer.innerHTML = ''
         formLayer.style.display = 'none'
+        TaskManager.taskStart = performance.now()
       }
     })
   }
