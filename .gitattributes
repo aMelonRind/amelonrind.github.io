@@ -1,0 +1,14 @@
+# https://github.com/github-linguist/linguist/blob/main/docs/overrides.md
+/jsm-docs-test/[0-9][0-9]*.[0-9][0-9]*.[0-9][0-9]*/** linguist-generated
+/jsm-docs-test/examples/* linguist-documentation
+/jsm-docs-test linguist-vendored
+!/jsm-docs-test/index.js
+!/jsm-docs-test/search.js
+
+/*/wasm/pkg/* linguist-generated
+
+kenpixel_mini_square.woff linguist-vendored
+
+/mapart-conv/npm/* linguist-vendored
+!/mapart-conv/npm/nbtify/dist/read.js
+!/mapart-conv/npm/nbtify/dist/write.js
