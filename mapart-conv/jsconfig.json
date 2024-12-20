@@ -5,6 +5,7 @@
     "checkJs": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
+    "strictNullChecks": true,
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]

@@ -1,7 +1,8 @@
-import BlockImage from "./BlockImage.js"
+import BlockImage, { BlockPalette } from "./BlockImage.js"
 import Form from "./Form.js"
 import MainContext from "./MainContext.js"
 import { ITask } from "./TaskManager.js"
+import { downloadBlob, isDev, requireNonNull } from "./utils.js"
 
 export default class ConvertMethod {
   /** @readonly @type {Map<string, ConvertMethod>} */
@@ -113,172 +114,173 @@ new ConvertMethod({
   }
 })
 
-// new ConvertMethod({
-//   name: '[dev] rebane 2d palette hash gen',
-//   canRun: ctx => ctx?.isTrueColor() && Number.isInteger(ctx.base.getWidth() / 32) && Number.isInteger(ctx.base.getHeight() / 32),
-//   async action(task, ctx) {
-//     if (!ctx) return
-//     const img = ctx.getImageData()
-//     // accepts something like ../img/rebaneBlocks.png
-//     const w = img.width / 32
-//     const h = img.height / 32
-//     if (!Number.isInteger(w) || !Number.isInteger(h)) {
-//       Form.send('devRebaneHashGen', {}, {
-//         title: 'Not a multiply of 32',
-//         description: `${img.width}x${img.height} (${w.toFixed(2)}x${h.toFixed(2)})`,
-//         noCancel: true
-//       })
-//       return
-//     }
-//     const rctx = requireNonNull(new OffscreenCanvas(img.width, img.height).getContext('2d'))
-//     {
-//       const orig = new OffscreenCanvas(img.width, img.height)
-//       orig.getContext('2d')?.putImageData(img, 0, 0)
-//       rctx.fillStyle = '#000000'
-//       rctx.fillRect(0, 0, img.width, img.height)
-//       rctx.drawImage(orig, 0, 0)
-//     }
-//     const opaqueData = rctx.getImageData(0, 0, img.width, img.height).data
-//     const w32 = w * 32
-//     const row = w32 * 32
-//     const abgrArr = new Uint32Array(opaqueData.buffer, opaqueData.byteOffset, row * h)
-//     const hashSampleIndexes = Uint32Array.of(
-//       // y should be ranged between 8..19 to avoid shadow and text.
-//        8 * w32 + 20, // grass variants
-//       16 * w32, // logs and stripped logs
-//       16 * w32 + 15, // universal
-//       16 * w32 + 16, // cobweb and candle
-//     )
-//     /** @type {Uint32Array[]} */
-//     const hashSamples = new Array(h + 1)
-//     { // full black hash
-//       let hash = 5
-//       for (const _ of hashSampleIndexes) {
-//         hash = ((hash << 5) - hash + 0xFF000000) | 0
-//       }
-//       hashSamples[0] = Uint32Array.of(hash)
-//       console.log(`Empty hash: ${hashSamples[0][0].toString(16)}`)
-//     }
-//     for (let y = 0; y < h; y++) {
-//       const ly = y * row
-//       /** @type {Set<number>} */
-//       const set = new Set()
-//       let count = 0
-//       for (let x = 0; x < w; x++) {
-//         const f = ly + x * 32
-//         let hash = 5
-//         let empty = true
-//         for (const j of hashSampleIndexes) {
-//           const abgr = abgrArr[f + j]
-//           if (abgr == null) throw 'wtf'
-//           empty &&= abgr === 0xFF000000
-//           hash = ((hash << 5) - hash + abgr) | 0
-//         }
-//         if (empty) continue
-//         set.add(hash)
-//         count++
-//       }
-//       if (set.size !== count) {
-//         // should avoid by hashing more sample, duplicate images can be ignored like leaves.
-//         // more precisely, top right and bottom right corner should be the same for shadow detection
-//         const s = `y${y}: (${count - set.size} / ${count})`
-//         if (![
-//           'y6: (5 / 8)', // 1:1
-//           'y41: (1 / 3)', // 1:1
-//           'y42: (1 / 4)', // 1:1
-//           'y8: (1 / 10)', // corners
-//         ].includes(s)) {
-//           console.log(`There was some conflicting hash for ${s}`)
-//         }
-//       }
-//       hashSamples[y + 1] = Uint32Array.from(set).sort((a, b) => a - b)
-//     }
-//     const sizeSum = hashSamples.map(v => v.length).reduce((p, v) => p + v)
-//     const tempSet = new Set()
-//     for (const a of hashSamples) {
-//       for (const v of a) {
-//         if (tempSet.has(v)) {
-//           console.log(v.toString(16))
-//         } else {
-//           tempSet.add(v)
-//         }
-//       }
-//     }
-//     console.log(`Unique Hashes: (${tempSet.size} / ${sizeSum})`)
-//     if (tempSet.size < sizeSum) {
-//       console.log('Please resolve duplicate hash.')
-//       return
-//     }
-//     tempSet.clear()
-//     const sorted = hashSamples
-//       .flatMap((arr, y) => Array.from(arr, /** @returns {[hash: number, y: number]} */ hash => [hash, y]))
-//       .sort((a, b) => a[0] - b[0])
-//     const hashes = Uint32Array.from(sorted.map(([hash]) => hash))
-//     const indexes = Uint8Array.from(sorted.map(([, y]) => y))
-//     const topSample = new Uint32Array(hashes.length)
-//     const bottomSample = new Uint32Array(hashes.length)
-//     const topSIndex = 32 - 1
-//     const bottomSIndex = w32 * 31 + 32 - 1
-//     let dirty = false
-//     for (const [i, hash] of hashes.entries()) {
-//       const ly = (indexes[i] - 1) * row
-//       if (ly < 0) {
-//         topSample[i] = 0xFF000000
-//         bottomSample[i] = 0xFF000000
-//         continue
-//       }
-//       /** @type {number?} */
-//       let found = null
-//       for (let x = 0; x < w; x++) {
-//         const f = ly + x * 32
-//         let subhash = 5
-//         for (const j of hashSampleIndexes) {
-//           const abgr = abgrArr[f + j]
-//           if (abgr == null) throw 'wtf'
-//           subhash = ((subhash << 5) - subhash + abgr) | 0
-//         }
-//         if ((subhash >>> 0) === hash) {
-//           if (found == null) {
-//             topSample[i] = abgrArr[f + topSIndex]
-//             bottomSample[i] = abgrArr[f + bottomSIndex]
-//             found = x
-//           } else if (topSample[i] !== abgrArr[f + topSIndex] || bottomSample[i] !== abgrArr[f + bottomSIndex]) {
-//             console.log(`Corner sample doesn't match! y: ${indexes[i] - 1}, hash: ${hash.toString(16)}, x1: ${found}, x2:${x}`)
-//             console.log(`${[topSample[i], abgrArr[f + topSIndex], bottomSample[i], abgrArr[f + bottomSIndex]].map(v => v.toString(16)).join(', ')}`)
-//             dirty = true
-//           }
-//         }
-//       }
-//     }
-//     if (dirty) {
-//       console.log('Please resolve unmatched corners.')
-//       return
-//     }
-//     if (topSample.some(v => v === 0) || bottomSample.some(v => v === 0)) {
-//       console.log('There are some missing corner samples!')
-//     }
-//     if (topSample.some(v => v === 0xFF000020) || bottomSample.some(v => v === 0xFF000020)) {
-//       console.log('There are some corner sample overlaps with shadow color!')
-//     }
-//     for (let i = 0; i < indexes.length; i++) {
-//       const v = indexes[i]
-//       indexes[i] = BlockPalette._unusualIndexDict[v - 1] ?? v
-//     }
-//     let hash = 0
-//     for (const v of [...indexes, ...hashes, ...topSample, ...bottomSample, hashes.length]) {
-//       hash = ((hash << 5) - hash + v) | 0
-//     }
-//     hash = Uint32Array.of(hash)[0]
-//     console.log(`Hash sum: ${hash.toString(16)}`) // d61a2259
-//     // result {hashes, indexes, topSample, bottomSample}
-//     downloadBlob('rebane2dHashes.json', new TextEncoder().encode(`{
-//       "hashes":[${hashes.join(',')}],
-//       "indexes":[${indexes.join(',')}],
-//       "topSample":[${topSample.map(v => v & 0xFFFFFF).join(',')}],
-//       "bottomSample":[${bottomSample.map(v => v & 0xFFFFFF).join(',')}]
-//     }`.replace(/\n\s+/g, '')))
-//   }
-// })
+if (isDev())
+new ConvertMethod({
+  name: '[dev] rebane 2d palette hash gen',
+  canRun: ctx => ctx?.isTrueColor() && Number.isInteger(ctx.base.getWidth() / 32) && Number.isInteger(ctx.base.getHeight() / 32),
+  async action(task, ctx) {
+    if (!ctx) return
+    const img = ctx.getImageData()
+    // accepts something like ../img/rebaneBlocks.png
+    const w = img.width / 32
+    const h = img.height / 32
+    if (!Number.isInteger(w) || !Number.isInteger(h)) {
+      Form.send('devRebaneHashGen', {}, {
+        title: 'Not a multiply of 32',
+        description: `${img.width}x${img.height} (${w.toFixed(2)}x${h.toFixed(2)})`,
+        noCancel: true
+      })
+      return
+    }
+    const rctx = requireNonNull(new OffscreenCanvas(img.width, img.height).getContext('2d'))
+    {
+      const orig = new OffscreenCanvas(img.width, img.height)
+      orig.getContext('2d')?.putImageData(img, 0, 0)
+      rctx.fillStyle = '#000000'
+      rctx.fillRect(0, 0, img.width, img.height)
+      rctx.drawImage(orig, 0, 0)
+    }
+    const opaqueData = rctx.getImageData(0, 0, img.width, img.height).data
+    const w32 = w * 32
+    const row = w32 * 32
+    const abgrArr = new Uint32Array(opaqueData.buffer, opaqueData.byteOffset, row * h)
+    const hashSampleIndexes = Uint32Array.of(
+      // y should be ranged between 8..19 to avoid shadow and text.
+       8 * w32 + 20, // grass variants
+      16 * w32, // logs and stripped logs
+      16 * w32 + 15, // universal
+      16 * w32 + 16, // cobweb and candle
+    )
+    /** @type {Uint32Array[]} */
+    const hashSamples = new Array(h + 1)
+    { // full black hash
+      let hash = 5
+      for (const _ of hashSampleIndexes) {
+        hash = ((hash << 5) - hash + 0xFF000000) | 0
+      }
+      hashSamples[0] = Uint32Array.of(hash)
+      console.log(`Empty hash: ${hashSamples[0][0].toString(16)}`)
+    }
+    for (let y = 0; y < h; y++) {
+      const ly = y * row
+      /** @type {Set<number>} */
+      const set = new Set()
+      let count = 0
+      for (let x = 0; x < w; x++) {
+        const f = ly + x * 32
+        let hash = 5
+        let empty = true
+        for (const j of hashSampleIndexes) {
+          const abgr = abgrArr[f + j]
+          if (abgr == null) throw 'wtf'
+          empty &&= abgr === 0xFF000000
+          hash = ((hash << 5) - hash + abgr) | 0
+        }
+        if (empty) continue
+        set.add(hash)
+        count++
+      }
+      if (set.size !== count) {
+        // should avoid by hashing more sample, duplicate images can be ignored like leaves.
+        // more precisely, top right and bottom right corner should be the same for shadow detection
+        const s = `y${y}: (${count - set.size} / ${count})`
+        if (![
+          'y6: (5 / 8)', // 1:1
+          'y41: (1 / 3)', // 1:1
+          'y42: (1 / 4)', // 1:1
+          'y8: (1 / 10)', // corners
+        ].includes(s)) {
+          console.log(`There was some conflicting hash for ${s}`)
+        }
+      }
+      hashSamples[y + 1] = Uint32Array.from(set).sort((a, b) => a - b)
+    }
+    const sizeSum = hashSamples.map(v => v.length).reduce((p, v) => p + v)
+    const tempSet = new Set()
+    for (const a of hashSamples) {
+      for (const v of a) {
+        if (tempSet.has(v)) {
+          console.log(v.toString(16))
+        } else {
+          tempSet.add(v)
+        }
+      }
+    }
+    console.log(`Unique Hashes: (${tempSet.size} / ${sizeSum})`)
+    if (tempSet.size < sizeSum) {
+      console.log('Please resolve duplicate hash.')
+      return
+    }
+    tempSet.clear()
+    const sorted = hashSamples
+      .flatMap((arr, y) => Array.from(arr, /** @returns {[hash: number, y: number]} */ hash => [hash, y]))
+      .sort((a, b) => a[0] - b[0])
+    const hashes = Uint32Array.from(sorted.map(([hash]) => hash))
+    const indexes = Uint8Array.from(sorted.map(([, y]) => y))
+    const topSample = new Uint32Array(hashes.length)
+    const bottomSample = new Uint32Array(hashes.length)
+    const topSIndex = 32 - 1
+    const bottomSIndex = w32 * 31 + 32 - 1
+    let dirty = false
+    for (const [i, hash] of hashes.entries()) {
+      const ly = (indexes[i] - 1) * row
+      if (ly < 0) {
+        topSample[i] = 0xFF000000
+        bottomSample[i] = 0xFF000000
+        continue
+      }
+      /** @type {number?} */
+      let found = null
+      for (let x = 0; x < w; x++) {
+        const f = ly + x * 32
+        let subhash = 5
+        for (const j of hashSampleIndexes) {
+          const abgr = abgrArr[f + j]
+          if (abgr == null) throw 'wtf'
+          subhash = ((subhash << 5) - subhash + abgr) | 0
+        }
+        if ((subhash >>> 0) === hash) {
+          if (found == null) {
+            topSample[i] = abgrArr[f + topSIndex]
+            bottomSample[i] = abgrArr[f + bottomSIndex]
+            found = x
+          } else if (topSample[i] !== abgrArr[f + topSIndex] || bottomSample[i] !== abgrArr[f + bottomSIndex]) {
+            console.log(`Corner sample doesn't match! y: ${indexes[i] - 1}, hash: ${hash.toString(16)}, x1: ${found}, x2:${x}`)
+            console.log(`${[topSample[i], abgrArr[f + topSIndex], bottomSample[i], abgrArr[f + bottomSIndex]].map(v => v.toString(16)).join(', ')}`)
+            dirty = true
+          }
+        }
+      }
+    }
+    if (dirty) {
+      console.log('Please resolve unmatched corners.')
+      return
+    }
+    if (topSample.some(v => v === 0) || bottomSample.some(v => v === 0)) {
+      console.log('There are some missing corner samples!')
+    }
+    if (topSample.some(v => v === 0xFF000020) || bottomSample.some(v => v === 0xFF000020)) {
+      console.log('There are some corner sample overlaps with shadow color!')
+    }
+    for (let i = 0; i < indexes.length; i++) {
+      const v = indexes[i]
+      indexes[i] = BlockPalette._unusualIndexDict[v - 1] ?? v
+    }
+    let hash = 0
+    for (const v of [...indexes, ...hashes, ...topSample, ...bottomSample, hashes.length]) {
+      hash = ((hash << 5) - hash + v) | 0
+    }
+    hash = Uint32Array.of(hash)[0]
+    console.log(`Hash sum: ${hash.toString(16)}`) // d61a2259
+    // result {hashes, indexes, topSample, bottomSample}
+    downloadBlob('rebane2dHashes.json', new TextEncoder().encode(`{
+      "hashes":[${hashes.join(',')}],
+      "indexes":[${indexes.join(',')}],
+      "topSample":[${topSample.map(v => v & 0xFFFFFF).join(',')}],
+      "bottomSample":[${bottomSample.map(v => v & 0xFFFFFF).join(',')}]
+    }`.replace(/\n\s+/g, '')))
+  }
+})
 
 {
   const loader = import("./data/rebane2dHashes.json", { with: { type: "json" } }).then(({default: json}) => ({

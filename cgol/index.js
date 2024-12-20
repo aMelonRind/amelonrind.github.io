@@ -2,8 +2,11 @@
 import { memory, Universe } from "./wasm_loader.js"
 import { Fps } from "./fps.js"
 
+/** @type {Set<string | undefined>} */
+const truthyStrs = new Set(['', 'true', 't', 'yes', 'y', 'on', '1', 'enabled', 'active'])
+
 const PIXEL_SIZE = 3
-let showFps = new URLSearchParams(window.location.search).get('hideFps') !== 'true'
+let showFps = !hasParam('hideFps')
 
 // set_panic_hook()
 const fps = new Fps()
@@ -92,4 +95,11 @@ function resize() {
   canvas.style.width = `${w * PIXEL_SIZE}px`
   canvas.style.height = `${h * PIXEL_SIZE}px`
   univ.resize(w, h)
+}
+
+/**
+ * @param {string} param 
+ */
+function hasParam(param) {
+  return truthyStrs.has(new URLSearchParams(window.location.search).get(param)?.toLowerCase())
 }

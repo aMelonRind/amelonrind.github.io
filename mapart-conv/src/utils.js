@@ -1,4 +1,3 @@
-import * as pako from "https://cdnjs.cloudflare.com/ajax/libs/pako/2.1.0/pako.esm.mjs"
 
 /**
  * @template T
@@ -16,6 +15,7 @@ export function requireNonNull(obj, message = 'Object is null!') {
  * @param {BlobPart} data 
  */
 export function downloadBlob(fileName, data) {
+  if (hasParam('no-dl')) return
   const blob = new Blob([data], { type: 'application/octet-stream' })
   const url = URL.createObjectURL(blob)
   downloadURL(url, fileName)
@@ -27,7 +27,7 @@ export function downloadBlob(fileName, data) {
  * @param {string} fileName 
  */
 export function downloadURL(dataURL, fileName) {
-  // if (window.location.hostname === 'localhost') return
+  if (hasParam('no-dl')) return
   const a = document.createElement('a')
   a.href = dataURL
   a.download = fileName
@@ -118,4 +118,18 @@ export class LRUCache {
     this.cache.set(key, value)
     return value
   }
+}
+
+/** @type {Set<string | undefined>} */
+const truthyStrs = new Set(['', 'true', 't', 'yes', 'y', 'on', '1', 'enabled', 'active'])
+
+/**
+ * @param {string} param 
+ */
+export function hasParam(param) {
+  return truthyStrs.has(new URLSearchParams(window.location.search).get(param)?.toLowerCase())
+}
+
+export function isDev() {
+  return hasParam('dev')
 }
