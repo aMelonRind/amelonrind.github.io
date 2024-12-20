@@ -1,7 +1,7 @@
 # https://github.com/github-linguist/linguist/blob/main/docs/overrides.md
-/jsm-docs-test/[0-9][0-9]*.[0-9][0-9]*.[0-9][0-9]*/** linguist-generated
-/jsm-docs-test/examples/* linguist-documentation
-/jsm-docs-test linguist-vendored
+/jsm-docs-test/1.9.0/ linguist-generated
+/jsm-docs-test/examples/ linguist-documentation
+/jsm-docs-test/ linguist-vendored
 !/jsm-docs-test/index.js
 !/jsm-docs-test/search.js
 
