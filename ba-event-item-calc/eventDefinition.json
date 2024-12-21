@@ -393,6 +393,34 @@
         {"ap": 20, "items": [36, 0, 0]}
       ]
     },
+    "Serenade Promenade": {
+      "wiki": "https://bluearchive.wiki/wiki/Serenade_Promenade",
+      "itemTypes": 4,
+      "icons": [
+        "",
+        "https://static.wikitide.net/bluearchivewiki/thumb/3/33/Item_Icon_Event_Token_1_S43.png/72px-Item_Icon_Event_Token_1_S43.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/e/ef/Item_Icon_Event_Token_2_S43.png/72px-Item_Icon_Event_Token_2_S43.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/7/72/Item_Icon_Event_Token_3_S43.png/72px-Item_Icon_Event_Token_3_S43.png"
+      ],
+      "transferRates": [
+        {"cost": 5, "of": 1, "to": 2},
+        {"cost": 5, "of": 2, "to": 3}
+      ],
+      "levels": [
+        {"ap": 10, "items": [9, 11, 0, 0]},
+        {"ap": 10, "items": [9, 0, 11, 0]},
+        {"ap": 10, "items": [9, 0, 0, 11]},
+        {"ap": 10, "items": [17, 1, 1, 1]},
+        {"ap": 15, "items": [6, 24, 0, 0]},
+        {"ap": 15, "items": [6, 0, 24, 0]},
+        {"ap": 15, "items": [6, 0, 0, 24]},
+        {"ap": 15, "items": [27, 1, 1, 1]},
+        {"ap": 20, "items": [3, 37, 0, 0]},
+        {"ap": 20, "items": [3, 0, 37, 0]},
+        {"ap": 20, "items": [3, 0, 0, 37]},
+        {"ap": 20, "items": [40, 0, 0, 0]}
+      ]
+    },
 
     "A Certain Scientific Blue Archive": {
       "wiki": "https://bluearchive.wiki/wiki/A_Certain_Scientific_Blue_Archive",
