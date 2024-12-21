@@ -1,19 +1,21 @@
 //@ts-check
-if (0) module.exports = 0
+import definition from "./eventDefinition.json" with { type: "json" }
+import initWasm, { LevelSet, calc as wasmCalc } from "./wasm/pkg/event_item_calc.js"
+await initWasm()
 
 const emptyIcon = 'https://static.miraheze.org/bluearchivewiki/thumb/8/8f/Item_Icon_Event_Item_0.png/90px-Item_Icon_Event_Item_0.png'
 
 const root = document.getElementById('script-root') ?? document.body
 
-/** @type {{default: string, events: { [name: string]: typeof import('./eventDefinition.json')['events']['Get Hyped and March On!'] }}} */
-let definition = {
-  default: '',
-  events: {}
-}
+/**
+ * @typedef {typeof events['Get Hyped and March On!']} EventDefinition
+ */
+const defEvent = definition.default
+export const events = definition.events
 
 const state = {
   selectedName: '',
-  /** @type {(typeof import('./eventDefinition.json')['events']['Get Hyped and March On!'])?} */
+  /** @type {EventDefinition?} */
   selected: null,
   /** @type {HTMLInputElement[]} */
   bonuses: [],
@@ -21,23 +23,27 @@ const state = {
   requires: []
 }
 
+const eventSelectDiv = document.createElement('div')
 const eventLabel = document.createElement('label')
+eventLabel.classList.add('generic-label')
 eventLabel.id = 'eventLabel'
 eventLabel.htmlFor = 'eventSelect'
 eventLabel.innerText = 'Event:'
 const eventSelect = document.createElement('select')
 eventSelect.id = 'eventSelect'
+eventSelectDiv.append(eventLabel, eventSelect)
 
 const wikiDiv = document.createElement('div')
 wikiDiv.style.visibility = 'none'
 const wikiLabel = document.createElement('label')
+wikiLabel.classList.add('generic-label')
 wikiLabel.id = 'wikiLabel'
 wikiLabel.htmlFor = 'wikiLink'
 wikiLabel.innerText = 'Wiki:'
 const wikiLink = document.createElement('a')
 wikiLink.id = 'wikiLink'
-wikiDiv.appendChild(wikiLabel)
-wikiDiv.appendChild(wikiLink)
+wikiLink.target = '_blank'
+wikiDiv.append(wikiLabel, wikiLink)
 
 const numberInputs = document.createElement('div')
 numberInputs.id = 'numberInputs'
@@ -47,43 +53,34 @@ output.id = 'output'
 output.style.whiteSpace = 'pre'
 
 async function main() {
-  definition = await fetch('eventDefinition.json').then(res => res.json())
   eventSelect.onchange = () => onSelectEvent(eventSelect.value)
   updateEventSelect()
 
   root.innerHTML = ''
-  const br = () => root.appendChild(document.createElement('br'))
-  root.appendChild(eventLabel)
-  root.appendChild(eventSelect)
-  br()
-  root.appendChild(wikiDiv)
-  br()
-  root.appendChild(numberInputs)
-  br()
-  root.appendChild(output)
+  root.append(eventSelectDiv, wikiDiv, numberInputs, output)
 
   console.log('loaded!')
 }
 
-function updateEventSelect() {
+export function updateEventSelect() {
   eventSelect.options.length = 0
-  for (const name in definition.events) {
+  for (const name in events) {
     const opt = document.createElement('option')
     opt.value = name
     opt.innerText = name
-    opt.selected = name === definition.default
+    opt.selected = name === defEvent
     eventSelect.options.add(opt)
   }
-  const event = localStorage.getItem('selectedEvent') ?? definition.default
-  onSelectEvent((event in definition.events) ? event : definition.default)
+  const event = localStorage.getItem('ba-event-item-calc:selectedEvent') ?? defEvent
+  onSelectEvent((event in events) ? event : defEvent)
 }
 
-function onSelectEvent(event = definition.default) {
-  localStorage.setItem('selectedEvent', event)
+function onSelectEvent(event = defEvent) {
+  localStorage.setItem('ba-event-item-calc:selectedEvent', event)
   numberInputs.innerHTML = ''
   output.innerText = ''
   state.selectedName = event
-  const def = state.selected = definition.events[event] ?? null
+  const def = state.selected = events[event] ?? null
   if (!def) return
   if (def.wiki) {
     wikiLink.href = def.wiki
@@ -114,6 +111,7 @@ function onSelectEvent(event = definition.default) {
   for (const url of Array.from(base, (_, i) => def.icons[i] || emptyIcon)) {
     const th = document.createElement('th')
     const img = document.createElement('img')
+    img.classList.add('item-icon')
     img.src = url
     th.appendChild(img)
     headRow.appendChild(th)
@@ -172,13 +170,25 @@ async function calculate() {
     bonuses: Array.from(bonusesInput),
     requires: Array.from(requires)
   }
-  localStorage.setItem('inputs', JSON.stringify(data))
+  localStorage.setItem('ba-event-item-calc:inputs', JSON.stringify(data))
 
+    /** @type {Float64Array} */
   const rcpDummy = new Float64Array(0)
+  /** @type {Float32Array} */
+  const normDummy = new Float32Array(0)
+  const amountsGen = n => {
+    const arr = new Uint32Array(def.levels.length)
+    arr[n] = 1
+    return arr
+  }
+  /** @type {(CalculatedLevel & { name: string })[]} */
   const rawLevels = def.levels.map((d, i) => ({
     name: `q${i + 1}`,
+    amounts: amountsGen(i),
     ap: d.ap,
-    items: Uint16Array.from(bonuses, (b, i) => Math.ceil(roundFloat((d.items[i] ?? 0) * b))),
+    /** @type {Uint32Array} */
+    items: Uint32Array.from(bonuses, (b, i) => Math.ceil(roundFloat((d.items[i] ?? 0) * b))),
+    normalized: normDummy,
     bitflag: d.items.slice(0, bonuses.length).reduce((p, v, i) => p | (+(v > 0) << i), 0),
     futurebits: 0,
     itemRcp: rcpDummy
@@ -196,15 +206,16 @@ async function calculate() {
   const log = list.map(row => row.map((v, i) => i === 0 ? v.padEnd(maxs[i], ' ') : v.padStart(maxs[i], ' ')).join(' '))
   log.unshift('Levels with bonus:')
   log.push('')
-  /** @type {{ [name: string]: Float32Array }} */
-  const normalized = {}
-  rawLevels.forEach(l => normalized[l.name] = Float32Array.from(l.items, v => v / l.ap))
+  for (const rl of rawLevels) {
+    rl.normalized = Float32Array.from(rl.items, v => v / rl.ap)
+  }
 
+  /** @type {CalculatedLevel[]} */
   let levels = rawLevels.filter(level => {
-    const a = normalized[level.name]
+    const a = level.normalized
     return rawLevels.every(l => {
       if (level === l) return true
-      const d = normalized[l.name].map((v, i) => a[i] - v)
+      const d = l.normalized.map((v, i) => a[i] - v)
       if (d.some(v => v > 0)) return true
       if (d.every(v => v === 0)) {
         if (level.ap <= l.ap) return true
@@ -236,22 +247,38 @@ async function calculate() {
 
   /** @type {CalculatedLevel[]} */
   const groupLevels = levels.flatMap((a, i) => levels.slice(i + 1).map(b => ({
-    name: `${a.name} and ${b.name}`,
+    amounts: a.amounts.map((v, i) => v + b.amounts[i]),
     ap: a.ap + b.ap,
     items: a.items.map((v, i) => v + b.items[i]),
+    normalized: normDummy,
     bitflag: a.bitflag | b.bitflag,
     futurebits: NaN,
     itemRcp: rcpDummy
   })))
+  for (const gl of groupLevels) {
+    gl.normalized = Float32Array.from(gl.items, v => v / gl.ap)
+  }
   for (const ap of new Set(rawLevels.map(l => l.ap))) {
     const group = rawLevels.filter(l => l.ap === ap)
     for (let size = 3; size <= group.length; size++) {
       for (let i = 0; i + size <= group.length; i++) {
         const ls = group.slice(i, i + size)
+        const amounts = new Uint32Array(rawLevels.length)
+        const items = new Uint32Array(def.itemTypes)
+        for (const l of ls) {
+          for (let i = 0; i < rawLevels.length; i++) {
+            amounts[i] += l.amounts[i]
+          }
+          for (let i = 0; i < def.itemTypes; i++) {
+            items[i] += l.items[i]
+          }
+        }
+        const ap = ls.reduce((p, v) => p + v.ap, 0)
         groupLevels.push({
-          name: ls.map(l => l.name).join(' and '),
-          ap: ls.reduce((p, v) => p + v.ap, 0),
-          items: ls[0].items.map((_, i) => ls.reduce((p, v) => p + v.items[i], 0)),
+          amounts,
+          ap,
+          items,
+          normalized: Float32Array.from(items, v => v / ap),
           bitflag: ls.reduce((p, v) => p | v.bitflag, 0),
           futurebits: NaN,
           itemRcp: rcpDummy
@@ -259,14 +286,14 @@ async function calculate() {
       }
     }
   }
-  groupLevels.forEach(l => normalized[l.name] = Float32Array.from(l.items, v => v / l.ap))
+  groupLevels.forEach(l => l.normalized = Float32Array.from(l.items, v => v / l.ap))
   levels.push(...groupLevels)
   levels = levels.filter(level => {
     if (!(level.bitflag & mask)) return false
-    const a = normalized[level.name]
+    const a = level.normalized
     return levels.every(l => {
       if (level === l) return true
-      const d = normalized[l.name].map((v, i) => a[i] - v)
+      const d = l.normalized.map((v, i) => a[i] - v)
       return d.some(v => v > 0) || level.ap <= l.ap && d.every(v => v === 0)
     })
   })
@@ -277,27 +304,28 @@ async function calculate() {
   def.transferRates // TODO use this
   // too hard to implement
 
-  const collector = new Collector()
+  const levelSets = levels.map(l => LevelSet.new(l.amounts, l.ap, Uint32Array.from(l.items), l.bitflag))
+
   const time = performance.now()
-  calc(levels, requires, 0, '', collector)
+  const wasmRes = wasmCalc(levelSets, requires)
   log.push(`Recursive calculation costs ${(performance.now() - time).toFixed(1)}ms.`)
-  if (collector.ap === Infinity) {
+  if (wasmRes.ap() === 4294967295) {
     log.push(`Didn't find any route for some reason...`)
   } else outer: {
     log.push(
-      `Explored ${collector.count} possibilities, found this route:`,
-      `Uses ${collector.ap} AP.`,
-      `Route: ${collector.route}`,
+      `Explored ${wasmRes.count()} possibilities, found this route:`,
+      `Uses ${wasmRes.ap()} AP.`,
+      `Route: ${Array.from(wasmRes.amounts(), (v, i) => v && `${v}x q${i + 1}`).filter(v => v).join(', ')}`,
       'Performing further approach...\n'
     )
     output.innerText = log.join('\n') + '\n'.repeat(24)
     await new Promise(res => setTimeout(res, 1))
 
     levels = rawLevels.filter(level => {
-      const a = normalized[level.name]
+      const a = level.normalized
       return rawLevels.every(l => {
         if (level === l) return true
-        const d = normalized[l.name].map((v, i) => a[i] - v)
+        const d = l.normalized.map((v, i) => a[i] - v)
         if (d.some(v => v > 0)) return true
         return level.ap > l.ap && Number.isInteger(level.ap / l.ap)
       })
@@ -313,84 +341,49 @@ async function calculate() {
     /** @type {{ [name: string]: CalculatedLevel }} */
     const byName = {}
     for (const l of levels) {
-      byName[l.name] = l
+      byName[l.name ?? ''] = l
     }
-    /** @type {{ [name: string]: number }} */
-    const counts = {}
-    for (const str of collector.route.split(', ')) {
-      if (!str) continue
-      const match = str.match(/^(\d+)x (q\d+(?: and q\d+)*)$/)
-      if (!match) {
-        log.push(`error: string doesn't match: "${str}"`)
-        break outer
-      }
-      const amount = parseInt(match[1])
-      if (amount <= 0) continue
-      for (const name of match[2].split(' and ')) {
-        if (!(name in byName)) {
-          log.push(`error: level doesn't exist: "${name}"`)
-          break outer
-        }
-        counts[name] = (counts[name] ?? 0) + amount
-      }
-    }
+    /** @type {Uint32Array} */
+    const counts = wasmRes.amounts().slice()
+    let lastAP = counts.reduce((p, v, i) => v ? p + v * rawLevels[i].ap : p, 0)
 
     const time = performance.now()
-    let lastAP = Object.entries(counts).reduce((p, [name, amount]) => p + byName[name].ap * amount, 0)
     let count = 0
     const clones = levels.map(() => new Uint32Array(requires.length)) // for performace
     while (true) {
-      /** @type {{ [name: string]: number }} */
-      const extracted = {}
       const clone = Uint32Array.from(requires)
       let extractedAP = 0
-      let extractedRoute = ''
-      for (const name in counts) {
-        const l = byName[name]
-        if (counts[name] <= 3) {
-          const amount = counts[name]
-          delete counts[name]
-          extracted[name] = amount
+      const extractedRoute = new Uint32Array(rawLevels.length)
+      for (const [i, v] of counts.entries()) {
+        const l = rawLevels[i]
+        if (v <= 3) {
+          counts[i] = 0
 
-          extractedAP += amount * l.ap
-          extractedRoute += `, ${amount}x ${l.name}`
+          extractedAP += v * l.ap
+          extractedRoute[i] += v
         } else {
-          counts[name] -= 3
-          extracted[name] = 3
+          counts[i] -= 3
 
-          for (let i = 0; i < clone.length; i++) {
-            if (l.items[i] && clone[i]) {
-              clone[i] = Math.max(0, clone[i] - l.items[i] * counts[name])
+          for (let j = 0; j < clone.length; j++) {
+            if (l.items[j] && clone[j]) {
+              clone[j] = Math.max(0, clone[j] - l.items[j] * counts[i])
             }
           }
 
           extractedAP += 3 * l.ap
-          extractedRoute += `, 3x ${l.name}`
+          extractedRoute[i] += 3
         }
       }
 
-      const collector = new Collector()
-      collector.collect(extractedAP, extractedRoute.slice(2))
-      calcFurther(levels, 0, clone, clones, 0, '', collector)
-      for (const str of collector.route.split(', ')) {
-        if (!str) continue
-        const match = str.match(/^(\d+)x (q\d+)$/)
-        if (!match) {
-          log.push(`error: string doesn't match: "${str}"`)
-          break outer
-        }
-        const amount = parseInt(match[1])
-        if (amount <= 0) continue
-        const name = match[2]
-        if (!(name in byName)) {
-          log.push(`error: level doesn't exist: "${name}"`)
-          break outer
-        }
-        counts[name] = (counts[name] ?? 0) + amount
+      const collector = new Collector(rawLevels.length)
+      collector.collect(extractedAP, [[extractedRoute, 1]])
+      calcFurther(levels, 0, clone, clones, 0, [], collector)
+      for (const [i, amount] of collector.route.entries()) {
+        counts[i] += amount
       }
 
       count++
-      const ap = Object.entries(counts).reduce((p, [name, amount]) => p + byName[name].ap * amount, 0)
+      const ap = counts.reduce((p, v, i) => v ? p + v * rawLevels[i].ap : p, 0)
       if (ap === lastAP) break
       if (ap < lastAP) lastAP = ap
     }
@@ -402,14 +395,14 @@ async function calculate() {
     let sumAP = 0
     let sumAPForItem0 = 0
     const sumItems = new Uint32Array(requires.length)
-    const list = Object.entries(counts).sort(([_, a], [$, b]) => b - a).map(([name, amount]) => {
-      const l = byName[name]
+    const list = [...counts.entries()].filter(([, v]) => v).sort(([, a], [, b]) => b - a).map(([i, amount]) => {
+      const l = rawLevels[i]
       const ap = l.ap * amount
       sumAP += ap
       if (l.bitflag === 1) sumAPForItem0 += ap
       return [
         amount + 'x',
-        name,
+        l.name,
         ap + 'AP',
         ...Array.from(l.items, (v, i) => {
           const n = v * amount
@@ -443,58 +436,13 @@ async function calculate() {
 }
 
 /**
- * @param {CalculatedLevel[]} levels 
- * @param {Uint32Array} requires 
- * @param {number} usedAP 
- * @param {string} route 
- * @param {Collector} collector 
- */
-function calc(levels, requires, usedAP, route, collector) {
-  const len = requires.length
-  let reqBits = 0
-  let i = 0, j = 0, k = 0, v = 0
-  for (j = 0; j < len; j++) {
-    if (requires[j]) reqBits |= 1 << j
-  }
-  if (reqBits === 0) {
-    collector.collect(usedAP, route.slice(2))
-    return
-  }
-
-  const clone = new Uint32Array(len)
-  for (i = 0; i < levels.length; i++) {
-    const { bitflag, itemRcp, ap, items, name } = levels[i]
-    for (j = 0; j < len; j++) {
-      if (~(reqBits & bitflag) & (1 << j)) continue
-      const amount = Math.ceil(Math.fround(requires[j] * itemRcp[j]))
-      const uap = usedAP + ap * amount
-      if (uap > collector.ap) {
-        collector.collect(uap, 'Abandoned route.')
-        continue
-      }
-      for (k = 0; k < len; k++) {
-        v = requires[k]
-        clone[k] = (v && items[k]) ? Math.max(0, v - items[k] * amount) : v
-      }
-      calc(
-        levels,
-        clone,
-        uap,
-        `${route}, ${amount}x ${name}`,
-        collector
-      )
-    }
-  }
-}
-
-/**
  * this recursive function sacrificed some readability for performance.
  * @param {CalculatedLevel[]} levels 
  * @param {number} lvIndex 
  * @param {Uint32Array} requires 
  * @param {Uint32Array[]} clones for performance
  * @param {number} usedAP 
- * @param {string} route 
+ * @param {[Uint32Array, number][]} route 
  * @param {Collector} collector 
  */
 function calcFurther(levels, lvIndex, requires, clones, usedAP, route, collector) {
@@ -505,12 +453,12 @@ function calcFurther(levels, lvIndex, requires, clones, usedAP, route, collector
     for (i = 0; i < len; i++) {
       if (requires[i]) break endCheck
     }
-    collector.collect(usedAP, route.slice(2))
+    collector.collect(usedAP, route)
     return
   }
 
   if (lvIndex === levels.length) return
-  const { name, items, ap, futurebits, itemRcp } = levels[lvIndex]
+  const { amounts, items, ap, futurebits, itemRcp } = levels[lvIndex]
 
   let min = 0
   for (i = 0; i < len; i++) {
@@ -526,7 +474,9 @@ function calcFurther(levels, lvIndex, requires, clones, usedAP, route, collector
   if (!futurebits) { // last item
     usedAP += ap * min
     if (usedAP > collector.ap) return
-    collector.collect(usedAP, `${route}, ${min}x ${name}`.slice(2))
+    route.push([amounts, min])
+    collector.collect(usedAP, route)
+    route.pop()
     return
   }
 
@@ -543,7 +493,9 @@ function calcFurther(levels, lvIndex, requires, clones, usedAP, route, collector
         clone[j] = Math.max(0, clone[j] - items[j] * min)
       }
     }
-    calcFurther(levels, lvIndex, clone, clones, usedAP, `${route}, ${min}x ${name}`, collector)
+    route.push([amounts, min])
+    calcFurther(levels, lvIndex, clone, clones, usedAP, route, collector)
+    route.pop()
   } else {
     calcFurther(levels, lvIndex, clone, clones, usedAP, route, collector) // 0
   }
@@ -560,24 +512,36 @@ function calcFurther(levels, lvIndex, requires, clones, usedAP, route, collector
       }
     }
     if (clear) break
-    calcFurther(levels, lvIndex, clone, clones, usedAP, `${route}, ${i}x ${name}`, collector)
+    route.push([amounts, i])
+    calcFurther(levels, lvIndex, clone, clones, usedAP, route, collector)
+    route.pop()
   }
 }
 
 class Collector {
   count = 0
   ap = Infinity
-  route = ''
+  /** @readonly @type {Uint32Array} */
+  route
+
+  constructor (len) {
+    this.route = new Uint32Array(len)
+  }
 
   /**
    * @param {number} ap 
-   * @param {string} route 
+   * @param {[Uint32Array, number][]} route 
    */
   collect(ap, route) {
     this.count++
     if (ap >= this.ap) return
     this.ap = ap
-    this.route = route
+    this.route.fill(0)
+    for (const [amounts, multiplier] of route) {
+      for (let i = 0; i < amounts.length; i++) {
+        this.route[i] += amounts[i] * multiplier
+      }
+    }
   }
 }
 
@@ -588,7 +552,7 @@ class Collector {
  * } }}
  */
 function getStoredInputs() {
-  const raw = localStorage.getItem('inputs')
+  const raw = localStorage.getItem('ba-event-item-calc:inputs')
   if (!raw) return {}
   try {
     return JSON.parse(raw)
@@ -607,9 +571,11 @@ main()
 
 /**
  * @typedef {{
- *  name: string;
+ *  name?: string;
+ *  amounts: Uint32Array;
  *  ap: number;
- *  items: Uint16Array;
+ *  items: Uint32Array;
+ *  normalized: Float32Array;
  *  bitflag: number;
  *  futurebits: number;
  *  itemRcp: Float64Array;

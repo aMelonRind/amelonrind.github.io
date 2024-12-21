@@ -6,7 +6,10 @@
   <title>Blue Archive Event Item Calculator</title>
   <link rel="shortcut icon" href="favicon.ico?v=2">
   <link rel="stylesheet" href="index.css"/>
-  <script defer src="index.js"></script>
+  <script type="module">
+    import * as exposed from "./index.js"
+    Object.assign(globalThis, exposed)
+  </script>
 </head>
 <body>
   <div id="maindiv">
