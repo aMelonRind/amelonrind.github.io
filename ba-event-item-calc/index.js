@@ -353,7 +353,6 @@ async function calculate() {
     const counts = wasmRes.amounts.slice()
     let lastAP = counts.reduce((p, v, i) => v ? p + v * rawLevels[i].ap : p, 0)
 
-    // TODO: port this to wasm
     const time = performance.now()
     let count = 0
     const clones = levels.map(() => new Uint32Array(requires.length)) // for performace
