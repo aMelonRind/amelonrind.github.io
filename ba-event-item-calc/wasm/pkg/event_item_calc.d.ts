@@ -1,28 +1,42 @@
 /* tslint:disable */
 /* eslint-disable */
 export function set_panic_hook(): void;
-export function calc(levels: (LevelSet)[], requires: Uint32Array): CalcResult;
+export function calc(levels: (LevelSet)[], requires: Uint32Array, ap_ceil: number): CalcResult;
 export class CalcResult {
   private constructor();
   free(): void;
-  count(): bigint;
-  ap(): number;
-  amounts(): Uint32Array;
+  readonly count: bigint;
+  readonly ap: number;
+  readonly amounts: Uint32Array;
 }
 export class LevelSet {
+  free(): void;
+  constructor(amounts: Uint32Array, ap: number, items: Uint32Array, bitflag: number);
+}
+export class RawLevel {
   private constructor();
   free(): void;
-  static new(amounts: Uint32Array, ap: number, items: Uint32Array, bitflag: number): LevelSet;
+}
+export class RawLevels {
+  free(): void;
+  constructor(item_types: number);
+  push(index: number, ap: number, items: Uint32Array): void;
+  approach2(req: Uint32Array): CalcResult;
 }
 
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
 
 export interface InitOutput {
   readonly memory: WebAssembly.Memory;
+  readonly __wbg_rawlevel_free: (a: number, b: number) => void;
+  readonly __wbg_rawlevels_free: (a: number, b: number) => void;
+  readonly rawlevels_new: (a: number) => [number, number, number];
+  readonly rawlevels_push: (a: number, b: number, c: number, d: number, e: number) => [number, number];
+  readonly rawlevels_approach2: (a: number, b: number, c: number) => [number, number, number];
   readonly __wbg_levelset_free: (a: number, b: number) => void;
   readonly levelset_new: (a: number, b: number, c: number, d: number, e: number, f: number) => number;
   readonly __wbg_calcresult_free: (a: number, b: number) => void;
-  readonly calc: (a: number, b: number, c: number, d: number) => [number, number, number];
+  readonly calc: (a: number, b: number, c: number, d: number, e: number) => [number, number, number];
   readonly calcresult_count: (a: number) => bigint;
   readonly calcresult_ap: (a: number) => number;
   readonly calcresult_amounts: (a: number) => [number, number];
@@ -31,8 +45,8 @@ export interface InitOutput {
   readonly __wbindgen_malloc: (a: number, b: number) => number;
   readonly __wbindgen_realloc: (a: number, b: number, c: number, d: number) => number;
   readonly __wbindgen_export_3: WebAssembly.Table;
-  readonly __externref_table_alloc: () => number;
   readonly __externref_table_dealloc: (a: number) => void;
+  readonly __externref_table_alloc: () => number;
   readonly __wbindgen_start: () => void;
 }
 

@@ -1,8 +1,8 @@
 //@ts-check
 import definition from "./eventDefinition.json" with { type: "json" }
-import initWasm, { LevelSet, calc as wasmCalc } from "./wasm/pkg/event_item_calc.js"
+import initWasm, { LevelSet, calc as wasmCalc, RawLevels, set_panic_hook } from "./wasm/pkg/event_item_calc.js"
 await initWasm()
-
+set_panic_hook()
 const emptyIcon = 'https://static.miraheze.org/bluearchivewiki/thumb/8/8f/Item_Icon_Event_Item_0.png/90px-Item_Icon_Event_Item_0.png'
 
 const root = document.getElementById('script-root') ?? document.body
@@ -299,23 +299,29 @@ async function calculate() {
   })
   for (const level of levels) level.itemRcp = Float64Array.from(level.items, v => 1 / v)
 
-  log.push(`Level pool: ${levels.length}\n`)
+  log.push(`Level pool for approach1: ${levels.length}\n`)
 
   def.transferRates // TODO use this
   // too hard to implement
 
-  const levelSets = levels.map(l => LevelSet.new(l.amounts, l.ap, Uint32Array.from(l.items), l.bitflag))
-
   const time = performance.now()
-  const wasmRes = wasmCalc(levelSets, requires)
-  log.push(`Recursive calculation costs ${(performance.now() - time).toFixed(1)}ms.`)
-  if (wasmRes.ap() === 4294967295) {
+  const wasmRaws = new RawLevels(def.itemTypes)
+  rawLevels.forEach(({ ap, items }, i) => wasmRaws.push(i, ap, items))
+  const approach2 = wasmRaws.approach2(requires)
+  const levelSets = levels.map(l => new LevelSet(l.amounts, l.ap, Uint32Array.from(l.items), l.bitflag))
+  const approach1 = wasmCalc(levelSets, requires, approach2.ap)
+
+  const lower = approach1.ap < approach2.ap
+  const wasmRes = lower ? approach1 : approach2
+  log.push(`Main calculation costs ${(performance.now() - time).toFixed(1)}ms.`)
+  if (wasmRes.ap === 4294967295) {
     log.push(`Didn't find any route for some reason...`)
   } else outer: {
     log.push(
-      `Explored ${wasmRes.count()} possibilities, found this route:`,
-      `Uses ${wasmRes.ap()} AP.`,
-      `Route: ${Array.from(wasmRes.amounts(), (v, i) => v && `${v}x q${i + 1}`).filter(v => v).join(', ')}`,
+      `Explored ${approach2.count} + ${approach1.count} possibilities, found this route:`,
+      `Approach: ${lower ? 1 : 2}`,
+      `Uses ${wasmRes.ap} AP.`,
+      `Route: ${Array.from(wasmRes.amounts, (v, i) => v && `${v}x q${i + 1}`).filter(v => v).join(', ')}`,
       'Performing further approach...\n'
     )
     output.innerText = log.join('\n') + '\n'.repeat(24)
@@ -344,9 +350,10 @@ async function calculate() {
       byName[l.name ?? ''] = l
     }
     /** @type {Uint32Array} */
-    const counts = wasmRes.amounts().slice()
+    const counts = wasmRes.amounts.slice()
     let lastAP = counts.reduce((p, v, i) => v ? p + v * rawLevels[i].ap : p, 0)
 
+    // TODO: port this to wasm
     const time = performance.now()
     let count = 0
     const clones = levels.map(() => new Uint32Array(requires.length)) // for performace

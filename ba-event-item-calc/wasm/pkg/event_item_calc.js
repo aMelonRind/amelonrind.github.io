@@ -87,6 +87,12 @@ export function set_panic_hook() {
     wasm.set_panic_hook();
 }
 
+function takeFromExternrefTable0(idx) {
+    const value = wasm.__wbindgen_export_3.get(idx);
+    wasm.__externref_table_dealloc(idx);
+    return value;
+}
+
 let cachedUint32ArrayMemory0 = null;
 
 function getUint32ArrayMemory0() {
@@ -118,23 +124,18 @@ function passArrayJsValueToWasm0(array, malloc) {
     WASM_VECTOR_LEN = array.length;
     return ptr;
 }
-
-function takeFromExternrefTable0(idx) {
-    const value = wasm.__wbindgen_export_3.get(idx);
-    wasm.__externref_table_dealloc(idx);
-    return value;
-}
 /**
  * @param {(LevelSet)[]} levels
  * @param {Uint32Array} requires
+ * @param {number} ap_ceil
  * @returns {CalcResult}
  */
-export function calc(levels, requires) {
+export function calc(levels, requires, ap_ceil) {
     const ptr0 = passArrayJsValueToWasm0(levels, wasm.__wbindgen_malloc);
     const len0 = WASM_VECTOR_LEN;
     const ptr1 = passArray32ToWasm0(requires, wasm.__wbindgen_malloc);
     const len1 = WASM_VECTOR_LEN;
-    const ret = wasm.calc(ptr0, len0, ptr1, len1);
+    const ret = wasm.calc(ptr0, len0, ptr1, len1, ap_ceil);
     if (ret[2]) {
         throw takeFromExternrefTable0(ret[1]);
     }
@@ -174,21 +175,21 @@ export class CalcResult {
     /**
      * @returns {bigint}
      */
-    count() {
+    get count() {
         const ret = wasm.calcresult_count(this.__wbg_ptr);
         return BigInt.asUintN(64, ret);
     }
     /**
      * @returns {number}
      */
-    ap() {
+    get ap() {
         const ret = wasm.calcresult_ap(this.__wbg_ptr);
         return ret >>> 0;
     }
     /**
      * @returns {Uint32Array}
      */
-    amounts() {
+    get amounts() {
         const ret = wasm.calcresult_amounts(this.__wbg_ptr);
         var v1 = getArrayU32FromWasm0(ret[0], ret[1]).slice();
         wasm.__wbindgen_free(ret[0], ret[1] * 4, 4);
@@ -201,14 +202,6 @@ const LevelSetFinalization = (typeof FinalizationRegistry === 'undefined')
     : new FinalizationRegistry(ptr => wasm.__wbg_levelset_free(ptr >>> 0, 1));
 
 export class LevelSet {
-
-    static __wrap(ptr) {
-        ptr = ptr >>> 0;
-        const obj = Object.create(LevelSet.prototype);
-        obj.__wbg_ptr = ptr;
-        LevelSetFinalization.register(obj, obj.__wbg_ptr, obj);
-        return obj;
-    }
 
     static __unwrap(jsValue) {
         if (!(jsValue instanceof LevelSet)) {
@@ -233,15 +226,92 @@ export class LevelSet {
      * @param {number} ap
      * @param {Uint32Array} items
      * @param {number} bitflag
-     * @returns {LevelSet}
      */
-    static new(amounts, ap, items, bitflag) {
+    constructor(amounts, ap, items, bitflag) {
         const ptr0 = passArray32ToWasm0(amounts, wasm.__wbindgen_malloc);
         const len0 = WASM_VECTOR_LEN;
         const ptr1 = passArray32ToWasm0(items, wasm.__wbindgen_malloc);
         const len1 = WASM_VECTOR_LEN;
         const ret = wasm.levelset_new(ptr0, len0, ap, ptr1, len1, bitflag);
-        return LevelSet.__wrap(ret);
+        this.__wbg_ptr = ret >>> 0;
+        LevelSetFinalization.register(this, this.__wbg_ptr, this);
+        return this;
+    }
+}
+
+const RawLevelFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_rawlevel_free(ptr >>> 0, 1));
+
+export class RawLevel {
+
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        RawLevelFinalization.unregister(this);
+        return ptr;
+    }
+
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_rawlevel_free(ptr, 0);
+    }
+}
+
+const RawLevelsFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_rawlevels_free(ptr >>> 0, 1));
+
+export class RawLevels {
+
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        RawLevelsFinalization.unregister(this);
+        return ptr;
+    }
+
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_rawlevels_free(ptr, 0);
+    }
+    /**
+     * @param {number} item_types
+     */
+    constructor(item_types) {
+        const ret = wasm.rawlevels_new(item_types);
+        if (ret[2]) {
+            throw takeFromExternrefTable0(ret[1]);
+        }
+        this.__wbg_ptr = ret[0] >>> 0;
+        RawLevelsFinalization.register(this, this.__wbg_ptr, this);
+        return this;
+    }
+    /**
+     * @param {number} index
+     * @param {number} ap
+     * @param {Uint32Array} items
+     */
+    push(index, ap, items) {
+        const ptr0 = passArray32ToWasm0(items, wasm.__wbindgen_malloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ret = wasm.rawlevels_push(this.__wbg_ptr, index, ap, ptr0, len0);
+        if (ret[1]) {
+            throw takeFromExternrefTable0(ret[0]);
+        }
+    }
+    /**
+     * @param {Uint32Array} req
+     * @returns {CalcResult}
+     */
+    approach2(req) {
+        const ptr0 = passArray32ToWasm0(req, wasm.__wbindgen_malloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ret = wasm.rawlevels_approach2(this.__wbg_ptr, ptr0, len0);
+        if (ret[2]) {
+            throw takeFromExternrefTable0(ret[1]);
+        }
+        return CalcResult.__wrap(ret[0]);
     }
 }
 
