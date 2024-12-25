@@ -1,8 +1,8 @@
 //@ts-check
 import definition from "./eventDefinition.json" with { type: "json" }
-import initWasm, { LevelSet, calc as wasmCalc, RawLevels, set_panic_hook } from "./wasm/pkg/event_item_calc.js"
+import initWasm, { LevelSet, calc as wasmCalc, RawLevels } from "./wasm/pkg/event_item_calc.js"
 await initWasm()
-set_panic_hook()
+
 const emptyIcon = 'https://static.miraheze.org/bluearchivewiki/thumb/8/8f/Item_Icon_Event_Item_0.png/90px-Item_Icon_Event_Item_0.png'
 
 const root = document.getElementById('script-root') ?? document.body
@@ -381,7 +381,7 @@ async function calculate() {
         }
       }
 
-      const collector = new Collector(rawLevels.length)
+      const collector = new Collector(rawLevels, clone)
       collector.collect(extractedAP, [[extractedRoute, 1]])
       calcFurther(levels, 0, clone, clones, 0, [], collector)
       for (const [i, amount] of collector.route.entries()) {
@@ -529,9 +529,20 @@ class Collector {
   ap = Infinity
   /** @readonly @type {Uint32Array} */
   route
+  dirty = false
+  /** @readonly @type {CalculatedLevel[]} */
+  def
+  /** @readonly @type {Uint32Array} */
+  req
+  extra = -1
 
-  constructor (len) {
-    this.route = new Uint32Array(len)
+  /**
+   * @param {CalculatedLevel[]} def 
+   */
+  constructor (def, req) {
+    this.route = new Uint32Array(def.length)
+    this.def = def
+    this.req = req
   }
 
   /**
@@ -540,14 +551,57 @@ class Collector {
    */
   collect(ap, route) {
     this.count++
-    if (ap >= this.ap) return
-    this.ap = ap
-    this.route.fill(0)
-    for (const [amounts, multiplier] of route) {
-      for (let i = 0; i < amounts.length; i++) {
-        this.route[i] += amounts[i] * multiplier
+    if (ap > this.ap) return
+    if (ap < this.ap) {
+      this.ap = ap
+      this.dirty = true
+      this.route.fill(0)
+      for (const [amounts, multiplier] of route) {
+        for (let i = 0; i < amounts.length; i++) {
+          this.route[i] += amounts[i] * multiplier
+        }
+      }
+      this.extra = this.calcExtra(this.route)
+    } else {
+      const res = new Uint32Array(this.def.length)
+      for (const [amounts, multiplier] of route) {
+        for (let i = 0; i < amounts.length; i++) {
+          res[i] += amounts[i] * multiplier
+        }
+      }
+      const extra = this.calcExtra(res)
+      if (extra > this.extra) {
+        this.dirty = true
+        this.route.set(res)
+        this.extra = extra
       }
     }
+  }
+
+  /**
+   * @param {Uint32Array} route 
+   */
+  calcExtra(route) {
+    const items = new Uint32Array(this.def[0].items.length)
+    for (const [lv, amount] of route.entries()) {
+      for (const [i, count] of this.def[lv].items.entries()) {
+        items[i] += amount * count
+      }
+    }
+    for (const [i, count] of this.req.entries()) {
+      items[i] -= count
+    }
+    let clean = true
+    for (let i = 2; i < items.length; i++) {
+      const d = items[i - 1] / 5
+      if (!Number.isInteger(d)) return -1
+      if (d !== 0) {
+        items[i] += d
+        clean = false
+      }
+    }
+    if ((items.at(-1) ?? 0) % 5 !== 0) return -1
+    return (items[0] || Infinity) + (clean ? 0.5 : 0)
   }
 }
 

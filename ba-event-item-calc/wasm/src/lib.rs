@@ -11,10 +11,10 @@ use utils::{div_ceil_u32, JsResult};
 //     // fn log(s: &str);
 // }
 
-#[wasm_bindgen]
-pub fn set_panic_hook() {
-    utils::set_panic_hook();
-}
+// #[wasm_bindgen]
+// pub fn set_panic_hook() {
+//     utils::set_panic_hook();
+// }
 
 #[allow(dead_code)]
 #[wasm_bindgen]

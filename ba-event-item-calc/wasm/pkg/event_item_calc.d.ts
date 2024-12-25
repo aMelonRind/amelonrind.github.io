@@ -1,6 +1,5 @@
 /* tslint:disable */
 /* eslint-disable */
-export function set_panic_hook(): void;
 export function calc(levels: (LevelSet)[], requires: Uint32Array, ap_ceil: number): CalcResult;
 export class CalcResult {
   private constructor();
@@ -40,13 +39,11 @@ export interface InitOutput {
   readonly calcresult_count: (a: number) => bigint;
   readonly calcresult_ap: (a: number) => number;
   readonly calcresult_amounts: (a: number) => [number, number];
-  readonly set_panic_hook: () => void;
-  readonly __wbindgen_free: (a: number, b: number, c: number) => void;
-  readonly __wbindgen_malloc: (a: number, b: number) => number;
-  readonly __wbindgen_realloc: (a: number, b: number, c: number, d: number) => number;
-  readonly __wbindgen_export_3: WebAssembly.Table;
+  readonly __wbindgen_export_0: WebAssembly.Table;
   readonly __externref_table_dealloc: (a: number) => void;
+  readonly __wbindgen_malloc: (a: number, b: number) => number;
   readonly __externref_table_alloc: () => number;
+  readonly __wbindgen_free: (a: number, b: number, c: number) => void;
   readonly __wbindgen_start: () => void;
 }
 
