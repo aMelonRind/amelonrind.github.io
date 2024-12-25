@@ -59,6 +59,23 @@ async function main() {
   root.innerHTML = ''
   root.append(eventSelectDiv, wikiDiv, numberInputs, output)
 
+  window.addEventListener('paste', async e => {
+    const items = e.clipboardData?.items
+    if (!items) return
+    for (const item of items) {
+      if (item.type === 'text/plain') {
+        /** @type {string[]} */
+        const expressions = (await new Promise(res => item.getAsString(str => res(str)))).trim().split(/\r?\n/g)
+        if (expressions.length !== state.requires.length) continue
+        if (!expressions.every(exp => /^[\d()+\-*/% ]+$/.test(exp))) continue
+        for (const [i, exp] of expressions.entries()) {
+          state.requires[i].valueAsNumber = eval(exp)
+        }
+        calculate()
+      }
+    }
+  })
+
   console.log('loaded!')
 }
 
