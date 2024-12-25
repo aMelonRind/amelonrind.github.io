@@ -400,6 +400,7 @@ async function calculate() {
 
       const collector = new Collector(rawLevels, clone)
       collector.collect(extractedAP, [[extractedRoute, 1]])
+      collector.dirty = false
       calcFurther(levels, 0, clone, clones, 0, [], collector)
       for (const [i, amount] of collector.route.entries()) {
         counts[i] += amount
@@ -407,7 +408,7 @@ async function calculate() {
 
       count++
       const ap = counts.reduce((p, v, i) => v ? p + v * rawLevels[i].ap : p, 0)
-      if (ap === lastAP) break
+      if (!collector.dirty && ap === lastAP) break
       if (ap < lastAP) lastAP = ap
     }
     log.push(
