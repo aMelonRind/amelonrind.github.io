@@ -601,7 +601,7 @@ class Collector {
       }
     }
     if ((items.at(-1) ?? 0) % 5 !== 0) return -1
-    return (items[0] || Infinity) + (clean ? 0.5 : 0)
+    return (items[0] || 9e9) + (clean ? 0.5 : 0)
   }
 }
 
