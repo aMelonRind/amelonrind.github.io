@@ -187,7 +187,7 @@ impl RawLevels {
                 res.ap = ap;
                 res.amounts.fill(0);
                 for i in 0..self.item_types {
-                    res.amounts[lvset[i].index] = amounts[i];
+                    res.amounts[lvset[i].index] += amounts[i];
                 }
             }
         }
