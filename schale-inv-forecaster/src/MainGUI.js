@@ -54,8 +54,11 @@ class MainGUI extends ParentElement {
       this.updateScale()
     })
     this.updateScale()
+    this.#mainCanvas.addEventListener('pointerdown', e => e.preventDefault(), { passive: false })
     this.#mainCanvas.addEventListener('pointerup', e => {
-      this.onClick(Math.floor(e.offsetX / this.#scale), Math.floor(e.offsetY / this.#scale))
+      if (this.onClick(Math.floor(e.offsetX / this.#scale), Math.floor(e.offsetY / this.#scale))) {
+        e.preventDefault()
+      }
     })
     this.#mainCanvas.addEventListener('pointermove', e => {
       this.#hoverEvent = e
@@ -64,6 +67,8 @@ class MainGUI extends ParentElement {
       this.#hoverEvent = null
       this.unhover()
     })
+    this.#mainCanvas.addEventListener('touchstart', e => e.preventDefault(), { passive: false })
+    this.#mainCanvas.addEventListener('touchmove', e => e.preventDefault(), { passive: false })
 
     this.loadState()
   }
@@ -106,6 +111,7 @@ class MainGUI extends ParentElement {
   }
 
   updateScale() {
+    console.log(window.screen.width, window.screen.height)
     const c = this.#mainCanvas
     const scale = Math.max(1, Math.min(5,
       Math.floor(window.screen.width * 0.9 / c.width),

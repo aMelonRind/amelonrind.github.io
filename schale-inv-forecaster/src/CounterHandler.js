@@ -26,13 +26,17 @@ function createWorker() {
       }
     } else block: {
       if (msg.type === 'result') {
-        const { key, total, count, time } = msg
-        results.set(key, {
-          total,
-          //@ts-ignore
-          count: count.map(v => v ?? new BigUint64Array(45)),
-          time
-        })
+        const { key, total, count: countWithHoles, time } = msg
+        /** @type {[BigUint64Array, BigUint64Array, BigUint64Array]} *///@ts-ignore
+        const count = countWithHoles.map(v => v ?? new BigUint64Array(45))
+        results.set(key, { total, count, time })
+        // const totalstr = total.toLocaleString()
+        // console.log(
+        //   `total: ${totalstr}\n\n` +
+        //   Array.from(count, v => Array.from(v, n => n.toLocaleString().padStart(totalstr.length, ' ')))
+        //     .map(arr => Array.from({ length: 5 }, (_, i) => arr.slice(i * 9, i * 9 + 9).join(' ')).join('\n'))
+        //     .join('\n\n')
+        // )
       } else if (msg.type === 'error') {
         // console.log(`Wasm counter error: ${msg.msg}`)
       } else if (msg.type === 'loaded') {
