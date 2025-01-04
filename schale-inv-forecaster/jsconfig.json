@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "target": "ESNext",
+    "checkJs": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "strictNullChecks": true,
+    "paths": {},
+    "types": [
+      "./types.d.ts"
+    ]
+  },
+  "include": [
+    "src/**/*",
+    "index.js"
+  ]
+}

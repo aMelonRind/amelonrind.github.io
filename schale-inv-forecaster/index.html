@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Schale Inventory Forecaster</title>
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="stylesheet" href="index.css"/>
+  <script type="module">
+    import * as exposed from "./index.js"
+    Object.assign(globalThis, exposed)
+  </script>
+</head>
+<body>
+  <div id="body-container">
+    <div id="maindiv">
+      <div id="script-root">
+        Loading...
+        <noscript><br>This tool needs javascript to work! Enable them in your browser's settings.</noscript>
+      </div>
+      <hr style="width: 100%;">
+      <p id="site-description"
+>This tool is WIP, for calculating possibilities
+of Settlement Task event in Blue Archive.
+
+The algorithm is not done yet, it might take
+too long on certain combinations.
+
+Note that this tool explores all possibilities
+and treat them all equally, which might be
+inaccurate.
+
+The theoretically best way of solving this event
+is having someone host a database that collects
+solved pattern from worldwide senseis, because
+it seems like they're not fully random generated.
+noticed it when there's multiple same pattern
+in a chat group i'm in. Could it be picked by
+BA devs? idk..</p>
+    </div>
+  </div>
+</body>
+</html>

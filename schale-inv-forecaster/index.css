@@ -1,0 +1,41 @@
+
+body {
+  display: flex;
+  align-items: flex-start;
+  margin: 0px;
+  /* background-color: #181a1b; */
+  font-family: Monaco, Menlo, Consolas, 'Droid Sans Mono', Inconsolata, 'Courier New', monospace;
+}
+
+#body-container {
+  margin: auto;
+  padding-top: 10px;
+}
+
+#site-description {
+  white-space: pre;
+  height: 360px;
+}
+
+#maindiv,
+#script-root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#script-root {
+  gap: 10px;
+}
+
+label {
+  padding-right: 5px;
+}
+
+select {
+  height: 24px;
+}
+
+.mainCanvas {
+  image-rendering: pixelated;
+}
