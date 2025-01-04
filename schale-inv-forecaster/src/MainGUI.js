@@ -111,7 +111,6 @@ class MainGUI extends ParentElement {
   }
 
   updateScale() {
-    console.log(window.screen.width, window.screen.height)
     const c = this.#mainCanvas
     const scale = Math.max(1, Math.min(5,
       Math.floor(window.screen.width * 0.9 / c.width),
