@@ -99,14 +99,22 @@ class MainGUI extends ParentElement {
     })
     this.#mainCanvas.addEventListener('pointermove', e => {
       this.#hoverEvent = e
+      this.scheduleRender()
     })
     this.#mainCanvas.addEventListener('pointerleave', e => {
       this.#hoverEvent = null
       this.unhover()
+      this.scheduleRender()
     })
     this.#mainCanvas.addEventListener('touchstart', e => e.preventDefault(), { passive: false })
     this.#mainCanvas.addEventListener('touchmove', e => e.preventDefault(), { passive: false })
     this.#mainCanvas.addEventListener('keydown', e => this.dispatchKeyEvent(e))
+
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) {
+        mainGUI.markAllDirty()
+      }
+    })
 
     this.loadState()
   }
@@ -160,6 +168,7 @@ class MainGUI extends ParentElement {
   }
 
   mainRender() {
+    this.scheduledRender = false
     if (this.#hoverEvent) {
       this.onHover(Math.floor(this.#hoverEvent.offsetX / this.#scale), Math.floor(this.#hoverEvent.offsetY / this.#scale))
       this.#hoverEvent = null
@@ -169,6 +178,29 @@ class MainGUI extends ParentElement {
     this.#mainCanvasCtx.fillRect(0, 0, this.width, this.height)
     this._render(this.#mainCanvasCtx)
     this.#hoverTextElement.innerText = this.hoverTextprovider?.hoverText ?? this.hoverText
+  }
+
+  markDirty() {
+    super.markDirty()
+    this.scheduleRender()
+  }
+
+  markHoverDirty() {
+    super.markHoverDirty()
+    this.scheduleRender()
+  }
+
+  markAllDirty() {
+    super.markAllDirty()
+    this.hoverText = i18n.hoverToSee
+    this.scheduleRender()
+  }
+
+  scheduledRender = false
+  scheduleRender() {
+    if (this.scheduledRender) return
+    this.scheduledRender = true
+    requestAnimationFrame(() => this.mainRender())
   }
 
   /** @type {Element['render']} */
@@ -205,25 +237,3 @@ class MainGUI extends ParentElement {
 }
 
 export const mainGUI = new MainGUI()
-
-let ff = false // i think we don't need 60fps on this
-function mainRender() {
-  if (ff = !ff) {
-    mainGUI.mainRender()
-  }
-  requestAnimationFrame(mainRender)
-}
-
-export function forceRenderNextFrame() {
-  mainGUI.markAllDirty()
-  mainGUI.hoverText = i18n.hoverToSee
-  ff = false
-}
-
-document.addEventListener('visibilitychange', () => {
-  if (!document.hidden) {
-    forceRenderNextFrame()
-  }
-})
-
-mainRender()

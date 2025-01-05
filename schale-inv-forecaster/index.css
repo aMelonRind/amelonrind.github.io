@@ -3,8 +3,12 @@ body {
   display: flex;
   align-items: flex-start;
   margin: 0px;
-  /* background-color: #181a1b; */
   font-family: Monaco, Menlo, Consolas, 'Droid Sans Mono', Inconsolata, 'Courier New', monospace;
+}
+
+input, select, body {
+  background-color: #181a1b;
+  color: white;
 }
 
 #body-container {

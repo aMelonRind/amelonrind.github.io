@@ -1,6 +1,6 @@
 
 import { i18n, langs, setLang } from "./src/I18n.js"
-import { forceRenderNextFrame, mainGUI } from "./src/MainGUI.js"
+import { mainGUI } from "./src/MainGUI.js"
 import { isDev } from "./src/util.js"
 export { mainGUI }
 
@@ -107,7 +107,7 @@ function updateLang() {
   for (const [i, opt] of presetOptions.entries()) {
     opt.innerText = i18n.defaultPreset(i + 1, i + 1 === last)
   }
-  forceRenderNextFrame()
+  mainGUI.markAllDirty()
 }
 
 /**
@@ -130,11 +130,10 @@ function applyPreset(key) {
     cfg.countSelect.value = c
     cfg.init()
   }
-  forceRenderNextFrame()
+  mainGUI.markAllDirty()
 }
 
 // TODO LIST
-// navigator
 // ==== wasm ====
 // optimize: available mask
 // improve wasm progress report?
