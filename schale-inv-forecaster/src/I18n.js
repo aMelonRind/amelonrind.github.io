@@ -15,7 +15,7 @@ const english = {
     'is having someone host a database that collects\n' +
     'solved pattern from worldwide senseis, because\n' +
     "it seems like they're not fully random generated.\n" +
-    "noticed it when there's multiple same pattern\n" +
+    "Noticed it when there's multiple same pattern\n" +
     "in a chat group i'm in. Could it be picked by\n" +
     'BA devs? idk..',
   preset: 'Apply a preset...',

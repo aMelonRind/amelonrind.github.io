@@ -101,6 +101,49 @@ class SizeSelectElement extends ElementWithItemId {
     this.main.itemcfg[this.id].markAddsDirty()
     return true
   }
+
+  /** @type {Element['navigate']} */
+  navigate(type) {
+    if (type === 'activate') {
+      if (this.hovered) {
+        this.onClick(this.hoverX, this.hoverY)
+      }
+      return true
+    } else {
+      if (this.hovered) {
+        let v = Math.floor(this.hoverY / 6) * 5 + Math.floor(this.hoverX / 6)
+        switch (type) {
+          case 'prev':
+            v--
+            break
+          case 'next':
+            v++
+            break
+          case 'up':
+            v -= 5
+            break
+          case 'down':
+            v += 5
+            break
+          case 'left':
+            v = v % 5 === 0 ? -1 : v - 1
+            break
+          case 'right':
+            v = v % 5 === 4 ? -1 : v + 1
+            break
+        }
+        if (v <= 0 || v >= 25) {
+          this.unhover()
+          return false
+        }
+        this.onHover(2 + (v % 5) * 6, 2 + Math.floor(v / 5) * 6)
+        return true
+      } else {
+        this.onHover(8, 2)
+        return true
+      }
+    }
+  }
 }
 
 const dice = new RenderCache(15, 9)
@@ -173,6 +216,49 @@ class CountSelectElement extends ElementWithItemId {
     this.main.itemcfg[this.id].markAddsDirty()
     return true
   }
+
+  /** @type {Element['navigate']} */
+  navigate(type) {
+    if (type === 'activate') {
+      if (this.hovered) {
+        this.onClick(this.hoverX, this.hoverY)
+      }
+      return true
+    } else {
+      if (this.hovered) {
+        let v = Math.floor(this.hoverY / 6) * 3 + Math.floor(this.hoverX / 6)
+        switch (type) {
+          case 'prev':
+            v--
+            break
+          case 'next':
+            v++
+            break
+          case 'up':
+            v -= 3
+            break
+          case 'down':
+            v += 3
+            break
+          case 'left':
+            v = v % 3 === 0 ? -1 : v - 1
+            break
+          case 'right':
+            v = v % 3 === 2 ? -1 : v + 1
+            break
+        }
+        if (v < 0 || v >= 6) {
+          this.unhover()
+          return false
+        }
+        this.onHover(2 + (v % 3) * 6, 2 + Math.floor(v / 3) * 6)
+        return true
+      } else {
+        this.onHover(2, 2)
+        return true
+      }
+    }
+  }
 }
 
 const eyeClose = new RenderCache(7, 5)
@@ -222,6 +308,11 @@ class VisibilityElement extends ElementWithItemId {
     this.main.inventory.markDirty()
     return true
   }
+
+  /** @type {Element['navigate']} */
+  navigate(type) {
+    return this.simpleButtonNavigate(type)
+  }
 }
 
 class AddVerticalElement extends ElementWithItemId {
@@ -266,6 +357,11 @@ class AddVerticalElement extends ElementWithItemId {
     this.main.inventory.startPlace(this.id, true)
     this.markDirty()
     return true
+  }
+
+  /** @type {Element['navigate']} */
+  navigate(type) {
+    return this.simpleButtonNavigate(type)
   }
 }
 
@@ -312,6 +408,11 @@ class AddHorizontalElement extends ElementWithItemId {
     this.markDirty()
     return true
   }
+
+  /** @type {Element['navigate']} */
+  navigate(type) {
+    return this.simpleButtonNavigate(type)
+  }
 }
 
 export class ItemConfigElement extends ParentElement {
@@ -336,6 +437,41 @@ export class ItemConfigElement extends ParentElement {
     this.visibilityToggle = new VisibilityElement(id, 31, 12, this)
     this.addVertical = new AddVerticalElement(id, 43, 12, this)
     this.addHorizontal = new AddHorizontalElement(id, 31, 24, this)
+
+    this.sizeSelect.navigateTargets.next = this.countSelect
+    this.sizeSelect.navigateTargets.right = this.countSelect
+    this.countSelect.setNavigateTargets(
+      this.sizeSelect,
+      this.visibilityToggle,
+      null,
+      this.visibilityToggle,
+      this.sizeSelect,
+      null
+    )
+    this.visibilityToggle.setNavigateTargets(
+      this.countSelect,
+      this.addVertical,
+      this.countSelect,
+      this.addHorizontal,
+      this.sizeSelect,
+      this.addVertical
+    )
+    this.addVertical.setNavigateTargets(
+      this.visibilityToggle,
+      this.addHorizontal,
+      this.countSelect,
+      this.addHorizontal,
+      this.visibilityToggle,
+      null
+    )
+    this.addHorizontal.setNavigateTargets(
+      this.addVertical,
+      null,
+      this.visibilityToggle,
+      null,
+      this.sizeSelect,
+      this.addVertical
+    )
   }
 
   get sizeW() {

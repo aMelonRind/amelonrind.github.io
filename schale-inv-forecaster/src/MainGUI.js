@@ -45,10 +45,47 @@ class MainGUI extends ParentElement {
     this.hovered = true
     this.div.classList.add('mainGUI')
     this.#mainCanvas.classList.add('mainCanvas')
+    this.#mainCanvas.tabIndex = 0
+    this.#mainCanvas.ariaLabel = 'Main Forecaster GUI'
     this.#hoverTextElement.classList.add('hoverTextElement')
     this.#mainCanvas.width = this.width
     this.#mainCanvas.height = this.height
     this.div.append(this.#mainCanvas, this.#hoverTextElement)
+
+    this.itemcfg[0].setNavigateTargets(
+      null,
+      this.itemcfg[1],
+      this.startButton,
+      this.itemcfg[1],
+      null,
+      this.inventory
+    )
+    this.itemcfg[1].setNavigateTargets(
+      this.itemcfg[0],
+      this.itemcfg[2],
+      this.itemcfg[0],
+      this.itemcfg[2],
+      null,
+      this.inventory
+    )
+    this.itemcfg[2].setNavigateTargets(
+      this.itemcfg[1],
+      this.startButton,
+      this.itemcfg[1],
+      this.startButton,
+      null,
+      this.inventory
+    )
+    this.startButton.setNavigateTargets(
+      this.itemcfg[2],
+      this.inventory,
+      this.itemcfg[2],
+      this.itemcfg[0],
+      null,
+      this.inventory
+    )
+    this.inventory.navigateTargets.prev = this.startButton
+    this.inventory.navigateTargets.left = this.itemcfg[0]
 
     window.addEventListener('resize', () => {
       this.updateScale()
@@ -69,6 +106,7 @@ class MainGUI extends ParentElement {
     })
     this.#mainCanvas.addEventListener('touchstart', e => e.preventDefault(), { passive: false })
     this.#mainCanvas.addEventListener('touchmove', e => e.preventDefault(), { passive: false })
+    this.#mainCanvas.addEventListener('keydown', e => this.dispatchKeyEvent(e))
 
     this.loadState()
   }
@@ -158,6 +196,12 @@ class MainGUI extends ParentElement {
     yield this.inventory
   }
 
+  /** @type {Element['navigate']} */
+  navigate(type) {
+    if (super.navigate(type)) return true
+    return type !== 'prev' && type !== 'next' // prevent scrolling the page
+  }
+
 }
 
 export const mainGUI = new MainGUI()
@@ -175,5 +219,11 @@ export function forceRenderNextFrame() {
   mainGUI.hoverText = i18n.hoverToSee
   ff = false
 }
+
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden) {
+    forceRenderNextFrame()
+  }
+})
 
 mainRender()

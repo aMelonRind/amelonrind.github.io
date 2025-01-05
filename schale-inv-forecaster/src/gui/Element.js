@@ -18,17 +18,55 @@ export class RenderCache {
   }
 }
 
+/**
+ * @template T
+ * @param {KeyboardEvent} e 
+ * @param {T} type 
+ * @returns {T?}
+ */
+const noMod = (e, type) => e.ctrlKey || e.shiftKey || e.altKey ? null : type
+
+/** @type {Record<string, (e: KeyboardEvent) => NavigateType | null>} */
+const navigateTypeReader = {
+  Tab: e => e.ctrlKey || e.altKey ? null : (e.shiftKey ? 'prev' : 'next'),
+  ArrowUp: e => noMod(e, 'up'),
+  ArrowDown: e => noMod(e, 'down'),
+  ArrowLeft: e => noMod(e, 'left'),
+  ArrowRight: e => noMod(e, 'right'),
+  ' ': e => noMod(e, 'activate'),
+  Enter: e => noMod(e, 'activate'),
+  w: e => noMod(e, 'up'),
+  a: e => noMod(e, 'left'),
+  s: e => noMod(e, 'down'),
+  d: e => noMod(e, 'right'),
+  e: e => noMod(e, 'activate'),
+}
+
 export class Element {
   /** @readonly @type {MainGUI} */ main
   /** @readonly */ parent
   /** @readonly */ cache
   /** @readonly */ hoverCache
+  focusable = true
   renderDirty = true
   hovered = false
   hoverDirty = false
   hoverX = 0
   hoverY = 0
   hoverText = i18n.empty
+
+  /**
+   * For parent elements to conveniently store navigate target.
+   * @type {Record<Exclude<NavigateType, 'activate'>, Element?>}
+   */
+  navigateTargets = {
+    prev: null,
+    next: null,
+    up: null,
+    down: null,
+    left: null,
+    right: null,
+  }
 
   /**
    * @param {number} x 
@@ -152,12 +190,55 @@ export class Element {
   }
 
   /**
-   * @param {KeyboardEvent} event 
-   * @returns {boolean}
-   * @alias onKey
+   * @param {KeyboardEvent} e 
    */
-  navigate(event) {
+  dispatchKeyEvent(e) {
+    const type = navigateTypeReader[e.key]?.(e)
+    if (type == null) return
+    if (this.navigate(type)) {
+      e.preventDefault()
+    }
+  }
+
+  /**
+   * @param {NavigateType} type 
+   * @returns {boolean}
+   */
+  navigate(type) {
     return false
+  }
+
+  /**
+   * @param {NavigateType} type 
+   * @returns {boolean}
+   */
+  simpleButtonNavigate(type) {
+    if (type === 'activate') {
+      if (this.hovered) {
+        this.onClick(this.hoverX, this.hoverY)
+      }
+      return true
+    } else {
+      if (this.hovered) {
+        this.unhover()
+        return false
+      } else {
+        this.onHover(Math.floor(this.width / 2), Math.floor(this.height / 2))
+        return true
+      }
+    }
+  }
+
+  /**
+   * @param {Element?} prev 
+   * @param {Element?} next 
+   * @param {Element?} up 
+   * @param {Element?} down 
+   * @param {Element?} left 
+   * @param {Element?} right 
+   */
+  setNavigateTargets(prev, next, up, down, left, right) {
+    this.navigateTargets = { prev, next, up, down, left, right }
   }
 }
 
@@ -253,20 +334,37 @@ export class ParentElement extends Element {
     }
   }
 
-  // focus() {
-  //   this.hovering = this.elements().next().value ?? null
-  //   this.hovering?.focus()
-  // }
+  /**
+   * @returns {Element?}
+   */
+  initialNavigateTarget() {
+    for (const child of this.elements()) {
+      if (child.focusable) {
+        return child
+      }
+    }
+    return null
+  }
 
-  // /** @type {Element['navigate']} */
-  // navigate(event) {
-  //   if (this.hovering?.navigate(event)) return true
-  //   const arr = this.elements().toArray()
-  //   //@ts-ignore
-  //   this.hovering = arr[arr.indexOf(this.hovering) + 1] ?? null
-  //   this.hovering?.focus()
-  //   return this.hovering !== null
-  // }
+  /** @type {Element['navigate']} */
+  navigate(type) {
+    if (this.hovering?.navigate(type)) return true
+    if (type === 'activate') return true
+    const next = this.hovering ? this.hovering.navigateTargets[type] : this.initialNavigateTarget()
+    this.unhover()
+    if (!next) {
+      return false
+    }
+    if (next.navigate(type)) {
+      this.hovering = next
+      this.hovered = true
+      this.hoverX = next.x + next.hoverX
+      this.hoverY = next.y + next.hoverY
+      this.hoverDirty = true
+      return true
+    }
+    return false
+  }
 
 }
 

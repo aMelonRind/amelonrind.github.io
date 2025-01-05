@@ -100,4 +100,9 @@ export class StartButtonElement extends Element {
     return true
   }
 
+  /** @type {Element['navigate']} */
+  navigate(type) {
+    return this.simpleButtonNavigate(type)
+  }
+
 }

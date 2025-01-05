@@ -4,7 +4,7 @@ import { forceRenderNextFrame, mainGUI } from "./src/MainGUI.js"
 import { isDev } from "./src/util.js"
 export { mainGUI }
 
-/** @type {Record<string, ItemSet>} */
+/** @satisfies {Record<string, ItemSet>} */
 const devPreset = {
   optimizeTest: [[4, 4, 2], [2, 2, 0], [2, 2, 0]],
   patternTest: [[5, 5, 1], [4, 4, 1], [2, 2, 0]],
@@ -19,11 +19,11 @@ const preset = [
   // everything below except 3 and 6 are running in acceptable speed
   // 2x1 is really small apparently
   [[4, 2, 1], [3, 2, 2], [2, 2, 2]],
-  [[3, 3, 1], [3, 2, 2], [1, 3, 2]],
-  [[1, 4, 2], [1, 3, 3], [2, 1, 5]],
+  [[3, 3, 1], [3, 2, 2], [3, 1, 2]],
+  [[4, 1, 2], [3, 1, 3], [2, 1, 5]], // Total possibilities: 446,710,624,706, Took time: 25312569ms
   [[4, 2, 1], [3, 2, 2], [2, 2, 2]],
-  [[3, 3, 1], [3, 2, 2], [1, 3, 2]],
-  [[1, 4, 2], [1, 3, 3], [2, 1, 5]],
+  [[3, 3, 1], [3, 2, 2], [3, 1, 2]],
+  [[4, 1, 2], [3, 1, 3], [2, 1, 5]],
   [[3, 3, 1], [4, 2, 1], [3, 2, 2]],
 ]
 const last = 7
@@ -134,6 +134,7 @@ function applyPreset(key) {
 }
 
 // TODO LIST
+// navigator
 // ==== wasm ====
 // optimize: available mask
 // improve wasm progress report?

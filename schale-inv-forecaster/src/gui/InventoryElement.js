@@ -244,7 +244,7 @@ export class InventoryElement extends Element {
             const nsum = Number(sum)
             const perc = Math.trunc(nsum / total * 1000 - 500) / 10 + 50
             const alpha = Math.floor(255 * (0.2 + (nsum / nmax) * 0.8)).toString(16).slice(0, 2).padStart(2, '0')
-            ctx.fillStyle = (sum === max ? maxStyle : theme.generic) + alpha
+            ctx.fillStyle = sum === max ? maxStyle : theme.generic + alpha
             this.#drawStickyNote(ctx, x, y)
             drawText(ctx, x + 2, y + 5, theme.generic + alpha,
               sum === total64 ? '100%' : `${perc.toFixed(1).slice(0, 4).padStart(4, ' ')}%`
@@ -289,7 +289,7 @@ export class InventoryElement extends Element {
             const x = 4 + col * 24
             const y = 4 + row * 24
             ctx.fillStyle = theme.gray
-            this.#drawStickyNote(ctx, x, y)
+            drawRect(ctx, x, y, 21, 21)
           }
         }
       }
@@ -418,6 +418,49 @@ export class InventoryElement extends Element {
       }
     }
     return true
+  }
+
+  /** @type {Element['navigate']} */
+  navigate(type) {
+    if (type === 'activate') {
+      if (this.hovered) {
+        this.onClick(this.hoverX, this.hoverY)
+      }
+      return true
+    } else {
+      if (this.hovered) {
+        let v = Math.floor((this.hoverY - 4) / 24) * 9 + Math.floor((this.hoverX - 4) / 24)
+        switch (type) {
+          case 'prev':
+            v--
+            break
+          case 'next':
+            v++
+            break
+          case 'up':
+            v -= 9
+            break
+          case 'down':
+            v += 9
+            break
+          case 'left':
+            v = v % 9 === 0 ? -1 : v - 1
+            break
+          case 'right':
+            v = v % 9 === 8 ? -1 : v + 1
+            break
+        }
+        if (v < 0 || v >= 45) {
+          this.unhover()
+          return false
+        }
+        this.onHover(14 + (v % 9) * 24, 14 + Math.floor(v / 9) * 24)
+        return true
+      } else {
+        this.onHover(14, 14)
+        return true
+      }
+    }
   }
 
   /**

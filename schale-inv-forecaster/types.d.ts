@@ -32,6 +32,15 @@ type WorkerPacket = {
   time: string
 };
 
+type NavigateType =
+| 'prev' // shift + tab
+| 'next' // tab
+| 'up' // arrow up
+| 'down' // arrow down
+| 'left' // arrow left
+| 'right' // arrow right
+| 'activate' // spacebar || enter
+
 interface I18n {
   readonly name: string;
   readonly empty: string;
