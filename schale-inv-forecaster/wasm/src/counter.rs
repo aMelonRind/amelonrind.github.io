@@ -1,6 +1,10 @@
 //! Main function: Board::count
+mod third_try;
+mod progress_tracker;
+
 use std::cell::Cell;
 
+use third_try::ItemAlgo;
 use wasm_bindgen::prelude::*;
 use crate::utils::JsResult;
 
@@ -55,10 +59,17 @@ impl Board {
         js_assert!(h > 0, "Too short ({h})");
         js_assert!(h <= H, "Too high ({h})");
         js_assert!(w * h > 1, "Too small ({})", w * h);
+        // js_assert!(count > 0, "No count ({count})");
         let sum = self.items.iter().map(|v| v.count as u16).sum::<u16>() + count as u16;
         js_assert!(sum <= 18, "Too much ({sum})");
         self.items.push(Item::new(w, h, count));
         Ok(())
+    }
+
+    pub fn count3(&mut self) -> JsResult<CountResult> {
+        let mut algo = ItemAlgo::prepare(self.board, &mut self.items)?;
+        unsafe { algo.count()?; }
+        Ok(algo.result())
     }
 
     pub fn count(&self) -> JsResult<CountResult> {

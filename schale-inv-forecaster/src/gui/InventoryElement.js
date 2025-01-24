@@ -154,7 +154,9 @@ class ItemPlacements {
    * @returns {Item}
    */
   toTuple() {
-    return [this.width, this.height, this.getCountLeft()]
+    return this.height > this.width
+      ? [this.height, this.width, this.getCountLeft()]
+      : [this.width, this.height, this.getCountLeft()]
   }
 }
 

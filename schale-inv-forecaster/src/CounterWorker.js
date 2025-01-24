@@ -48,7 +48,7 @@ function handleMessage(e) {
         board.push(...item)
       }
       const start = performance.now()
-      const res = board.count()
+      const res = board.count3()
       /** @type {(BigUint64Array | null)[]} */
       const count = [null, null, null]
       for (const [i, [ii]] of sorted.entries()) {

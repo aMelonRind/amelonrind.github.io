@@ -5,6 +5,7 @@ export class Board {
   free(): void;
   constructor(board: bigint);
   push(w: number, h: number, count: number): void;
+  count3(): CountResult;
   count(): CountResult;
 }
 export class CountResult {
@@ -22,6 +23,7 @@ export interface InitOutput {
   readonly __wbg_countresult_free: (a: number, b: number) => void;
   readonly board_new: (a: bigint) => [number, number, number];
   readonly board_push: (a: number, b: number, c: number, d: number) => [number, number];
+  readonly board_count3: (a: number) => [number, number, number];
   readonly board_count: (a: number) => [number, number, number];
   readonly countresult_total: (a: number) => bigint;
   readonly countresult_get: (a: number, b: number) => [number, number];

@@ -21,6 +21,11 @@ macro_rules! jserr {
 }
 
 macro_rules! js_assert {
+    ($cond:expr) => {
+        if !$cond {
+            jserr!("Assertion failed on {}", stringify!($cond))
+        }
+    };
     ($cond:expr, $($arg:tt)+) => {
         if !$cond {
             jserr!($($arg)*)

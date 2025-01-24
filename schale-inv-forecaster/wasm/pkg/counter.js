@@ -150,6 +150,16 @@ export class Board {
     /**
      * @returns {CountResult}
      */
+    count3() {
+        const ret = wasm.board_count3(this.__wbg_ptr);
+        if (ret[2]) {
+            throw takeFromExternrefTable0(ret[1]);
+        }
+        return CountResult.__wrap(ret[0]);
+    }
+    /**
+     * @returns {CountResult}
+     */
     count() {
         const ret = wasm.board_count(this.__wbg_ptr);
         if (ret[2]) {

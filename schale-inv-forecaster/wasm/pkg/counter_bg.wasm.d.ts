@@ -5,6 +5,7 @@ export const __wbg_board_free: (a: number, b: number) => void;
 export const __wbg_countresult_free: (a: number, b: number) => void;
 export const board_new: (a: bigint) => [number, number, number];
 export const board_push: (a: number, b: number, c: number, d: number) => [number, number];
+export const board_count3: (a: number) => [number, number, number];
 export const board_count: (a: number) => [number, number, number];
 export const countresult_total: (a: number) => bigint;
 export const countresult_get: (a: number, b: number) => [number, number];
