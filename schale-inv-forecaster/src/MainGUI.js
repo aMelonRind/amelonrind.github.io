@@ -200,7 +200,7 @@ class MainGUI extends ParentElement {
   scheduleRender() {
     if (this.scheduledRender) return
     this.scheduledRender = true
-    requestAnimationFrame(() => this.mainRender())
+    requestAnimationFrame(() => requestAnimationFrame(() => this.mainRender()))
   }
 
   /** @type {Element['render']} */

@@ -1,3 +1,4 @@
+import { hasParam } from "./util.js"
 
 let currentSession = new Uint16Array(1)
 /** @type {'init' | 'idle' | 'running'} */
@@ -83,6 +84,9 @@ export function startCounter(board, itemSet) {
  */
 export function isAvailableStart(board, itemSet) {
   const key = `${board},${itemSet.map(v => v.join(',')).join(',')}`
+  if (hasParam('force_start')) {
+    results.delete(key)
+  }
   if (results.has(key) || (state === 'running' && running === key)) return null
   return key
 }

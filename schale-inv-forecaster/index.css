@@ -16,6 +16,16 @@ input, select, body {
   padding-top: 10px;
 }
 
+#site-description-container {
+  display: flex;
+  flex-direction: column;
+}
+
+#site-main-description {
+  white-space: pre;
+  padding-bottom: 16px;
+}
+
 #site-description {
   white-space: pre;
   height: 360px;

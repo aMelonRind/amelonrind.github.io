@@ -2,7 +2,7 @@
 import { countStart, isAvailableStart, progress, results, startCounter, state } from "../CounterHandler.js"
 import { i18n } from "../I18n.js"
 import { theme } from "../MainGUI.js"
-import { drawRect } from "../util.js"
+import { drawRect, hasParam } from "../util.js"
 import { Element } from "./Element.js"
 import { drawText } from "./TextRenderer.js"
 
@@ -47,6 +47,7 @@ export class StartButtonElement extends Element {
     } else {
       if (this.running) {
         this.main.inventory.markDirty()
+        setTimeout(() => this.main.inventory.markDirty(), 500)
         this.running = false
       }
       this.animationTicks = 0
@@ -92,7 +93,7 @@ export class StartButtonElement extends Element {
   /** @type {Element['onClick']} */
   onClick() {
     this.main.saveState()
-    if (!this.running && this.hasResult) return false
+    if (!this.running && this.hasResult && !hasParam('force_start')) return false
     const inv = this.main.inventory
     startCounter(inv.getBoardBits(), inv.getItemSet())
     this.running = true

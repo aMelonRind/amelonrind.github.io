@@ -44,6 +44,7 @@ type NavigateType =
 interface I18n {
   readonly name: string;
   readonly empty: string;
+  readonly siteMainDescription: string;
   readonly siteDescription: string;
   readonly preset: string;
   readonly defaultPreset(stage: number, last: boolean): string;

@@ -6,13 +6,15 @@ export { mainGUI }
 
 /** @satisfies {Record<string, ItemSet>} */
 const devPreset = {
+  zero: [[2, 2, 0], [2, 2, 0], [2, 2, 0]],
   optimizeTest: [[4, 4, 2], [2, 2, 0], [2, 2, 0]],
   patternTest: [[5, 5, 1], [4, 4, 1], [2, 2, 0]],
   performanceTest: [[4, 1, 2], [3, 1, 3], [2, 1, 1]], // basically modified default6
   // level 3 took 1288sec, goal is level 5
   // done final layer quick filter optimization, level 3 took 496sec
+  // the third try of algorithm impl took 240s
 
-  hell: [[4, 2, 2], [3, 1, 3], [2, 1, 6]]
+  notReallyHell: [[4, 2, 2], [3, 1, 3], [2, 1, 6]]
 }
 /** @type {ItemSet[]} */
 const preset = [
@@ -20,7 +22,7 @@ const preset = [
   // 2x1 is really small apparently
   [[4, 2, 1], [3, 2, 2], [2, 2, 2]],
   [[3, 3, 1], [3, 2, 2], [3, 1, 2]],
-  [[4, 1, 2], [3, 1, 3], [2, 1, 5]], // Total possibilities: 446,710,624,706, Took time: 25312569ms
+  [[4, 1, 2], [3, 1, 3], [2, 1, 5]], // Total possibilities: 446,710,624,706, Took time: 25,312,569ms, Third try: 7,725,470ms
   [[4, 2, 1], [3, 2, 2], [2, 2, 2]],
   [[3, 3, 1], [3, 2, 2], [3, 1, 2]],
   [[4, 1, 2], [3, 1, 3], [2, 1, 5]],
@@ -36,6 +38,7 @@ const updateInfo = 'Stage data: Global 2024/12/03'
 
 
 const root = document.getElementById('script-root') ?? document.createElement('div')
+const siteMainDesc = document.getElementById('site-main-description') ?? document.createElement('p')
 const siteDesc = document.getElementById('site-description') ?? document.createElement('p')
 
 const langsDropdown = document.createElement('select')
@@ -101,6 +104,7 @@ function applyLang(lang) {
 }
 
 function updateLang() {
+  siteMainDesc.innerText = i18n.siteMainDescription
   siteDesc.innerText = i18n.siteDescription
   presetsDropdown.title = i18n.preset
   presetsPlaceholder.innerText = i18n.preset
@@ -132,8 +136,3 @@ function applyPreset(key) {
   }
   mainGUI.markAllDirty()
 }
-
-// TODO LIST
-// ==== wasm ====
-// optimize: available mask
-// improve wasm progress report?

@@ -3,9 +3,10 @@
 const english = {
   name: 'English',
   empty: '\u00A0',
-  siteDescription:
+  siteMainDescription:
     'This tool is WIP, for calculating possibilities\n' +
-    'of Settlement Task event in Blue Archive.\n\n' +
+    'of Settlement Task event in Blue Archive.',
+  siteDescription:
     'The algorithm is not done yet, it might take\n' +
     'too long on certain combinations.\n\n' +
     'Note that this tool explores all possibilities\n' +
@@ -49,8 +50,8 @@ const english = {
 const zhtw = {
   name: '繁體中文',
   empty: '\u3000\u00A0',
+  siteMainDescription: '這個工具正在製作中 拿來計算蔚藍檔案裡其中一種總結算的可能性',
   siteDescription:
-    '這個工具正在製作中 拿來計算蔚藍檔案裡其中一種總結算的可能性\n\n' +
     '演算法還沒製作完成 它可能會在某些組合花太久時間\n\n' +
     '提醒: 這工具會尋找所有的可能性 並且一視同仁\n' +
     '所以計算結果與真實情況可能會有些差異\n\n' +
