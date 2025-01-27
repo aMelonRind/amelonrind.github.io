@@ -30,10 +30,12 @@ impl ItemAlgoLayer {
                 }
             })
     }
-    fn to_pass(&self, board: u64) -> Pass {
-        let mut arr = [(0, 0); 76];
-        for i in 0..self.len {
-            arr[i] = (i, self.placements[i])
+    fn to_pass(&self, board: u64, counts_ptr: &*mut u64) -> Pass {
+        let mut arr = [(std::ptr::null_mut(), 0); 76];
+        unsafe {
+            for i in 0..self.len {
+                arr[i] = (counts_ptr.add(i), self.placements[i])
+            }
         }
         Pass { arr, len: self.len, board }
     }
@@ -48,7 +50,7 @@ pub struct ItemAlgo {
 }
 
 struct Pass {
-    arr: [(usize, u64); 76],
+    arr: [(*mut u64, u64); 76],
     len: usize,
     board: u64
 }
@@ -56,16 +58,16 @@ struct Pass {
 impl Pass {
     #[inline(always)]
     const fn new() -> Pass {
-        Pass { arr: [(0, 0); 76], len: 0, board: 0 }
+        Pass { arr: [(std::ptr::null_mut(), 0); 76], len: 0, board: 0 }
     }
     #[inline(always)]
     fn filter(&mut self, prev: &Pass, board: u64, start: usize) {
         self.len = 0;
         let arr_ptr = self.arr.as_mut_ptr();
         unsafe {
-            for &(i, plac) in raw_slice(prev.arr.as_ptr().add(start), prev.len - start) {
+            for &(ptr, plac) in raw_slice(prev.arr.as_ptr().add(start), prev.len - start) {
                 if board & plac == 0 {
-                    *arr_ptr.add(self.len) = (i, plac);
+                    *arr_ptr.add(self.len) = (ptr, plac);
                     self.len += 1;
                 }
             }
@@ -109,15 +111,17 @@ impl ItemAlgo {
         let mut pt = ProgressTracker::new(self.layer1.depth as usize, self.layer1.len)?;
 
         let count_ptr = self.layer1.count.as_mut_ptr();
+        let count_ptr2 = self.layer2.count.as_mut_ptr();
+        let count_ptr3 = self.layer3.count.as_mut_ptr();
         let mut total;
         let mut count1;
         let mut count2;
         let mut count3;
         let mut count4;
         let mut count5;
-        let pass_0 = self.layer1.to_pass(self.board);
-        let pass2_0 = self.layer2.to_pass(self.board);
-        let pass3_0 = self.layer3.to_pass(self.board);
+        let pass_0 = self.layer1.to_pass(self.board, &count_ptr);
+        let pass2_0 = self.layer2.to_pass(self.board, &count_ptr2);
+        let pass3_0 = self.layer3.to_pass(self.board, &count_ptr3);
         let mut pass_1 = Pass::new();
         let mut pass_2 = Pass::new();
         let mut pass_3 = Pass::new();
@@ -136,12 +140,12 @@ impl ItemAlgo {
         macro_rules! gen {
             ($dim:expr, $prev_index:expr, $count:ident, $pass:ident, $pass2:ident, $pass3:ident,) => {{
                 $count = 0;
-                for &(i, plac) in &$pass.arr[$prev_index..$pass.len] {
+                for &(ptr, plac) in &$pass.arr[$prev_index..$pass.len] {
                     if ($pass.board & plac) == 0 {
                         let count = self.count_second($pass.board | plac, &$pass2, &$pass3);
-                        *count_ptr.add(i) += count;
+                        *ptr += count;
                         $count += count;
-                        pt.report(i);
+                        pt.report(ptr.offset_from(count_ptr) as usize);
                     }
                 }
             }};
@@ -149,13 +153,13 @@ impl ItemAlgo {
                 $prev_count = 0;
                 $pass.filter(&$prev_pass, $prev_pass.board, $prev_index);
                 for i in 0..$pass.len {
-                    let (j, plac) = *$pass.arr.as_ptr().add(i);
+                    let (ptr, plac) = *$pass.arr.as_ptr().add(i);
                     $pass.board = $prev_pass.board | plac;
                     $pass2.filter(&$prev_pass2, $pass.board, 0);
                     $pass3.filter(&$prev_pass3, $pass.board, 0);
-                    pt.track($dim, j);
+                    pt.track($dim, ptr.offset_from(count_ptr) as usize);
                     gen!($dim - 1, i + 1, $count, $pass, $pass2, $pass3, $($other_count, $other_pass, $other_pass2, $other_pass3, )*);
-                    *count_ptr.add(j) += $count;
+                    *ptr += $count;
                     $prev_count += $count;
                 }
             }};
@@ -163,11 +167,11 @@ impl ItemAlgo {
         match self.layer1.depth {
             1 => {
                 total = 0;
-                for &(i, plac) in &pass_0.arr[0..pass_0.len] {
+                for &(ptr, plac) in &pass_0.arr[0..pass_0.len] {
                     let count = self.count_second(pass_0.board | plac, &pass2_0, &pass3_0);
-                    *count_ptr.add(i) += count;
+                    *ptr += count;
                     total += count;
-                    pt.report(i);
+                    pt.report(ptr.offset_from(count_ptr) as usize);
                 }
             },
             2 => gen!(2, 0, total, pass_0, pass2_0, pass3_0, count1, pass_1, pass2_1, pass3_1, ),
@@ -183,7 +187,6 @@ impl ItemAlgo {
     }
     #[allow(static_mut_refs)]
     unsafe fn count_second(&mut self, board: u64, pass: &Pass, pass3: &Pass) -> u64 {
-        let count_ptr = self.layer2.count.as_mut_ptr();
         let mut total;
         let mut count1;
         let mut count2;
@@ -207,10 +210,10 @@ impl ItemAlgo {
         macro_rules! gen {
             ($prev_index:expr, $count:ident, $pass:ident, $pass3:ident,) => {{
                 $count = 0;
-                for &(i, plac) in raw_slice($pass.arr.as_ptr().add($prev_index), $pass.len - $prev_index) {
+                for &(ptr, plac) in raw_slice($pass.arr.as_ptr().add($prev_index), $pass.len - $prev_index) {
                     if ($pass.board & plac) == 0 {
                         let count = self.count_last($pass.board | plac, &$pass3);
-                        *count_ptr.add(i) += count;
+                        *ptr += count;
                         $count += count;
                     }
                 }
@@ -219,11 +222,11 @@ impl ItemAlgo {
                 $prev_count = 0;
                 $pass.filter(&$prev_pass, $prev_pass.board, $prev_index);
                 for i in 0..$pass.len {
-                    let (j, plac) = *$pass.arr.as_ptr().add(i);
+                    let (ptr, plac) = *$pass.arr.as_ptr().add(i);
                     $pass.board = $prev_pass.board | plac;
                     $pass3.filter(&$prev_pass3, $pass.board, 0);
                     gen!(i + 1, $count, $pass, $pass3, $($other_count, $other_pass, $other_pass3, )*);
-                    *count_ptr.add(j) += $count;
+                    *ptr += $count;
                     $prev_count += $count;
                 }
             }};
@@ -231,9 +234,9 @@ impl ItemAlgo {
         match self.layer2.depth {
             1 => {
                 total = 0;
-                for &(i, plac) in &PASS_0.arr[0..PASS_0.len] {
+                for &(ptr, plac) in &PASS_0.arr[0..PASS_0.len] {
                     let count = self.count_last(PASS_0.board | plac, &PASS3_0);
-                    *count_ptr.add(i) += count;
+                    *ptr += count;
                     total += count;
                 }
             },
@@ -249,12 +252,11 @@ impl ItemAlgo {
     #[inline]
     #[allow(static_mut_refs)]
     unsafe fn count_last(&mut self, board: u64, pass: &Pass) -> u64 {
-        let count_ptr = self.layer3.count.as_mut_ptr();
         macro_rules! final_count {
             ($slice:expr, $board:expr) => {
-                $slice.iter().map(|&(i, plac)| {
+                $slice.iter().map(|&(ptr, plac)| {
                     if ($board & plac) == 0 {
-                        *count_ptr.add(i) += 1;
+                        *ptr += 1;
                         1u32
                     } else {
                         0
@@ -286,10 +288,10 @@ impl ItemAlgo {
                 $prev_count = 0;
                 $pass.filter(&$prev_pass, $prev_pass.board, $prev_index);
                 for i in 0..$pass.len {
-                    let (j, plac) = *$pass.arr.as_ptr().add(i);
+                    let (ptr, plac) = *$pass.arr.as_ptr().add(i);
                     $pass.board = $prev_pass.board | plac;
                     gen!(i + 1, $count, $pass, $($other_count, $other_pass, )*);
-                    *count_ptr.add(j) += $count;
+                    *ptr += $count;
                     $prev_count += $count;
                 }
             }};

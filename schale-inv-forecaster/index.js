@@ -12,7 +12,7 @@ const devPreset = {
   performanceTest: [[4, 1, 2], [3, 1, 3], [2, 1, 1]], // basically modified default6
   // level 3 took 1288sec, goal is level 5
   // done final layer quick filter optimization, level 3 took 496sec
-  // the third try of algorithm impl took 240s
+  // the third try of algorithm impl took 240s. After caching pointers, 184s.
 
   notReallyHell: [[4, 2, 2], [3, 1, 3], [2, 1, 6]]
 }
@@ -22,7 +22,10 @@ const preset = [
   // 2x1 is really small apparently
   [[4, 2, 1], [3, 2, 2], [2, 2, 2]],
   [[3, 3, 1], [3, 2, 2], [3, 1, 2]],
-  [[4, 1, 2], [3, 1, 3], [2, 1, 5]], // Total possibilities: 446,710,624,706, Took time: 25,312,569ms, Third try: 7,725,470ms
+  [[4, 1, 2], [3, 1, 3], [2, 1, 5]],
+  // ^ Total possibilities: 446,710,624,706, Took time: 25,312s, Third try: 7,725s
+  // Third try on macbook air m1: 971s. 8x faster than my main laptop.
+  // After caching pointers: 4,429s, mac m1: 946s
   [[4, 2, 1], [3, 2, 2], [2, 2, 2]],
   [[3, 3, 1], [3, 2, 2], [3, 1, 2]],
   [[4, 1, 2], [3, 1, 3], [2, 1, 5]],

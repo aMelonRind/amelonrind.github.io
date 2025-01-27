@@ -87,7 +87,6 @@ impl Board {
         possible ^= u64::MAX;
         let board = possible;
 
-        // compress data to smaller bits. so the future can be optimized by having u32 and u16 counter
         let iterate_source: Vec<Vec<ItemIterable>> = self.items.iter().map(|item| item.to_iterables(board)).collect();
         let types = self.items.len();
 
