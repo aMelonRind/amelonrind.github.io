@@ -16,20 +16,32 @@ const devPreset = {
 
   notReallyHell: [[4, 2, 2], [3, 1, 3], [2, 1, 6]]
 }
+// /** @type {ItemSet[]} */
+// const preset = [
+//   // everything below except 3 and 6 are running in acceptable speed
+//   // 2x1 is really small apparently
+//   [[4, 2, 1], [3, 2, 2], [2, 2, 2]],
+//   [[3, 3, 1], [3, 2, 2], [3, 1, 2]],
+//   [[4, 1, 2], [3, 1, 3], [2, 1, 5]],
+//   // ^ Total possibilities: 446,710,624,706, Took time: 25,312s, Third try: 7,725s
+//   // Third try on macbook air m1: 971s. 8x faster than my main laptop.
+//   // After caching pointers: 4,429s, mac m1: 946s
+//   [[4, 2, 1], [3, 2, 2], [2, 2, 2]],
+//   [[3, 3, 1], [3, 2, 2], [3, 1, 2]],
+//   [[4, 1, 2], [3, 1, 3], [2, 1, 5]],
+//   [[3, 3, 1], [4, 2, 1], [3, 2, 2]],
+// ]
+
+// Descent of the Five Senses
 /** @type {ItemSet[]} */
 const preset = [
-  // everything below except 3 and 6 are running in acceptable speed
-  // 2x1 is really small apparently
-  [[4, 2, 1], [3, 2, 2], [2, 2, 2]],
-  [[3, 3, 1], [3, 2, 2], [3, 1, 2]],
-  [[4, 1, 2], [3, 1, 3], [2, 1, 5]],
-  // ^ Total possibilities: 446,710,624,706, Took time: 25,312s, Third try: 7,725s
-  // Third try on macbook air m1: 971s. 8x faster than my main laptop.
-  // After caching pointers: 4,429s, mac m1: 946s
-  [[4, 2, 1], [3, 2, 2], [2, 2, 2]],
-  [[3, 3, 1], [3, 2, 2], [3, 1, 2]],
-  [[4, 1, 2], [3, 1, 3], [2, 1, 5]],
-  [[3, 3, 1], [4, 2, 1], [3, 2, 2]],
+  [[3, 2, 1], [3, 1, 5], [2, 1, 2]],
+  [[4, 2, 1], [2, 2, 2], [3, 1, 3]],
+  [[3, 3, 0], [1, 4, 0], [2, 1, 0]],
+  [[3, 2, 1], [3, 1, 5], [2, 1, 2]],
+  [[4, 2, 1], [2, 2, 2], [3, 1, 3]],
+  [[3, 3, 0], [1, 4, 0], [2, 1, 0]],
+  [[2, 2, 0], [3, 1, 0], [2, 1, 0]],
 ]
 const last = 7
 const presetOptions = preset.map((_, i) => {
@@ -37,7 +49,7 @@ const presetOptions = preset.map((_, i) => {
   opt.value = i.toString()
   return opt
 })
-const updateInfo = 'Stage data: Global 2024/12/03'
+const updateInfo = 'Stage data: Global 2025/03/18 (partial, unknown counts at 3, 6 and 7)'
 
 
 const root = document.getElementById('script-root') ?? document.createElement('div')
