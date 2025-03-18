@@ -37,9 +37,9 @@ function handleMessage(e) {
         postMessage({
           type: 'result',
           key: msg.key,
-          total: 0n,
+          total: 1n,
           count: [null, null, null],
-          time: 'zero'
+          time: 'N/A'
         })
         return
       }
