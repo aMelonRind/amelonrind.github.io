@@ -41,7 +41,7 @@ const preset = [
   [[3, 2, 1], [3, 1, 5], [2, 1, 2]],
   [[4, 2, 1], [2, 2, 2], [3, 1, 3]],
   [[3, 3, 1], [1, 4, 3], [2, 1, 2]],
-  [[2, 2, 0], [3, 1, 0], [2, 1, 0]],
+  [[2, 2, 2], [3, 1, 3], [2, 1, 6]],
 ]
 const last = 7
 const presetOptions = preset.map((_, i) => {
@@ -49,7 +49,7 @@ const presetOptions = preset.map((_, i) => {
   opt.value = i.toString()
   return opt
 })
-const updateInfo = 'Stage data: Global 2025/03/19 (partial, unknown counts at 7)'
+const updateInfo = 'Stage data: Global 2025/03/27'
 
 
 const root = document.getElementById('script-root') ?? document.createElement('div')
