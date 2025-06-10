@@ -1,218 +1,6 @@
 {
-  "default": "Alabaster Calling Card ~ Mansion Masquerade and the Essence of Beauty ~",
+  "default": "Secret Midnight Party ~ Oni Holds a Bell ~",
   "events": {
-    "Alabaster Calling Card ~ Mansion Masquerade and the Essence of Beauty ~": {
-      "wiki": "https://bluearchive.wiki/wiki/Alabaster_Calling_Card_~_Mansion_Masquerade_and_the_Essence_of_Beauty_~",
-      "itemTypes": 3,
-      "icons": [
-        "https://static.miraheze.org/bluearchivewiki/thumb/3/37/Item_Icon_Event_Token_2_S27.png/90px-Item_Icon_Event_Token_2_S27.png",
-        "https://static.miraheze.org/bluearchivewiki/thumb/c/cf/Item_Icon_Event_Token_0_S27.png/90px-Item_Icon_Event_Token_0_S27.png",
-        "https://static.miraheze.org/bluearchivewiki/thumb/4/44/Item_Icon_Event_Token_1_S27.png/90px-Item_Icon_Event_Token_1_S27.png"
-      ],
-      "transferRates": [
-        {"cost": 5, "of": 1, "to": 2}
-      ],
-      "levels": [
-        {"ap": 10, "items": [14, 2, 2]},
-        {"ap": 10, "items": [0, 14, 4]},
-        {"ap": 10, "items": [0, 4, 14]},
-        {"ap": 10, "items": [18, 0, 0]},
-        {"ap": 15, "items": [20, 4, 3]},
-        {"ap": 15, "items": [0, 20, 7]},
-        {"ap": 15, "items": [0, 7, 20]},
-        {"ap": 15, "items": [27, 0, 0]},
-        {"ap": 20, "items": [24, 6, 6]},
-        {"ap": 20, "items": [0, 36, 0]},
-        {"ap": 20, "items": [0, 0, 36]},
-        {"ap": 20, "items": [36, 0, 0]}
-      ]
-    },
-    "Dragon & Tortoise ~ Working Together for a Better Future ~": {
-      "wiki": "https://bluearchive.wiki/wiki/Dragon_%26_Tortoise_~_Working_Together_for_a_Better_Future_~",
-      "itemTypes": 3,
-      "icons": [
-        "https://static.miraheze.org/bluearchivewiki/thumb/8/82/Item_Icon_Event_Token_0_S28.png/90px-Item_Icon_Event_Token_0_S28.png",
-        "https://static.miraheze.org/bluearchivewiki/thumb/5/58/Item_Icon_Event_Token_1_S28.png/90px-Item_Icon_Event_Token_1_S28.png",
-        "https://static.miraheze.org/bluearchivewiki/thumb/6/62/Item_Icon_Event_Token_2_S28.png/90px-Item_Icon_Event_Token_2_S28.png"
-      ],
-      "transferRates": [
-        {"cost": 5, "of": 1, "to": 2}
-      ],
-      "levels": [
-        {"ap": 10, "items": [12, 3, 3]},
-        {"ap": 10, "items": [0, 14, 4]},
-        {"ap": 10, "items": [0, 4, 14]},
-        {"ap": 10, "items": [18, 0, 0]},
-        {"ap": 15, "items": [19, 4, 4]},
-        {"ap": 15, "items": [0, 23, 4]},
-        {"ap": 15, "items": [0, 4, 23]},
-        {"ap": 15, "items": [27, 0, 0]},
-        {"ap": 20, "items": [28, 4, 4]},
-        {"ap": 20, "items": [4, 32, 0]},
-        {"ap": 20, "items": [4, 0, 32]},
-        {"ap": 20, "items": [36, 0, 0]}
-      ]
-    },
-    "Summer Special Operation! RABBIT Squad and the Mystery of the Missing Shrimp": {
-      "wiki": "https://bluearchive.wiki/wiki/Summer_Special_Operation!_RABBIT_Squad_and_the_Mystery_of_the_Missing_Shrimp",
-      "itemTypes": 4,
-      "icons": [
-        "https://static.miraheze.org/bluearchivewiki/thumb/8/8d/Item_Icon_Event_Token_0_S29.png/90px-Item_Icon_Event_Token_0_S29.png",
-        "https://static.miraheze.org/bluearchivewiki/thumb/0/08/Item_Icon_Event_Token_1_S29.png/90px-Item_Icon_Event_Token_1_S29.png",
-        "https://static.miraheze.org/bluearchivewiki/thumb/7/7d/Item_Icon_Event_Token_2_S29.png/90px-Item_Icon_Event_Token_2_S29.png",
-        "https://static.miraheze.org/bluearchivewiki/thumb/5/55/Item_Icon_Event_Token_3_S29.png/90px-Item_Icon_Event_Token_3_S29.png"
-      ],
-      "transferRates": [
-        {"cost": 5, "of": 1, "to": 2},
-        {"cost": 5, "of": 2, "to": 3}
-      ],
-      "levels": [
-        {"ap": 10, "items": [6, 6, 6, 0]},
-        {"ap": 10, "items": [6, 0, 6, 6]},
-        {"ap": 10, "items": [6, 6, 0, 6]},
-        {"ap": 10, "items": [12, 2, 2, 2]},
-        {"ap": 15, "items": [9, 12, 6, 0]},
-        {"ap": 15, "items": [9, 0, 12, 6]},
-        {"ap": 15, "items": [9, 6, 0, 12]},
-        {"ap": 15, "items": [21, 2, 2, 2]},
-        {"ap": 20, "items": [0, 36, 0, 0]},
-        {"ap": 20, "items": [0, 0, 36, 0]},
-        {"ap": 20, "items": [0, 0, 0, 36]},
-        {"ap": 20, "items": [36, 0, 0, 0]}
-      ]
-    },
-    "In Search of a Hidden Heritage ~ Trinity's Extracurricular Activities ~": {
-      "wiki": "https://bluearchive.wiki/wiki/In_Search_of_a_Hidden_Heritage_~_Trinity%27s_Extracurricular_Activities_~",
-      "itemTypes": 4,
-      "icons": [
-        "",
-        "https://static.miraheze.org/bluearchivewiki/thumb/f/fe/Item_Icon_Event_Token_0_S30.png/90px-Item_Icon_Event_Token_0_S30.png",
-        "https://static.miraheze.org/bluearchivewiki/thumb/a/aa/Item_Icon_Event_Token_1_S30.png/90px-Item_Icon_Event_Token_1_S30.png",
-        "https://static.miraheze.org/bluearchivewiki/thumb/e/e5/Item_Icon_Event_Token_2_S30.png/90px-Item_Icon_Event_Token_2_S30.png"
-      ],
-      "transferRates": [
-        {"cost": 5, "of": 1, "to": 2},
-        {"cost": 5, "of": 2, "to": 3}
-      ],
-      "levels": [
-        {"ap": 10, "items": [3, 17, 0, 0]},
-        {"ap": 10, "items": [3, 0, 17, 0]},
-        {"ap": 10, "items": [3, 0, 0, 17]},
-        {"ap": 10, "items": [20, 0, 0, 0]},
-        {"ap": 15, "items": [6, 24, 0, 0]},
-        {"ap": 15, "items": [6, 0, 24, 0]},
-        {"ap": 15, "items": [6, 0, 0, 24]},
-        {"ap": 15, "items": [30, 0, 0, 0]},
-        {"ap": 20, "items": [9, 31, 0, 0]},
-        {"ap": 20, "items": [9, 0, 31, 0]},
-        {"ap": 20, "items": [9, 0, 0, 31]},
-        {"ap": 20, "items": [40, 0, 0, 0]}
-      ]
-    },
-    "An Academy Club's Story ~ The Two Girls' Wish for the Final Volume ~": {
-      "wiki": "https://bluearchive.wiki/wiki/An_Academy_Club%27s_Story_~_The_Two_Girls%27_Wish_for_the_Final_Volume_~",
-      "itemTypes": 3,
-      "icons": [
-        "https://static.miraheze.org/bluearchivewiki/thumb/3/31/Item_Icon_Event_Token_0_S31.png/90px-Item_Icon_Event_Token_0_S31.png",
-        "https://static.miraheze.org/bluearchivewiki/thumb/7/75/Item_Icon_Event_Token_1_S31.png/90px-Item_Icon_Event_Token_1_S31.png",
-        "https://static.miraheze.org/bluearchivewiki/thumb/8/84/Item_Icon_Event_Token_2_S31.png/90px-Item_Icon_Event_Token_2_S31.png"
-      ],
-      "transferRates": [
-        {"cost": 5, "of": 1, "to": 2}
-      ],
-      "levels": [
-        {"ap": 10, "items": [10, 3, 3]},
-        {"ap": 10, "items": [0, 13, 3]},
-        {"ap": 10, "items": [0, 3, 13]},
-        {"ap": 10, "items": [16, 0, 0]},
-        {"ap": 15, "items": [16, 4, 4]},
-        {"ap": 15, "items": [0, 20, 4]},
-        {"ap": 15, "items": [0, 4, 20]},
-        {"ap": 15, "items": [24, 0, 0]},
-        {"ap": 20, "items": [24, 4, 4]},
-        {"ap": 20, "items": [4, 28, 0]},
-        {"ap": 20, "items": [4, 0, 28]},
-        {"ap": 20, "items": [32, 0, 0]}
-      ]
-    },
-    "Trip-Trap-Train": {
-      "wiki": "https://bluearchive.wiki/wiki/Trip-Trap-Train",
-      "itemTypes": 4,
-      "icons": [
-        "",
-        "https://static.miraheze.org/bluearchivewiki/thumb/c/c4/Item_Icon_Event_Token_0_S32.png/90px-Item_Icon_Event_Token_0_S32.png",
-        "https://static.miraheze.org/bluearchivewiki/thumb/c/c5/Item_Icon_Event_Token_1_S32.png/90px-Item_Icon_Event_Token_1_S32.png",
-        "https://static.miraheze.org/bluearchivewiki/thumb/3/34/Item_Icon_Event_Token_2_S32.png/90px-Item_Icon_Event_Token_2_S32.png"
-      ],
-      "transferRates": [
-        {"cost": 5, "of": 1, "to": 2},
-        {"cost": 5, "of": 2, "to": 3}
-      ],
-      "levels": [
-        {"ap": 10, "items": [3, 9, 3, 3]},
-        {"ap": 10, "items": [3, 3, 9, 3]},
-        {"ap": 10, "items": [3, 3, 3, 9]},
-        {"ap": 10, "items": [18, 0, 0, 0]},
-        {"ap": 15, "items": [4, 18, 5, 0]},
-        {"ap": 15, "items": [4, 0, 18, 5]},
-        {"ap": 15, "items": [4, 5, 0, 18]},
-        {"ap": 15, "items": [27, 0, 0, 0]},
-        {"ap": 20, "items": [6, 30, 0, 0]},
-        {"ap": 20, "items": [6, 0, 30, 0]},
-        {"ap": 20, "items": [6, 0, 0, 30]},
-        {"ap": 20, "items": [36, 0, 0, 0]}
-      ]
-    },
-    "New Year March": {
-      "wiki": "https://bluearchive.wiki/wiki/New_Year_March",
-      "itemTypes": 3,
-      "icons": [
-        "",
-        "https://static.miraheze.org/bluearchivewiki/thumb/c/cf/Item_Icon_Event_Token_1_S34.png/90px-Item_Icon_Event_Token_1_S34.png",
-        "https://static.miraheze.org/bluearchivewiki/thumb/b/b7/Item_Icon_Event_Token_2_S34.png/90px-Item_Icon_Event_Token_2_S34.png"
-      ],
-      "transferRates": [
-        {"cost": 5, "of": 1, "to": 2}
-      ],
-      "levels": [
-        {"ap": 10, "items": [6, 6, 6]},
-        {"ap": 10, "items": [6, 9, 3]},
-        {"ap": 10, "items": [6, 3, 9]},
-        {"ap": 10, "items": [8, 4, 4]},
-        {"ap": 15, "items": [5, 11, 11]},
-        {"ap": 15, "items": [5, 17, 5]},
-        {"ap": 15, "items": [5, 5, 17]},
-        {"ap": 15, "items": [16, 4, 4]},
-        {"ap": 20, "items": [4, 16, 16]},
-        {"ap": 20, "items": [4, 32, 0]},
-        {"ap": 20, "items": [4, 0, 32]},
-        {"ap": 20, "items": [32, 0, 0]}
-      ]
-    },
-    "Sunshine Girls' Serenade": {
-      "wiki": "https://bluearchive.wiki/wiki/Sunshine_Girls%27_Serenade",
-      "itemTypes": 3,
-      "icons": [
-        "",
-        "https://static.miraheze.org/bluearchivewiki/thumb/a/ac/Item_Icon_Event_Token_1_S35.png/90px-Item_Icon_Event_Token_1_S35.png",
-        "https://static.miraheze.org/bluearchivewiki/thumb/4/48/Item_Icon_Event_Token_2_S35.png/90px-Item_Icon_Event_Token_2_S35.png"
-      ],
-      "transferRates": [],
-      "levels": [
-        {"ap": 10, "items": [6, 7, 7]},
-        {"ap": 10, "items": [6, 7, 7]},
-        {"ap": 10, "items": [6, 8, 6]},
-        {"ap": 10, "items": [6, 6, 8]},
-        {"ap": 15, "items": [9, 14, 7]},
-        {"ap": 15, "items": [9, 7, 14]},
-        {"ap": 15, "items": [9, 16, 5]},
-        {"ap": 15, "items": [9, 5, 16]},
-        {"ap": 20, "items": [12, 24, 4]},
-        {"ap": 20, "items": [12, 4, 24]},
-        {"ap": 20, "items": [12, 28, 0]},
-        {"ap": 20, "items": [12, 0, 28]}
-      ]
-    },
     "0068 from Opera with Love!": {
       "wiki": "https://bluearchive.wiki/wiki/0068_from_Opera_with_Love!",
       "itemTypes": 3,
@@ -419,6 +207,134 @@
         {"ap": 20, "items": [3, 0, 37, 0]},
         {"ap": 20, "items": [3, 0, 0, 37]},
         {"ap": 20, "items": [40, 0, 0, 0]}
+      ]
+    },
+    "Secret Midnight Party ~ Oni Holds a Bell ~": {
+      "wiki": "https://bluearchive.wiki/wiki/Secret_Midnight_Party_~_Oni_Holds_a_Bell_~",
+      "itemTypes": 3,
+      "icons": [
+        "https://static.wikitide.net/bluearchivewiki/thumb/d/de/Item_Icon_Event_Token_0_S44.png/72px-Item_Icon_Event_Token_0_S44.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/5/50/Item_Icon_Event_Token_1_S44.png/72px-Item_Icon_Event_Token_1_S44.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/f/fc/Item_Icon_Event_Token_2_S44.png/72px-Item_Icon_Event_Token_2_S44.png"
+      ],
+      "transferRates": [
+        {"cost": 5, "of": 1, "to": 2}
+      ],
+      "levels": [
+        {"ap": 10, "items": [8, 5, 5]},
+        {"ap": 10, "items": [5, 8, 5]},
+        {"ap": 10, "items": [5, 5, 8]},
+        {"ap": 10, "items": [12, 3, 3]},
+        {"ap": 15, "items": [15, 6, 6]},
+        {"ap": 15, "items": [6, 15, 6]},
+        {"ap": 15, "items": [6, 6, 15]},
+        {"ap": 15, "items": [23, 2, 2]},
+        {"ap": 20, "items": [28, 4, 4]},
+        {"ap": 20, "items": [4, 32, 0]},
+        {"ap": 20, "items": [4, 0, 32]},
+        {"ap": 20, "items": [36, 0, 0]}
+      ]
+    },
+    "Code: BOX Shadow Looming Over Millennium ～One Question and Two Answers～": {
+      "wiki": "https://bluearchive.wiki/wiki/Code:_BOX_Shadow_Looming_Over_Millennium_%EF%BD%9EOne_Question_and_Two_Answers%EF%BD%9E",
+      "itemTypes": 3,
+      "icons": [
+        "",
+        "https://static.wikitide.net/bluearchivewiki/thumb/2/2f/Item_Icon_Event_Token_0_S45.png/72px-Item_Icon_Event_Token_0_S45.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/b/b2/Item_Icon_Event_Token_1_S45.png/72px-Item_Icon_Event_Token_1_S45.png"
+      ],
+      "transferRates": [],
+      "levels": [
+        {"ap": 10, "items": [6, 7, 7]},
+        {"ap": 10, "items": [6, 7, 7]},
+        {"ap": 10, "items": [6, 8, 6]},
+        {"ap": 10, "items": [6, 6, 8]},
+        {"ap": 15, "items": [9, 14, 7]},
+        {"ap": 15, "items": [9, 7, 14]},
+        {"ap": 15, "items": [9, 16, 5]},
+        {"ap": 15, "items": [9, 5, 16]},
+        {"ap": 20, "items": [12, 24, 4]},
+        {"ap": 20, "items": [12, 4, 24]},
+        {"ap": 20, "items": [12, 28, 0]},
+        {"ap": 20, "items": [12, 0, 28]}
+      ]
+    },
+    "Pandemic Hazard ～ Miracle Pancake ～": {
+      "wiki": "https://bluearchive.wiki/wiki/Pandemic_Hazard_%EF%BD%9E_Miracle_Pancake_%EF%BD%9E",
+      "itemTypes": 3,
+      "icons": [
+        "https://static.wikitide.net/bluearchivewiki/thumb/9/92/Item_Icon_Event_Token_0_S46.png/72px-Item_Icon_Event_Token_0_S46.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/8/81/Item_Icon_Event_Token_1_S46.png/72px-Item_Icon_Event_Token_1_S46.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/f/ff/Item_Icon_Event_Token_2_S46.png/72px-Item_Icon_Event_Token_2_S46.png"
+      ],
+      "transferRates": [
+        {"cost": 5, "of": 1, "to": 2}
+      ],
+      "levels": [
+        {"ap": 10, "items": [8, 5, 5]},
+        {"ap": 10, "items": [5, 8, 5]},
+        {"ap": 10, "items": [5, 5, 8]},
+        {"ap": 10, "items": [12, 3, 3]},
+        {"ap": 15, "items": [15, 6, 6]},
+        {"ap": 15, "items": [6, 15, 6]},
+        {"ap": 15, "items": [6, 6, 15]},
+        {"ap": 15, "items": [23, 2, 2]},
+        {"ap": 20, "items": [28, 4, 4]},
+        {"ap": 20, "items": [4, 32, 0]},
+        {"ap": 20, "items": [4, 0, 32]},
+        {"ap": 20, "items": [36, 0, 0]}
+      ]
+    },
+    "Pray-Ball! ～ Aim for a Grand Slam Home Run ～": {
+      "wiki": "https://bluearchive.wiki/wiki/Pray-Ball!_%EF%BD%9E_Aim_for_a_Grand_Slam_Home_Run_%EF%BD%9E",
+      "itemTypes": 3,
+      "icons": [
+        "",
+        "https://static.wikitide.net/bluearchivewiki/thumb/3/3e/Item_Icon_Event_Token_1_S47.png/72px-Item_Icon_Event_Token_1_S47.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/9/90/Item_Icon_Event_Token_2_S47.png/72px-Item_Icon_Event_Token_2_S47.png"
+      ],
+      "transferRates": [
+        {"cost": 5, "of": 1, "to": 2}
+      ],
+      "levels": [
+        {"ap": 10, "items": [6, 6, 6]},
+        {"ap": 10, "items": [6, 9, 3]},
+        {"ap": 10, "items": [6, 3, 9]},
+        {"ap": 10, "items": [8, 4, 4]},
+        {"ap": 15, "items": [5, 11, 11]},
+        {"ap": 15, "items": [5, 17, 5]},
+        {"ap": 15, "items": [5, 5, 17]},
+        {"ap": 15, "items": [16, 4, 4]},
+        {"ap": 20, "items": [4, 16, 16]},
+        {"ap": 20, "items": [4, 32, 0]},
+        {"ap": 20, "items": [4, 0, 32]},
+        {"ap": 20, "items": [32, 0, 0]}
+      ]
+    },
+    "Highlander Railroad Runaway Incident 〜 And Then The Train Was Gone 〜": {
+      "wiki": "https://bluearchive.wiki/wiki/Highlander_Railroad_Runaway_Incident_%E3%80%9C_And_Then_The_Train_Was_Gone_%E3%80%9C",
+      "itemTypes": 3,
+      "icons": [
+        "https://static.wikitide.net/bluearchivewiki/thumb/3/3c/Item_Icon_Event_Token_0_S48.png/72px-Item_Icon_Event_Token_0_S48.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/4/41/Item_Icon_Event_Token_1_S48.png/72px-Item_Icon_Event_Token_1_S48.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/7/79/Item_Icon_Event_Token_2_S48.png/72px-Item_Icon_Event_Token_2_S48.png"
+      ],
+      "transferRates": [
+        {"cost": 5, "of": 1, "to": 2}
+      ],
+      "levels": [
+        {"ap": 10, "items": [8, 5, 5]},
+        {"ap": 10, "items": [5, 8, 5]},
+        {"ap": 10, "items": [5, 5, 8]},
+        {"ap": 10, "items": [12, 3, 3]},
+        {"ap": 15, "items": [15, 6, 6]},
+        {"ap": 15, "items": [6, 15, 6]},
+        {"ap": 15, "items": [6, 6, 15]},
+        {"ap": 15, "items": [23, 2, 2]},
+        {"ap": 20, "items": [28, 4, 4]},
+        {"ap": 20, "items": [4, 32, 0]},
+        {"ap": 20, "items": [4, 0, 32]},
+        {"ap": 20, "items": [36, 0, 0]}
       ]
     },
 

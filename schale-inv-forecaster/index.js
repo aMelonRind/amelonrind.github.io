@@ -32,16 +32,28 @@ const devPreset = {
 //   [[3, 3, 1], [4, 2, 1], [3, 2, 2]],
 // ]
 
-// Descent of the Five Senses
+// // Descent of the Five Senses
+// /** @type {ItemSet[]} */
+// const preset = [
+//   [[3, 2, 1], [3, 1, 5], [2, 1, 2]],
+//   [[4, 2, 1], [2, 2, 2], [3, 1, 3]],
+//   [[3, 3, 1], [1, 4, 3], [2, 1, 2]],
+//   [[3, 2, 1], [3, 1, 5], [2, 1, 2]],
+//   [[4, 2, 1], [2, 2, 2], [3, 1, 3]],
+//   [[3, 3, 1], [1, 4, 3], [2, 1, 2]],
+//   [[2, 2, 2], [3, 1, 3], [2, 1, 6]],
+// ]
+
+// Secret Midnight Party ~ Oni Holds a Bell ~
 /** @type {ItemSet[]} */
 const preset = [
-  [[3, 2, 1], [3, 1, 5], [2, 1, 2]],
-  [[4, 2, 1], [2, 2, 2], [3, 1, 3]],
-  [[3, 3, 1], [1, 4, 3], [2, 1, 2]],
-  [[3, 2, 1], [3, 1, 5], [2, 1, 2]],
-  [[4, 2, 1], [2, 2, 2], [3, 1, 3]],
-  [[3, 3, 1], [1, 4, 3], [2, 1, 2]],
-  [[2, 2, 2], [3, 1, 3], [2, 1, 6]],
+  [[3, 2, 2], [3, 1, 5], [2, 1, 2]],
+  [[4, 2, 1], [1, 4, 2], [3, 1, 5]],
+  [[3, 3, 0], [2, 2, 0], [2, 1, 0]],
+  [[3, 2, 2], [3, 1, 5], [2, 1, 2]],
+  [[4, 2, 1], [1, 4, 2], [3, 1, 5]],
+  [[3, 3, 0], [2, 2, 0], [2, 1, 0]],
+  [[4, 2, 0], [3, 1, 0], [2, 1, 0]],
 ]
 const last = 7
 const presetOptions = preset.map((_, i) => {
@@ -49,7 +61,7 @@ const presetOptions = preset.map((_, i) => {
   opt.value = i.toString()
   return opt
 })
-const updateInfo = 'Stage data: Global 2025/03/27'
+const updateInfo = 'Stage data: Global 2025/06/10'
 
 
 const root = document.getElementById('script-root') ?? document.createElement('div')
