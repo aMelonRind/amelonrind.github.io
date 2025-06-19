@@ -1,6 +1,7 @@
 //@ts-check
 import * as NBT from "./npm/nbtify/dist/index.js"
 import suffocatable from "./src/suffocatable.json" with { type: "json" }
+import fallable from "./src/fallable.json" with { type: "json" }
 
 let logHistory = ''
 
@@ -333,11 +334,6 @@ async function process(root, filename) {
       }
     }
   }
-  function getState(index = 0) {
-    const bitIndex = BigInt(index) * bits
-    const i = Number(bitIndex / 64n)
-    return Number(((((rawstates[i + 1] ?? 0n) << 64n) | (rawstates[i] ?? 0n)) >> (bitIndex % 64n)) & mask)
-  }
   /**
    * @param {number} index 
    * @param {number} fromDirection 
@@ -473,15 +469,20 @@ async function process(root, filename) {
       ...supportFacingR,
       ...complexSupport
     ])
+    const fallableSet = makeSet(fallable)
+    console.log(fallableSet)
     const counts = {}
     const redstoneComponents = new Set()
-    for (let i = data.length; i >= layerSize; i--) {
+    for (let i = layerSize; i < data.length; i++) {
       const state = getState(i)
       if (!data[i] && state !== 0) {
         const id = ids[state]
         if (!id.endsWith('air')) {
-          data[i] |= 0b1000
+          data[i] = 0b1001
           counts[id] = (counts[id] ?? 0) + 1
+          if (data[i + layerSize] && fallableSet.has(getState(i + layerSize))) {
+            data[i] = id === 'minecraft:cobblestone' ? 0 : 0b1010
+          }
           if (redstones.has(state)) {
             redstoneComponents.add(i)
             if (!standalone.has(state)) {
@@ -555,7 +556,7 @@ async function process(root, filename) {
       await log('Redstone component detected. Make sure to check them manually!')
       for (const i of redstoneComponents) {
         const state = getState(i)
-        if (data[i] === 0b1000) {
+        if (data[i] & 0b1000) {
           data[i] = 0
           const id = ids[state]
           if (id in counts) {
@@ -563,6 +564,11 @@ async function process(root, filename) {
           }
         }
       }
+    }
+    function getState(index = 0) {
+      const bitIndex = BigInt(index) * bits
+      const i = Number(bitIndex / 64n)
+      return Number(((((rawstates[i + 1] ?? 0n) << 64n) | (rawstates[i] ?? 0n)) >> (bitIndex % 64n)) & mask)
     }
     const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1])
     if (sorted.length === 0) {
@@ -590,7 +596,7 @@ async function process(root, filename) {
     const offsets = [-1, 1, -sx, sx, -layerSize, layerSize]
     for (let i of jigsaws) {
       while (i < data.length) {
-        data[i] |= 0b1000
+        data[i] = data[i] & 0b11100000 | 0b1001
         i += offsets[(data[i] >>> 5) - 1]
       }
     }
@@ -605,7 +611,7 @@ async function process(root, filename) {
   const mask64 = (1n << 64n) - 1n
   for (const d of data) {
     if (d & 0b1000) {
-      buf |= 1n << bufs
+      buf |= ((d & 0b10) ? 2n : 1n) << bufs
       totalBlocks++
     }
     bufs += 2n
@@ -641,7 +647,11 @@ async function process(root, filename) {
       Entities: [],
       PendingBlockTicks: [],
       PendingFluidTicks: [],
-      BlockStatePalette: [{ Name: 'minecraft:air' }, { Name: 'minecraft:stone' }],
+      BlockStatePalette: [
+        { Name: 'minecraft:air' },
+        { Name: 'minecraft:stone' },
+        { Name: 'minecraft:cobblestone' }
+      ],
       BlockStates: longArr
     }}
   })
