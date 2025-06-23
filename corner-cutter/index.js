@@ -69,9 +69,9 @@ async function process(root, filename) {
   // init data
   await log('Initializing data')
   const [ regionName, region ] = regions[0]
-  const sx = region.Size.x.valueOf()
-  const sy = region.Size.y.valueOf()
-  const sz = region.Size.z.valueOf()
+  const sx = Math.abs(region.Size.x.valueOf())
+  const sy = Math.abs(region.Size.y.valueOf())
+  const sz = Math.abs(region.Size.z.valueOf())
   const layerSize = sx * sz
   const sides3DMasks = [
     0b010000001000000000001000,
@@ -641,7 +641,7 @@ async function process(root, filename) {
       EnclosingSize: region.Size
     },
     Regions: { [regionName ?? 'Main']: {
-      Position: { x: new NBT.Int32(0), y: new NBT.Int32(0), z: new NBT.Int32(0) },
+      Position: region.Position,
       Size: region.Size,
       TileEntities: [],
       Entities: [],
