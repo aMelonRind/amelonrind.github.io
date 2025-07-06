@@ -1,0 +1,610 @@
+// this file can dynamically generate wasm module based on inputs
+import { getPlacements } from "./Assembler.js"
+import { section, cf, i32, i64, local, flatU8A } from "./WasmSpec.js"
+import { results } from "../CounterHandler.js"
+
+const num2alphabet = 'ZYXWVUTSRQPONMLKJIHGFEDCBAzyxwvutsrqponmlkjihgfedcba'
+
+export async function generateTest() {
+  const buildStart = performance.now()
+  const { wasm, ctx } = buildCounterModule([[4, 1, 2], [3, 1, 3], [2, 1, 2]])
+  // downloadBlob('generated.wasm', wasm)
+  const module = await WebAssembly.compile(await wasm.arrayBuffer())
+  const instance = await WebAssembly.instantiate(module)
+  /** @type {WebAssembly.Memory} *///@ts-ignore
+  const memory = instance.exports.memory
+  const view = new DataView(memory.buffer)
+  new Uint8Array(memory.buffer).fill(0)
+  for (let item = 0; item < ctx.placementsRev.length; item++) {
+    const arrPtr = ctx.pass.arrPtrsRev[item]
+    const countPtr = ctx.countArrsRev[item]
+    const placements = ctx.placementsRev[item]
+    for (let i = 0; i < placements.length; i++) {
+      view.setBigUint64(arrPtr + i * 12, placements[i], true)
+      view.setUint32(arrPtr + i * 12 + 8, countPtr + i * 8, true)
+    }
+  }
+  console.log(`build time: ${(performance.now() - buildStart).toFixed(1)}ms`)
+  const start = performance.now()
+  /** @type {bigint} *///@ts-ignore
+  const total = instance.exports.main()
+  const time = `test wasm time: ${(performance.now() - start).toFixed(1)}ms`
+  const countsRev = []
+  for (let item = 0; item < ctx.placementsRev.length; item++) {
+    const countPtr = ctx.countArrsRev[item]
+    const placements = ctx.placementsRev[item]
+    const res = new BigUint64Array(placements.length)
+    for (let i = 0; i < placements.length; i++) {
+      const count = view.getBigUint64(countPtr + i * 8, true)
+      if (count > 2500000000n) console.log((countPtr + i * 8).toString(16))
+      if (count) {
+        for (let bi = 0; bi < 45; bi++) {
+          if (placements[i] & (1n << BigInt(bi))) {
+            res[bi] += count
+          }
+        }
+      }
+    }
+    countsRev.push(res)
+  }
+  //@ts-ignore
+  results.set('0,4,1,2,3,1,3,2,1,2', { total, count: countsRev.reverse(), time })
+  console.log(time)
+}
+
+/**
+ * @param {string} fileName 
+ * @param {BlobPart} data 
+ */
+function downloadBlob(fileName, data) {
+  const blob = new Blob([data], { type: 'application/octet-stream' })
+  const url = URL.createObjectURL(blob)
+  downloadURL(url, fileName)
+  setTimeout(() => URL.revokeObjectURL(url), 5000)
+}
+
+/**
+ * @param {string} dataURL 
+ * @param {string} fileName 
+ */
+function downloadURL(dataURL, fileName) {
+  const a = document.createElement('a')
+  a.href = dataURL
+  a.download = fileName
+  a.click()
+}
+
+/**
+ * @param {Item[]} items 
+ */
+export function buildCounterModule(items) {
+  const memories = new MemoryAllocator()
+  const ctx = new BuildContext(memories, 0n, items)
+  if (!ctx.placements.every((p, i) => p.length >= ctx.items[i][2])) {
+    throw 'invalid length'
+  }
+  generatePass(
+    ctx,
+    Uint8Array.from(ctx.itemsRev, v => v[2]),
+    Uint8Array.from(ctx.placementsRev, v => v.length),
+    0,
+    num2alphabet.slice(-ctx.items.length),
+    ctx.entryHoles,
+    ctx.entryHoles <= 32
+  )
+  const mainBody = flatU8A([ctx.pass.getCode(), cf.end])
+  const wasm = new Blob([
+    section.header,
+    section.types([[Uint8Array.of(), Uint8Array.of(i64.type)]]),
+    section.func([0]),
+    memories.toSection(),
+    section.export({ memory: ['mem', 0], main: ['func', 0] }),
+    section.code([[Uint8Array.from(ctx.locals.types), mainBody]]),
+    section.names([ctx.locals.names])
+  ])
+  return { wasm, ctx }
+}
+
+/**
+ * @param {BuildContext} ctx 
+ * @param {Uint8Array} leftsRev 
+ * @param {Uint8Array} lensRev 
+ * @param {number} depth 
+ * @param {string} itemCharsRev 
+ * @param {number} holes 
+ * @param {boolean} is32 
+ */
+function generatePass(ctx, leftsRev, lensRev, depth, itemCharsRev, holes, is32 = false) {
+  const curr = leftsRev.length - 1
+  let nextLeftsRev = leftsRev.slice()
+  nextLeftsRev[curr] -= 1
+  if (nextLeftsRev[curr] >= 45) throw 'invalid left count'
+  const nextItem = nextLeftsRev[curr] === 0
+  const doFilter = !nextItem
+  const [w, h] = ctx.itemsRev[curr]
+  holes -= w * h
+  const convert32 = !is32 && holes <= 32
+  if (nextItem) {
+    nextLeftsRev = nextLeftsRev.slice(0, -1)
+  }
+  const nextLensRev = lensRev.subarray(0, nextLeftsRev.length)
+    // this is buggy, don't reduce array length for now
+    // .map((v, i) => doFilter || i < curr - 1 ? v - containAmount(w, h, ctx.itemsRev[i][0], ctx.itemsRev[i][1]) : v)
+  if (nextLeftsRev.length === 1 && nextLeftsRev[0] === 1) {
+    generateLast(ctx, nextLensRev[0], depth + 1, itemCharsRev[0], is32 || convert32)
+  } else {
+    generatePass(ctx, nextLeftsRev, nextLensRev, depth + 1, itemCharsRev, holes, is32 || convert32)
+  }
+
+  const board = depth ? ctx.locals.declare(i64.type, `board${depth}`) : 0
+  const count = ctx.locals.declare(i64.type, `count${depth}`)
+  const ptr = nextItem ? ctx.getTPtrVar() : ctx.locals.declare(i32.type, `ptr${depth}`)
+  const idx = ctx.locals.declare(i32.type, `idx${depth}`)
+  const tIdx = leftsRev.length - (nextItem ? 2 : 1) > 0 ? ctx.getTIdxVar() : -2
+  const endVars = depth ? Array.from(leftsRev, (_, i) => doFilter || i !== curr - 1
+    ? ctx.locals.declare(i32.type, `${itemCharsRev[i]}end${depth}`)
+    : ctx.pass.getEndVar(i)
+  ) : Array.from(leftsRev).fill(-2)
+  const arrPtrs = Array.from(lensRev, (len, i) => doFilter || i !== curr - 1
+    ? ctx.memories.allocate(len * 12, 8)
+    : ctx.pass.getArrPtr(i)
+  )
+  if (nextItem) {
+    ctx.allocateCountArr(curr)
+  }
+  const nextArrPtr = nextItem ? 0 : ctx.pass.getArrPtr(curr)
+  const nextEndVar = nextItem ? 0 : ctx.pass.getEndVar(curr)
+  const boardGetter = depth ? local.get(board) : i64.const(ctx.mainBoard)
+  if (lensRev[curr] === 0) throw 'wtf'
+  const code = flatU8A([
+    i64.const(0),
+    local.set(count),
+    (nextItem ? [] : [
+      i32.const(nextArrPtr),
+      local.set(nextEndVar)
+    ]),
+    depth ? local.get(endVars[curr]) : i32.const(arrPtrs[curr] + lensRev[curr] * 12),
+    local.set(idx),
+    cf.loop(flatU8A([
+      // decrement idx
+      local.get(idx),
+      i32.const(12),
+      i32.sub,
+      local.tee(idx),
+      // verify placement
+      i64.load(),
+      boardGetter,
+      i64.and,
+      i64.eqz,
+      cf.if(flatU8A([
+        // place item on board
+        boardGetter,
+        local.get(idx),
+        i64.load(),
+        i64.or,
+        local.set(ctx.pass.getBoardVar()),
+        (nextItem ? [] : [
+          // move placement
+          local.get(ctx.pass.getEndVar(curr)),
+          local.get(idx),
+          i64.load(),
+          i64.store(),
+          // move ptr
+          local.get(ctx.pass.getEndVar(curr)),
+          local.get(idx),
+          i32.load(8),
+          local.tee(ptr),
+          i32.store(8)
+        ]),
+        // condition to inner
+        local.get(ctx.pass.getEndVar(nextItem ? curr - 1 : curr)),
+        i32.const(ctx.pass.getArrPtr(nextItem ? curr - 1 : curr)), // todo: try increase this
+        i32.gt_u,
+        cf.if(flatU8A([
+          // filter everything else
+          Array.from({ length: Math.max(0, leftsRev.length - (nextItem ? 2 : 1)) }, (_, item) => flatU8A([
+            i32.const(ctx.pass.getArrPtr(item)),
+            local.set(ctx.pass.getEndVar(item)),
+            depth ? local.get(endVars[item]) : i32.const(arrPtrs[item] + ctx.placementsRev[item].length * 12),
+            local.set(tIdx),
+            cf.loop(flatU8A([
+              // decrement idx
+              local.get(tIdx),
+              i32.const(12),
+              i32.sub,
+              local.tee(tIdx),
+              // verify placement
+              i64.load(),
+              local.get(ctx.pass.getBoardVar()),
+              i64.and,
+              i64.eqz,
+              cf.if(flatU8A([
+                // move placement
+                local.get(ctx.pass.getEndVar(item)),
+                local.get(tIdx),
+                i64.load(),
+                i64.store(),
+                // move ptr
+                local.get(ctx.pass.getEndVar(item)),
+                local.get(tIdx),
+                i32.load(8),
+                i32.store(8),
+                // increment arr end
+                local.get(ctx.pass.getEndVar(item)),
+                i32.const(12),
+                i32.add,
+                local.set(ctx.pass.getEndVar(item))
+              ])),
+              local.get(tIdx),
+              i32.const(arrPtrs[item]),
+              i32.gt_u,
+              cf.br_if(0)
+            ]))
+          ])).reverse(),
+          // inner
+          ctx.pass.getCode(),
+          // add to previous
+          local.get(count),
+          i64.add,
+          local.set(count),
+          // add count to the memory
+          (nextItem ? [
+            local.get(idx),
+            i32.load(8),
+            local.tee(ptr),
+          ] : local.get(ptr)),
+          local.get(ptr),
+          i64.load(),
+          local.get(ctx.pass.getCountVar()),
+          i64.add,
+          i64.store()
+        ])),
+        (nextItem ? [] : [
+          // increment arr end
+          local.get(ctx.pass.getEndVar(curr)),
+          i32.const(12),
+          i32.add,
+          local.set(ctx.pass.getEndVar(curr)),
+        ])
+      ])),
+      local.get(idx),
+      (arrPtrs[curr] === 0 ? [] : [
+        i32.const(arrPtrs[curr]),
+        i32.gt_u
+      ]),
+      cf.br_if(0)
+    ])),
+    local.get(count)
+  ])
+  ctx.pass.setAll(code, count, board, arrPtrs, endVars)
+}
+
+/**
+ * @param {number} w1 
+ * @param {number} h1 
+ * @param {number} w2 
+ * @param {number} h2 
+ */
+function containAmount(w1, h1, w2, h2) {
+  return Math.max(w1 - w2 + 1, 0) * Math.max(h1 - h2 + 1, 0) + (w2 === h2 ? 0 : Math.max(w1 - h2 + 1, 0) * Math.max(h1 - w2 + 1, 0))
+}
+
+/**
+ * @param {BuildContext} ctx 
+ * @param {number} len 
+ * @param {number} depth 
+ * @param {string} itemChar 
+ * @param {boolean} is32 
+ */
+function generateLast(ctx, len, depth, itemChar, is32 = false) {
+  const board = ctx.locals.declare(i64.type, `board${depth}`)
+  const end = ctx.locals.declare(i32.type, `${itemChar}end${depth}`)
+  const ptr = ctx.getTPtrVar()
+  const count = ctx.locals.declare(i64.type, `count${depth}`)
+  const arr = ctx.memories.allocate(len * 12, 8)
+  ctx.allocateCountArr(0)
+
+  let block = cf.block(flatU8A([
+    i32.const(0),
+    local.get(end),
+    (arr ? [ // this should be always zero, but just in case something unexpected happens and make sure it'll work anyway
+      i32.const(arr),
+      i32.sub,
+    ] : []),
+    i32.const(2),
+    i32.shr_u,
+    i32.const(0xAAAAAAAB),
+    i32.mul,
+    cf.br_table(Array.from({ length: len + 1 }, (_, i) => len - i))
+  ]), i32.type)
+
+  const chunk1 = flatU8A([
+    i64.load(),
+    local.get(board),
+    i64.and,
+    i64.const(0),
+    i64.ne,
+    cf.br_if(0),
+  ])
+  const chunk2 = flatU8A([
+    i32.load(),
+    local.tee(ptr),
+    local.get(ptr),
+    i64.load(),
+    i64.const(1),
+    i64.add,
+    i64.store(),
+    i32.const(1),
+    i32.add
+  ])
+  for (let i = len - 1; i >= 0; i--) {
+    block = cf.block(flatU8A([
+      block,
+      i32.const(arr + i * 12),
+      chunk1,
+      i32.const(arr + i * 12 + 8),
+      chunk2
+    ]), i32.type)
+  }
+  const code = flatU8A([
+    block,
+    i64.extend_i32_u,
+    local.tee(count),
+  ])
+  ctx.pass.setAll(code, count, board, [arr], [end])
+}
+
+class BuildContext {
+  /**
+   * @type {bigint}
+   * @readonly
+   */
+  origBoard
+  /**
+   * @type {bigint}
+   * @readonly
+   */
+  mainBoard
+  /**
+   * holes in mainBoard
+   * @type {number}
+   * @readonly
+   */
+  entryHoles
+  /**
+   * @type {MemoryAllocator}
+   * @readonly
+   */
+  memories
+  /**
+   * @type {LocalVariables}
+   * @readonly
+   */
+  locals
+  /**
+   * the memory pointers of each item placement's counts allocated by inner hotspot.
+   * @type {Int32Array}
+   * @readonly
+   */
+  countArrsRev
+  /**
+   * @type {BuildPass}
+   * @readonly
+   */
+  pass
+  /**
+   * @type {Item[]}
+   * @readonly
+   */
+  items
+  /**
+   * @type {Item[]}
+   * @readonly
+   */
+  itemsRev
+  /**
+   * @type {BigUint64Array[]}
+   * @readonly
+   */
+  placements
+  /**
+   * @type {BigUint64Array[]}
+   * @readonly
+   */
+  placementsRev
+  /**
+   * @type {number}
+   */
+  tempIdx = -1
+  /**
+   * @type {number}
+   */
+  tempPtr = -1
+
+  /**
+   * @param {MemoryAllocator} memories 
+   * @param {bigint} origBoard 
+   * @param {Item[]} items 
+   */
+  constructor(memories, origBoard, items) {
+    this.origBoard = origBoard
+    this.memories = memories
+    this.locals = new LocalVariables([])
+    this.countArrsRev = new Int32Array(items.length).fill(-1)
+    this.pass = new BuildPass(items.length)
+    this.items = items
+    this.itemsRev = items.slice().reverse()
+    this.placements = items.map(([w, h]) => getPlacements(w, h).filter(p => (p & origBoard) === 0n))
+    this.placementsRev = this.placements.slice().reverse()
+    this.mainBoard = ((1n << 45n) - 1n) ^ this.placements.map(a => a.reduce((p, v) => p | v)).reduce((p, v) => p | v)
+    let holes = 0
+    for (let i = 0n; i < 45n; i++) {
+      if (((this.mainBoard >> i) & 1n) === 0n) {
+        holes++
+      }
+    }
+    this.entryHoles = holes
+  }
+
+  /**
+   * @param {number} itemIndexRev reversed index of item
+   */
+  allocateCountArr(itemIndexRev) {
+    const v = this.countArrsRev[itemIndexRev]
+    if (v === undefined) throw 'index out of bounds'
+    if (v !== -1) throw 'already allocated'
+    this.countArrsRev[itemIndexRev] = this.memories.allocate(this.placementsRev[itemIndexRev].length * 8, 8)
+  }
+
+  getTIdxVar() {
+    if (this.tempIdx === -1) {
+      this.tempIdx = this.locals.declare(i32.type, `idx`)
+    }
+    return this.tempIdx
+  }
+
+  getTPtrVar() {
+    if (this.tempPtr === -1) {
+      this.tempPtr = this.locals.declare(i32.type, `ptr`)
+    }
+    return this.tempPtr
+  }
+}
+
+class BuildPass {
+  /**
+   * the inner code that leaves an i64 on the stack as count.
+   * @type {Uint8Array?}
+   */
+  code = null
+  /**
+   * the local variable index for inner count (i64).
+   * @type {number}
+   */
+  countVar = -1
+  /**
+   * the local variable index of board that used by inner code.
+   * @type {number}
+   */
+  boardVar = -1
+  /**
+   * the memory pointer of the array pass for inner code.
+   * @type {Int32Array}
+   * @readonly
+   */
+  arrPtrsRev
+  /**
+   * the local variable index that represents the end of arrs above.
+   * @type {Int32Array}
+   * @readonly
+   */
+  endVarsRev
+
+  /**
+   * @param {number} itemLen 
+   */
+  constructor(itemLen) {
+    this.arrPtrsRev = new Int32Array(itemLen).fill(-1)
+    this.endVarsRev = new Int32Array(itemLen).fill(-1)
+  }
+
+  /**
+   * @param {Uint8Array} code 
+   * @param {number} countVar 
+   * @param {number} boardVar 
+   * @param {number[]} arrPtrsRev 
+   * @param {number[]} endVarsRev 
+   */
+  setAll(code, countVar, boardVar, arrPtrsRev, endVarsRev) {
+    this.code = code
+    this.countVar = countVar
+    this.boardVar = boardVar
+    this.arrPtrsRev.set(arrPtrsRev)
+    this.endVarsRev.set(endVarsRev)
+  }
+
+  getCode() {
+    return checkInvalidAccess(this.code, null)
+  }
+
+  getCountVar() {
+    return checkInvalidAccess(this.countVar, -1)
+  }
+
+  getBoardVar() {
+    return checkInvalidAccess(this.boardVar, -1)
+  }
+
+  /**
+   * @param {number} itemIndexRev 
+   */
+  getArrPtr(itemIndexRev) {
+    return checkInvalidAccess(this.arrPtrsRev[itemIndexRev] ?? -1, -1)
+  }
+
+  /**
+   * @param {number} itemIndexRev 
+   */
+  getEndVar(itemIndexRev) {
+    return checkInvalidAccess(this.endVarsRev[itemIndexRev] ?? -1, -1)
+  }
+}
+
+/**
+ * @template T
+ * @template {T} I 
+ * @param {T} value 
+ * @param {I} invalidValue 
+ * @returns {Exclude<T, I>}
+ */
+function checkInvalidAccess(value, invalidValue) {
+  if (value === invalidValue) throw 'invalid access'
+  //@ts-ignore
+  return value
+}
+
+class MemoryAllocator {
+  size = 0
+
+  /**
+   * @param {number} size size of the required memory in bytes
+   * @param {number} [align] alignment of the pointer
+   * @return {number} ptr
+   */
+  allocate(size, align = 4) {
+    const ptr = Math.ceil(this.size / align) * align
+    this.size = ptr + size
+    return ptr
+  }
+
+  toSection() {
+    return section.memory(Math.ceil(this.size / 65536) || 1)
+  }
+}
+
+class LocalVariables {
+  /** @type {number[]} */
+  types = []
+  /** @type {string[]} */
+  names
+
+  /**
+   * @param {string[]} paramNames 
+   */
+  constructor (paramNames) {
+    this.names = paramNames.slice()
+  }
+
+  /**
+   * @param {number} type 
+   * @returns {number} idx
+   */
+  declare(type, name = '') {
+    this.types.push(type)
+    if (name && this.names.includes(name)) {
+      console.log(`Warning: duplicate name (${name})`)
+    }
+    this.names.push(name)
+    return this.names.length - 1
+  }
+}

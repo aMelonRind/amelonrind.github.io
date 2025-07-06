@@ -4,6 +4,9 @@ import { mainGUI } from "./src/MainGUI.js"
 import { isDev } from "./src/util.js"
 export { mainGUI }
 
+export { assemblerTest } from "./src/assembler/Assembler.js"
+export { generateTest, bulkTest } from "./src/assembler/assembler_test.js"
+
 /** @satisfies {Record<string, ItemSet>} */
 const devPreset = {
   zero: [[2, 2, 0], [2, 2, 0], [2, 2, 0]],

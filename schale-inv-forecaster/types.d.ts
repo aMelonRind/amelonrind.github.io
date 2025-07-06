@@ -4,6 +4,7 @@ type Elem = import('./src/gui/Element.js').Element;
 type ItemId = 0 | 1 | 2;
 type Item = [w: number, h: number, count: number];
 type ItemSet = [Item, Item, Item];
+type Tuple<Len extends number, T = number, _P = []> = -1 extends Len ? T[] : (_P extends { length: Len } ? _P : Tuple<Len, T, [T, ..._P]>);
 
 interface CounterResult {
   readonly total: bigint;
