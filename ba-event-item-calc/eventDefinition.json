@@ -1,6 +1,32 @@
 {
   "default": "Secret Midnight Party ~ Oni Holds a Bell ~",
   "events": {
+    "New Year March": {
+      "wiki": "https://bluearchive.wiki/wiki/New_Year_March",
+      "itemTypes": 3,
+      "icons": [
+        "",
+        "https://static.miraheze.org/bluearchivewiki/thumb/c/cf/Item_Icon_Event_Token_1_S34.png/90px-Item_Icon_Event_Token_1_S34.png",
+        "https://static.miraheze.org/bluearchivewiki/thumb/b/b7/Item_Icon_Event_Token_2_S34.png/90px-Item_Icon_Event_Token_2_S34.png"
+      ],
+      "transferRates": [
+        {"cost": 5, "of": 1, "to": 2}
+      ],
+      "levels": [
+        {"ap": 10, "items": [6, 6, 6]},
+        {"ap": 10, "items": [6, 9, 3]},
+        {"ap": 10, "items": [6, 3, 9]},
+        {"ap": 10, "items": [8, 4, 4]},
+        {"ap": 15, "items": [5, 11, 11]},
+        {"ap": 15, "items": [5, 17, 5]},
+        {"ap": 15, "items": [5, 5, 17]},
+        {"ap": 15, "items": [16, 4, 4]},
+        {"ap": 20, "items": [4, 16, 16]},
+        {"ap": 20, "items": [4, 32, 0]},
+        {"ap": 20, "items": [4, 0, 32]},
+        {"ap": 20, "items": [32, 0, 0]}
+      ]
+    },
     "0068 from Opera with Love!": {
       "wiki": "https://bluearchive.wiki/wiki/0068_from_Opera_with_Love!",
       "itemTypes": 3,
