@@ -12,12 +12,19 @@ fileSelect.type = 'file'
 fileSelect.accept = '.litematic'
 fileSelect.title = 'Accepts litematica file with exactly one region.'
 fileSelect.files?.item
+const fileLabel = createLabel('', 'fileSelect', 'Indicator of if the file has changed.')
+fileSelect.onchange = onFileChange
+onFileChange()
+
+function onFileChange() {
+  const last = fileLabel.textContent
+  while (fileLabel.textContent === last) {
+    fileLabel.textContent = Math.random().toString(16).slice(2, 8)
+  }
+}
 
 const outsidesTitle = 'Choose which sides should be treated as outside.'
-const outsidesLabel = createLabel(
-  'Outsides: ', 'outsidesSelect',
-  outsidesTitle
-)
+const outsidesLabel = createLabel('Outsides: ', 'outsidesSelect', outsidesTitle)
 
 /** @type {Side[]} */
 const sides = ['up', 'down', 'north', 'south', 'west', 'east']
@@ -76,7 +83,14 @@ const recursiveLabel = createLabel(
 const startButton = document.createElement('button')
 startButton.type = 'button'
 startButton.innerText = 'Start'
-startButton.onclick = start
+startButton.onclick = async () => {
+  try {
+    await start()
+  } catch (e) {
+    log('Something wrong happened:')
+    log(e)
+  }
+}
 startButton.title = 'Starts scan with the given inputs.'
 
 const logDisplay = document.createElement('div')
@@ -94,11 +108,11 @@ async function main() {
       e.preventDefault()
     }
     fileSelect.files = e.dataTransfer?.files ?? (shouldIgnore(e.target) ? fileSelect.files : null)
-    // readItems(e.dataTransfer?.items)
+    onFileChange()
   })
   window.addEventListener('paste', e => {
     fileSelect.files = e.clipboardData?.files ?? (shouldIgnore(e.target) ? fileSelect.files : null)
-    // readItems(e.clipboardData?.items)
+    onFileChange()
   })
 
   root.innerHTML = ''
@@ -110,7 +124,8 @@ async function main() {
     div.append(...elements)
     return div
   }
-  root.append(fileSelect,
+  root.append(
+    group(fileSelect, fileLabel),
     group(outsidesLabel, ...outsidesCheckboxes),
     group(insideMarkerLabel, insideMarkerInput),
     group(outsideMarkerLabel, outsideMarkerInput),

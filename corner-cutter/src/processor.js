@@ -272,7 +272,6 @@ export async function process(root, filename, options) {
   const jigsaws = []
   const patched = new Uint8Array(data.length)
   let gen = 0
-  scan:
   while (true) {
     jigsaws.length = 0
     data.set(patched)
@@ -323,22 +322,21 @@ export async function process(root, filename, options) {
     // iterate
     let nextLog = 0
     index = 0
-    let timeout = 0
     while (true) {
       index = alive.indexOf(1, index)
       if (index === -1) {
+        // if nothing changed, break
         if (!dirty) break
         if (Date.now() > nextLog) {
           let count = 0
           for (const v of alive) {
             if (v) count++
           }
-          await log(`Scanning... ${count.toLocaleString()} left.`)
+          await log(`Scanning... currently has ${count.toLocaleString()} alive cells.`)
           nextLog = Date.now() + 500
         }
         dirty = false
         index = 0
-        if (timeout++ > 99999) throw 'timeout'
         continue
       }
       alive[index] = 0
@@ -362,6 +360,7 @@ export async function process(root, filename, options) {
         let j = i
         /** @type {Set<number>} */
         const visited = new Set()
+        // try add blocks at paths that's close to other block
         while (!isNaN(j) && !visited.has(j)) {
           visited.add(j)
           for (const k of [j, ...iterateSides(j).map(side => j + offsets[side])]) {
@@ -373,6 +372,7 @@ export async function process(root, filename, options) {
           }
           j += offsets[(data[j] >>> 5) - 1]
         }
+        // if nothing is added, make the whole path solid
         if (!added2) {
           j = i
           j += offsets[(data[j] >>> 5) - 1]
@@ -615,7 +615,7 @@ export async function process(root, filename, options) {
     }
     const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1])
     if (sorted.length === 0) {
-      await log('This litematic is already perfect for this tool!')
+      await log('This litematic is already perfect for this tool! (No blocks detected for removal)')
       return
     } else {
       log('This mask can help you save:')
