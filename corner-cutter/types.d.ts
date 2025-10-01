@@ -8,6 +8,15 @@ declare namespace NBT {
   export type Vec3iTuple = NBT.ListTag<NBT.Int32> & [ NBT.Int32, NBT.Int32, NBT.Int32 ];
 }
 
+type Side = 'up' | 'down' | 'north' | 'south' | 'west' | 'east'
+type ProcessOptions = {
+  outsides: Record<Side, boolean>,
+  insideMarker: string | null, // block id
+  outsideMarker: string | null, // block id
+  extraSolidBlocks: string[],
+  recursive: boolean
+};
+
 type NbtDataResult = Promise<{ name: string, data: Uint8Array }>;
 
 type PaletteNbt = NBT.ListTag<{

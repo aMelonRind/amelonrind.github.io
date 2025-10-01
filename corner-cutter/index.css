@@ -2,4 +2,17 @@
 body {
   font-family: Monaco, Menlo, Consolas, 'Droid Sans Mono', Inconsolata, 'Courier New', monospace;
   white-space: pre;
+  display: flex;
+}
+
+#script-root {
+  width: 100%;
+  height: calc(100vh - 200px);
+}
+
+#logDisplay {
+  height: inherit;
+  border: 1px solid #ccc;
+  overflow-y: auto;
+  padding: 5px;
 }
