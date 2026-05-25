@@ -2,6 +2,7 @@ import { useState } from 'preact/hooks'
 import preactLogo from './assets/preact.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
+import iconsUrl from '/icons.svg?url'
 import './app.css'
 
 export function App() {
@@ -35,7 +36,7 @@ export function App() {
       <section id="next-steps">
         <div id="docs">
           <svg class="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
+            <use href={`${iconsUrl}#documentation-icon`}></use>
           </svg>
           <h2>Documentation</h2>
           <p>Your questions, answered</p>
@@ -56,7 +57,7 @@ export function App() {
         </div>
         <div id="social">
           <svg class="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
+            <use href={`${iconsUrl}#social-icon`}></use>
           </svg>
           <h2>Connect with us</h2>
           <p>Join the Vite community</p>
@@ -64,7 +65,7 @@ export function App() {
             <li>
               <a href="https://github.com/vitejs/vite" target="_blank">
                 <svg class="button-icon" role="presentation" aria-hidden="true">
-                  <use href="/icons.svg#github-icon"></use>
+                  <use href={`${iconsUrl}#github-icon`}></use>
                 </svg>
                 GitHub
               </a>
@@ -72,7 +73,7 @@ export function App() {
             <li>
               <a href="https://chat.vite.dev/" target="_blank">
                 <svg class="button-icon" role="presentation" aria-hidden="true">
-                  <use href="/icons.svg#discord-icon"></use>
+                  <use href={`${iconsUrl}#discord-icon`}></use>
                 </svg>
                 Discord
               </a>
@@ -80,7 +81,7 @@ export function App() {
             <li>
               <a href="https://x.com/vite_js" target="_blank">
                 <svg class="button-icon" role="presentation" aria-hidden="true">
-                  <use href="/icons.svg#x-icon"></use>
+                  <use href={`${iconsUrl}#x-icon`}></use>
                 </svg>
                 X.com
               </a>
@@ -88,7 +89,7 @@ export function App() {
             <li>
               <a href="https://bsky.app/profile/vite.dev" target="_blank">
                 <svg class="button-icon" role="presentation" aria-hidden="true">
-                  <use href="/icons.svg#bluesky-icon"></use>
+                  <use href={`${iconsUrl}#bluesky-icon`}></use>
                 </svg>
                 Bluesky
               </a>
