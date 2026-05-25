@@ -1,5 +1,5 @@
-import { render } from 'preact'
+import { render } from 'solid-js/web'
 import './index.css'
 import { App } from './app.tsx'
 
-render(<App />, document.getElementById('app')!)
+render(() => <App />, document.getElementById('app')!)

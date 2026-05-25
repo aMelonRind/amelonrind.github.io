@@ -1,21 +1,14 @@
-import { useState } from 'preact/hooks'
-import preactLogo from './assets/preact.svg'
+import { createSignal } from 'solid-js'
 import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
 import iconsUrl from '/icons.svg?url'
 import './app.css'
 
 export function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = createSignal(0)
 
   return (
     <>
       <section id="center">
-        <div class="hero">
-          <img src={heroImg} class="base" width="170" height="179" alt="" />
-          <img src={preactLogo} class="framework" alt="Preact logo" />
-          <img src={viteLogo} class="vite" alt="Vite logo" />
-        </div>
         <div>
           <h1>Get started</h1>
           <p>
@@ -27,7 +20,7 @@ export function App() {
           class="counter"
           onClick={() => setCount((count) => count + 1)}
         >
-          Count is {count}
+          Count is {count()}
         </button>
       </section>
 
@@ -48,9 +41,9 @@ export function App() {
               </a>
             </li>
             <li>
-              <a href="https://preactjs.com/" target="_blank">
-                <img class="button-icon" src={preactLogo} alt="" />
-                Learn more
+              <a href="https://github.com/solidjs/solid" target="_blank">
+                {/* <img class="button-icon" src={logo} alt="" /> */}
+                Learn SolidJs
               </a>
             </li>
           </ul>
