@@ -1,0 +1,24 @@
+
+@font-face {
+  font-family: "kenpixel_mini_square";
+  src: url("./kenpixel_mini_square.woff") format("woff");
+}
+
+body {
+  margin: 0px;
+  background-color: #181a1b;
+}
+
+#cgol-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  place-items: center;
+  place-content: center;
+  padding: 0px;
+  position: absolute;
+}
+
+#cgol-canvas {
+  image-rendering: pixelated;
+}

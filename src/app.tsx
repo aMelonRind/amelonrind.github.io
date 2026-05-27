@@ -1,98 +1,59 @@
-import { createSignal } from 'solid-js'
-import viteLogo from './assets/vite.svg'
-import iconsUrl from '/icons.svg?url'
-import './app.css'
+import meloSvg from "/melo.svg";
+import toolSvg from "./assets/tool.svg";
+import iconsUrl from "/icons.svg";
+import "./app.css";
+import { applist } from "../apps/applist";
 
 export function App() {
-  const [count, setCount] = createSignal(0)
-
   return (
     <>
-      <section id="center">
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/app.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          class="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count()}
-        </button>
-      </section>
-
-      <div class="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg class="icon" role="presentation" aria-hidden="true">
-            <use href={`${iconsUrl}#documentation-icon`}></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img class="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://github.com/solidjs/solid" target="_blank">
-                {/* <img class="button-icon" src={logo} alt="" /> */}
-                Learn SolidJs
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg class="icon" role="presentation" aria-hidden="true">
-            <use href={`${iconsUrl}#social-icon`}></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg class="button-icon" role="presentation" aria-hidden="true">
-                  <use href={`${iconsUrl}#github-icon`}></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg class="button-icon" role="presentation" aria-hidden="true">
-                  <use href={`${iconsUrl}#discord-icon`}></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg class="button-icon" role="presentation" aria-hidden="true">
-                  <use href={`${iconsUrl}#x-icon`}></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg class="button-icon" role="presentation" aria-hidden="true">
-                  <use href={`${iconsUrl}#bluesky-icon`}></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div class="ticks"></div>
-      <section id="spacer"></section>
+      <div id="main-container">
+        <section id="info">
+          <img id="pfp" src={meloSvg} alt="MelonRind Profile Picture" />
+          <h1>MelonRind's&nbsp;Pages</h1>
+          <div class="badges-container">
+            {buttonIcon('github', 'https://github.com/aMelonRind')}
+            {buttonIcon('discord', 'https://discord.gg/J82QfTWv2F')}
+            {buttonIcon('modrinth', 'https://modrinth.com/user/MelonRind')}
+          </div>
+        </section>
+        <section id="pages">
+          {applist.map(app => <div class="app-card">
+            <div class="app-card-title">
+              {app.icon
+                ? <img class="app-icon" src={app.icon} alt="App Icon" />
+                : <img class="app-icon-placeholder" src={toolSvg} alt="App Icon"></img>
+              }
+              <a class="app-name" href={app.url}>{app.name}</a>
+            </div>
+            {app.badges?.length && <div class="badges-container">
+              {app.badges.map(badge => <div
+                class="badge"
+                style={badge.color ? { 'outline-color': badge.color } : undefined}
+              >
+                {badge.url
+                  ? <a
+                    class="badge-link"
+                    href={badge.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >{badge.label}</a>
+                  : badge.label
+                }
+              </div>)}
+            </div>}
+            <div class="app-desc">{app.desc}</div>
+          </div>)}
+        </section>
+      </div><section id="spacer"></section>
     </>
   )
+}
+
+function buttonIcon(id: string, href: string) {
+  return <a href={href} target="_blank" rel="noopener noreferrer">
+    <svg class="button-icon" role="presentation" aria-hidden="true">
+      <use href={`${iconsUrl}#${id}`}></use>
+    </svg>
+  </a>
 }
