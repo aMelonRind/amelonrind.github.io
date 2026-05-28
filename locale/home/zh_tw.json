@@ -1,0 +1,18 @@
+{
+  "header1": "MelonRind的網頁",
+  "apps": {
+    "cgol": {
+      "title": "Conway's Game of Life",
+      "desc": "我在學Rust時寫的CGOL. 控制: F:\u00a0顯示幀數; C\u2060或\u2060Delete:\u00a0清空; P\u2060或空格或\u2060Pause:\u00a0暫停; S:\u00a0播放一幀."
+    },
+    "bugcgol": {
+      "title": "壞掉的CGOL",
+      "desc": "我在寫CGOL時寫出來的BUG 看起來很酷就上傳了."
+    }
+  },
+  "tags": {
+    "toy": "玩具",
+    "util": "工具",
+    "sourcecode": "原始碼"
+  }
+}

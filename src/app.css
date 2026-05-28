@@ -1,9 +1,18 @@
 
+header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+}
+
+#lang-select {
+  grid-column: 2 / 3;
+}
+
 #main-container {
   max-width: min(80%, 1000px);
   margin: 0 auto;
   padding: 32px;
-  margin-top: 64px;
+  margin-top: 10px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   justify-items: stretch;

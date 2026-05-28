@@ -1,12 +1,14 @@
 import { base } from "../lib/constants.ts";
+import { Flatten } from "../lib/i18n-base.tsx";
 import cgolIconUrl from "./cgol/cgol.svg?url";
 
 type UrlString = string & {};
+type TranslationKey = keyof Flatten<typeof import("../locale/home/en_us.ts")['en_us']>;
 
 interface App {
-  name: string;
+  name: TranslationKey;
   url: UrlString;
-  desc: string;
+  desc: TranslationKey;
   color?: string;
   icon?: UrlString;
   background?: UrlString;
@@ -14,29 +16,27 @@ interface App {
 }
 
 interface Badge {
-  label: string;
+  label: TranslationKey;
   color?: string;
   url?: UrlString;
 }
 
-const toyBadge: Badge = { label: 'Toy' }
-const utilBadge: Badge = { label: 'Utility' }
-const sourceBadge = (url: string): Badge => ({ label: 'Source', color: 'gray', url })
-const nbsp = '\u00a0'
+const toyBadge: Badge = { label: 'tags.toy' }
+const utilBadge: Badge = { label: 'tags.util' }
+const sourceBadge = (url: string): Badge => ({ label: 'tags.sourcecode', color: 'gray', url })
 
 export const applist: App[] = [
   {
-    name: "Conway's Game of Life",
+    name: 'apps.cgol.title',
     url: `${base}cgol`,
     icon: cgolIconUrl,
-    desc: 'The CGOL I wrote while learning Rust. Controls: ' +
-      'F: Show FPS; C or Delete: Clear; P or Space or Pause: Pause; S: Step.'.replaceAll(/(?<!;) /g, nbsp),
+    desc: 'apps.cgol.desc',
     badges: [toyBadge]
   }, {
-    name: 'Broken CGOL',
+    name: 'apps.bugcgol.title',
     url: `${base}cgol?broken`,
     icon: cgolIconUrl,
-    desc: 'The bug I wrote while playing with CGOL. It looks so cool that I decided to upload it.',
+    desc: 'apps.bugcgol.desc',
     badges: [
       toyBadge,
       sourceBadge(
