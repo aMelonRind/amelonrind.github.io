@@ -1,4 +1,4 @@
-import { createI18n, Flatten } from "../lib/i18n-base.tsx";
+import { createI18n, Flatten } from "../../lib/i18n-base.tsx";
 import { en_us } from "./locale/en_us.ts";
 
 export type TranslationDict = Flatten<typeof import("./locale/en_us.ts")['en_us']>;
@@ -13,4 +13,4 @@ export const {
   localeOrderedElements,
   tw,
   WrappedTranslatable
-} = createI18n(en_us, import.meta.glob('./locale/*.json'), 'home:lang')
+} = createI18n(en_us, import.meta.glob('./locale/*.json'), 'corner-cutter:lang')

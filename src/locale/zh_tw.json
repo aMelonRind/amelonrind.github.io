@@ -1,6 +1,14 @@
 {
-  "header1": "MelonRind的網頁",
+  "site_title": "MelonRind的網頁",
   "apps": {
+    "corner_cutter": {
+      "title": "偷工減料",
+      "desc": "在麥塊建築中透過刪除不可見的方塊來節省材料"
+    },
+    "mapart_conv": {
+      "title": "地圖繪轉換器",
+      "desc": "在多個格式中轉換或裁切地繪檔案"
+    },
     "cgol": {
       "title": "Conway's Game of Life",
       "desc": "我在學Rust時寫的CGOL. 控制: F:\u00a0顯示幀數; C\u2060或\u2060Delete:\u00a0清空; P\u2060或空格或\u2060Pause:\u00a0暫停; S:\u00a0播放一幀."
@@ -13,6 +21,8 @@
   "tags": {
     "toy": "玩具",
     "util": "工具",
+    "minecraft": "麥塊",
+    "blue_archive": "蔚藍檔案",
     "sourcecode": "原始碼"
   }
 }

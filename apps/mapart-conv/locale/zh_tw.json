@@ -1,0 +1,63 @@
+{
+  "site": {
+    "title": "地圖繪轉換器",
+    "description": "輕鬆地轉換你的地圖繪檔案格式"
+  },
+  "status": {
+    "import_guide": "拖放或貼上檔案來匯入...\n可接受 圖片/.nbt/.schematic/.litematic/map_*.dat/.zip",
+    "image_info": "{{ imgWidth }}x{{ imgHeight }} ({{ mapWidth }}x{{ mapHeight }}) • {{ imgType }}"
+  },
+  "control": {
+    "rebane_url_input": "Rebane調色盤連結: ",
+    "rebane_url_tooltip": "在rebane2001's MapartCraft生成的方塊列表連結",
+    "download_png": "下載成PNG",
+    "download_png_tooltip": "允許的牆況下會自動命名.\n如果是BlockImage 則會以最高壓縮等級的顏色索引PNG儲存 所以如果圖片很大的話可能會花費較久的時間",
+    "convert": {
+      "order": "以{<method>}的方式{<convert>}",
+      "button": "轉換",
+      "tooltip": "如果要用普通的抖動方式 去用Rebane's MapartCraft, 因為它比較進階.\n這網站專門處理特殊的圖片類型.\n在Rebane's MapartCraft轉換完之後 複製圖片並且在這用\"nearest\"轉換方式即可匯入.",
+      "method": {
+        "nearest": {
+          "name": "最相近",
+          "title": "轉換方式: 最相近",
+          "description": "把每個像素用rmean演算法轉換成地繪色表"
+        },
+        "rebane_2d_restore": {
+          "name": "從Rebane的線上平面預覽還原",
+          "title": "轉換方式: 從Rebane's MapartCraft的線上平面預覽還原",
+          "description": "從預覽圖復原出地繪. 例圖:",
+          "33": {
+            "title": "邊長不是33的倍數",
+            "description": "{{ imgWidth }}x{{ imgHeight }} ({{ mapWidth }}x{{ mapHeight }})"
+          },
+          "not_fully_restored": {
+            "title": "無法完整復原",
+            "description": "轉換器無法復原某些像素 留下了透明色. 下面的像素有可能也被影響. ({{ missing }}/{{ size }}) ({{ percentage }}%)"
+          }
+        }
+      }
+    },
+    "export": {
+      "order": "{<export>}為{<format>}",
+      "button": "匯出"
+    }
+  },
+  "undefined_alert": {
+    "convert_method": "無效的轉換方式 ({{ method }})",
+    "export_method": "無效的匯出方式 ({{ method }})"
+  },
+  "form": {
+    "invalid_4th_color": {
+      "title": "無效的顏色",
+      "description": "這圖片包含只能從第三方工具取得的顏色 要把這些轉換成對應的暗色並繼續嗎?"
+    },
+    "invalid_dark_top": {
+      "title": "透明下方的暗色",
+      "description": "這圖片包含麻煩的透明-黑色排列組合.",
+      "checkbox": {
+        "label": "轉換成對應的亮色",
+        "tooltip": "取消勾選的話會生成鷹架佔位符來讓你自己去處理它"
+      }
+    }
+  }
+}

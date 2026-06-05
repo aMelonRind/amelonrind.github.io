@@ -1,12 +1,35 @@
-import { createContext, useContext, createSignal, createResource, ParentComponent, Accessor, Setter, For } from "solid-js";
-import { translator, BaseRecordDict } from "@solid-primitives/i18n";
+import { createContext, useContext, createSignal, createResource, ParentComponent, Accessor, Setter, For, JSX } from "solid-js";
+import { translator, BaseRecordDict, resolveTemplate } from "@solid-primitives/i18n";
 
 export const localeNames = {
   en_us: 'English',
   zh_tw: '繁體中文'
 } as const;
 
+// use lowercase unless conflicted
+const localeMap: { [bcp47: string]: Locale[] } = {
+  'zh-tw': ['zh_tw'],
+  'zh': ['zh_tw'],
+}
+
 type Locale = keyof typeof localeNames;
+
+function guessLanguage(key: string, available: string[]) {
+  if (localStorage[key]) {
+    return
+  }
+
+  const prefer = window.navigator.language
+  const acceptable: (Locale[] | undefined)[] = [
+    localeMap[prefer],
+    localeMap[prefer.toLowerCase()],
+    localeMap[prefer.split('-')[0]]
+  ]
+  const lang = acceptable.filter(v => v !== undefined).flat().find(l => available.includes(l))
+  if (lang !== 'en_us') {
+    localStorage[key] = lang
+  }
+}
 
 /**
  * Creates I18n context.
@@ -30,6 +53,8 @@ export function createI18n<FullDict extends object>(
     }
     locales[loc] = localeGlob[key]
   }
+
+  guessLanguage(storageKey, Object.keys(locales))
 
   const fetchDictionary = async (locale: Locale) => {
     const clone: any = { ...base }
@@ -61,7 +86,7 @@ export function createI18n<FullDict extends object>(
     const [locale, setLocale] = createSignal<Locale>(localStorage[storageKey] ?? 'en_us')
     const [dict] = createResource(locale, fetchDictionary, { initialValue: {} })
 
-    const t = translator(dict) as TypedTranslator<FullDict>
+    const t = translator(dict, resolveTemplate) as TypedTranslator<FullDict>
 
     return <I18nContext.Provider value={{ locale, setLocale, t }}>{props.children}</I18nContext.Provider>
   }
@@ -83,7 +108,8 @@ export function createI18n<FullDict extends object>(
       style={{
         margin: '16px',
         'margin-bottom': '0px',
-        padding: '8px'
+        padding: '8px',
+        'grid-column': '-2'
       }}
       onchange={e => {
         const v = e.currentTarget.value as any
@@ -100,7 +126,18 @@ export function createI18n<FullDict extends object>(
     </select>
   }
 
-  return { I18nProvider, useI18n, hasLocale, getAvailableLocales, createLangSelect }
+  const tw: any = (key: any, args: any) => new WrappedTranslatable(key, args)
+
+  return {
+    I18nProvider,
+    useI18n,
+    hasLocale,
+    getAvailableLocales,
+    createLangSelect,
+    localeOrderedElements,
+    tw: tw as TypedTranslateWrapper<FullDict>,
+    WrappedTranslatable
+  }
 }
 
 /**
@@ -127,8 +164,51 @@ function flatten<T>(input: T, target: { [key: string]: string } = {}, path = '')
   return target as Flatten<T>
 }
 
-type TypedTranslator<Dict, Flat = Flatten<Dict>> =
-  <K extends keyof Flat>(key: K, ...args: GetTranslateArgs<Flat[K]>) => string
+/**
+ * Tries to insert elements at location described in the text.
+ * If no placeholder is found, the element will be placed at the end.
+ */
+function localeOrderedElements<T extends string>(
+  text: T,
+  elements: { [placeholder in ExtractElementTemplates<T>]: JSX.Element }
+): JSX.Element[] {
+  const res: JSX.Element[] = [text]
+  outer:
+  for (const [k, element] of Object.entries(elements)) {
+    const key = `{<${k}>}`
+    for (let i = 0; i < res.length; i++) {
+      const v = res[i]
+      if (typeof v === 'string' && v.includes(key)) {
+        res.splice(i, 1, ...v.split(key))
+        res.splice(i + 1, 0, element as JSX.Element)
+        continue outer
+      }
+    }
+    res.push(element as JSX.Element)
+  }
+  return res.filter(v => v !== '')
+}
+
+class WrappedTranslatable<T> {
+  readonly key: string
+  readonly args: any
+
+  constructor (key: string, args: any) {
+    this.key = key
+    this.args = args
+  }
+
+  unwrap(translator: (key: any, args?: any) => string): T {
+    return translator(this.key, this.args) as T
+  }
+}
+
+export type TypedTranslator<Dict, Flat = Flatten<Dict>> =
+  <K extends keyof Flat>(key: K, ...args: GetTranslateArgs<Flat[K]>) => Flat[K]
+;
+
+export type TypedTranslateWrapper<Dict, Flat = Flatten<Dict>> =
+  <K extends keyof Flat>(key: K, ...args: GetTranslateArgs<Flat[K]>) => WrappedTranslatable<Flat[K]>
 ;
 
 
@@ -144,8 +224,16 @@ type ExtractTemplates<S extends string> =
   IsStrictAny<S> extends true ? any :
   S extends `${string}{{${infer A}` ?
   A extends `${infer B}}}${infer C}` ?
-    TrimString<B> | ExtractTemplates<C> : never : never;
-type TrimString<S> = S extends ` ${infer R}` ? TrimString<R> : S extends `${infer R} ` ? TrimString<R> : S;
+  B extends ` ${infer K} ` ?
+  K extends `${string} ${string}` ? never :
+    K | ExtractTemplates<C> : never : never : never;
+type ExtractElementTemplates<S extends string> =
+  IsStrictAny<S> extends true ? any :
+  S extends `${string}{<${infer A}` ?
+  A extends `${infer B}>}${infer C}` ?
+  B extends `${string} ${string}` ? never :
+    B | ExtractElementTemplates<C> : never : never;
+// type TrimString<S> = S extends ` ${infer R}` ? TrimString<R> : S extends `${infer R} ` ? TrimString<R> : S;
 
 // flatten({
 //   a: {

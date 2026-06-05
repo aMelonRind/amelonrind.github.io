@@ -1,4 +1,4 @@
-import meloSvg from "/melo.svg";
+import meloSvg from "/melo.svg?url";
 import toolSvg from "./assets/tool.svg";
 import iconsUrl from "/icons.svg";
 import "./app.css";
@@ -16,7 +16,7 @@ export function App() {
       <div id="main-container">
         <section id="info">
           <img id="pfp" src={meloSvg} alt="MelonRind Profile Picture" />
-          <h1>{t('header1')}</h1>
+          <h1>{t('site_title')}</h1>
           <div class="badges-container">
             {buttonIcon('github', 'https://github.com/aMelonRind')}
             {buttonIcon('discord', 'https://discord.gg/J82QfTWv2F')}
@@ -42,7 +42,7 @@ export function App() {
                     class="badge-link"
                     href={badge.url}
                     target="_blank"
-                    rel="noopener noreferrer"
+                    rel="noopener"
                   >{t(badge.label)}</a>
                   : t(badge.label)
                 }
@@ -57,7 +57,7 @@ export function App() {
 }
 
 function buttonIcon(id: string, href: string) {
-  return <a href={href} target="_blank" rel="noopener noreferrer">
+  return <a href={href} target="_blank" rel="noopener">
     <svg class="button-icon" role="presentation" aria-hidden="true">
       <use href={`${iconsUrl}#${id}`}></use>
     </svg>

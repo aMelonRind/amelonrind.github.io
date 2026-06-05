@@ -1,0 +1,32 @@
+
+:root {
+  --text: #e6e6e6;
+  --text-h: #f3f4f6;
+  --bg: #111315;
+  --bg2: #1a1d21;
+  --bg3: #23272d;
+  --border: #2e343c;
+  --code-bg: #1f2028;
+  --accent: #00a000;
+  --accent-bg: rgba(132, 252, 132, 0.15);
+  --accent-border: rgba(132, 252, 138, 0.5);
+  --social-bg: rgba(47, 58, 48, 0.5);
+  --shadow:
+    rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+
+  --sans: Inter, Segoe UI, system-ui, -apple-system, sans-serif;
+  --heading: Inter, Segoe UI, system-ui, -apple-system, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  font: 18px/145% var(--sans);
+  color-scheme: dark;
+  color: var(--text);
+  background: var(--bg);
+}
+
+.muted {
+  color: #a7abb2;
+  font-size: 13px;
+  line-height: 1;
+  margin: 0;
+}

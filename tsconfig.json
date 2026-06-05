@@ -23,5 +23,5 @@
     // Linting
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "data", "lib", "apps", "locale/*/*.ts"]
+  "include": ["src", "data", "lib", "apps"]
 }

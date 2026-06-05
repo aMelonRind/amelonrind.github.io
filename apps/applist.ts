@@ -1,9 +1,9 @@
 import { base } from "../lib/constants.ts";
-import { Flatten } from "../lib/i18n-base.tsx";
+import { TranslationKey } from "../src/i18n.ts";
 import cgolIconUrl from "./cgol/cgol.svg?url";
+import mapIconUrl from "./mapart-conv/favicon.ico?url";
 
 type UrlString = string & {};
-type TranslationKey = keyof Flatten<typeof import("../locale/home/en_us.ts")['en_us']>;
 
 interface App {
   name: TranslationKey;
@@ -23,9 +23,24 @@ interface Badge {
 
 const toyBadge: Badge = { label: 'tags.toy' }
 const utilBadge: Badge = { label: 'tags.util' }
+const mcBadge: Badge = { label: 'tags.minecraft', color: 'lime' }
+const baBadge: Badge = { label: 'tags.blue_archive', color: 'aqua' }
 const sourceBadge = (url: string): Badge => ({ label: 'tags.sourcecode', color: 'gray', url })
 
 export const applist: App[] = [
+  {
+    name: 'apps.corner_cutter.title',
+    url: `${base}corner-cutter`,
+    desc: 'apps.corner_cutter.desc',
+    badges: [utilBadge, mcBadge]
+  },
+  {
+    name: 'apps.mapart_conv.title',
+    url: `${base}mapart-conv`,
+    icon: mapIconUrl,
+    desc: 'apps.mapart_conv.desc',
+    badges: [utilBadge, mcBadge]
+  },
   {
     name: 'apps.cgol.title',
     url: `${base}cgol`,

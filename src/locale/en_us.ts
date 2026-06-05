@@ -1,6 +1,14 @@
-export const en_us =  {
-  "header1": "MelonRind's\u00a0Pages",
+export const en_us = {
+  "site_title": "MelonRind's\u00a0Pages",
   "apps": {
+    "corner_cutter": {
+      "title": "Corner Cutter",
+      "desc": "Save materials in large minecraft build by removing non visible blocks. (site ui wip)"
+    },
+    "mapart_conv": {
+      "title": "Mapart Converter",
+      "desc": "Convert or slice minecraft mapart file between various formats."
+    },
     "cgol": {
       "title": "Conway's Game of Life",
       "desc": "The CGOL I wrote while learning Rust. Controls: F:\u00a0Show\u00a0FPS; C\u00a0or\u00a0Delete:\u00a0Clear; P\u00a0or\u00a0Space\u00a0or\u00a0Pause:\u00a0Pause; S:\u00a0Step."
@@ -13,6 +21,8 @@ export const en_us =  {
   "tags": {
     "toy": "Toy",
     "util": "Utility",
+    "minecraft": "Minecraft",
+    "blue_archive": "Blue Archive",
     "sourcecode": "Source"
   }
 } as const;

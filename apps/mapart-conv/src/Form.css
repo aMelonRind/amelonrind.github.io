@@ -1,0 +1,87 @@
+
+.form-layer {
+  overflow-x: auto;
+  overflow-y: auto;
+  position: fixed;
+  inset: 0;
+  z-index: 1024;
+  background: rgba(0, 0, 0, 0.4);
+  display: grid;
+}
+
+.form-container {
+  place-self: center center;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin: min(128px, 25vh);
+  padding: 20px;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+  width: min-content;
+}
+
+.form-container > * {
+  margin: 0;
+}
+
+.form-container > p {
+  font-size: smaller;
+}
+
+.form-container > img {
+  max-width: 100%;
+  image-rendering: pixelated;
+}
+
+.form-item-container {
+  display: flex;
+  align-self: end;
+  width: max-content;
+}
+
+.form-item-label {
+  padding-right: 1ch;
+}
+
+.form-item-invalid-text {
+  color: red;
+  font-size: 0.9em;
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  text-align: start;
+}
+
+.form-input-complex {
+  display: inline-flex;
+  width: calc(20ch + 1px);
+  gap: 3px;
+}
+
+.form-input-complex input {
+  flex: 1;
+  min-width: 0;
+}
+
+.form-button-div {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
+  gap: 20px;
+}
+
+.form-reset-button {
+  grid-column: 1;
+  width: fit-content;
+}
+
+.form-cancel-button {
+  grid-column: -3;
+}
+
+.form-ok-button {
+  grid-column: -2;
+}

@@ -1,0 +1,99 @@
+{
+  "site": {
+    "title": "偷工減料",
+    "description": "在麥塊建築中透過刪除不可見的方塊來節省材料。定義外部和內部之後可讓工具幫你檢查漏洞。"
+  },
+  "direction": {
+    "up": "上",
+    "down": "下",
+    "north": "北",
+    "south": "南",
+    "west": "西",
+    "east": "東"
+  },
+  "input": {
+    "file": {
+      "desc": "接受剛好包含一個區域的litematic結構檔。拖放或貼上也能匯入。",
+      "get": "在這取得Litematica模組",
+      "time": "檔案匯入時間"
+    },
+    "outside_directions": {
+      "label": "外部方向:",
+      "desc": "選擇應該被視為外部的方向。至少一個方向或標記需要被定義。"
+    },
+    "inside_marker": {
+      "label": "內部標記:",
+      "desc": "設定哪個方塊應該被視為內部(不可抵達)。如果外部發現了抵達這個標記的路徑，一個litematic結構檔會被生成來協助補洞。"
+    },
+    "outside_marker": {
+      "label": "外部標記:",
+      "desc": "設定哪個方塊應該被視為外部。"
+    },
+    "extra_solid_blocks": {
+      "label": "額外方塊:",
+      "desc": "新增額外的模組或新版本方塊，像是如果這網站的資料過舊的話。可以是被逗號區隔的ID或一個有效的JSON字串。\"minecraft:\"可以省略。"
+    },
+    "recursive": {
+      "label": "循環:",
+      "desc": "如果在內部跟外部之間發現聯繫，嘗試修補並再次掃描。"
+    },
+    "auto_start": {
+      "label": "自動開始:",
+      "desc": "接收到新檔案時自動開始。"
+    },
+    "start": {
+      "label": "開始",
+      "desc": "使用給予的輸入開始掃描。"
+    },
+    "main_mask": {
+      "label": "主要方塊:",
+      "desc": "匯出的litematic主要用的方塊。"
+    },
+    "suppport_mask": {
+      "label": "支撐方塊:",
+      "desc": "在比如沙或混凝土粉末有重力的方塊下使用的支撐方塊。"
+    },
+    "auto_download": {
+      "label": "自動下載:",
+      "desc": "在準備好的時候自動下載。"
+    },
+    "download": {
+      "label": "下載",
+      "desc": "下載運行結果。"
+    }
+  },
+  "error": {
+    "label": "發生錯誤:",
+    "no_file": "沒有選擇的檔案。",
+    "no_read": "沒有litematic檔案。",
+    "same_marker": "內部標記和外部標記不能是相同的！",
+    "undefined_outside": "沒有外部被定義。所有方塊會被標記成不可見。",
+    "file_type": "這個工具只接受litematic檔案。收到{{ name }}。",
+    "no_region": "藍圖是空的。",
+    "multiple_region": "多個藍圖區域是不支持的。請以單一的藍圖區域重新儲存。",
+    "esb": {
+      "not_array": "額外方塊讀取錯誤: 不是陣列。",
+      "not_string_array": "額外方塊讀取錯誤: 不是字串陣列。",
+      "other": "額外方塊讀取錯誤: {{ error }}"
+    }
+  },
+  "status": {
+    "idle": "閒置",
+    "starting": "正在開始...",
+    "init": "正在初始化...",
+    "scanning": "正在掃描...",
+    "finalizing": "正在結束...",
+    "result": "完成。"
+  },
+  "running": {
+    "alives": "計算中的格子: {{ alives }}",
+    "recursive": "正在循環執行第{{ runs }}次"
+  },
+  "result": {
+    "redstone": "偵測到紅石零件。請記得去確認它們！",
+    "saves": "這個遮罩可以幫你節省:",
+    "perfect": "這個藍圖對這工具來說已經是完美的了！(沒有找到不可見的方塊)",
+    "detected_patches": "偵測到內部標記。正在生成補丁。",
+    "detected_paths": "偵測到內部標記。正在生成路徑。"
+  }
+}

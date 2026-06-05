@@ -4,10 +4,6 @@ header {
   grid-template-columns: 1fr auto;
 }
 
-#lang-select {
-  grid-column: 2 / 3;
-}
-
 #main-container {
   max-width: min(80%, 1000px);
   margin: 0 auto;
@@ -79,7 +75,7 @@ header {
 }
 
 .app-card {
-  background: var(--card-bg);
+  background: var(--bg2);
   margin: 22px;
   /* width: 100%; */
   padding: 20px;
@@ -115,7 +111,7 @@ header {
 }
 
 .badge {
-  background: var(--badge-bg);
+  background: var(--bg3);
   outline: 1px solid var(--accent);
   outline-offset: -1px;
   border-radius: 0.2lh;
