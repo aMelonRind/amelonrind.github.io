@@ -3,7 +3,7 @@ export const en_us = {
   "apps": {
     "corner_cutter": {
       "title": "Corner Cutter",
-      "desc": "Save materials in large minecraft build by removing non visible blocks. (site ui wip)"
+      "desc": "Save materials in large minecraft build by removing non visible blocks."
     },
     "mapart_conv": {
       "title": "Mapart Converter",
