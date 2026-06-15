@@ -2,6 +2,7 @@ import { base } from "../lib/constants.ts";
 import { TranslationKey } from "../src/i18n.ts";
 import cgolIconUrl from "./cgol/cgol.svg?url";
 import mapIconUrl from "./mapart-conv/favicon.ico?url";
+import eventPointIconUrl from "./ba-event-item-calc/favicon.ico?url";
 
 type UrlString = string & {};
 
@@ -28,6 +29,13 @@ const baBadge: Badge = { label: 'tags.blue_archive', color: 'aqua' }
 const sourceBadge = (url: string): Badge => ({ label: 'tags.sourcecode', color: 'gray', url })
 
 export const applist: App[] = [
+  {
+    name: 'apps.baeic.title',
+    url: `${base}ba-event-item-calc`,
+    icon: eventPointIconUrl,
+    desc: 'apps.baeic.desc',
+    badges: [utilBadge, baBadge]
+  },
   {
     name: 'apps.corner_cutter.title',
     url: `${base}corner-cutter`,

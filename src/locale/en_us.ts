@@ -1,6 +1,10 @@
 export const en_us = {
   "site_title": "MelonRind's\u00a0Pages",
   "apps": {
+    "baeic": {
+      "title": "Blue Archive Event Item Calculator",
+      "desc": "Save AP by getting the optimal way to sweep for event resources."
+    },
     "corner_cutter": {
       "title": "Corner Cutter",
       "desc": "Save materials in large minecraft build by removing non visible blocks."

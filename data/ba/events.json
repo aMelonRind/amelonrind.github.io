@@ -1,0 +1,485 @@
+{
+  "default": "Game Development Department Cleanup Mission!",
+  "events": {
+    "A Certain Scientific Blue Archive": {
+      "wiki": "https://bluearchive.wiki/wiki/A_Certain_Scientific_Blue_Archive",
+      "itemTypes": 3,
+      "icons": [
+        "https://static.wikitide.net/bluearchivewiki/thumb/a/a1/Item_Icon_Event_Token_0_S33.png/144px-Item_Icon_Event_Token_0_S33.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/f/fa/Item_Icon_Event_Token_1_S33.png/144px-Item_Icon_Event_Token_1_S33.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/a/a1/Item_Icon_Event_Token_2_S33.png/144px-Item_Icon_Event_Token_2_S33.png"
+      ],
+      "voids": [6, 0, 5],
+      "tfers": [0, 5, 0],
+      "levels": [
+        {"ap": 10, "items": [8, 5, 5]},
+        {"ap": 10, "items": [5, 8, 5]},
+        {"ap": 10, "items": [5, 5, 8]},
+        {"ap": 10, "items": [18, 0, 0]},
+        {"ap": 15, "items": [15, 6, 6]},
+        {"ap": 15, "items": [6, 15, 6]},
+        {"ap": 15, "items": [6, 6, 15]},
+        {"ap": 15, "items": [27, 0, 0]},
+        {"ap": 20, "items": [28, 4, 4]},
+        {"ap": 20, "items": [4, 32, 0]},
+        {"ap": 20, "items": [4, 0, 32]},
+        {"ap": 20, "items": [36, 0, 0]}
+      ]
+    },
+
+    "Descent of the Five Senses": {
+      "wiki": "https://bluearchive.wiki/wiki/Descent_of_the_Five_Senses",
+      "itemTypes": 3,
+      "icons": [
+        "https://static.wikitide.net/bluearchivewiki/thumb/1/16/Item_Icon_Event_Token_0_S42.png/144px-Item_Icon_Event_Token_0_S42.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/c/cd/Item_Icon_Event_Token_1_S42.png/144px-Item_Icon_Event_Token_1_S42.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/8/83/Item_Icon_Event_Token_2_S42.png/144px-Item_Icon_Event_Token_2_S42.png"
+      ],
+      "voids": [250, 0, 5],
+      "tfers": [0, 5, 0],
+      "levels": [
+        {"ap": 10, "items": [8, 5, 5]},
+        {"ap": 10, "items": [5, 8, 5]},
+        {"ap": 10, "items": [5, 5, 8]},
+        {"ap": 10, "items": [12, 3, 3]},
+        {"ap": 15, "items": [15, 6, 6]},
+        {"ap": 15, "items": [6, 15, 6]},
+        {"ap": 15, "items": [6, 6, 15]},
+        {"ap": 15, "items": [23, 2, 2]},
+        {"ap": 20, "items": [28, 4, 4]},
+        {"ap": 20, "items": [4, 32, 0]},
+        {"ap": 20, "items": [4, 0, 32]},
+        {"ap": 20, "items": [36, 0, 0]}
+      ]
+    },
+    "Serenade Promenade": {
+      "wiki": "https://bluearchive.wiki/wiki/Serenade_Promenade",
+      "itemTypes": 4,
+      "icons": [
+        "",
+        "https://static.wikitide.net/bluearchivewiki/thumb/3/33/Item_Icon_Event_Token_1_S43.png/144px-Item_Icon_Event_Token_1_S43.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/e/ef/Item_Icon_Event_Token_2_S43.png/144px-Item_Icon_Event_Token_2_S43.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/7/72/Item_Icon_Event_Token_3_S43.png/144px-Item_Icon_Event_Token_3_S43.png"
+      ],
+      "voids": [450, 0, 0, 5],
+      "tfers": [0, 5, 5, 0],
+      "levels": [
+        {"ap": 10, "items": [9, 11, 0, 0]},
+        {"ap": 10, "items": [9, 0, 11, 0]},
+        {"ap": 10, "items": [9, 0, 0, 11]},
+        {"ap": 10, "items": [17, 1, 1, 1]},
+        {"ap": 15, "items": [6, 24, 0, 0]},
+        {"ap": 15, "items": [6, 0, 24, 0]},
+        {"ap": 15, "items": [6, 0, 0, 24]},
+        {"ap": 15, "items": [27, 1, 1, 1]},
+        {"ap": 20, "items": [3, 37, 0, 0]},
+        {"ap": 20, "items": [3, 0, 37, 0]},
+        {"ap": 20, "items": [3, 0, 0, 37]},
+        {"ap": 20, "items": [40, 0, 0, 0]}
+      ]
+    },
+    "Secret Midnight Party ~ Oni Holds a Bell ~": {
+      "wiki": "https://bluearchive.wiki/wiki/Secret_Midnight_Party_~_Oni_Holds_a_Bell_~",
+      "itemTypes": 3,
+      "icons": [
+        "https://static.wikitide.net/bluearchivewiki/thumb/d/de/Item_Icon_Event_Token_0_S44.png/144px-Item_Icon_Event_Token_0_S44.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/5/50/Item_Icon_Event_Token_1_S44.png/144px-Item_Icon_Event_Token_1_S44.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/f/fc/Item_Icon_Event_Token_2_S44.png/144px-Item_Icon_Event_Token_2_S44.png"
+      ],
+      "voids": [200, 0, 5],
+      "tfers": [0, 5, 0],
+      "levels": [
+        {"ap": 10, "items": [8, 5, 5]},
+        {"ap": 10, "items": [5, 8, 5]},
+        {"ap": 10, "items": [5, 5, 8]},
+        {"ap": 10, "items": [12, 3, 3]},
+        {"ap": 15, "items": [15, 6, 6]},
+        {"ap": 15, "items": [6, 15, 6]},
+        {"ap": 15, "items": [6, 6, 15]},
+        {"ap": 15, "items": [23, 2, 2]},
+        {"ap": 20, "items": [28, 4, 4]},
+        {"ap": 20, "items": [4, 32, 0]},
+        {"ap": 20, "items": [4, 0, 32]},
+        {"ap": 20, "items": [36, 0, 0]}
+      ]
+    },
+    "Code: BOX Shadow Looming Over Millennium ～One Question and Two Answers～": {
+      "wiki": "https://bluearchive.wiki/wiki/Code:_BOX_Shadow_Looming_Over_Millennium_%EF%BD%9EOne_Question_and_Two_Answers%EF%BD%9E",
+      "itemTypes": 3,
+      "icons": [
+        "",
+        "https://static.wikitide.net/bluearchivewiki/thumb/2/2f/Item_Icon_Event_Token_0_S45.png/144px-Item_Icon_Event_Token_0_S45.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/b/b2/Item_Icon_Event_Token_1_S45.png/144px-Item_Icon_Event_Token_1_S45.png"
+      ],
+      "voids": [300, 5, 5],
+      "tfers": [0, 0, 0],
+      "levels": [
+        {"ap": 10, "items": [6, 7, 7]},
+        {"ap": 10, "items": [6, 7, 7]},
+        {"ap": 10, "items": [6, 8, 6]},
+        {"ap": 10, "items": [6, 6, 8]},
+        {"ap": 15, "items": [9, 14, 7]},
+        {"ap": 15, "items": [9, 7, 14]},
+        {"ap": 15, "items": [9, 16, 5]},
+        {"ap": 15, "items": [9, 5, 16]},
+        {"ap": 20, "items": [12, 24, 4]},
+        {"ap": 20, "items": [12, 4, 24]},
+        {"ap": 20, "items": [12, 28, 0]},
+        {"ap": 20, "items": [12, 0, 28]}
+      ]
+    },
+    "Pandemic Hazard ～ Miracle Pancake ～": {
+      "wiki": "https://bluearchive.wiki/wiki/Pandemic_Hazard_%EF%BD%9E_Miracle_Pancake_%EF%BD%9E",
+      "itemTypes": 3,
+      "icons": [
+        "https://static.wikitide.net/bluearchivewiki/thumb/9/92/Item_Icon_Event_Token_0_S46.png/144px-Item_Icon_Event_Token_0_S46.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/8/81/Item_Icon_Event_Token_1_S46.png/144px-Item_Icon_Event_Token_1_S46.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/f/ff/Item_Icon_Event_Token_2_S46.png/144px-Item_Icon_Event_Token_2_S46.png"
+      ],
+      "voids": [6, 0, 5],
+      "tfers": [0, 5, 0],
+      "levels": [
+        {"ap": 10, "items": [8, 5, 5]},
+        {"ap": 10, "items": [5, 8, 5]},
+        {"ap": 10, "items": [5, 5, 8]},
+        {"ap": 10, "items": [12, 3, 3]},
+        {"ap": 15, "items": [15, 6, 6]},
+        {"ap": 15, "items": [6, 15, 6]},
+        {"ap": 15, "items": [6, 6, 15]},
+        {"ap": 15, "items": [23, 2, 2]},
+        {"ap": 20, "items": [28, 4, 4]},
+        {"ap": 20, "items": [4, 32, 0]},
+        {"ap": 20, "items": [4, 0, 32]},
+        {"ap": 20, "items": [36, 0, 0]}
+      ]
+    },
+    "Pray-Ball! ～ Aim for a Grand Slam Home Run ～": {
+      "wiki": "https://bluearchive.wiki/wiki/Pray-Ball!_%EF%BD%9E_Aim_for_a_Grand_Slam_Home_Run_%EF%BD%9E",
+      "itemTypes": 3,
+      "icons": [
+        "",
+        "https://static.wikitide.net/bluearchivewiki/thumb/3/3e/Item_Icon_Event_Token_1_S47.png/144px-Item_Icon_Event_Token_1_S47.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/9/90/Item_Icon_Event_Token_2_S47.png/144px-Item_Icon_Event_Token_2_S47.png"
+      ],
+      "voids": [300, 0, 5],
+      "tfers": [0, 5, 0],
+      "levels": [
+        {"ap": 10, "items": [6, 6, 6]},
+        {"ap": 10, "items": [6, 9, 3]},
+        {"ap": 10, "items": [6, 3, 9]},
+        {"ap": 10, "items": [8, 4, 4]},
+        {"ap": 15, "items": [5, 11, 11]},
+        {"ap": 15, "items": [5, 17, 5]},
+        {"ap": 15, "items": [5, 5, 17]},
+        {"ap": 15, "items": [16, 4, 4]},
+        {"ap": 20, "items": [4, 16, 16]},
+        {"ap": 20, "items": [4, 32, 0]},
+        {"ap": 20, "items": [4, 0, 32]},
+        {"ap": 20, "items": [32, 0, 0]}
+      ]
+    },
+    "Highlander Railroad Runaway Incident 〜 And Then The Train Was Gone 〜": {
+      "wiki": "https://bluearchive.wiki/wiki/Highlander_Railroad_Runaway_Incident_%E3%80%9C_And_Then_The_Train_Was_Gone_%E3%80%9C",
+      "itemTypes": 3,
+      "icons": [
+        "https://static.wikitide.net/bluearchivewiki/thumb/3/3c/Item_Icon_Event_Token_0_S48.png/144px-Item_Icon_Event_Token_0_S48.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/4/41/Item_Icon_Event_Token_1_S48.png/144px-Item_Icon_Event_Token_1_S48.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/7/79/Item_Icon_Event_Token_2_S48.png/144px-Item_Icon_Event_Token_2_S48.png"
+      ],
+      "voids": [150, 0, 5],
+      "tfers": [0, 5, 0],
+      "levels": [
+        {"ap": 10, "items": [8, 5, 5]},
+        {"ap": 10, "items": [5, 8, 5]},
+        {"ap": 10, "items": [5, 5, 8]},
+        {"ap": 10, "items": [12, 3, 3]},
+        {"ap": 15, "items": [15, 6, 6]},
+        {"ap": 15, "items": [6, 15, 6]},
+        {"ap": 15, "items": [6, 6, 15]},
+        {"ap": 15, "items": [23, 2, 2]},
+        {"ap": 20, "items": [28, 4, 4]},
+        {"ap": 20, "items": [4, 32, 0]},
+        {"ap": 20, "items": [4, 0, 32]},
+        {"ap": 20, "items": [36, 0, 0]}
+      ]
+    },
+    "A Flower Blooms Among The Hundred ～ Honorable Sea Showdown ～": {
+      "wiki": "https://bluearchive.wiki/wiki/A_Flower_Blooms_Among_The_Hundred_%EF%BD%9E_Honorable_Sea_Showdown_%EF%BD%9E",
+      "itemTypes": 3,
+      "icons": [
+        "https://static.wikitide.net/bluearchivewiki/thumb/3/3e/Item_Icon_Event_Token_0_S50.png/144px-Item_Icon_Event_Token_0_S50.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/c/c9/Item_Icon_Event_Token_1_S50.png/144px-Item_Icon_Event_Token_1_S50.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/a/a5/Item_Icon_Event_Token_2_S50.png/144px-Item_Icon_Event_Token_2_S50.png"
+      ],
+      "voids": [200, 0, 5],
+      "tfers": [0, 5, 0],
+      "levels": [
+        {"ap": 10, "items": [8, 5, 5]},
+        {"ap": 10, "items": [5, 8, 5]},
+        {"ap": 10, "items": [5, 5, 8]},
+        {"ap": 10, "items": [12, 3, 3]},
+        {"ap": 15, "items": [15, 6, 6]},
+        {"ap": 15, "items": [6, 15, 6]},
+        {"ap": 15, "items": [6, 6, 15]},
+        {"ap": 15, "items": [23, 2, 2]},
+        {"ap": 20, "items": [28, 4, 4]},
+        {"ap": 20, "items": [4, 32, 0]},
+        {"ap": 20, "items": [4, 0, 32]},
+        {"ap": 20, "items": [36, 0, 0]}
+      ]
+    },
+    "Summer Sky's Promise": {
+      "wiki": "https://bluearchive.wiki/wiki/Summer_Sky%27s_Promise",
+      "itemTypes": 3,
+      "icons": [
+        "https://static.wikitide.net/bluearchivewiki/thumb/c/cd/Item_Icon_Event_Token_0_S51.png/144px-Item_Icon_Event_Token_0_S51.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/1/16/Item_Icon_Event_Token_1_S51.png/144px-Item_Icon_Event_Token_1_S51.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/f/f9/Item_Icon_Event_Token_2_S51.png/144px-Item_Icon_Event_Token_2_S51.png"
+      ],
+      "voids": [2000, 0, 5],
+      "tfers": [0, 5, 0],
+      "levels": [
+        {"ap": 10, "items": [8, 5, 5]},
+        {"ap": 10, "items": [5, 8, 5]},
+        {"ap": 10, "items": [5, 5, 8]},
+        {"ap": 10, "items": [12, 3, 3]},
+        {"ap": 15, "items": [15, 6, 6]},
+        {"ap": 15, "items": [6, 15, 6]},
+        {"ap": 15, "items": [6, 6, 15]},
+        {"ap": 15, "items": [23, 2, 2]},
+        {"ap": 20, "items": [28, 4, 4]},
+        {"ap": 20, "items": [4, 32, 0]},
+        {"ap": 20, "items": [4, 0, 32]},
+        {"ap": 20, "items": [36, 0, 0]}
+      ]
+    },
+    "We are the Occult Research Society! ～Academy Mysteries and Ancient Spells～": {
+      "wiki": "https://bluearchive.wiki/wiki/We_are_the_Occult_Research_Society!_%EF%BD%9EAcademy_Mysteries_and_Ancient_Spells%EF%BD%9E",
+      "itemTypes": 4,
+      "icons": [
+        "https://static.wikitide.net/bluearchivewiki/thumb/7/7b/Item_Icon_Event_Token_0_S52.png/144px-Item_Icon_Event_Token_0_S52.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/9/90/Item_Icon_Event_Token_1_S52.png/144px-Item_Icon_Event_Token_1_S52.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/4/4e/Item_Icon_Event_Token_2_S52.png/144px-Item_Icon_Event_Token_2_S52.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/f/f4/Item_Icon_Event_Token_3_S52.png/144px-Item_Icon_Event_Token_3_S52.png"
+      ],
+      "voids": [500, 0, 0, 1],
+      "tfers": [0, 5, 5, 0],
+      "levels": [
+        {"ap": 10, "items": [6, 6, 6, 0]},
+        {"ap": 10, "items": [6, 0, 6, 6]},
+        {"ap": 10, "items": [6, 6, 0, 6]},
+        {"ap": 10, "items": [12, 2, 2, 2]},
+        {"ap": 15, "items": [9, 12, 6, 0]},
+        {"ap": 15, "items": [9, 0, 12, 6]},
+        {"ap": 15, "items": [9, 6, 0, 12]},
+        {"ap": 15, "items": [21, 2, 2, 2]},
+        {"ap": 20, "items": [0, 36, 0, 0]},
+        {"ap": 20, "items": [0, 0, 36, 0]},
+        {"ap": 20, "items": [0, 0, 0, 36]},
+        {"ap": 20, "items": [36, 0, 0, 0]}
+      ]
+    },
+    "Art for Whom? ～Art Forgery and the Pursuit of Beauty～": {
+      "wiki": "https://bluearchive.wiki/wiki/Art_for_Whom%3F_%EF%BD%9EArt_Forgery_and_the_Pursuit_of_Beauty%EF%BD%9E",
+      "itemTypes": 3,
+      "icons": [
+        "https://static.wikitide.net/bluearchivewiki/thumb/9/93/Item_Icon_Event_Token_0_S53.png/144px-Item_Icon_Event_Token_0_S53.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/9/92/Item_Icon_Event_Token_1_S53.png/144px-Item_Icon_Event_Token_1_S53.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/b/bf/Item_Icon_Event_Token_2_S53.png/144px-Item_Icon_Event_Token_2_S53.png"
+      ],
+      "voids": [200, 0, 5],
+      "tfers": [0, 5, 0],
+      "levels": [
+        {"ap": 10, "items": [10, 3, 3]},
+        {"ap": 10, "items": [0, 13, 3]},
+        {"ap": 10, "items": [0, 3, 13]},
+        {"ap": 10, "items": [16, 0, 0]},
+        {"ap": 15, "items": [16, 4, 4]},
+        {"ap": 15, "items": [0, 20, 4]},
+        {"ap": 15, "items": [0, 4, 20]},
+        {"ap": 15, "items": [24, 0, 0]},
+        {"ap": 20, "items": [24, 4, 4]},
+        {"ap": 20, "items": [4, 28, 0]},
+        {"ap": 20, "items": [4, 0, 28]},
+        {"ap": 20, "items": [32, 0, 0]}
+      ]
+    },
+    "Magical Girl Heavy Caliber ～Era's Ambition and the Right to Justice～": {
+      "wiki": "https://bluearchive.wiki/wiki/Magical_Girl_Heavy_Caliber_%EF%BD%9EEra%27s_Ambition_and_the_Right_to_Justice%EF%BD%9E",
+      "itemTypes": 3,
+      "icons": [
+        "",
+        "https://static.wikitide.net/bluearchivewiki/thumb/b/b8/Item_Icon_Event_Token_1_S54.png/144px-Item_Icon_Event_Token_1_S54.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/9/92/Item_Icon_Event_Token_2_S54.png/144px-Item_Icon_Event_Token_2_S54.png"
+      ],
+      "voids": [300, 0, 5],
+      "tfers": [0, 5, 0],
+      "levels": [
+        {"ap": 10, "items": [6, 6, 6]},
+        {"ap": 10, "items": [6, 9, 3]},
+        {"ap": 10, "items": [6, 3, 9]},
+        {"ap": 10, "items": [8, 4, 4]},
+        {"ap": 15, "items": [5, 11, 11]},
+        {"ap": 15, "items": [5, 17, 5]},
+        {"ap": 15, "items": [5, 5, 17]},
+        {"ap": 15, "items": [16, 4, 4]},
+        {"ap": 20, "items": [4, 16, 16]},
+        {"ap": 20, "items": [4, 32, 0]},
+        {"ap": 20, "items": [4, 0, 32]},
+        {"ap": 20, "items": [32, 0, 0]}
+      ]
+    },
+    "Winter Skies Renaissance ～On Wholesome Cultural Exchange～": {
+      "wiki": "https://bluearchive.wiki/wiki/Winter_Skies_Renaissance_%EF%BD%9EOn_Wholesome_Cultural_Exchange%EF%BD%9E",
+      "itemTypes": 3,
+      "icons": [
+        "",
+        "https://static.wikitide.net/bluearchivewiki/thumb/b/bc/Item_Icon_Event_Token_1_S55.png/144px-Item_Icon_Event_Token_1_S55.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/9/91/Item_Icon_Event_Token_2_S55.png/144px-Item_Icon_Event_Token_2_S55.png"
+      ],
+      "voids": [170, 0, 5],
+      "tfers": [0, 5, 0],
+      "levels": [
+        {"ap": 10, "items": [2, 8, 8]},
+        {"ap": 10, "items": [0, 12, 6]},
+        {"ap": 10, "items": [0, 6, 12]},
+        {"ap": 10, "items": [12, 3, 3]},
+        {"ap": 15, "items": [5, 11, 11]},
+        {"ap": 15, "items": [0, 16, 11]},
+        {"ap": 15, "items": [0, 11, 16]},
+        {"ap": 15, "items": [19, 4, 4]},
+        {"ap": 20, "items": [8, 14, 14]},
+        {"ap": 20, "items": [4, 32, 0]},
+        {"ap": 20, "items": [4, 0, 32]},
+        {"ap": 20, "items": [36, 0, 0]}
+      ]
+    },
+    "An Unconcealed Path ～Fashion Show Security Detail!～": {
+      "wiki": "https://bluearchive.wiki/wiki/An_Unconcealed_Path_%EF%BD%9EFashion_Show_Security_Detail!%EF%BD%9E",
+      "itemTypes": 3,
+      "icons": [
+        "",
+        "https://static.wikitide.net/bluearchivewiki/thumb/2/2e/Item_Icon_Event_Token_1_S56.png/144px-Item_Icon_Event_Token_1_S56.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/0/0c/Item_Icon_Event_Token_2_S56.png/144px-Item_Icon_Event_Token_2_S56.png"
+      ],
+      "voids": [300, 0, 5],
+      "tfers": [0, 5, 0],
+      "levels": [
+        {"ap": 10, "items": [6, 6, 6]},
+        {"ap": 10, "items": [6, 9, 3]},
+        {"ap": 10, "items": [6, 3, 9]},
+        {"ap": 10, "items": [8, 4, 4]},
+        {"ap": 15, "items": [5, 11, 11]},
+        {"ap": 15, "items": [5, 17, 5]},
+        {"ap": 15, "items": [5, 5, 17]},
+        {"ap": 15, "items": [16, 4, 4]},
+        {"ap": 20, "items": [4, 16, 16]},
+        {"ap": 20, "items": [0, 36, 0]},
+        {"ap": 20, "items": [0, 0, 36]},
+        {"ap": 20, "items": [36, 0, 0]}
+      ]
+    },
+    "Game Development Department Cleanup Mission!": {
+      "wiki": "https://bluearchive.wiki/wiki/Game_Development_Department_Cleanup_Mission!",
+      "itemTypes": 4,
+      "icons": [
+        "",
+        "https://static.wikitide.net/bluearchivewiki/thumb/2/2c/Item_Icon_Event_Token_1_S58.png/144px-Item_Icon_Event_Token_1_S58.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/7/7a/Item_Icon_Event_Token_2_S58.png/144px-Item_Icon_Event_Token_2_S58.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/0/03/Item_Icon_Event_Token_3_S58.png/144px-Item_Icon_Event_Token_3_S58.png"
+      ],
+      "voids": [500, 0, 0, 5],
+      "tfers": [0, 5, 5, 0],
+      "levels": [
+        {"ap": 10, "items": [6, 6, 6, 0]},
+        {"ap": 10, "items": [6, 0, 6, 6]},
+        {"ap": 10, "items": [6, 6, 0, 6]},
+        {"ap": 10, "items": [12, 2, 2, 2]},
+        {"ap": 15, "items": [9, 12, 6, 0]},
+        {"ap": 15, "items": [9, 0, 12, 6]},
+        {"ap": 15, "items": [9, 6, 0, 12]},
+        {"ap": 15, "items": [21, 2, 2, 2]},
+        {"ap": 20, "items": [0, 36, 0, 0]},
+        {"ap": 20, "items": [0, 0, 36, 0]},
+        {"ap": 20, "items": [0, 0, 0, 36]},
+        {"ap": 20, "items": [36, 0, 0, 0]}
+      ]
+    },
+    "Kivotos Unsolved Mysteries ～The Great Tsuchinoko Investigation to Ward Off Evil～": {
+      "wiki": "https://bluearchive.wiki/wiki/Kivotos_Unsolved_Mysteries_%EF%BD%9EThe_Great_Tsuchinoko_Investigation_to_Ward_Off_Evil%EF%BD%9E",
+      "itemTypes": 3,
+      "icons": [
+        "https://static.wikitide.net/bluearchivewiki/thumb/a/aa/Item_Icon_Event_Token_0_S59.png/144px-Item_Icon_Event_Token_0_S59.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/b/bc/Item_Icon_Event_Token_1_S59.png/144px-Item_Icon_Event_Token_1_S59.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/2/2f/Item_Icon_Event_Token_2_S59.png/144px-Item_Icon_Event_Token_2_S59.png"
+      ],
+      "voids": [6, 0, 5],
+      "tfers": [0, 5, 0],
+      "levels": [
+        {"ap": 10, "items": [8, 5, 5]},
+        {"ap": 10, "items": [5, 8, 5]},
+        {"ap": 10, "items": [5, 5, 8]},
+        {"ap": 10, "items": [12, 3, 3]},
+        {"ap": 15, "items": [15, 6, 6]},
+        {"ap": 15, "items": [6, 15, 6]},
+        {"ap": 15, "items": [6, 6, 15]},
+        {"ap": 15, "items": [23, 2, 2]},
+        {"ap": 20, "items": [28, 4, 4]},
+        {"ap": 20, "items": [0, 36, 0]},
+        {"ap": 20, "items": [0, 0, 36]},
+        {"ap": 20, "items": [36, 0, 0]}
+      ]
+    },
+    "Special Operation: Lore Pursuit": {
+      "wiki": "https://bluearchive.wiki/wiki/Special_Operation:_Lore_Pursuit",
+      "itemTypes": 3,
+      "icons": [
+        "",
+        "https://static.wikitide.net/bluearchivewiki/thumb/e/e0/Item_Icon_Event_Token_1_S60.png/144px-Item_Icon_Event_Token_1_S60.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/f/fb/Item_Icon_Event_Token_2_S60.png/144px-Item_Icon_Event_Token_2_S60.png"
+      ],
+      "voids": [200, 0, 5],
+      "tfers": [0, 5, 0],
+      "levels": [
+        {"ap": 10, "items": [8, 5, 5]},
+        {"ap": 10, "items": [5, 8, 5]},
+        {"ap": 10, "items": [5, 5, 8]},
+        {"ap": 10, "items": [12, 3, 3]},
+        {"ap": 15, "items": [15, 6, 6]},
+        {"ap": 15, "items": [6, 15, 6]},
+        {"ap": 15, "items": [6, 6, 15]},
+        {"ap": 15, "items": [23, 2, 2]},
+        {"ap": 20, "items": [28, 4, 4]},
+        {"ap": 20, "items": [0, 36, 0]},
+        {"ap": 20, "items": [0, 0, 36]},
+        {"ap": 20, "items": [36, 0, 0]}
+      ]
+    },
+    "Special Operation: Lore Pursuit (Season 2)": {
+      "wiki": "https://bluearchive.wiki/wiki/Special_Operation:_Lore_Pursuit_(Season_2)",
+      "itemTypes": 4,
+      "icons": [
+        "",
+        "https://static.wikitide.net/bluearchivewiki/thumb/e/e0/Item_Icon_Event_Token_1_S60.png/144px-Item_Icon_Event_Token_1_S60.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/f/fb/Item_Icon_Event_Token_2_S60.png/144px-Item_Icon_Event_Token_2_S60.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/6/6b/Item_Icon_Event_Token_3_S60.png/144px-Item_Icon_Event_Token_3_S60.png"
+      ],
+      "voids": [5, 0, 0, 5],
+      "tfers": [0, 5, 5, 0],
+      "levels": [
+        {"ap": 10, "items": [3, 9, 3, 3]},
+        {"ap": 10, "items": [3, 3, 9, 3]},
+        {"ap": 10, "items": [3, 3, 3, 9]},
+        {"ap": 10, "items": [9, 3, 3, 3]},
+        {"ap": 15, "items": [5, 12, 5, 5]},
+        {"ap": 15, "items": [5, 5, 12, 5]},
+        {"ap": 15, "items": [5, 5, 5, 12]},
+        {"ap": 15, "items": [12, 5, 5, 5]},
+        {"ap": 20, "items": [0, 36, 0, 0]},
+        {"ap": 20, "items": [0, 0, 36, 0]},
+        {"ap": 20, "items": [0, 0, 0, 36]},
+        {"ap": 20, "items": [36, 0, 0, 0]}
+      ]
+    }
+  }
+}

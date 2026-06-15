@@ -1,0 +1,82 @@
+
+body {
+  margin: 0;
+  font-family: var(--mono);
+}
+
+#site-header {
+  width: 100%;
+  grid-template-columns: auto auto 1fr auto;
+  padding-inline: 32px;
+  box-sizing: border-box;
+}
+
+h1 {
+  padding-left: 32px;
+  font-size: xx-large;
+}
+
+#lang-select {
+  margin: 8px !important;
+}
+
+#app {
+  padding-top: 10px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: safe center;
+  gap: 24px;
+}
+
+#event-select-div {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 10px;
+}
+
+#wiki-link[target="_blank"]::after {
+  content: "↗";
+  display: inline-block;
+  margin-left: 2px;
+}
+
+.item-icon {
+  height: 72px;
+}
+
+.require-td {
+  white-space: pre;
+}
+
+.bonus-input, .require-input {
+  max-width: 10ch;
+}
+
+#control {
+  display: flex;
+  flex-flow: row nowrap;
+  font-size: smaller;
+  align-items: center;
+  gap: 10px;
+}
+
+.ctlabel {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+#output {
+  white-space: pre;
+  font-size: smaller;
+  line-height: 1.3;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  place-items: center;
+  gap: 80px;
+}
+
+#output-bonuses {
+  place-self: start;
+  justify-self: center;
+}

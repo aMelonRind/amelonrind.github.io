@@ -1,0 +1,14 @@
+{
+  "site": {
+    "title": "蔚藍檔案 活動物品計算機",
+    "description": "計算最佳刷活動物資的方式來節省AP"
+  },
+  "event": "活動:",
+  "wiki": "Wiki",
+  "bonuses": "加成",
+  "requires": "需求",
+  "control": {
+    "perfectionist": "完美主義者",
+    "random": "隨機"
+  }
+}

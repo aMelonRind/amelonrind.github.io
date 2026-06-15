@@ -1,6 +1,10 @@
 {
   "site_title": "MelonRind的網頁",
   "apps": {
+    "baeic": {
+      "title": "活動物品計算機",
+      "desc": "計算最佳刷活動物資的方式來節省AP"
+    },
     "corner_cutter": {
       "title": "偷工減料",
       "desc": "在麥塊建築中透過刪除不可見的方塊來節省材料"
