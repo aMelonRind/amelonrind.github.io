@@ -3,6 +3,7 @@ import { TranslationKey } from "../src/i18n.ts";
 import cgolIconUrl from "./cgol/cgol.svg?url";
 import mapIconUrl from "./mapart-conv/favicon.ico?url";
 import eventPointIconUrl from "./ba-event-item-calc/favicon.ico?url";
+import treasureHuntUrl from "./treasure-hunt-forecaster/favicon.ico?url";
 
 type UrlString = string & {};
 
@@ -34,6 +35,13 @@ export const applist: App[] = [
     url: `${base}ba-event-item-calc`,
     icon: eventPointIconUrl,
     desc: 'apps.baeic.desc',
+    badges: [utilBadge, baBadge]
+  },
+  {
+    name: 'apps.bathf.title',
+    url: `${base}treasure-hunt-forecaster`,
+    icon: treasureHuntUrl,
+    desc: 'apps.bathf.desc',
     badges: [utilBadge, baBadge]
   },
   {

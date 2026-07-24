@@ -126,7 +126,7 @@ export function createI18n<FullDict extends object>(
     </select>
   }
 
-  const tw: any = (key: any, args: any) => new WrappedTranslatable(key, args)
+  const tw: any = (key: any, args: any) => typeof key === 'function' ? new WTFactory(key) : new WTSimple(key, args)
 
   return {
     I18nProvider,
@@ -190,10 +190,23 @@ function localeOrderedElements<T extends string>(
 }
 
 class WrappedTranslatable<T> {
+  protected constructor () {}
+
+  unwrap(translator: (key: any, args?: any) => string): T {
+    throw new Error('not implemented')
+  }
+
+  concat(other: WrappedTranslatable<any>) {
+    return new WTFactory(t => this.unwrap(t as any) + other.unwrap(t as any))
+  }
+}
+
+class WTSimple<T> extends WrappedTranslatable<T> {
   readonly key: string
   readonly args: any
 
   constructor (key: string, args: any) {
+    super()
     this.key = key
     this.args = args
   }
@@ -201,15 +214,43 @@ class WrappedTranslatable<T> {
   unwrap(translator: (key: any, args?: any) => string): T {
     return translator(this.key, this.args) as T
   }
+
+  [Symbol.toStringTag]() {
+    return `${this.key}${this.args ? JSON.stringify(this.args) : ''}`
+  }
 }
+
+class WTFactory extends WrappedTranslatable<string> {
+  readonly factory: (t: TypedTranslator<any>) => string
+
+  constructor (factory: (t: TypedTranslator<any>) => string) {
+    super()
+    this.factory = factory
+  }
+
+  unwrap(translator: (key: any, args?: any) => string): string {
+    return this.factory(translator as any)
+  }
+
+  [Symbol.toStringTag]() {
+    try {
+      return this.factory(((k: string) => k) as any)
+    } catch {
+      return this.factory.toString()
+    }
+  }
+}
+
+export type { WrappedTranslatable };
 
 export type TypedTranslator<Dict, Flat = Flatten<Dict>> =
   <K extends keyof Flat>(key: K, ...args: GetTranslateArgs<Flat[K]>) => Flat[K]
 ;
 
-export type TypedTranslateWrapper<Dict, Flat = Flatten<Dict>> =
-  <K extends keyof Flat>(key: K, ...args: GetTranslateArgs<Flat[K]>) => WrappedTranslatable<Flat[K]>
-;
+export interface TypedTranslateWrapper<Dict, Flat = Flatten<Dict>> {
+  <K extends keyof Flat>(key: K, ...args: GetTranslateArgs<Flat[K]>): WrappedTranslatable<Flat[K]>;
+  (factory: (t: TypedTranslator<Dict, Flat>) => string): WrappedTranslatable<string>;
+}
 
 
 // type Test = TrimString<"   asd   ">;

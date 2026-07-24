@@ -13,4 +13,4 @@ export const {
   localeOrderedElements,
   tw,
   WrappedTranslatable
-} = createI18n(en_us, import.meta.glob('./locale/*.json'), 'ba-event-item-calc:lang')
+} = createI18n(en_us, import.meta.glob('./locale/*.json'), 'treasure-hunt-forecaster:lang')

@@ -5,6 +5,10 @@ export const en_us = {
       "title": "Blue Archive Event Item Calculator",
       "desc": "Save AP by getting the optimal way to sweep for event resources."
     },
+    "bathf": {
+      "title": "Blue Archive Treasure Hunt Forecaster",
+      "desc": "Get ALL possibilities of treasure hunt combinations."
+    },
     "corner_cutter": {
       "title": "Corner Cutter",
       "desc": "Save materials in large minecraft build by removing non visible blocks."

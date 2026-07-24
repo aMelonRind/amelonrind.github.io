@@ -327,10 +327,11 @@ class Collector<T extends Uint8Array | Uint16Array | Uint32Array> {
   constructor(identifier: TierIdentifier, initAp = Infinity) {
     this.identifier = identifier
     this.maxAp = initAp
+    this.perfect.tier = Tier.SEMI_PERFECT
   }
 
   add(tier: Tier, ap: number, sweeps: T) {
-    if (tier === Tier.PERFECT) {
+    if (tier >= this.perfect.tier) {
       this.perfect.consume(tier, ap, sweeps)
     }
     this.holder.consume(tier, ap, sweeps)
@@ -358,7 +359,7 @@ class Collector<T extends Uint8Array | Uint16Array | Uint32Array> {
   consume(ap: number, sweeps: T, items: Int16Array): boolean {
     const tier = this.identifier(items)
     if (tier === Tier.INVALID) return true
-    if (ap <= this.maxAp || tier === Tier.PERFECT) {
+    if (ap <= this.maxAp || tier >= this.perfect.tier) {
       // console.log(`valid hit ${ap} ${this.perfectAp} ${sweeps.join(',')}`)
       this.add(tier, ap, sweeps)
     }

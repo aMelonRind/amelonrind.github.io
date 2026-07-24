@@ -1,0 +1,48 @@
+{
+  "site": {
+    "title": "蔚藍檔案 尋寶預測工具",
+    "description": {
+      "main": "取得所有尋寶小遊戲的排列組合",
+      "yap": [
+        "提醒: 這工具會尋找所有的可能性 並且一視同仁 所以計算結果與真實情況可能會有些差異",
+        "這個跟其他工具最大的不同是它沒有做隨機採樣 會計算並顯示全部的組合",
+        "理論上這活動的最佳解是讓某大佬架設一個資料庫 蒐集全球老師們解完的排列 因為這活動的排列似乎不是完全隨機的 我在某個聊天群注意到的 不同人解的但是有多個相同的排列 不知道是不是檔案的工程師挑的"
+      ]
+    }
+  },
+  "preset": {
+    "placeholder": "套用預設...",
+    "stage": "回合{{ stage }}",
+    "stageLast": "回合{{ stage }}+"
+  },
+  "hover": {
+    "empty": "\u00A0",
+    "hoverToSee": "懸浮在元件上查看註解",
+    "clickToPlace": "點擊放置物品{{ item }}",
+    "clickToPlaceHori": "點擊放置橫向的物品{{ item }}",
+    "clickToPlaceVert": "點擊放置直向的物品{{ item }}",
+    "placementOOB": "放置範圍超出邊界",
+    "placementOccupied": "放置範圍已經被占用",
+    "clickToRemoveItem": "點擊移除放置的物品",
+    "somethingWrongInInv": "內部資料出了點問題..",
+    "clickToMarkOpen": "點擊標記第{{ index }}格為開啟",
+    "clickToMarkClose": "點擊標記第{{ index }}格為未開啟",
+    "slotStat": " | 數量:\u00A0[{{ counts }}]\u3000總和:\u00A0{{ sum }}\u3000百分比:\u00A0{{ perc }}%",
+    "slotStatPartialVisible": " | 數量:\u00A0[{{ counts }}]\u3000總和:\u00A0{{ sum }}\u3000可見:\u00A0{{ visible }}\u3000百分比:\u00A0{{ perc }}%",
+    "invalid1x1": "1x1大小是不可用的",
+    "setItemSize": "設定物品{{ item }}的大小為{{ width }}x{{ height }}",
+    "setItemCount": "設定物品{{ item }}的數量為{{ count }}",
+    "enableItemVisibility": "開啟物品{{ item }}的可見性",
+    "disableItemVisibility": "關閉物品{{ item }}的可見性",
+    "addItemPlacement": "新增一個物品{{ item }}放置點",
+    "addItemPlacementHori": "新增一個橫向的物品{{ item }}放置點",
+    "addItemPlacementVert": "新增一個直向的物品{{ item }}放置點",
+    "itemPlacementFull": "物品{{ item }}已經放滿{{ count }}個了",
+    "running": "計算中",
+    "runningCanRestart": "計算中 點擊以目前狀態重新開始",
+    "runningElapsed": " | 經過時間:\u00A0{{ elapsedSec }}s",
+    "clickToStart": "點擊開始計算",
+    "totalPossibilities": "全部可能性:\u00A0{{ total }}\u3000計算時間:\u00A0{{ time }}ms",
+    "totalPossibilities1": "全部可能性:\u00A01"
+  }
+}

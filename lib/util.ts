@@ -15,6 +15,7 @@ export function exposeToGlobal(objs: object) {
 }
 
 const truthyStrs: Set<string | undefined> = new Set(['', 'true', 't', 'yes', 'y', 'on', '1', 'enabled', 'active'])
+const paramHinted = new Set<string>()
 
 export function isTruthy(str: string | undefined): boolean {
   return truthyStrs.has(str)
@@ -25,6 +26,10 @@ export function getParams() {
 }
 
 export function getParam(param: string) {
+  if (!paramHinted.has(param)) {
+    console.log(`Search param hint: ${param}`)
+    paramHinted.add(param)
+  }
   return getParams().get(param)
 }
 
@@ -47,7 +52,9 @@ export function requireNonNull<T>(obj: T, message: string = 'Object is null!'): 
 
 export function downloadBlob(fileName: string, data: BlobPart) {
   if (hasParam('no-dl')) return
+
   const blob = new Blob([data], { type: 'application/octet-stream' })
+
   const url = URL.createObjectURL(blob)
   downloadURL(url, fileName)
   setTimeout(() => URL.revokeObjectURL(url), 5000)
@@ -55,10 +62,22 @@ export function downloadBlob(fileName: string, data: BlobPart) {
 
 export function downloadURL(dataURL: string, fileName: string) {
   if (hasParam('no-dl')) return
+
   const a = document.createElement('a')
   a.href = dataURL
   a.download = fileName
+  a.style.display = 'none'
+
+  document.body.appendChild(a)
   a.click()
+  a.remove()
+}
+
+export function drawRect(ctx: CanvasRect, x: number, y: number, w: number, h: number) {
+  ctx.fillRect(x, y, w, 1)
+  ctx.fillRect(x, y + h - 1, w, 1)
+  ctx.fillRect(x, y + 1, 1, h - 2)
+  ctx.fillRect(x + w - 1, y + 1, 1, h - 2)
 }
 
 export function firstValue<T>(iterable: Iterable<T>): T {
@@ -122,15 +141,15 @@ export namespace Maths {
 }
 
 
-export class LRUCache {
-  cache: Map<number, number> = new Map()
+export class LRUCache<K = number, V = number> {
+  cache: Map<K, V> = new Map()
   maxSize: number
 
   constructor(maxSize: number) {
     this.maxSize = maxSize
   }
 
-  get(key: number): number | null {
+  get(key: K): V | null {
     const value = this.cache.get(key)
     if (value === undefined) return null
     this.cache.delete(key)
@@ -138,7 +157,7 @@ export class LRUCache {
     return value
   }
 
-  set(key: number, value: number) {
+  set(key: K, value: V) {
     if (!this.cache.delete(key) && this.cache.size >= this.maxSize) {
       this.cache.delete(this.cache.keys().next().value!)
     }
