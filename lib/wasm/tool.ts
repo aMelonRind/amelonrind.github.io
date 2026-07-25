@@ -590,6 +590,9 @@ class WasmWorker {
         }
     
         res(new WasmWorker(worker, tickets))
+      }).catch(e => {
+        done = true
+        throw e
       })
 
       setTimeout(() => {

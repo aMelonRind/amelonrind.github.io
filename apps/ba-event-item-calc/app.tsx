@@ -105,7 +105,7 @@ async function calculate() {
   }
 
   await new Promise(res => setTimeout(res, 1))
-  const res = solve(
+  const res = await solve(
     levels,
     requires,
     Uint16Array.from(def.voids),

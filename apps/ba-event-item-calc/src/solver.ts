@@ -1,4 +1,9 @@
 import { Maths } from "../../../lib/util.ts";
+import { WasmWorker } from "../../../lib/wasm/tool.ts";
+import { assemble } from "./assembler.ts";
+
+// bruteForce probably needs optimization
+// but it's working and runs under manageable duration, i guess it's fine.
 
 export interface Level {
   ap: number;
@@ -17,21 +22,18 @@ type SolveResult = { readonly sweeps: Sweeps, readonly tier: string };
 type SolveReturn = { readonly normal: SolveResult, readonly perfect: SolveResult | null } | null;
 
 const TIERS = ['INVALID', 'NORMAL', 'SEMI_PERFECT', 'PERFECT'] as const
-const CRAFT_VALUES = [1, 0.7934660541092394, 0.7254211332312402] as const
+export const CRAFT_VALUES = [1, 0.7934660541092394, 0.7254211332312402] as const
 
-export function solve(
+export async function solve(
   levels: readonly Level[],
   requires: Uint32Array,
   voids: Uint16Array,
   transfers: Uint8Array
-): SolveReturn {
+): Promise<SolveReturn> {
   const len = requires.length
   if (levels.some(l => l.items.length !== len) || voids.length !== len || transfers.length !== len) {
     throw `assertion error: inconsistent lengths`
   }
-
-  const special = SpecialCaseOnlyFirst.solve(levels, requires, voids, transfers)
-  if (special) return special
 
   const solverStart = performance.now()
   const list: SolvedSweeps[] = []
@@ -62,9 +64,13 @@ export function solve(
   const identifier = compileIdentifier(voids, transfers)
   const collector = new Collector<Sweeps>(identifier, ceilMin)
 
+  const wasm = await assemble(levels, len, voids, transfers)
+  const worker = await wasm.instantiateWorker()
+  const pp = isPerfectPossible(levels.map(l => l.items[0]), voids[0], requires[0])
+
   // const perfectPossible = isPerfectPossible(levels.map(l => l.items[0]), voids[0] || transfers[0], requires[0])
   for (const sweeps of cand) {
-    bruteForce(levels, sweeps, requires, collector, identifier)
+    await bruteForce(levels, sweeps, requires, collector, identifier, worker, pp)
   }
   console.log(`normal run finished at ${(performance.now() - solverStart).toFixed(2)}ms`)
   for (const sweeps of cand) {
@@ -74,13 +80,14 @@ export function solve(
     }
     for (const i of idxs) {
       sweeps[i] -= 4
-      bruteForce(levels, sweeps, requires, collector, identifier)
+      await bruteForce(levels, sweeps, requires, collector, identifier, worker, pp)
       sweeps[i] += 4
     }
     for (const i of idxs) {
       sweeps[i] -= 2
     }
   }
+  worker.release()
   console.log(`brute force finished at ${(performance.now() - solverStart).toFixed(2)}ms`)
   const normal = collector.holder.toResult()
   return normal && { normal, perfect: collector.perfect.toResult() }
@@ -195,12 +202,14 @@ function roundFloat(n: number) {
   return Math.round(n * 9e9) / 9e9
 }
 
-function bruteForce(
+async function bruteForce(
   levels: readonly Level[],
   sweeps: Uint32Array,
   requires: Uint32Array,
   mainCollector: Collector<Uint32Array>,
-  identifier: TierIdentifier
+  identifier: TierIdentifier,
+  worker: WasmWorker,
+  pp: boolean
 ) {
   const len = requires.length
   const req = Int32Array.from(requires)
@@ -218,99 +227,38 @@ function bruteForce(
 
   if (baseAp >= mainCollector.maxAp) return
 
+  const wasmMaxAp = mainCollector.maxAp - baseAp
+  const wasmPerfectAp = mainCollector.perfect.tier === Tier.PERFECT ? mainCollector.perfect.ap - baseAp : Infinity
+
   const collector = new Collector<Uint8Array>(identifier, mainCollector.maxAp - baseAp)
-  const items = Int16Array.from(req, v => -v)
-  const itemsL = items.length
-  const sweeps_ = new Uint8Array(levels.length)
-  let lvIndex = 0
-  let usedAp = 0
-  initFirst: {
-    const { ap, items: lItems } = levels[0]
+  const items = Int32Array.from(req, v => -v)
+  let lastFound = 0
 
-    let max = 0
-    for (let i = 0; i < itemsL; i++) {
-      if (lItems[i]) {
-        const n = Math.ceil(-items[i] / lItems[i])
-        if (n > max) {
-          max = n
-        }
-      }
+  const consume = (res: Int32Array | number[]) => {
+    res = Int32Array.from(res)
+    if (res[0] !== 2147483647) {
+      collector.consume(
+        res[0],
+        Uint8Array.from(res.subarray(1).subarray(0, levels.length)),
+        Int16Array.from(res.subarray(1 + levels.length).subarray(0, items.length))
+      )
+      lastFound = res[0]
+      return true
     }
-
-    max = Math.min(max, Math.floor((collector.maxAp - usedAp) / ap)) + 1
-    for (let i = 0; i < itemsL; i++) {
-      items[i] += lItems[i] * max
-    }
-    usedAp += max * ap
-    sweeps_[0] += max
+    return false
   }
 
-  const last = levels.length - 1
-  const { ap: lastAp, items: lastItems } = levels[last]
-  while (true) {
-    // find last non-zero
-    while (sweeps_[lvIndex] === 0) {
-      lvIndex--
-    }
-    // end
-    if (lvIndex < 0) break
-    // decrement
-    const { ap, items: lItems } = levels[lvIndex]
-    for (let i = 0; i < itemsL; i++) {
-      items[i] -= lItems[i]
-    }
-    usedAp -= ap
-    sweeps_[lvIndex++]--
-    // fill sweeps to last
-    while (lvIndex <= last) {
-      const { ap, items: lItems } = levels[lvIndex]
+  // find normal
+  if (!consume(await worker.invoke('normal', 0, wasmMaxAp, ...items) as number[])) {
+    // can't even find normal, return
+    return
+  }
 
-      let max = 0
-      for (let i = 0; i < itemsL; i++) {
-        if (lItems[i]) {
-          const n = Math.ceil(-items[i] / lItems[i])
-          if (n > max) {
-            max = n
-          }
-        }
-      }
-
-      max = Math.min(max, Math.floor((collector.maxAp - usedAp) / ap))
-      if (max > 0) {
-        let skip = true
-        for (let i = 0; i < itemsL; i++) {
-          if ((items[i] += lItems[i] * max) < 0) {
-            skip = false
-          }
-        }
-        usedAp += max * ap
-        sweeps_[lvIndex] += max
-        if (skip) {
-          lvIndex = last
-        }
-      }
-      lvIndex++
-    }
-    lvIndex--
-    // collect
-    while (true) {
-      if (collector.consume(usedAp, sweeps_, items)) {
-        const m = sweeps_[last]
-        if (m) {
-          for (let i = 0; i < itemsL; i++) {
-            items[i] -= m * lastItems[i]
-          }
-          usedAp -= m * lastAp
-          sweeps_[last] = 0
-        }
-        break
-      }
-      if (!sweeps_[last]) break
-      for (let i = 0; i < itemsL; i++) {
-        items[i] -= lastItems[i]
-      }
-      usedAp -= lastAp
-      sweeps_[last]--
+  // find perfects
+  const absMax = Math.min(wasmPerfectAp, lastFound + 100)
+  if (!pp || !consume(await worker.invoke('perfect1', lastFound, absMax, ...items) as number[])) {
+    if (mainCollector.perfect.tier <= Tier.SEMI_PERFECT) {
+      consume(await worker.invoke('semiPerfect1', lastFound, absMax, ...items) as number[])
     }
   }
 
@@ -332,6 +280,9 @@ class Collector<T extends Uint8Array | Uint16Array | Uint32Array> {
 
   add(tier: Tier, ap: number, sweeps: T) {
     if (tier >= this.perfect.tier) {
+      if (tier > this.perfect.tier) {
+        this.perfect.ap = Infinity
+      }
       this.perfect.consume(tier, ap, sweeps)
     }
     this.holder.consume(tier, ap, sweeps)
@@ -343,7 +294,7 @@ class Collector<T extends Uint8Array | Uint16Array | Uint32Array> {
 
   merge(baseSweeps: T, baseAp: number, from: Collector<Uint8Array>) {
     for (const holder of [from.holder, from.perfect]) {
-      if (holder.sweeps && baseAp + holder.ap <= this.perfect.ap) {
+      if (holder.sweeps && (baseAp + holder.ap <= this.perfect.ap || holder.tier > this.perfect.tier)) {
         const sweeps = baseSweeps.slice() as T
         for (let i = 0; i < sweeps.length; i++) {
           sweeps[i] += holder.sweeps[i]
@@ -489,364 +440,9 @@ function isPerfectPossible(values: Iterable<number>, step: number, target: numbe
 
 type TierIdentifier = (items: Int16Array) => Tier
 
-enum Tier {
+export const enum Tier {
   INVALID = 0, // the result simply doesn't pass
   NORMAL = 1, // the result passed normally
   SEMI_PERFECT = 2, // the items are perfectly aligned except the first one
   PERFECT = 3 // the items are perfectly aligned
-}
-
-class SpecialCaseOnlyFirst {
-  static solve(
-    levels: readonly Level[],
-    requires: Uint32Array,
-    voids: Uint16Array,
-    transfers: Uint8Array
-  ): SolveReturn {
-    if (!requires[0] || requires.slice(1).some(v => v)) return null
-    if (voids.slice(1, -1).some(v => v) || !voids.at(-1)) return null
-    if (transfers[0] || transfers.at(-1) || transfers.slice(1, -1).some(v => !v)) return null
-
-    const solverStart = performance.now()
-
-    // calculate multipliers and mod
-    const mults = Uint32Array.from(transfers)
-    const lastI = mults.length - 1
-    mults[0] = 1
-    mults[lastI] = voids[lastI]
-    for (let i = 0; i < lastI; i++) {
-      mults[i + 1] *= mults[i]
-    }
-    const mod = mults[lastI]
-    if (!mod) {
-      console.warn('?')
-      return null
-    }
-
-    // convert to single resource level
-    const srls: SingleResourceLevel[] = levels.map(({ ap, items }, index) => {
-      const point = items[0]
-      let extra = 0
-      for (let i = 1; i < items.length; i++) {
-        extra += mults[i - 1] * items[i]
-      }
-      extra %= mod
-      return { index, ap, point, extra }
-    })
-
-    // remove duplicates
-    srls.sort((a, b) => a.point - b.point || a.extra - b.extra || a.ap - b.ap || a.index - b.index)
-    for (let i = 1; i < srls.length;) {
-      const a = srls[i - 1]
-      const b = srls[i]
-      if (a.extra === b.extra && a.point === b.point || !b.point && !b.extra) {
-        srls.splice(i, 1)
-        continue
-      }
-      i++
-    }
-    if (!srls[0].point && !srls[0].extra) {
-      srls.shift()
-    }
-    // sort them
-    srls.sort((b, a) => a.point / a.ap - b.point / b.ap || a.extra - b.extra)
-    const values = Float64Array.from(srls, l => CRAFT_VALUES[l.index >> 2])
-    const last = srls.length - 1
-    const lastPointLevel = srls.findLastIndex(l => l.point)
-    function compareValue(a: ArrayLike<number>, b: ArrayLike<number>): number {
-      let v = 0
-      for (let i = 0; i <= last; i++) {
-        v += (a[i] - b[i]) * values[i]
-      }
-      return v || getMiscValue(a) - getMiscValue(b)
-    }
-    function toNormalSweeps(sweeps: Uint32Array) {
-      const res = new Uint32Array(levels.length)
-      for (const [i, v] of sweeps.entries()) {
-        res[srls[i].index] = v
-      }
-      return res
-    }
-
-    let pointsTarget = requires[0]
-    const pointTargetStep = voids[0]
-    console.log(`target: ${pointsTarget}, step: ${pointTargetStep}, mod: ${mod}, levels: ${srls.length}`)
-    // console.log(srls.map(l => `{"ap":${l.ap},"point":${l.point},"extra":${l.extra}}`).join(',\n'))
-    const table = new Int32Array(srls[last].extra).fill(-1)
-    if (!srls[last].point) {
-      const b = mod
-      const c = srls[last].extra
-      const g = Maths.gcd(b, c)
-      const bb = b / g
-      const cc = c / g
-      const inv = Maths.modInv(bb, cc)
-      if (inv !== null) {
-        for (let r = 0; r < c; r++) {
-          if (r % g !== 0) continue
-          table[r] = (((cc - (r / g) % cc) * inv) % cc)
-        }
-      }
-    }
-    // console.log(table.join(', '))
-    const perfectPossible = isPerfectPossible(srls.map(v => v.point), pointTargetStep, pointsTarget)
-    let limit = Math.ceil(pointsTarget / srls[0].point) - 8
-
-    let bestAp = Infinity
-    let bestSweeps: Uint32Array | null = null
-    let isPerfectAsWell = false
-
-    let bestPerfectAp = Infinity
-    let bestPerfectSweeps: Uint32Array | null = null
-
-    // brute force normal, this will be fast
-    bruteForceLoop()
-    console.log(`normal run finished at ${(performance.now() - solverStart).toFixed(2)}ms`)
-
-    // brute force perfect, this is slower..
-    const timeLimit = performance.now() + 3200
-    let layers = 0
-    if (perfectPossible) {
-      bruteForcePerfectLoop()
-      if (pointTargetStep) {
-        const maxLayer = 10000 / srls[0].ap * srls[0].point / pointTargetStep
-        while (!bestPerfectSweeps && performance.now() < timeLimit && layers < maxLayer) {
-          pointsTarget += pointTargetStep
-          layers++
-          limit = Math.floor(pointsTarget / srls[0].point) - 12
-          bruteForcePerfectLoop()
-        }
-      }
-    }
-    console.log(`brute force finished at ${(performance.now() - solverStart).toFixed(2)}ms, layer: ${layers}`)
-
-    // impossible, but just in case
-    if (!bestSweeps) return null
-
-    return {
-      normal: {
-        sweeps: toNormalSweeps(bestSweeps),
-        tier: TIERS[isPerfectAsWell ? Tier.PERFECT : Tier.NORMAL]
-      },
-      perfect: bestPerfectSweeps && {
-        sweeps: toNormalSweeps(bestPerfectSweeps),
-        tier: TIERS[Tier.PERFECT]
-      }
-    }
-
-    function bruteForceLoop() {
-      let lvIndex = 0
-      let usedAp = 0
-      let points = 0
-      let extras = 0
-      const sweeps = new Uint32Array(srls.length)
-      initFirst: {
-        const { ap, point, extra } = srls[0]
-
-        const max = Math.min(Math.ceil((pointsTarget - points) / point), Math.floor((bestAp - usedAp) / ap)) + 1
-        usedAp += max * ap
-        points += max * point
-        extras += max * extra
-        sweeps[0] += max
-      }
-      const { ap: lastAp, point: lastPoint, extra: lastExtra } = srls[last]
-      while (true) {
-        // find last non-zero
-        while (sweeps[lvIndex] === 0) {
-          lvIndex--
-        }
-        // end
-        if (lvIndex < 0) break
-        if (!lvIndex && sweeps[0] < limit) break
-        // decrement
-        const { ap, point, extra } = srls[lvIndex]
-        usedAp -= ap
-        points -= point
-        extras -= extra
-        sweeps[lvIndex++]--
-        // fill sweeps to last
-        while (lvIndex <= last) {
-          const { ap, point, extra } = srls[lvIndex]
-          const max = Math.min(Math.ceil(pointsTarget / point), Math.floor((bestAp - usedAp) / ap))
-
-          if (max > 0) {
-            usedAp += max * ap
-            points += max * point
-            extras += max * extra
-            sweeps[lvIndex] += max
-            if (points >= pointsTarget) {
-              lvIndex = last
-            }
-          }
-          lvIndex++
-        }
-        lvIndex--
-        // collect
-        while (true) {
-          if (points >= pointsTarget) {
-            const isPerfect = points === pointsTarget && extras % mod === 0
-            if (usedAp < bestAp || usedAp === bestAp && compareValue(sweeps, bestSweeps!) > 0) {
-              bestAp = usedAp
-              bestSweeps = sweeps.slice()
-              isPerfectAsWell = isPerfect
-            }
-            if (isPerfect && (
-                !bestPerfectSweeps ||
-                usedAp < bestPerfectAp ||
-                usedAp === bestPerfectAp && compareValue(sweeps, bestPerfectSweeps) > 0
-            )) {
-              bestPerfectAp = usedAp
-              bestPerfectSweeps = sweeps.slice()
-            }
-          }
-          if (!sweeps[last]) break
-          if (points - lastAp < pointsTarget) {
-            const m = sweeps[last]
-            if (m) {
-              usedAp -= m * lastAp
-              points -= m * lastPoint
-              extras -= m * lastExtra
-              sweeps[last] = 0
-            }
-            break
-          }
-          usedAp -= lastAp
-          points -= lastPoint
-          extras -= lastExtra
-          sweeps[last]--
-        }
-      }
-    }
-
-    function bruteForcePerfectLoop() {
-      let lvIndex = 0
-      let usedAp = 0
-      let points = 0
-      let extras = 0
-      const sweeps = new Uint32Array(srls.length)
-      initFirst: {
-        const { ap, point, extra } = srls[0]
-
-        const max = Math.min(
-          Math.floor(pointsTarget / point),
-          Math.floor((bestPerfectAp - usedAp) / ap)
-        ) + 1
-        usedAp += max * ap
-        points += max * point
-        extras += max * extra
-        sweeps[0] += max
-      }
-      const { ap: lastAp, point: lastPoint, extra: lastExtra } = srls[last]
-      outer:
-      while (true) {
-        // find last non-zero
-        while (sweeps[lvIndex] === 0) {
-          lvIndex--
-        }
-        // end
-        if (lvIndex < 0) break
-        if (!lvIndex && sweeps[0] < limit) break
-        if (lvIndex < 8 && performance.now() > timeLimit) break
-        // decrement
-        const { ap, point, extra } = srls[lvIndex]
-        if (lvIndex === lastPointLevel) {
-          const m = sweeps[lastPointLevel]
-          usedAp -= m * ap
-          points -= m * point
-          extras -= m * extra
-          sweeps[lvIndex] = 0
-          continue
-        } else {
-          usedAp -= ap
-          points -= point
-          extras -= extra
-          sweeps[lvIndex++]--
-        }
-        // fill sweeps to last
-        while (lvIndex <= last) {
-          const { ap, point, extra } = srls[lvIndex]
-          if (point) {
-            const max = Math.min(
-              Math.floor((pointsTarget - points) / point),
-              Math.floor((bestPerfectAp - usedAp) / ap)
-            )
-
-            if (lvIndex === lastPointLevel && points + max * point !== pointsTarget) {
-              continue outer
-            }
-
-            if (max > 0) {
-              usedAp += max * ap
-              points += max * point
-              extras += max * extra
-              sweeps[lvIndex] += max
-              if (points >= pointsTarget) {
-                lvIndex = lastPointLevel
-              }
-            }
-          } else if (lvIndex < last) {
-            // extra filler level
-            const max = Math.min(
-              extras % mod ? 8 : 0,
-              Math.floor((bestPerfectAp - usedAp) / ap)
-            )
-
-            if (max > 0) {
-              usedAp += max * ap
-              extras += max * extra
-              sweeps[lvIndex] += max
-            }
-          } else {
-            const es = extras % mod
-            if (es) {
-              // last extra filler level
-              // ((layer - extras) + n * layer) % extra
-              const need = mod - es
-              const cache = table[need % extra]
-              if (cache === -1) continue outer
-
-              const max = (need + cache * mod) / extra
-              if (usedAp + max * ap > bestPerfectAp) {
-                continue outer
-              }
-
-              if (max > 0) {
-                usedAp += max * ap
-                extras += max * extra
-                sweeps[lvIndex] += max
-              }
-            }
-          }
-          lvIndex++
-        }
-        lvIndex--
-        // collect
-        if (points === pointsTarget && extras % mod === 0) {
-          if (
-            !bestPerfectSweeps ||
-            usedAp < bestPerfectAp ||
-            usedAp === bestPerfectAp && compareValue(sweeps, bestPerfectSweeps) > 0
-          ) {
-            bestPerfectAp = usedAp
-            bestPerfectSweeps = sweeps.slice()
-          }
-        }
-        const m = sweeps[last]
-        // if it contains points, then decrementing one would make it invalid
-        // if it doesn't, it's already handled up there to the best case, no need to decrement one by one.
-        if (m) {
-          usedAp -= m * lastAp
-          points -= m * lastPoint
-          extras -= m * lastExtra
-          sweeps[last] = 0
-        }
-      }
-    }
-  }
-}
-
-interface SingleResourceLevel {
-  index: number;
-  ap: number;
-  point: number;
-  extra: number;
 }

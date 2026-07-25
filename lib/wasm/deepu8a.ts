@@ -1,5 +1,6 @@
 
 export type DeepU8Arr = readonly (number | Uint8Array | DeepU8Arr | false | null | undefined | void)[];
+export type WritableDeepU8Arr = (number | Uint8Array | DeepU8Arr | false | null | undefined | void)[];
 
 /**
  * Flatten nested byte arrays into single one.

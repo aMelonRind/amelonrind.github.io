@@ -710,11 +710,35 @@ export namespace i32 {
   i32.const = const_
 
   /**
+   * Multiply by a constant. Checks if bit shifting is available.
+   * 
+   * Stack: [i32] → [i32]
+   */
+  export const mul_const = (m: number) => {
+    if (m === 0) {
+      return flatU8A([control_flow.drop, i32.const(0)])
+    }
+    if (m === 1) {
+      return null
+    }
+    return (m & (m - 1)) === 0
+    ? flatU8A([i32.const(31 - Math.clz32(m)), i32.shl])
+    : flatU8A([i32.const(m), i32.mul])
+  }
+
+  // TODO: read this https://en.wikipedia.org/wiki/Division_algorithm#Division_by_a_constant
+  /**
    * Divides by 3 with mul op. The input must be a multiply of 3 or else it'll be undefined behavior.
    * 
    * Stack: [i32] → [i32]
    */
   export const div3 = flatU8A([i32.const(0xAAAAAAAB >> 0), i32.mul])
+  /**
+   * Divides by 5 with mul op. The input must be a multiply of 5 or else it'll be undefined behavior.
+   * 
+   * Stack: [i32] → [i32]
+   */
+  export const div5 = flatU8A([i32.const(0xCCCCCCCD >> 0), i32.mul])
 }
 
 export namespace i64 {
