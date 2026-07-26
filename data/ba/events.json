@@ -480,6 +480,31 @@
         {"ap": 20, "items": [0, 0, 0, 36]},
         {"ap": 20, "items": [36, 0, 0, 0]}
       ]
+    },
+    "Clear Skies After the Storm": {
+      "wiki": "https://bluearchive.wiki/wiki/Clear_Skies_After_the_Storm",
+      "itemTypes": 3,
+      "icons": [
+        "https://static.wikitide.net/bluearchivewiki/thumb/4/4d/Item_Icon_Event_Token_0_S62.png/144px-Item_Icon_Event_Token_0_S62.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/9/9c/Item_Icon_Event_Token_1_S62.png/144px-Item_Icon_Event_Token_1_S62.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/e/e0/Item_Icon_Event_Token_2_S62.png/144px-Item_Icon_Event_Token_2_S62.png"
+      ],
+      "voids": [200, 0, 5],
+      "tfers": [0, 5, 0],
+      "levels": [
+        {"ap": 10, "items": [8, 5, 5]},
+        {"ap": 10, "items": [5, 8, 5]},
+        {"ap": 10, "items": [5, 5, 8]},
+        {"ap": 10, "items": [12, 3, 3]},
+        {"ap": 15, "items": [15, 6, 6]},
+        {"ap": 15, "items": [6, 15, 6]},
+        {"ap": 15, "items": [6, 6, 15]},
+        {"ap": 15, "items": [23, 2, 2]},
+        {"ap": 20, "items": [28, 4, 4]},
+        {"ap": 20, "items": [0, 36, 0]},
+        {"ap": 20, "items": [0, 0, 36]},
+        {"ap": 20, "items": [36, 0, 0]}
+      ]
     }
   }
 }

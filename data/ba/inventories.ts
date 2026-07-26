@@ -137,22 +137,22 @@ export const inventories: readonly Definition[] = [
     ], 2, [Items.BgKivopoly_4x2(2), Items.CToothbrush_3x1(3), Items.PScarf_2x1(6)])
   }, {
     event: "SCHALE Settlement Task with General Student Council Season 18",
-    start: '2026-09-29', // predicted
+    start: '2026-09-15', // predicted
     items: repeatWithLast([
       [Items.TBox_4x2(1), Items.SBag_3x2(2), Items.PRFSnack_2x2(3)],
       [Items.Umbrella_1x4(2), Items.Receipt_1x3(3), Items.LFPen_2x1(7)]
     ], 2, [Items.GMagazine_3x3(1), Items.TBox_4x2(1), Items.SBag_3x2(2)])
   }, {
     event: "A Flower Blooms Among The Hundred ～ Honorable Sea Showdown ～",
-    start: '2026-10-20', // predicted
+    start: '2026-10-06', // predicted
     items: repeatWithLast([
       [Items.RWGun_3x2(2), Items.WSCase_3x1(5), Items.Sunscreen_1x2(2)],
       [Items.Surfboard_4x2(1), Items.Parasol_1x4(2), Items.WSCase_3x1(5)],
       [Items.STube_3x3(1), Items.Bandana_2x2(4), Items.Sunscreen_1x2(3)]
     ], 2, [Items.Surfboard_4x2(2), Items.WSCase_3x1(3), Items.Sunscreen_1x2(6)])
   }
-  // last check ended at season 18 and 58th event: Special Operation: Lore Pursuit (Season 2)
-  // 未來視 2026/06/10
+  // last check ended at season 19 and 59th event: Clear Skies After the Storm
+  // 未來視 2026/07/20
 ]
 
 function repeatWithLast(subset: ItemSet[], times: number = 2, last: ItemSet): ItemSet[] {
