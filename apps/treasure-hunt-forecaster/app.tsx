@@ -4,6 +4,8 @@ import { ItemSet, current as preset } from "../../data/ba/inventories.ts";
 import { createLangSelect, useI18n } from "./i18n.ts";
 import { Header } from "../../lib/header.tsx";
 import "./app.css";
+import { counter_cache as cc } from "./src/counter/cache.ts";
+import { genCache } from "./src/counter/cache_gen.ts";
 
 // import {} from "../../lib/wasm/.test.ts";
 
@@ -51,9 +53,11 @@ function applyPreset(key: string) {
   setTimeout(() => mainGUI.markAllDirty(), 200)
 }
 
-if (!hasParam('force_start')) {
-  console.log(`Note that the took time isn't always correct due to multi threading and caching.`)
-  console.log(`Use ?force_start to disable cache.`)
+if (!hasParam('force_start') && !hasParam('no_multi_cache')) {
+  console.info(
+    `Note that the took time isn't always correct due to multi threading and caching.\n` +
+    `Use ?force_start to disable cache.`
+  )
 }
 
 export function App() {
@@ -92,6 +96,17 @@ export function App() {
           <p>{t('site.description.yap.2')}</p>
         </div>
       </div>
+
+      {isDev() && <div class="dev-section">
+        <label>Dev options</label>
+        <button onclick={cc.testCodec}>Test cache codec</button>
+        {hasParam('no_multi_cache') && hasParam('noauto') && <button disabled onclick={() => {
+          genCache()
+          mainGUI.startButton.markDirty()
+        }}>Gen Cache</button>}
+        <button onclick={() => cc.download(0)}>Download All Cache</button>
+        <button onclick={() => cc.download(5000)}>Download &gt;5000ms Cache</button>
+      </div>}
     </div>
   </>
 }

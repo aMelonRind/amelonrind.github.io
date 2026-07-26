@@ -13,3 +13,12 @@ export namespace inv_data {
     res()
   })
 }
+
+class Entry {
+  protected bytesVersion: number = 0
+  /**
+   * stores the encoded bytes possibly in lower version.
+   * there's no reason to re-encode it to possibly larger bytes in a higher version if info is missing.
+   */
+  protected bytes: Uint8Array | null = null
+}

@@ -28,11 +28,6 @@ h1 {
   gap: 16px;
 }
 
-input, select, body {
-  background-color: #181a1b;
-  color: white;
-}
-
 hr {
   width: 100%;
 }
@@ -66,4 +61,10 @@ hr {
 .hoverTextElement {
   align-self: start;
   min-height: 2lh;
+}
+
+.dev-section {
+  display: flex;
+  margin: 32px;
+  gap: 10px;
 }

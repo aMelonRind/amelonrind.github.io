@@ -77,9 +77,10 @@ export namespace counter {
     }
   }
 
-  export async function start(items: Item[], board = 0n, timeout = 0) {
+  export async function start(items: readonly Item[], board = 0n, timeout = 0) {
     // console.log(items.join(','), board.toString(2).padStart(45, '0'))
     if (!hasParam('force_start')) {
+      await cc.waitForCache
       const cache = cc.get(board, items)
       if (cache) {
         // console.log(`from cache: ${cache.total.toLocaleString()}`)
@@ -156,6 +157,12 @@ export namespace counter {
       startTime = performance.now()
       runInfinitely = !(timeout > 0)
       terminateHandles.clear()
+
+      if (!hasParam('force_start') && !hasParam('no_multi_cache')) {
+        setProgress('wait cache')
+        await cc.waitForCache
+        setProgress('init')
+      }
 
       // setup timeout
       if (timeout > 0) {
@@ -242,7 +249,7 @@ export namespace counter {
     const depth = Math.min(2, paa[0].amount)
     // const depth = 1
     const canCache = paa[0].amount === depth
-    const doCache = canCache && !hasParam('force_start')
+    const doCache = canCache && !hasParam('force_start') && !hasParam('no_multi_cache')
 
     // prepare variables
     const paas = paa.slice(+canCache)

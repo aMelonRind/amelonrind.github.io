@@ -129,10 +129,13 @@ export namespace Maths {
     return ((x % m) + m) % m
   }
 
-  export function gcd(a: number, b: number): number {
-    let temp: number
-    while (b !== 0) {
+  export function gcd(a: number, b: number): number;
+  export function gcd(a: bigint, b: bigint): bigint;
+  export function gcd(a: number | bigint, b: number | bigint): number | bigint {
+    let temp: number | bigint
+    while (b) {
       temp = b
+      //@ts-expect-error
       b = a % b
       a = temp
     }

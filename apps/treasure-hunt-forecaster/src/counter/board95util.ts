@@ -87,3 +87,8 @@ export function boardPopcnt(board: bigint) {
   }
   return cnt
 }
+
+export function boardToString(board: bigint): string {
+  const raw = (board & ((1n << 45n) - 1n)).toString(2).padStart(45, '0')
+  return `${raw.slice(0, 9)}_${raw.slice(9, 18)}_${raw.slice(18, 27)}_${raw.slice(27, 36)}_${raw.slice(36, 45)}`
+}
