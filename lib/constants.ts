@@ -1,2 +1,2 @@
 
-export const base = '/pages-migrating/'
+export const base = '/'
