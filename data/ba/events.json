@@ -438,7 +438,7 @@
         "https://static.wikitide.net/bluearchivewiki/thumb/e/e0/Item_Icon_Event_Token_1_S60.png/144px-Item_Icon_Event_Token_1_S60.png",
         "https://static.wikitide.net/bluearchivewiki/thumb/f/fb/Item_Icon_Event_Token_2_S60.png/144px-Item_Icon_Event_Token_2_S60.png"
       ],
-      "voids": [200, 0, 5],
+      "voids": [5000, 0, 5],
       "tfers": [0, 5, 0],
       "levels": [
         {"ap": 10, "items": [8, 5, 5]},
