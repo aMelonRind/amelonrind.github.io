@@ -138,14 +138,15 @@ export const inventories: readonly Definition[] = [
   }, {
     event: "SCHALE Settlement Task with General Student Council Season 18",
     start: '2026-09-08',
-    default: true,
+    ended: true,
     items: repeatWithLast([
       [Items.TBox_4x2(1), Items.SBag_3x2(2), Items.PRFSnack_2x2(3)],
       [Items.Umbrella_1x4(2), Items.Receipt_1x3(3), Items.LFPen_2x1(7)]
     ], 2, [Items.GMagazine_3x3(1), Items.TBox_4x2(1), Items.SBag_3x2(2)])
   }, {
     event: "A Flower Blooms Among The Hundred ～ Honorable Sea Showdown ～",
-    start: '2026-09-29', // predicted
+    start: '2026-09-29',
+    default: true,
     items: repeatWithLast([
       [Items.RWGun_3x2(2), Items.WSCase_3x1(5), Items.Sunscreen_1x2(2)],
       [Items.Surfboard_4x2(1), Items.Parasol_1x4(2), Items.WSCase_3x1(5)],
