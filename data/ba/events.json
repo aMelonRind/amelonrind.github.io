@@ -1,5 +1,5 @@
 {
-  "default": "A Flower Blooms Among The Hundred ～ Honorable Sea Showdown ～",
+  "default": "Clear Skies After the Storm",
   "events": {
     "A Certain Scientific Blue Archive": {
       "wiki": "https://bluearchive.wiki/wiki/A_Certain_Scientific_Blue_Archive",
@@ -490,6 +490,107 @@
         "https://static.wikitide.net/bluearchivewiki/thumb/e/e0/Item_Icon_Event_Token_2_S62.png/144px-Item_Icon_Event_Token_2_S62.png"
       ],
       "voids": [200, 0, 5],
+      "tfers": [0, 5, 0],
+      "levels": [
+        {"ap": 10, "items": [8, 5, 5]},
+        {"ap": 10, "items": [5, 8, 5]},
+        {"ap": 10, "items": [5, 5, 8]},
+        {"ap": 10, "items": [12, 3, 3]},
+        {"ap": 15, "items": [15, 6, 6]},
+        {"ap": 15, "items": [6, 15, 6]},
+        {"ap": 15, "items": [6, 6, 15]},
+        {"ap": 15, "items": [23, 2, 2]},
+        {"ap": 20, "items": [28, 4, 4]},
+        {"ap": 20, "items": [0, 36, 0]},
+        {"ap": 20, "items": [0, 0, 36]},
+        {"ap": 20, "items": [36, 0, 0]}
+      ]
+    },
+    "Set Sail! Man-of-Pandemonium: Chairman Makoto's Magnificent Summer Retreat": {
+      "wiki": "https://bluearchive.wiki/wiki/Set_Sail!_Man-of-Pandemonium:_Chairman_Makoto%27s_Magnificent_Summer_Retreat",
+      "itemTypes": 3,
+      "icons": [
+        "https://static.wikitide.net/bluearchivewiki/thumb/4/47/Item_Icon_Event_Token_0_S63.png/144px-Item_Icon_Event_Token_0_S63.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/c/c1/Item_Icon_Event_Token_1_S63.png/144px-Item_Icon_Event_Token_1_S63.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/6/66/Item_Icon_Event_Token_2_S63.png/144px-Item_Icon_Event_Token_2_S63.png"
+      ],
+      "voids": [400, 0, 5],
+      "tfers": [0, 5, 0],
+      "levels": [
+        {"ap": 10, "items": [4, 7, 7]},
+        {"ap": 10, "items": [0, 12, 6]},
+        {"ap": 10, "items": [0, 6, 12]},
+        {"ap": 10, "items": [12, 3, 3]},
+        {"ap": 15, "items": [3, 12, 12]},
+        {"ap": 15, "items": [0, 21, 6]},
+        {"ap": 15, "items": [0, 6, 21]},
+        {"ap": 15, "items": [21, 3, 3]},
+        {"ap": 20, "items": [12, 12, 12]},
+        {"ap": 20, "items": [0, 36, 0]},
+        {"ap": 20, "items": [0, 0, 36]},
+        {"ap": 20, "items": [36, 0, 0]}
+      ]
+    },
+    "Dive into OCEAN!": {
+      "wiki": "https://bluearchive.wiki/wiki/Dive_into_OCEAN!",
+      "itemTypes": 3,
+      "icons": [
+        "https://static.wikitide.net/bluearchivewiki/thumb/6/6d/Item_Icon_Event_Token_0_S64.png/144px-Item_Icon_Event_Token_0_S64.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/e/ea/Item_Icon_Event_Token_1_S64.png/144px-Item_Icon_Event_Token_1_S64.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/9/96/Item_Icon_Event_Token_2_S64.png/144px-Item_Icon_Event_Token_2_S64.png"
+      ],
+      "voids": [55, 0, 5],
+      "tfers": [0, 5, 0],
+      "levels": [
+        {"ap": 10, "items": [8, 5, 5]},
+        {"ap": 10, "items": [5, 8, 5]},
+        {"ap": 10, "items": [5, 5, 8]},
+        {"ap": 10, "items": [12, 3, 3]},
+        {"ap": 15, "items": [15, 6, 6]},
+        {"ap": 15, "items": [6, 15, 6]},
+        {"ap": 15, "items": [6, 6, 15]},
+        {"ap": 15, "items": [23, 2, 2]},
+        {"ap": 20, "items": [28, 4, 4]},
+        {"ap": 20, "items": [0, 36, 0]},
+        {"ap": 20, "items": [0, 0, 36]},
+        {"ap": 20, "items": [36, 0, 0]}
+      ]
+    },
+    "It's our Engine! ～Escape from No. 183!～": {
+      "wiki": "https://bluearchive.wiki/wiki/It%27s_our_Engine!_%EF%BD%9EEscape_from_No._183!%EF%BD%9E",
+      "itemTypes": 4,
+      "icons": [
+        "",
+        "https://static.wikitide.net/bluearchivewiki/thumb/b/b2/Item_Icon_Event_Token_1_S65.png/144px-Item_Icon_Event_Token_1_S65.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/1/19/Item_Icon_Event_Token_2_S65.png/144px-Item_Icon_Event_Token_2_S65.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/0/02/Item_Icon_Event_Token_3_S65.png/144px-Item_Icon_Event_Token_3_S65.png"
+      ],
+      "voids": [500, 0, 0, 5],
+      "tfers": [0, 5, 5, 0],
+      "levels": [
+        {"ap": 10, "items": [6, 6, 6, 0]},
+        {"ap": 10, "items": [6, 0, 6, 6]},
+        {"ap": 10, "items": [6, 6, 0, 6]},
+        {"ap": 10, "items": [12, 2, 2, 2]},
+        {"ap": 15, "items": [9, 12, 6, 0]},
+        {"ap": 15, "items": [9, 0, 12, 6]},
+        {"ap": 15, "items": [9, 6, 0, 12]},
+        {"ap": 15, "items": [18, 3, 3, 3]},
+        {"ap": 20, "items": [0, 36, 0, 0]},
+        {"ap": 20, "items": [0, 0, 36, 0]},
+        {"ap": 20, "items": [0, 0, 0, 36]},
+        {"ap": 20, "items": [36, 0, 0, 0]}
+      ]
+    },
+    "Special Operation: Lore Pursuit (Season 3)": {
+      "wiki": "https://bluearchive.wiki/wiki/Special_Operation:_Lore_Pursuit_(Season_3)",
+      "itemTypes": 3,
+      "icons": [
+        "",
+        "https://static.wikitide.net/bluearchivewiki/thumb/e/e0/Item_Icon_Event_Token_1_S60.png/144px-Item_Icon_Event_Token_1_S60.png",
+        "https://static.wikitide.net/bluearchivewiki/thumb/f/fb/Item_Icon_Event_Token_2_S60.png/144px-Item_Icon_Event_Token_2_S60.png"
+      ],
+      "voids": [5000, 0, 5],
       "tfers": [0, 5, 0],
       "levels": [
         {"ap": 10, "items": [8, 5, 5]},

@@ -73,6 +73,14 @@ export const Items = {
   RWGun_3x2:     defItem(3, 2, 'Rifle Water Gun',            etAsset('847_05', '02', 150)),
   Surfboard_4x2: defItem(4, 2, 'Surfboard',                  etAsset('847_06', '81', 200)),
   STube_3x3:     defItem(3, 3, 'Swimming Tube',              etAsset('847_07', 'd9', 100)),
+  // Dive into OCEAN!
+  SSlug_1x2:    defItem(1, 2, 'Sea Slug',     etAsset('861_01', 'e8', 50)),
+  Seahorse_3x1: defItem(3, 1, 'Seahorse',     etAsset('861_02', '39', 300)),
+  Seaweed_1x4:  defItem(1, 4, 'Seaweed',      etAsset('861_03', 'a9', 25)),
+  Starfish_2x2: defItem(2, 2, 'Starfish',     etAsset('861_04', '91', 100)),
+  SUrchin_3x2:  defItem(3, 2, 'Sea Urchin',   etAsset('861_05', 'e0', 150)),
+  Seashell_4x2: defItem(4, 2, 'Seashell',     etAsset('861_06', '0c', 200)),
+  TShell_3x3:   defItem(3, 3, 'Turtle Shell', etAsset('861_07', 'd0', 100)),
 } as const satisfies Record<`${string}_${number}x${number}`, ItemDef>;
 // we could probably assume that each event has 7 items:
 // 2x1, 3x1, 4x1, 2x2, 3x2, 4x2, 3x3
@@ -146,15 +154,25 @@ export const inventories: readonly Definition[] = [
   }, {
     event: "A Flower Blooms Among The Hundred ～ Honorable Sea Showdown ～",
     start: '2026-09-29',
-    default: true,
+    ended: true,
     items: repeatWithLast([
       [Items.RWGun_3x2(2), Items.WSCase_3x1(5), Items.Sunscreen_1x2(2)],
       [Items.Surfboard_4x2(1), Items.Parasol_1x4(2), Items.WSCase_3x1(5)],
       [Items.STube_3x3(1), Items.Bandana_2x2(4), Items.Sunscreen_1x2(3)]
     ], 2, [Items.Surfboard_4x2(2), Items.WSCase_3x1(3), Items.Sunscreen_1x2(6)])
+  }, {
+    event: "Dive into OCEAN!",
+    start: '2026-12-08',
+    default: true,
+    items: repeatWithLast([
+      [Items.SUrchin_3x2(1), Items.Seaweed_1x4(3), Items.Seahorse_3x1(4)],
+      [Items.Seashell_4x2(1), Items.Starfish_2x2(4), Items.SSlug_1x2(3)],
+      [Items.TShell_3x3(1), Items.Starfish_2x2(3), Items.Seahorse_3x1(3)],
+      [Items.SUrchin_3x2(2), Items.Starfish_2x2(3), Items.Seahorse_3x1(2)]
+    ], 3, [Items.Seashell_4x2(2), Items.Seaweed_1x4(2), Items.Seahorse_3x1(2)])
   }
-  // last check ended at season 19 and 59th event: Clear Skies After the Storm
-  // 未來視 2026/09/08
+  // last check ended at season 19 and 63rd event: Special Operation: Lore Pursuit (Season 3)
+  // 未來視 2026/10/09
 ]
 
 function repeatWithLast(subset: ItemSet[], times: number = 2, last: ItemSet): ItemSet[] {
